@@ -824,6 +824,221 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/02/Java学习笔记day33/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/02/Java学习笔记day33/" itemprop="url">Java基础day33</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-02T21:11:19+08:00">
+                2019-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="33-1类加载器"><a href="#33-1类加载器" class="headerlink" title="33.1类加载器"></a>33.1类加载器</h4><h5 id="1-1-类的加载"><a href="#1-1-类的加载" class="headerlink" title="1.1 类的加载"></a>1.1 类的加载</h5><p>当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过加载，连接，初始化三步来实现对这个类进行初始化。</p>
+<ul>
+<li>加载 </li>
+</ul>
+<p>就是指将class文件读入内存，并为之创建一个Class对象。</p>
+<p>任何类被使用时系统都会建立一个Class对象</p>
+<ul>
+<li>连接</li>
+</ul>
+<p>验证 是否有正确的内部结构，并和其他类协调一致</p>
+<p>准备 负责为类的静态成员分配内存，并设置默认初始化值</p>
+<p>解析 将类的二进制数据中的符号引用替换为直接引用</p>
+<ul>
+<li>初始化 </li>
+</ul>
+<p>就是我们以前讲过的初始化步骤</p>
+<h5 id="1-2-类初始化时机"><a href="#1-2-类初始化时机" class="headerlink" title="1.2 类初始化时机"></a>1.2 类初始化时机</h5><ol>
+<li><p>创建类的实例</p>
+</li>
+<li><p>类的静态变量，或者为静态变量赋值</p>
+</li>
+<li><p>类的静态方法</p>
+</li>
+<li><p>使用反射方式来强制创建某个类或接口对应的java.lang.Class对象</p>
+</li>
+<li><p>初始化某个类的子类</p>
+</li>
+<li><h6 id="直接使用java-exe命令来运行某个主类"><a href="#直接使用java-exe命令来运行某个主类" class="headerlink" title="直接使用java.exe命令来运行某个主类"></a>直接使用java.exe命令来运行某个主类</h6></li>
+</ol>
+<h5 id="1-3类加载器"><a href="#1-3类加载器" class="headerlink" title="1.3类加载器"></a>1.3类加载器</h5><p> 负责将.class文件加载到内在中，并为之生成对应的Class对象。</p>
+<p>虽然我们不需要关心类加载机制，但是了解这个机制我们就能更好的理解程序的运行</p>
+<h5 id="1-4类加载器的组成"><a href="#1-4类加载器的组成" class="headerlink" title="1.4类加载器的组成"></a>1.4类加载器的组成</h5><ul>
+<li>ootstrap ClassLoader 根类加载器</li>
+</ul>
+<p>也被称为引导类加载器，负责Java核心类的加载</p>
+<p>比如System,String等。在JDK中JRE的lib目录下rt.jar文件中</p>
+<ul>
+<li>Extension ClassLoader 扩展类加载器</li>
+</ul>
+<p>负责JRE的扩展目录中jar包的加载。</p>
+<p>在JDK中JRE的lib目录下ext目录</p>
+<ul>
+<li>System ClassLoader 系统类加载器</li>
+</ul>
+<p>负责在JVM启动时加载来自java命令的class文件，以及classpath环境变量所指定的jar包和类路径。</p>
+<h4 id="33-2反射"><a href="#33-2反射" class="headerlink" title="33.2反射"></a>33.2反射</h4><p>JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。</p>
+<p>要想解剖一个类,必须先要获取到该类的字节码文件对象。而解剖使用的就是Class类中的方法.所以先要获取到每一个字节码文件对应的Class类型的对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*static&#123;</span></span><br><span class="line"><span class="comment">		System.out.println("静态代码块");</span></span><br><span class="line"><span class="comment">	&#125;*/</span></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span></span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name,<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">		<span class="keyword">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Person</span><span class="params">(<span class="keyword">int</span> age,String name)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">		<span class="keyword">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"人吃饭"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">(String s, <span class="keyword">int</span> a,<span class="keyword">double</span> d)</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"人在睡觉"</span>+s+<span class="string">"....."</span>+a+<span class="string">"....."</span>+d);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">playGame</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"人在打游戏"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"Person [name="</span> + name + <span class="string">", age="</span> + age + <span class="string">"]"</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-1Class类"><a href="#2-1Class类" class="headerlink" title="2.1Class类"></a>2.1Class类</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  获取一个类的class文件对象的三种方式</span></span><br><span class="line"><span class="comment"> *   1. 对象获取</span></span><br><span class="line"><span class="comment"> *   2. 类名获取</span></span><br><span class="line"><span class="comment"> *   3. Class类的静态方法获取</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> ClassNotFoundException </span>&#123;</span><br><span class="line">		<span class="comment">//1. 对象获取</span></span><br><span class="line">		Person p = <span class="keyword">new</span> Person();</span><br><span class="line">		<span class="comment">//调用Person类的父类的方法 getClass</span></span><br><span class="line">		Class c = p.getClass();</span><br><span class="line">		System.out.println(c);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//2. 类名获取</span></span><br><span class="line">	    <span class="comment">//每个类型,包括基本和引用,都会赋予这个类型一个静态的属性,属性名字class</span></span><br><span class="line">		Class c1 = Person.class;</span><br><span class="line">		System.out.println(c1);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//3. Class类的静态方法获取 forName(字符串的类名)包名.类名</span></span><br><span class="line">		Class c2 = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		System.out.println(c2);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-2通过反射获取空参数构造方法并使用"><a href="#2-2通过反射获取空参数构造方法并使用" class="headerlink" title="2.2通过反射获取空参数构造方法并使用"></a>2.2通过反射获取空参数构造方法并使用</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  通过反射获取class文件中的构造方法,运行构造方法</span></span><br><span class="line"><span class="comment"> *  运行构造方法,创建对象</span></span><br><span class="line"><span class="comment"> *    获取class文件对象</span></span><br><span class="line"><span class="comment"> *    从class文件对象中,获取需要的成员</span></span><br><span class="line"><span class="comment"> *    </span></span><br><span class="line"><span class="comment"> *  Constructor 描述构造方法对象类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo1</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">	</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		<span class="comment">//使用class文件对象,获取类中的构造方法</span></span><br><span class="line">		<span class="comment">//  Constructor[]  getConstructors() 获取class文件对象中的所有公共的构造方法</span></span><br><span class="line">		<span class="comment">/*Constructor[] cons = c.getConstructors();</span></span><br><span class="line"><span class="comment">		for(Constructor con : cons)&#123;</span></span><br><span class="line"><span class="comment">			System.out.println(con);</span></span><br><span class="line"><span class="comment">		&#125;*/</span></span><br><span class="line">		<span class="comment">//获取指定的构造方法,空参数的构造方法</span></span><br><span class="line">		Constructor con =  c.getConstructor();</span><br><span class="line">		<span class="comment">//运行空参数构造方法,Constructor类方法 newInstance()运行获取到的构造方法</span></span><br><span class="line">		Object obj = con.newInstance();</span><br><span class="line">		System.out.println(obj.toString());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-3通过反射获取有参数构造方法并使用"><a href="#2-3通过反射获取有参数构造方法并使用" class="headerlink" title="2.3通过反射获取有参数构造方法并使用"></a>2.3通过反射获取有参数构造方法并使用</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  通过反射,获取有参数的构造方法并运行</span></span><br><span class="line"><span class="comment"> *  方法getConstructor,传递可以构造方法相对应的参数列表即可</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo2</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		<span class="comment">//获取带有,String和int参数的构造方法</span></span><br><span class="line">		<span class="comment">//Constructor&lt;T&gt; getConstructor(Class&lt;?&gt;... parameterTypes)  </span></span><br><span class="line">		<span class="comment">//Class&lt;?&gt;... parameterTypes 传递要获取的构造方法的参数列表</span></span><br><span class="line">		Constructor con = c.getConstructor(String.class,<span class="keyword">int</span>.class);</span><br><span class="line">		<span class="comment">//运行构造方法</span></span><br><span class="line">		<span class="comment">// T newInstance(Object... initargs)  </span></span><br><span class="line">		<span class="comment">//Object... initargs 运行构造方法后,传递的实际参数</span></span><br><span class="line">		Object obj = con.newInstance(<span class="string">"张三"</span>,<span class="number">20</span>);</span><br><span class="line">		System.out.println(obj);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-4通过反射获取构造方法并运行，快捷方式"><a href="#2-4通过反射获取构造方法并运行，快捷方式" class="headerlink" title="2.4通过反射获取构造方法并运行，快捷方式"></a>2.4通过反射获取构造方法并运行，快捷方式</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 反射获取构造方法并运行,有快捷点的方式</span></span><br><span class="line"><span class="comment"> * 有前提:</span></span><br><span class="line"><span class="comment"> *   被反射的类,必须具有空参数构造方法</span></span><br><span class="line"><span class="comment"> *   构造方法权限必须public</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo3</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		<span class="comment">// Class类中定义方法, T newInstance() 直接创建被反射类的对象实例</span></span><br><span class="line">		Object obj = c.newInstance();</span><br><span class="line">		System.out.println(obj);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-5反射获取私有的构造方法并运行"><a href="#2-5反射获取私有的构造方法并运行" class="headerlink" title="2.5反射获取私有的构造方法并运行"></a>2.5反射获取私有的构造方法并运行</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  反射获取私有的构造方法运行</span></span><br><span class="line"><span class="comment"> *  不推荐,破坏了程序的封装性,安全性</span></span><br><span class="line"><span class="comment"> *  暴力反射</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo4</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		<span class="comment">//Constructor[] getDeclaredConstructors()获取所有的构造方法,包括私有的</span></span><br><span class="line">		<span class="comment">/*Constructor[] cons = c.getDeclaredConstructors();</span></span><br><span class="line"><span class="comment">		for(Constructor con : cons)&#123;</span></span><br><span class="line"><span class="comment">			System.out.println(con);</span></span><br><span class="line"><span class="comment">		&#125;*/</span></span><br><span class="line">		<span class="comment">//Constructor getDeclaredConstructor(Class...c)获取到指定参数列表的构造方法</span></span><br><span class="line">		Constructor con = c.getDeclaredConstructor(<span class="keyword">int</span>.class,String.class);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//Constructor类,父类AccessibleObject,定义方法setAccessible(boolean b)</span></span><br><span class="line">		con.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">		</span><br><span class="line">		Object obj = con.newInstance(<span class="number">18</span>,<span class="string">"lisi"</span>);</span><br><span class="line">		System.out.println(obj);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-6反射获取成员变量并改值"><a href="#2-6反射获取成员变量并改值" class="headerlink" title="2.6反射获取成员变量并改值"></a>2.6反射获取成员变量并改值</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  反射获取成员变量,并修改值</span></span><br><span class="line"><span class="comment"> *  Person类中的成员String name</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo5</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		Object obj = c.newInstance();</span><br><span class="line">		<span class="comment">//获取成员变量 Class类的方法 getFields() class文件中的所有公共的成员变量</span></span><br><span class="line">		<span class="comment">//返回值是Field[]    Field类描述成员变量对象的类</span></span><br><span class="line">		<span class="comment">/*Field[] fields = c.getFields();</span></span><br><span class="line"><span class="comment">		for(Field f : fields)&#123;</span></span><br><span class="line"><span class="comment">			System.out.println(f);</span></span><br><span class="line"><span class="comment">		&#125;*/</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//获取指定的成员变量 String name</span></span><br><span class="line">		<span class="comment">//Class类的方法  Field getField(传递字符串类型的变量名) 获取指定的成员变量</span></span><br><span class="line">		Field field = c.getField(<span class="string">"name"</span>);</span><br><span class="line">	   </span><br><span class="line">		<span class="comment">//Field类的方法 void set(Object obj, Object value) ,修改成员变量的值</span></span><br><span class="line">		<span class="comment">//Object obj 必须有对象的支持,  Object value 修改后的值</span></span><br><span class="line">		field.set(obj,<span class="string">"王五"</span>);</span><br><span class="line">		System.out.println(obj);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-7反射获取空参数成员方法并运行"><a href="#2-7反射获取空参数成员方法并运行" class="headerlink" title="2.7反射获取空参数成员方法并运行"></a>2.7反射获取空参数成员方法并运行</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  反射获取成员方法并运行</span></span><br><span class="line"><span class="comment"> *  public void eat()&#123;&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo6</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		Object obj = c.newInstance();</span><br><span class="line">		<span class="comment">//获取class对象中的成员方法</span></span><br><span class="line">		<span class="comment">// Method[] getMethods()获取的是class文件中的所有公共成员方法,包括继承的</span></span><br><span class="line">		<span class="comment">// Method类是描述成员方法的对象</span></span><br><span class="line">		<span class="comment">/*Method[] methods = c.getMethods();</span></span><br><span class="line"><span class="comment">		for(Method m : methods)&#123;</span></span><br><span class="line"><span class="comment">			System.out.println(m);</span></span><br><span class="line"><span class="comment">		&#125;*/</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//获取指定的方法eat运行</span></span><br><span class="line">		<span class="comment">// Method getMethod(String methodName,Class...c)</span></span><br><span class="line">		<span class="comment">// methodName获取的方法名  c 方法的参数列表</span></span><br><span class="line">		Method method = c.getMethod(<span class="string">"eat"</span>);</span><br><span class="line">		<span class="comment">//使用Method类中的方法,运行获取到的方法eat</span></span><br><span class="line">		<span class="comment">//Object invoke(Object obj, Object...o)</span></span><br><span class="line">		method.invoke(obj);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-8反射获取有参数的成员方法并运行"><a href="#2-8反射获取有参数的成员方法并运行" class="headerlink" title="2.8反射获取有参数的成员方法并运行"></a>2.8反射获取有参数的成员方法并运行</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  反射获取有参数的成员方法并执行</span></span><br><span class="line"><span class="comment"> *  public void sleep(String,int,double)&#123;&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo7</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		Object obj = c.newInstance();</span><br><span class="line">		<span class="comment">//调用Class类的方法getMethod获取指定的方法sleep</span></span><br><span class="line">		Method method = c.getMethod(<span class="string">"sleep"</span>, String.class,<span class="keyword">int</span>.class,<span class="keyword">double</span>.class);</span><br><span class="line">		<span class="comment">//调用Method类的方法invoke运行sleep方法</span></span><br><span class="line">		method.invoke(obj, <span class="string">"休眠"</span>,<span class="number">100</span>,<span class="number">888.99</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-9泛型擦出"><a href="#2-9泛型擦出" class="headerlink" title="2.9泛型擦出"></a>2.9泛型擦出</h5><p>ArrayList的对象array进行操作，对ArrayList.class进行操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *   定义集合类,泛型String</span></span><br><span class="line"><span class="comment"> *   要求向集合中添加Integer类型</span></span><br><span class="line"><span class="comment"> *   </span></span><br><span class="line"><span class="comment"> *   反射方式,获取出集合ArrayList类的class文件对象</span></span><br><span class="line"><span class="comment"> *   通过class文件对象,调用add方法</span></span><br><span class="line"><span class="comment"> *   </span></span><br><span class="line"><span class="comment"> *   对反射调用方法是否理解</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectTest</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		ArrayList&lt;String&gt; array  = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		array.add(<span class="string">"a"</span>);</span><br><span class="line">		<span class="comment">//反射方式,获取出集合ArrayList类的class文件对象</span></span><br><span class="line">		Class c = array.getClass();</span><br><span class="line">		<span class="comment">//获取ArrayList.class文件中的方法add</span></span><br><span class="line">		Method method = c.getMethod(<span class="string">"add"</span>,Object.class);</span><br><span class="line">		<span class="comment">//使用invoke运行ArrayList方法add</span></span><br><span class="line">		method.invoke(array, <span class="number">150</span>);</span><br><span class="line">		method.invoke(array, <span class="number">1500</span>);</span><br><span class="line">		method.invoke(array, <span class="number">15000</span>);</span><br><span class="line">		System.out.println(array);</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-10反射通过配置文件运行的步骤"><a href="#2-10反射通过配置文件运行的步骤" class="headerlink" title="2.10反射通过配置文件运行的步骤"></a>2.10反射通过配置文件运行的步骤</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileReader;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  调用Person方法,调用Student方法,调用Worker方法</span></span><br><span class="line"><span class="comment"> *  类不清楚,方法也不清楚</span></span><br><span class="line"><span class="comment"> *  通过配置文件实现此功能</span></span><br><span class="line"><span class="comment"> *    运行的类名和方法名字,以键值对的形式,写在文本中</span></span><br><span class="line"><span class="comment"> *    运行哪个类,读取配置文件即可</span></span><br><span class="line"><span class="comment"> *  实现步骤:</span></span><br><span class="line"><span class="comment"> *    1. 准备配置文件,键值对</span></span><br><span class="line"><span class="comment"> *    2. IO流读取配置文件  Reader</span></span><br><span class="line"><span class="comment"> *    3. 文件中的键值对存储到集合中 Properties</span></span><br><span class="line"><span class="comment"> *        集合保存的键值对,就是类名和方法名</span></span><br><span class="line"><span class="comment"> *    4. 反射获取指定类的class文件对象</span></span><br><span class="line"><span class="comment"> *    5. class文件对象,获取指定的方法</span></span><br><span class="line"><span class="comment"> *    6. 运行方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		<span class="comment">//IO流读取配置文件</span></span><br><span class="line">		FileReader r = <span class="keyword">new</span> FileReader(<span class="string">"config.properties"</span>);</span><br><span class="line">		<span class="comment">//创建集合对象</span></span><br><span class="line">		Properties pro = <span class="keyword">new</span> Properties();</span><br><span class="line">		<span class="comment">//调用集合方法load,传递流对象</span></span><br><span class="line">		pro.load(r);</span><br><span class="line">		r.close();</span><br><span class="line">		<span class="comment">//通过键获取值</span></span><br><span class="line">		String className = pro.getProperty(<span class="string">"className"</span>);</span><br><span class="line">		String methodName = pro.getProperty(<span class="string">"methodName"</span>);</span><br><span class="line">		<span class="comment">//反射获取指定类的class文件对象</span></span><br><span class="line">		Class c = Class.forName(className);</span><br><span class="line">		Object obj = c.newInstance();</span><br><span class="line">		<span class="comment">//获取指定的方法名</span></span><br><span class="line">		Method method = c.getMethod(methodName);</span><br><span class="line">		method.invoke(obj);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">study</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"学生在学习"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">className=cn.itcast.demo3.Student</span><br><span class="line">methodName=study</span><br><span class="line">#className=cn.itcast.demo3.Person</span><br><span class="line">#methodName=eat</span><br><span class="line">#className=cn.itcast.demo3.Worker</span><br><span class="line">#methodName=job</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/02/Java基础学习笔记/Java学习笔记day33/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2132,199 +2347,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/Java基础学习笔记/Java学习笔记day27/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪翔宇的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/Java基础学习笔记/Java学习笔记day27/" itemprop="url">Java基础day27</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-27T21:11:13+08:00">
-                2019-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Java基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="27-1线程安全"><a href="#27-1线程安全" class="headerlink" title="27.1线程安全"></a>27.1线程安全</h4><p>多线程同时操作一个共享数据，可能会出现安全问题</p>
-<p><img src="C:%5CUsers%5C%E8%AF%B7%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1559382276301.png" alt="1559382276301"></p>
-<h5 id="27-1-1同步代码块解决线程安全问题"><a href="#27-1-1同步代码块解决线程安全问题" class="headerlink" title="27.1.1同步代码块解决线程安全问题"></a>27.1.1同步代码块解决线程安全问题</h5><p>当一个线程进入数据操作的时候，无论是否休眠，其他线程只能等待</p>
-<p>加入同步代码块 </p>
-<p><strong>公式:</strong></p>
-<p>synchronized(任意对象){</p>
-<p>线程要操作的共享数据</p>
-<p>}</p>
-<p>注意:同步进程会影响程序速度，但是保证了程序的安全</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 多线程并发访问同一个数据资源</span></span><br><span class="line"><span class="comment"> * 3个线程,对一个票资源,出售</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadDemo</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//创建Runnable接口实现类对象</span></span><br><span class="line">		Tickets t = <span class="keyword">new</span> Tickets();</span><br><span class="line">		<span class="comment">//创建3个Thread类对象,传递Runnable接口实现类</span></span><br><span class="line">		Thread t0 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">		Thread t1 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">		Thread t2 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">		</span><br><span class="line">		t0.start();t1.start();t2.start();</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  通过线程休眠,出现安全问题</span></span><br><span class="line"><span class="comment"> *  解决安全问题,Java程序,提供技术,同步技术</span></span><br><span class="line"><span class="comment"> *  公式:</span></span><br><span class="line"><span class="comment"> *    synchronized(任意对象)&#123;</span></span><br><span class="line"><span class="comment"> *      线程要操作的共享数据</span></span><br><span class="line"><span class="comment"> *    &#125;</span></span><br><span class="line"><span class="comment"> *    同步代码块</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tickets</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//定义出售的票源</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> ticket = <span class="number">100</span>;</span><br><span class="line">	<span class="keyword">private</span> Object obj = <span class="keyword">new</span> Object();</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">			<span class="comment">//线程共享数据,保证安全,加入同步代码块</span></span><br><span class="line">			<span class="keyword">synchronized</span>(obj)&#123;</span><br><span class="line">			<span class="comment">//对票数判断,大于0,可以出售,变量--操作</span></span><br><span class="line">				<span class="keyword">if</span>( ticket &gt; <span class="number">0</span>)&#123;</span><br><span class="line">					<span class="keyword">try</span>&#123;</span><br><span class="line">					   Thread.sleep(<span class="number">10</span>);</span><br><span class="line">					&#125;<span class="keyword">catch</span>(Exception ex)&#123;&#125;</span><br><span class="line">					System.out.println(Thread.currentThread().getName()+<span class="string">" 出售第 "</span>+ticket--);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="27-1-2同步方法解决线程安全问题"><a href="#27-1-2同步方法解决线程安全问题" class="headerlink" title="27.1.2同步方法解决线程安全问题"></a>27.1.2同步方法解决线程安全问题</h5><p>将同步代码块提取出来，写在一个方法中</p>
-<p>方法声明中加入synchronized,把代码块中的synchronized去掉</p>
-<p>同步方法中同步锁，是本类对象引用this</p>
-<p>静态方法，同步锁，是本类类名.class属性</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 多线程并发访问同一个数据资源</span></span><br><span class="line"><span class="comment"> * 3个线程,对一个票资源,出售</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadDemo</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//创建Runnable接口实现类对象</span></span><br><span class="line">		Tickets t = <span class="keyword">new</span> Tickets();</span><br><span class="line">		<span class="comment">//创建3个Thread类对象,传递Runnable接口实现类</span></span><br><span class="line">		Thread t0 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">		Thread t1 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">		Thread t2 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">		</span><br><span class="line">		t0.start();t1.start();t2.start();</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  采用同步方法形式,解决线程的安全问题</span></span><br><span class="line"><span class="comment"> *  好处: 代码简洁</span></span><br><span class="line"><span class="comment"> *  将线程共享数据,和同步,抽取到一个方法中</span></span><br><span class="line"><span class="comment"> *  在方法的声明上,加入同步关键字</span></span><br><span class="line"><span class="comment"> *  </span></span><br><span class="line"><span class="comment"> *  问题:</span></span><br><span class="line"><span class="comment"> *    同步方法有锁吗,肯定有,同步方法中的对象锁,是本类对象引用 this</span></span><br><span class="line"><span class="comment"> *    如果方法是静态的呢,同步有锁吗,绝对不是this</span></span><br><span class="line"><span class="comment"> *    锁是本类自己.class 属性</span></span><br><span class="line"><span class="comment"> *    静态方法,同步锁,是本类类名.class属性</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tickets</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//定义出售的票源</span></span><br><span class="line">	<span class="keyword">private</span>  <span class="keyword">int</span> ticket = <span class="number">100</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">			payTicket();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span>  <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">payTicket</span><span class="params">()</span></span>&#123;	</span><br><span class="line">			<span class="keyword">if</span>( ticket &gt; <span class="number">0</span>)&#123;</span><br><span class="line">				<span class="keyword">try</span>&#123;</span><br><span class="line">				   Thread.sleep(<span class="number">10</span>);</span><br><span class="line">				&#125;<span class="keyword">catch</span>(Exception ex)&#123;&#125;</span><br><span class="line">				System.out.println(Thread.currentThread().getName()+<span class="string">" 出售第 "</span>+ticket--);</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="27-1-3Lock接口"><a href="#27-1-3Lock接口" class="headerlink" title="27.1.3Lock接口"></a>27.1.3Lock接口</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.Lock;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.ReentrantLock;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  使用JDK1.5 的接口Lock,替换同步代码块,实现线程的安全性</span></span><br><span class="line"><span class="comment"> *  Lock接口方法:</span></span><br><span class="line"><span class="comment"> *     lock() 获取锁</span></span><br><span class="line"><span class="comment"> *     unlock()释放锁</span></span><br><span class="line"><span class="comment"> *  实现类ReentrantLock</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tickets</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//定义出售的票源</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> ticket = <span class="number">100</span>;</span><br><span class="line">	<span class="comment">//在类的成员位置,创建Lock接口的实现类对象</span></span><br><span class="line">	<span class="keyword">private</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">			<span class="comment">//调用Lock接口方法lock获取锁</span></span><br><span class="line">		    lock.lock();</span><br><span class="line">			<span class="comment">//对票数判断,大于0,可以出售,变量--操作</span></span><br><span class="line">				<span class="keyword">if</span>( ticket &gt; <span class="number">0</span>)&#123;</span><br><span class="line">					<span class="keyword">try</span>&#123;</span><br><span class="line">					   Thread.sleep(<span class="number">10</span>);</span><br><span class="line">					   System.out.println(Thread.currentThread().getName()+<span class="string">" 出售第 "</span>+ticket--);</span><br><span class="line">					&#125;<span class="keyword">catch</span>(Exception ex)&#123;</span><br><span class="line">						</span><br><span class="line">					&#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">						<span class="comment">//释放锁,调用Lock接口方法unlock</span></span><br><span class="line">						lock.unlock();</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">	</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="27-2死锁"><a href="#27-2死锁" class="headerlink" title="27.2死锁"></a>27.2死锁</h4><p>27.2.1死锁的原理</p>
-<p>多个进程在执行过程中，因为竞争资源会造成相互等待的局面。如果没有外力作用，这些</p>
-<p>进程将永远无法向前推进。此时称系统处于死锁状态或者系统产生了死锁。</p>
-<p><img src="C:%5CUsers%5C%E8%AF%B7%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1559388221943.png" alt="1559388221943"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeadLockDemo</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		DeadLock dead = <span class="keyword">new</span> DeadLock();</span><br><span class="line">		Thread t0 = <span class="keyword">new</span> Thread(dead);</span><br><span class="line">		Thread t1 = <span class="keyword">new</span> Thread(dead);</span><br><span class="line">		t0.start();</span><br><span class="line">		t1.start();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeadLock</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(i%<span class="number">2</span>==<span class="number">0</span>)&#123;</span><br><span class="line">				<span class="comment">//先进入A同步,再进入B同步</span></span><br><span class="line">				<span class="keyword">synchronized</span>(LockA.locka)&#123;</span><br><span class="line">					System.out.println(<span class="string">"if...locka"</span>);</span><br><span class="line">					<span class="keyword">synchronized</span>(LockB.lockb)&#123;</span><br><span class="line">						System.out.println(<span class="string">"if...lockb"</span>);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				<span class="comment">//先进入B同步,再进入A同步</span></span><br><span class="line">				<span class="keyword">synchronized</span>(LockB.lockb)&#123;</span><br><span class="line">					System.out.println(<span class="string">"else...lockb"</span>);</span><br><span class="line">					<span class="keyword">synchronized</span>(LockA.locka)&#123;</span><br><span class="line">						System.out.println(<span class="string">"else...locka"</span>);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LockA</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">LockA</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span>  <span class="keyword">static</span> <span class="keyword">final</span> LockA locka = <span class="keyword">new</span> LockA();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LockB</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">LockB</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> LockB lockb = <span class="keyword">new</span> LockB();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="27-2-1等待唤醒机制"><a href="#27-2-1等待唤醒机制" class="headerlink" title="27.2.1等待唤醒机制"></a>27.2.1等待唤醒机制</h5><p>等待唤醒机制所涉及到的方法：</p>
-<ul>
-<li>wait（） :等待，将正在执行的线程释放其执行资格 和 执行权，并存储到线程池中。</li>
-<li>notify（）：唤醒，唤醒线程池中被wait（）的线程，一次唤醒一个，而且是任意的。</li>
-<li>notifyAll（）： 唤醒全部：可以将线程池中的所有wait() 线程都唤醒。</li>
-</ul>
-<p><strong>注意</strong>：这些方法，需要锁对象来调用</p>
-<p>27.2.2线程等待与唤醒案例</p>
-<p><img src="C:%5CUsers%5C%E8%AF%B7%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1559392786100.png" alt="1559392786100"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo4;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  开启输入线程和输出线程,实现赋值和打印值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadDemo</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		Resource r = <span class="keyword">new</span> Resource();</span><br><span class="line">		</span><br><span class="line">		Input in = <span class="keyword">new</span> Input(r);</span><br><span class="line">		Output out = <span class="keyword">new</span> Output(r);</span><br><span class="line">		</span><br><span class="line">		Thread tin = <span class="keyword">new</span> Thread(in);</span><br><span class="line">		Thread tout = <span class="keyword">new</span> Thread(out);</span><br><span class="line">		</span><br><span class="line">		tin.start();</span><br><span class="line">		tout.start();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo4;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  定义资源类,有2个成员变量</span></span><br><span class="line"><span class="comment"> *  name,sex</span></span><br><span class="line"><span class="comment"> *  同时有2个线程,对资源中的变量操作</span></span><br><span class="line"><span class="comment"> *  1个对name,age赋值</span></span><br><span class="line"><span class="comment"> *  2个对name,age做变量的输出打印</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Resource</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> String name;</span><br><span class="line">	<span class="keyword">public</span> String sex;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo4;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  输入的线程,对资源对象Resource中成员变量赋值</span></span><br><span class="line"><span class="comment"> *  一次赋值 张三,男</span></span><br><span class="line"><span class="comment"> *  下一次赋值 lisi,nv</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Input</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Resource r ;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Input</span><span class="params">(Resource r)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.r = r;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> i = <span class="number">0</span> ;</span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">		  <span class="keyword">synchronized</span>(r)&#123;</span><br><span class="line">			  <span class="comment">//标记是true,等待</span></span><br><span class="line">			    <span class="keyword">if</span>(r.flag)&#123;</span><br><span class="line">			    	<span class="keyword">try</span>&#123;r.wait();&#125;<span class="keyword">catch</span>(Exception ex)&#123;&#125;</span><br><span class="line">			    &#125;</span><br><span class="line">			  </span><br><span class="line">				<span class="keyword">if</span>(i%<span class="number">2</span>==<span class="number">0</span>)&#123;</span><br><span class="line">					r.name = <span class="string">"张三"</span>;</span><br><span class="line">					r.sex = <span class="string">"男"</span>;</span><br><span class="line">				&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">					r.name = <span class="string">"lisi"</span>;</span><br><span class="line">					r.sex = <span class="string">"nv"</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="comment">//将对方线程唤醒,标记改为true</span></span><br><span class="line">				r.flag = <span class="keyword">true</span>;</span><br><span class="line">				r.notify();</span><br><span class="line">		  &#125;</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo4;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  输出线程,对资源对象Resource中成员变量,输出值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Output</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Resource r ;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Output</span><span class="params">(Resource r)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.r = r;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">		  <span class="keyword">synchronized</span>(r)&#123;	</span><br><span class="line">			  <span class="comment">//判断标记,是false,等待</span></span><br><span class="line">			<span class="keyword">if</span>(!r.flag)&#123;</span><br><span class="line">				<span class="keyword">try</span>&#123;r.wait();&#125;<span class="keyword">catch</span>(Exception ex)&#123;&#125;</span><br><span class="line">		    &#125;</span><br><span class="line">			System.out.println(r.name+<span class="string">".."</span>+r.sex);</span><br><span class="line">			<span class="comment">//标记改成false,唤醒对方线程</span></span><br><span class="line">			r.flag = <span class="keyword">false</span>;</span><br><span class="line">			r.notify();</span><br><span class="line">		  &#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2377,7 +2399,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2416,6 +2438,12 @@
                     <a href="https://github.com/nixiangyu1" target="_blank" title="GitHub">
                       
                         <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://gitee.com/nixiangyu1" target="_blank" title="博客仓库">
+                      
+                        <i class="fa fa-fw fa-small"></i>博客仓库</a>
                   </span>
                 
             </div>
