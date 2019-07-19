@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java基础,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="32.1网络编程 ​                                                     TCP/IP网络模型 链路层：链路层是用于定义物理传输通道，通常是对某些网络连接设备的驱动协议，例如针对光纤、网线提供的驱动。 网络层：网络层是整个TCP/IP协议的核心，它主要用于将传输的数据进行分组，将分组数据发送到目标计算机或者网络。 传输层：主要使网络程序进行通信，">
+<meta name="keywords" content="Java基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础day32">
+<meta property="og:url" content="http://yoursite.com/2019/06/01/Java基础学习笔记/Java学习笔记day32/index.html">
+<meta property="og:site_name" content="倪翔宇的博客">
+<meta property="og:description" content="32.1网络编程 ​                                                     TCP/IP网络模型 链路层：链路层是用于定义物理传输通道，通常是对某些网络连接设备的驱动协议，例如针对光纤、网线提供的驱动。 网络层：网络层是整个TCP/IP协议的核心，它主要用于将传输的数据进行分组，将分组数据发送到目标计算机或者网络。 传输层：主要使网络程序进行通信，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="file:///C:%5CUsers%5C%E8%AF%B7%5CAppData%5CLocal%5CTemp%5Cksohtml15972%5Cwps1.jpg">
+<meta property="og:image" content="file:///C:%5CUsers%5C%E8%AF%B7%5CAppData%5CLocal%5CTemp%5Cksohtml15972%5Cwps3.png">
+<meta property="og:image" content="file:///C:%5CUsers%5C%E8%AF%B7%5CAppData%5CLocal%5CTemp%5Cksohtml15972%5Cwps4.png">
+<meta property="og:image" content="file:///C:%5CUsers%5C%E8%AF%B7%5CAppData%5CLocal%5CTemp%5Cksohtml15972%5Cwps5.png">
+<meta property="og:image" content="c:%5CUsers%5C%E8%AF%B7%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1560172675365.png">
+<meta property="og:image" content="c:%5CUsers%5C%E8%AF%B7%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1560172848633.png">
+<meta property="og:image" content="c:%5CUsers%5C%E8%AF%B7%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1560177980668.png">
+<meta property="og:updated_time" content="2019-07-19T13:25:03.444Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java基础day32">
+<meta name="twitter:description" content="32.1网络编程 ​                                                     TCP/IP网络模型 链路层：链路层是用于定义物理传输通道，通常是对某些网络连接设备的驱动协议，例如针对光纤、网线提供的驱动。 网络层：网络层是整个TCP/IP协议的核心，它主要用于将传输的数据进行分组，将分组数据发送到目标计算机或者网络。 传输层：主要使网络程序进行通信，">
+<meta name="twitter:image" content="file:///C:%5CUsers%5C%E8%AF%B7%5CAppData%5CLocal%5CTemp%5Cksohtml15972%5Cwps1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '倪翔宇'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/01/Java基础学习笔记/Java学习笔记day32/">
+
+
+
+
+
+  <title>Java基础day32 | 倪翔宇的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">倪翔宇的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录和小刘一起学习的过程</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/01/Java基础学习笔记/Java学习笔记day32/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java基础day32</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-01T21:11:18+08:00">
+                2019-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="32-1网络编程"><a href="#32-1网络编程" class="headerlink" title="32.1网络编程"></a>32.1网络编程</h4><p><img src="file:///C:%5CUsers%5C%E8%AF%B7%5CAppData%5CLocal%5CTemp%5Cksohtml15972%5Cwps1.jpg" alt="img"></p>
+<p>​                                                     TCP/IP网络模型</p>
+<p>链路层：<a href="http://zhidao.baidu.com/search?word=%CA%FD%BE%DD%C1%B4%C2%B7%B2%E3&fr=qb_search_exp&ie=gbk" target="_blank" rel="noopener">链路层</a>是用于定义物理传输通道，通常是对某些网络连接设备的驱动协议，例如针对光纤、<a href="http://zhidao.baidu.com/search?word=%CB%AB%BD%CA%CF%DF&fr=qb_search_exp&ie=gbk" target="_blank" rel="noopener">网线</a>提供的驱动。</p>
+<p>网络层：网络层是整个TCP/IP协议的核心，它主要用于将传输的数据进行分组，将分组数据发送到目标计算机或者网络。</p>
+<p>传输层：主要使网络程序进行通信，在进行网络通信时，可以采用TCP协议，也可以采用UDP协议。</p>
+<p>应用层：主要负责应用程序的协议，例如HTTP协议、FTP协议等。</p>
+<h5 id="32-1-1网络通讯协议"><a href="#32-1-1网络通讯协议" class="headerlink" title="32.1.1网络通讯协议"></a>32.1.1网络通讯协议</h5><h6 id="1-地址和端口号"><a href="#1-地址和端口号" class="headerlink" title="1.地址和端口号"></a>1.地址和端口号</h6><p>要想使网络中的计算机能够进行通信，必须为每台计算机指定一个标识号，通过这个标识号来指定接受数据的计算机或者发送数据的计算机。</p>
+<p>在TCP/IP协议中，这个标识号就是IP地址，它可以唯一标识一台计算机，目前，IP地址广泛使用的版本是IPv4，它是由4个字节大小的二进制数来表示，如：00001010000000000000000000000001。由于二进制形式表示的IP地址非常不便记忆和处理，因此通常会将IP地址写成十进制的形式，每个字节用一个十进制数字(0-255)表示，数字间用符号“.”分开，如 “192.168.1.100”。</p>
+<p>随着计算机网络规模的不断扩大，对IP地址的需求也越来越多，IPV4这种用4个字节表示的IP地址面临枯竭，因此IPv6 便应运而生了，IPv6使用16个字节表示IP地址，它所拥有的地址容量约是IPv4的8×1028倍，达到2128个（算上全零的），这样就解决了网络地址资源数量不够的问题。</p>
+<p>通过IP地址可以连接到指定计算机，但如果想访问目标计算机中的某个应用程序，还需要指定端口号。在计算机中，不同的应用程序是通过端口号区分的。端口号是用两个字节（16位的二进制数）表示的，它的取值范围是0<del>65535，其中，0</del>1023之间的端口号用于一些知名的网络服务和应用，用户的普通应用程序需要使用1024以上的端口号，从而避免端口号被另外一个应用或服务所占用。</p>
+<p>接下来通过一个图例来描述IP地址和端口号的作用，如下图所示。</p>
+<p><img src="file:///C:%5CUsers%5C%E8%AF%B7%5CAppData%5CLocal%5CTemp%5Cksohtml15972%5Cwps3.png" alt="img"> </p>
+<p>从上图中可以清楚地看到，位于网络中一台计算机可以通过IP地址去访问另一台计算机，并通过端口号访问目标计算机中的某个应用程序。</p>
+<h6 id="2-InetAddress"><a href="#2-InetAddress" class="headerlink" title="2.InetAddress"></a>2.InetAddress</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.net.InetAddress;</span><br><span class="line"><span class="keyword">import</span> java.net.UnknownHostException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 互联网中的ip地址</span></span><br><span class="line"><span class="comment"> * 	java.net.InetAddress</span></span><br><span class="line"><span class="comment"> * 静态方法</span></span><br><span class="line"><span class="comment"> * 	static InetAddress getLocalHost()  本地主机</span></span><br><span class="line"><span class="comment"> * 	返回本地主机，返回值InetAddress对象</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * 	static InetAddress getByName(String hostName)传递主机名，获取IP地址对象</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * 	</span></span><br><span class="line"><span class="comment"> * 非静态方法</span></span><br><span class="line"><span class="comment"> *   String getHoustAddress()获取主机IP地址</span></span><br><span class="line"><span class="comment"> *   String getHoustName() 获取主机名</span></span><br><span class="line"><span class="comment"> *   </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InetAddressDemo</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> UnknownHostException </span>&#123;</span><br><span class="line">		function();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//static InetAddress getByName(String hostName)传递主机名，获取IP地址对象</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">function_1</span><span class="params">()</span> <span class="keyword">throws</span> UnknownHostException </span>&#123;</span><br><span class="line">		InetAddress inet = InetAddress.getByName(<span class="string">"LAPTOP-VCHODBPN"</span>);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//static InetAddress getLocalHost()  本地主机</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">function</span><span class="params">()</span> <span class="keyword">throws</span> UnknownHostException </span>&#123;</span><br><span class="line">		InetAddress inet=InetAddress.getLocalHost();</span><br><span class="line">		<span class="comment">//输出结果就是主机名，和IP地址</span></span><br><span class="line">		System.out.println(inet);</span><br><span class="line">		</span><br><span class="line">		String ip = inet.getHostAddress();</span><br><span class="line">		String name =inet.getHostName();</span><br><span class="line">		System.out.println(ip+<span class="string">"  "</span>+name);</span><br><span class="line"><span class="comment">//		String host =inet.toString();</span></span><br><span class="line"><span class="comment">//		String[] str = host.split("/");</span></span><br><span class="line"><span class="comment">//		for(String s:str) &#123;</span></span><br><span class="line"><span class="comment">//			System.out.println(s);</span></span><br><span class="line"><span class="comment">//		&#125;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="32-1-2UDP与TCP协议"><a href="#32-1-2UDP与TCP协议" class="headerlink" title="32.1.2UDP与TCP协议"></a>32.1.2UDP与TCP协议</h5><h6 id="1-UDP协议"><a href="#1-UDP协议" class="headerlink" title="1.UDP协议"></a>1.UDP协议</h6><p>UDP是无连接通信协议，即在数据传输时，数据的发送端和接收端不建立逻辑连接。简单来说，当一台计算机向另外一台计算机发送数据时，发送端不会确认接收端是否存在，就会发出数据，同样接收端在收到数据时，也不会向发送端反馈是否收到数据。</p>
+<p>由于使用UDP协议消耗资源小，通信效率高，所以通常都会用于音频、视频和普通数据的传输例如视频会议都使用UDP协议，因为这种情况即使偶尔丢失一两个数据包，也不会对接收结果产生太大影响。</p>
+<p>但是在使用UDP协议传送数据时，由于UDP的面向无连接性，不能保证数据的完整性，因此在传输重要数据时不建议使用UDP协议。UDP的交换过程如下图所示。</p>
+<p><img src="file:///C:%5CUsers%5C%E8%AF%B7%5CAppData%5CLocal%5CTemp%5Cksohtml15972%5Cwps4.png" alt="img"></p>
+<h6 id="2-TCP协议"><a href="#2-TCP协议" class="headerlink" title="2.TCP协议"></a>2.TCP协议</h6><p>TCP协议是面向连接的通信协议，即在传输数据前先在发送端和接收端建立逻辑连接，然后再传输数据，它提供了两台计算机之间可靠无差错的数据传输。在TCP连接中必须要明确客户端与服务器端，由客户端向服务端发出连接请求，每次连接的创建都需要经过“三次握手”。第一次握手，客户端向服务器端发出连接请求，等待服务器确认，第二次握手，服务器端向客户端回送一个响应，通知客户端收到了连接请求，第三次握手，客户端再次向服务器端发送确认信息，确认连接。整个交互过程如下图所示。</p>
+<p><img src="file:///C:%5CUsers%5C%E8%AF%B7%5CAppData%5CLocal%5CTemp%5Cksohtml15972%5Cwps5.png" alt="img"> </p>
+<p>由于TCP协议的面向连接特性，它可以保证传输数据的安全性，所以是一个被广泛采用的协议，例如在下载文件时，如果数据接收不完整，将会导致文件数据丢失而不能被打开，因此，下载文件时必须采用TCP协议。</p>
+<h5 id="32-1-3UDP通信"><a href="#32-1-3UDP通信" class="headerlink" title="32.1.3UDP通信"></a>32.1.3UDP通信</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.DatagramPacket;</span><br><span class="line"><span class="keyword">import</span> java.net.DatagramSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.InetAddress;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  实现UDP协议的发送端:</span></span><br><span class="line"><span class="comment"> *    实现封装数据的类 java.net.DatagramPacket  将你的数据包装</span></span><br><span class="line"><span class="comment"> *    实现数据传输的类 java.net.DatagramSocket  将数据包发出去</span></span><br><span class="line"><span class="comment"> *    </span></span><br><span class="line"><span class="comment"> *  实现步骤:</span></span><br><span class="line"><span class="comment"> *    1. 创建DatagramPacket对象,封装数据, 接收的地址和端口</span></span><br><span class="line"><span class="comment"> *    2. 创建DatagramSocket</span></span><br><span class="line"><span class="comment"> *    3. 调用DatagramSocket类方法send,发送数据包</span></span><br><span class="line"><span class="comment"> *    4. 关闭资源</span></span><br><span class="line"><span class="comment"> *    </span></span><br><span class="line"><span class="comment"> *    DatagramPacket构造方法:</span></span><br><span class="line"><span class="comment"> *      DatagramPacket(byte[] buf, int length, InetAddress address, int port) </span></span><br><span class="line"><span class="comment"> *      </span></span><br><span class="line"><span class="comment"> *    DatagramSocket构造方法:</span></span><br><span class="line"><span class="comment"> *      DatagramSocket()空参数</span></span><br><span class="line"><span class="comment"> *      方法: send(DatagramPacket d)</span></span><br><span class="line"><span class="comment"> *      </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UDPSend</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">		<span class="comment">//创建数据包对象,封装要发送的数据,接收端IP,端口</span></span><br><span class="line">		<span class="keyword">byte</span>[] date = <span class="string">"你好UDP"</span>.getBytes();</span><br><span class="line">		<span class="comment">//创建InetAddress对象,封装自己的IP地址</span></span><br><span class="line">		InetAddress inet = InetAddress.getByName(<span class="string">"127.0.0.1"</span>);</span><br><span class="line">		DatagramPacket dp = <span class="keyword">new</span> DatagramPacket(date, date.length, inet,<span class="number">6000</span>);</span><br><span class="line">		<span class="comment">//创建DatagramSocket对象,数据包的发送和接收对象</span></span><br><span class="line">		DatagramSocket ds = <span class="keyword">new</span> DatagramSocket();</span><br><span class="line">		<span class="comment">//调用ds对象的方法send,发送数据包</span></span><br><span class="line">		ds.send(dp);</span><br><span class="line">		<span class="comment">//关闭资源</span></span><br><span class="line">		ds.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.DatagramPacket;</span><br><span class="line"><span class="keyword">import</span> java.net.DatagramSocket;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  实现UDP接收端</span></span><br><span class="line"><span class="comment"> *    实现封装数据包 java.net.DatagramPacket 将数据接收</span></span><br><span class="line"><span class="comment"> *    实现输出传输     java.net.DatagramSocket 接收数据包</span></span><br><span class="line"><span class="comment"> *    </span></span><br><span class="line"><span class="comment"> *  实现步骤:</span></span><br><span class="line"><span class="comment"> *     1. 创建DatagramSocket对象,绑定端口号</span></span><br><span class="line"><span class="comment"> *         要和发送端端口号一致</span></span><br><span class="line"><span class="comment"> *     2. 创建字节数组,接收发来的数据</span></span><br><span class="line"><span class="comment"> *     3. 创建数据包对象DatagramPacket</span></span><br><span class="line"><span class="comment"> *     4. 调用DatagramSocket对象方法</span></span><br><span class="line"><span class="comment"> *        receive(DatagramPacket dp)接收数据,数据放在数据包中</span></span><br><span class="line"><span class="comment"> *     5. 拆包</span></span><br><span class="line"><span class="comment"> *          发送的IP地址</span></span><br><span class="line"><span class="comment"> *            数据包对象DatagramPacket方法getAddress()获取的是发送端的IP地址对象</span></span><br><span class="line"><span class="comment"> *            返回值是InetAddress对象</span></span><br><span class="line"><span class="comment"> *          接收到的字节个数</span></span><br><span class="line"><span class="comment"> *            数据包对象DatagramPacket方法 getLength()</span></span><br><span class="line"><span class="comment"> *          发送方的端口号</span></span><br><span class="line"><span class="comment"> *            数据包对象DatagramPacket方法 getPort()发送端口</span></span><br><span class="line"><span class="comment"> *     6. 关闭资源</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UDPReceive</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="comment">//创建数据包传输对象DatagramSocket 绑定端口号</span></span><br><span class="line">		DatagramSocket ds = <span class="keyword">new</span> DatagramSocket(<span class="number">6000</span>);</span><br><span class="line">		<span class="comment">//创建字节数组</span></span><br><span class="line">		<span class="keyword">byte</span>[] data = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">		<span class="comment">//创建数据包对象,传递字节数组</span></span><br><span class="line">		DatagramPacket dp = <span class="keyword">new</span> DatagramPacket(data, data.length);</span><br><span class="line">		<span class="comment">//调用ds对象的方法receive传递数据包</span></span><br><span class="line">		ds.receive(dp);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//获取发送端的IP地址对象</span></span><br><span class="line">		String ip=dp.getAddress().getHostAddress();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//获取发送的端口号</span></span><br><span class="line">		<span class="keyword">int</span> port = dp.getPort();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//获取接收到的字节个数</span></span><br><span class="line">		<span class="keyword">int</span> length = dp.getLength();</span><br><span class="line">		System.out.println(<span class="keyword">new</span> String(data,<span class="number">0</span>,length)+<span class="string">"..."</span>+ip+<span class="string">":"</span>+port);</span><br><span class="line">		ds.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>键盘录入</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.DatagramPacket;</span><br><span class="line"><span class="keyword">import</span> java.net.DatagramSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.InetAddress;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 实现UDP发送,键盘输入的形式</span></span><br><span class="line"><span class="comment"> * 输入完毕,发送给接收端      </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UDPSend</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		DatagramSocket ds = <span class="keyword">new</span> DatagramSocket();</span><br><span class="line">		InetAddress inet = InetAddress.getByName(<span class="string">"127.0.0.1"</span>);</span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">		String message = sc.nextLine();</span><br><span class="line">		<span class="comment">/*if("886".equals(message))&#123;</span></span><br><span class="line"><span class="comment">			break;</span></span><br><span class="line"><span class="comment">		&#125;*/</span></span><br><span class="line">		<span class="keyword">byte</span>[] date = message.getBytes();</span><br><span class="line">		DatagramPacket dp = <span class="keyword">new</span> DatagramPacket(date, date.length, inet,<span class="number">6000</span>);</span><br><span class="line">		ds.send(dp);</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="comment">//	ds.close();</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.DatagramPacket;</span><br><span class="line"><span class="keyword">import</span> java.net.DatagramSocket;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  实现UDP接收端</span></span><br><span class="line"><span class="comment"> *  永不停歇的接收端</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UDPReceive</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="comment">//创建数据包传输对象DatagramSocket 绑定端口号</span></span><br><span class="line">		DatagramSocket ds = <span class="keyword">new</span> DatagramSocket(<span class="number">6000</span>);</span><br><span class="line">		<span class="comment">//创建字节数组</span></span><br><span class="line">		<span class="keyword">byte</span>[] data = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">		<span class="comment">//创建数据包对象,传递字节数组</span></span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">		DatagramPacket dp = <span class="keyword">new</span> DatagramPacket(data, data.length);</span><br><span class="line">		<span class="comment">//调用ds对象的方法receive传递数据包</span></span><br><span class="line">		ds.receive(dp);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//获取发送端的IP地址对象</span></span><br><span class="line">		String ip=dp.getAddress().getHostAddress();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//获取发送的端口号</span></span><br><span class="line">		<span class="keyword">int</span> port = dp.getPort();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//获取接收到的字节个数</span></span><br><span class="line">		<span class="keyword">int</span> length = dp.getLength();</span><br><span class="line">		System.out.println(<span class="keyword">new</span> String(data,<span class="number">0</span>,length)+<span class="string">"..."</span>+ip+<span class="string">":"</span>+port);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//ds.close();</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="32-1-4TCP通信"><a href="#32-1-4TCP通信" class="headerlink" title="32.1.4TCP通信"></a>32.1.4TCP通信</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  实现TCP客户端,连接到服务器</span></span><br><span class="line"><span class="comment"> *  和服务器实现数据交换</span></span><br><span class="line"><span class="comment"> *  实现TCP客户端程序的类 java.net.Socket</span></span><br><span class="line"><span class="comment"> *  </span></span><br><span class="line"><span class="comment"> *  构造方法:</span></span><br><span class="line"><span class="comment"> *      Socket(String host, int port)  传递服务器IP和端口号</span></span><br><span class="line"><span class="comment"> *      注意:构造方法只要运行,就会和服务器进行连接,连接失败,抛出异常</span></span><br><span class="line"><span class="comment"> *      </span></span><br><span class="line"><span class="comment"> *    OutputStream  getOutputStream() 返回套接字的输出流</span></span><br><span class="line"><span class="comment"> *      作用: 将数据输出,输出到服务器</span></span><br><span class="line"><span class="comment"> *      </span></span><br><span class="line"><span class="comment"> *    InputStream getInputStream() 返回套接字的输入流</span></span><br><span class="line"><span class="comment"> *      作用: 从服务器端读取数据</span></span><br><span class="line"><span class="comment"> *      </span></span><br><span class="line"><span class="comment"> *    客户端服务器数据交换,必须使用套接字对象Socket中的获取的IO流,自己new流,不行</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TCPClient</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="comment">//创建Socket对象,连接服务器</span></span><br><span class="line">		Socket socket = <span class="keyword">new</span> Socket(<span class="string">"127.0.0.1"</span>, <span class="number">8888</span>);</span><br><span class="line">		<span class="comment">//通过客户端的套接字对象Socket方法,获取字节输出流,将数据写向服务器</span></span><br><span class="line">		OutputStream out = socket.getOutputStream();</span><br><span class="line">		out.write(<span class="string">"服务器OK"</span>.getBytes());</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//读取服务器发回的数据,使用socket套接字对象中的字节输入流</span></span><br><span class="line">		InputStream in = socket.getInputStream();</span><br><span class="line">		<span class="keyword">byte</span>[] data = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">		<span class="keyword">int</span> len = in.read(data);</span><br><span class="line">		System.out.println(<span class="keyword">new</span> String(data,<span class="number">0</span>,len));</span><br><span class="line">		</span><br><span class="line">		socket.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  实现TCP服务器程序</span></span><br><span class="line"><span class="comment"> *  表示服务器程序的类 java.net.ServerSocket</span></span><br><span class="line"><span class="comment"> *  构造方法:</span></span><br><span class="line"><span class="comment"> *    ServerSocket(int port) 传递端口号</span></span><br><span class="line"><span class="comment"> *  </span></span><br><span class="line"><span class="comment"> *  很重要的事情: 必须要获得客户端的套接字对象Socket</span></span><br><span class="line"><span class="comment"> *    Socket  accept()</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TCPServer</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">		ServerSocket server = <span class="keyword">new</span> ServerSocket(<span class="number">8888</span>);</span><br><span class="line">		<span class="comment">//调用服务器套接字对象中的方法accept() 获取客户端套接字对象</span></span><br><span class="line">		Socket socket = server.accept();</span><br><span class="line">		<span class="comment">//通过客户端套接字对象,socket获取字节输入流,读取的是客户端发送来的数据</span></span><br><span class="line">		InputStream in = socket.getInputStream();</span><br><span class="line">		<span class="keyword">byte</span>[] data = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">		<span class="keyword">int</span> len = in.read(data);</span><br><span class="line">		System.out.println(<span class="keyword">new</span> String(data,<span class="number">0</span>,len));</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//服务器向客户端回数据,字节输出流,通过客户端套接字对象获取字节输出流</span></span><br><span class="line">		OutputStream out = socket.getOutputStream();</span><br><span class="line">		out.write(<span class="string">"收到,谢谢"</span>.getBytes());</span><br><span class="line">		</span><br><span class="line">		socket.close();</span><br><span class="line">		server.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="32-1-5TCP的中的流对象"><a href="#32-1-5TCP的中的流对象" class="headerlink" title="32.1.5TCP的中的流对象"></a>32.1.5TCP的中的流对象</h5><p><img src="C:%5CUsers%5C%E8%AF%B7%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1560172675365.png" alt="1560172675365"></p>
+<h5 id="32-1-6TCP图片上传案例分析"><a href="#32-1-6TCP图片上传案例分析" class="headerlink" title="32.1.6TCP图片上传案例分析"></a>32.1.6TCP图片上传案例分析</h5><p><img src="C:%5CUsers%5C%E8%AF%B7%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1560172848633.png" alt="1560172848633"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 实现TCP图片上传客户端</span></span><br><span class="line"><span class="comment"> * 实现步骤:</span></span><br><span class="line"><span class="comment"> * 	1.Socket套接字连接服务器</span></span><br><span class="line"><span class="comment"> * 	2.通过Socket获取字节输出流，写图片</span></span><br><span class="line"><span class="comment"> * 	3.使用自己的流对象，读取图片数据源</span></span><br><span class="line"><span class="comment"> * 		FileInputStream</span></span><br><span class="line"><span class="comment"> * 	4.读取图片，使用字节输出流，将图片写到服务器</span></span><br><span class="line"><span class="comment"> * 	5.通过Socket套接字获取字节输入流</span></span><br><span class="line"><span class="comment"> * 		读取服务器放回来的上传成功</span></span><br><span class="line"><span class="comment"> * 	6.关闭资源 </span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TCClient</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">		Socket socket = <span class="keyword">new</span> Socket(<span class="string">"192.168.56.1"</span>,<span class="number">8888</span>);</span><br><span class="line">		<span class="comment">//获取字节输出流，图片写到服务器</span></span><br><span class="line">		OutputStream out = socket.getOutputStream();</span><br><span class="line">		<span class="comment">//创建字节输入流，读取本机上的数据源文件</span></span><br><span class="line">		FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"E:\\c.jpg"</span>);</span><br><span class="line">		<span class="comment">//开始读写字节数组</span></span><br><span class="line">		<span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">		<span class="keyword">while</span>((len=fis.read(bytes))!=-<span class="number">1</span>) &#123;</span><br><span class="line">			out.write(bytes, <span class="number">0</span>, len);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//给服务器写终止序列</span></span><br><span class="line">		socket.shutdownOutput();</span><br><span class="line">		<span class="comment">//获取字节输入流，读取服务器的上传成功</span></span><br><span class="line">		InputStream in = socket.getInputStream();</span><br><span class="line">		len = in.read(bytes);</span><br><span class="line">		System.out.println(<span class="keyword">new</span> String(bytes,<span class="number">0</span>,len));</span><br><span class="line">		</span><br><span class="line">		fis.close();</span><br><span class="line">		socket.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*   TCP图片上传服务器</span></span><br><span class="line"><span class="comment"> *   1. ServerSocket套接字对象,监听端口8000</span></span><br><span class="line"><span class="comment"> *   2. 方法accept()获取客户端的连接对象</span></span><br><span class="line"><span class="comment"> *   3. 客户端连接对象获取字节输入流,读取客户端发送图片</span></span><br><span class="line"><span class="comment"> *   4. 创建File对象,绑定上传文件夹</span></span><br><span class="line"><span class="comment"> *       判断文件夹存在, 不存,在创建文件夹</span></span><br><span class="line"><span class="comment"> *   5. 创建字节输出流,数据目的File对象所在文件夹</span></span><br><span class="line"><span class="comment"> *   6. 字节流读取图片,字节流将图片写入到目的文件夹中</span></span><br><span class="line"><span class="comment"> *   7. 将上传成功会写客户端</span></span><br><span class="line"><span class="comment"> *   8. 关闭资源</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TCPServer</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span>  <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">		ServerSocket server = <span class="keyword">new</span> ServerSocket(<span class="number">8888</span>);</span><br><span class="line">		Socket socket = server.accept();</span><br><span class="line">		<span class="comment">//通过客户端连接对象,获取字节输入流，读取客户端图片</span></span><br><span class="line">		InputStream in = socket.getInputStream();</span><br><span class="line">		<span class="comment">//将目的文件夹封装到File对象</span></span><br><span class="line">		File upload = <span class="keyword">new</span> File(<span class="string">"e:\\upload"</span>);</span><br><span class="line">		<span class="keyword">if</span>(!upload.exists()) &#123;</span><br><span class="line">			upload.mkdirs();</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//防止文件同名被覆盖，从新定义文件的名字</span></span><br><span class="line">		<span class="comment">//规则 :域名+毫秒值+6位随机数</span></span><br><span class="line">		String filename = <span class="string">"itcast"</span>+System.currentTimeMillis()+<span class="keyword">new</span> Random().nextInt(<span class="number">999999</span>)+<span class="string">".jpg"</span>;</span><br><span class="line">		<span class="comment">//创建字节输出流，将图片写入目的文件夹中</span></span><br><span class="line">		FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(upload+File.separator+<span class="string">"t.jpg"</span>);</span><br><span class="line">		<span class="comment">//读写字节数组</span></span><br><span class="line">		<span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">		<span class="keyword">int</span> len=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>((len = in.read(bytes))!=-<span class="number">1</span>) &#123;</span><br><span class="line">			fos.write(bytes,<span class="number">0</span>,len);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//通过客户端连接对象获取字节输出流</span></span><br><span class="line">		<span class="comment">//上传成功写回客户端</span></span><br><span class="line">		socket.getOutputStream().write(<span class="string">"上传成功"</span>.getBytes());</span><br><span class="line">		</span><br><span class="line">		fos.close();</span><br><span class="line">		socket.close();</span><br><span class="line">		server.close();</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="32-1-7多线程上传案例"><a href="#32-1-7多线程上传案例" class="headerlink" title="32.1.7多线程上传案例"></a>32.1.7多线程上传案例</h5><p><img src="C:%5CUsers%5C%E8%AF%B7%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1560177980668.png" alt="1560177980668"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Upload</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Socket socket;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Upload</span><span class="params">(Socket socket)</span> </span>&#123;<span class="keyword">this</span>.socket=socket;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span>  </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="comment">//通过客户端连接对象,获取字节输入流，读取客户端图片</span></span><br><span class="line">		InputStream in = socket.getInputStream();</span><br><span class="line">		<span class="comment">//将目的文件夹封装到File对象</span></span><br><span class="line">		File upload = <span class="keyword">new</span> File(<span class="string">"e:\\upload"</span>);</span><br><span class="line">		<span class="keyword">if</span>(!upload.exists()) &#123;</span><br><span class="line">			upload.mkdirs();</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//防止文件同名被覆盖，从新定义文件的名字</span></span><br><span class="line">		<span class="comment">//规则 :域名+毫秒值+6位随机数</span></span><br><span class="line">		String filename = <span class="string">"itcast"</span>+System.currentTimeMillis()+<span class="keyword">new</span> Random().nextInt(<span class="number">999999</span>)+<span class="string">".jpg"</span>;</span><br><span class="line">		<span class="comment">//创建字节输出流，将图片写入目的文件夹中</span></span><br><span class="line">		FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(upload+File.separator+filename);</span><br><span class="line">		<span class="comment">//读写字节数组</span></span><br><span class="line">		<span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">		<span class="keyword">int</span> len=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>((len = in.read(bytes))!=-<span class="number">1</span>) &#123;</span><br><span class="line">			fos.write(bytes,<span class="number">0</span>,len);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//通过客户端连接对象获取字节输出流</span></span><br><span class="line">		<span class="comment">//上传成功写回客户端</span></span><br><span class="line">		socket.getOutputStream().write(<span class="string">"上传成功"</span>.getBytes());</span><br><span class="line">		</span><br><span class="line">		fos.close();</span><br><span class="line">		socket.close();</span><br><span class="line">		&#125;<span class="keyword">catch</span>(Exception ex) &#123;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TCPThreadServer</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		</span><br><span class="line">		ServerSocket server = <span class="keyword">new</span> ServerSocket(<span class="number">8888</span>);</span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">		<span class="comment">//获取到一个客户端，必须开启新线程</span></span><br><span class="line">		Socket socket = server.accept();</span><br><span class="line">		<span class="keyword">new</span> Thread( <span class="keyword">new</span> Upload(socket)).start();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java基础/" rel="tag"># Java基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/31/Java基础学习笔记/Java学习笔记day31/" rel="next" title="Java基础day31">
+                <i class="fa fa-chevron-left"></i> Java基础day31
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/02/Java基础学习笔记/Java学习笔记day33/" rel="prev" title="Java基础day33">
+                Java基础day33 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/me.jpg" alt="倪翔宇">
+            
+              <p class="site-author-name" itemprop="name">倪翔宇</p>
+              <p class="site-description motion-element" itemprop="description">技术博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/nixiangyu1" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#32-1网络编程"><span class="nav-number">1.</span> <span class="nav-text">32.1网络编程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#32-1-1网络通讯协议"><span class="nav-number">1.1.</span> <span class="nav-text">32.1.1网络通讯协议</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-地址和端口号"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.地址和端口号</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-InetAddress"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.InetAddress</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-1-2UDP与TCP协议"><span class="nav-number">1.2.</span> <span class="nav-text">32.1.2UDP与TCP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-UDP协议"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.UDP协议</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-TCP协议"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.TCP协议</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-1-3UDP通信"><span class="nav-number">1.3.</span> <span class="nav-text">32.1.3UDP通信</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-1-4TCP通信"><span class="nav-number">1.4.</span> <span class="nav-text">32.1.4TCP通信</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-1-5TCP的中的流对象"><span class="nav-number">1.5.</span> <span class="nav-text">32.1.5TCP的中的流对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-1-6TCP图片上传案例分析"><span class="nav-number">1.6.</span> <span class="nav-text">32.1.6TCP图片上传案例分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#32-1-7多线程上传案例"><span class="nav-number">1.7.</span> <span class="nav-text">32.1.7多线程上传案例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">倪翔宇</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

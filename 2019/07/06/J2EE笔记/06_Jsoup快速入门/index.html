@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="J2EE笔记,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Jsoup步骤：  导入jar包 获取Document对象 获取对应的标签Element对象 获取数据   1234567891011121314151617181920212223242526272829package jsoup;import org.jsoup.Jsoup;import org.jsoup.nodes.Document;import org.jsoup.nodes.Eleme">
+<meta name="keywords" content="J2EE笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="06_Jsoup快速入门">
+<meta property="og:url" content="http://yoursite.com/2019/07/06/J2EE笔记/06_Jsoup快速入门/index.html">
+<meta property="og:site_name" content="倪翔宇的博客">
+<meta property="og:description" content="Jsoup步骤：  导入jar包 获取Document对象 获取对应的标签Element对象 获取数据   1234567891011121314151617181920212223242526272829package jsoup;import org.jsoup.Jsoup;import org.jsoup.nodes.Document;import org.jsoup.nodes.Eleme">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-19T14:00:04.345Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="06_Jsoup快速入门">
+<meta name="twitter:description" content="Jsoup步骤：  导入jar包 获取Document对象 获取对应的标签Element对象 获取数据   1234567891011121314151617181920212223242526272829package jsoup;import org.jsoup.Jsoup;import org.jsoup.nodes.Document;import org.jsoup.nodes.Eleme">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '倪翔宇'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/06/J2EE笔记/06_Jsoup快速入门/">
+
+
+
+
+
+  <title>06_Jsoup快速入门 | 倪翔宇的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">倪翔宇的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录和小刘一起学习的过程</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/06/J2EE笔记/06_Jsoup快速入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">06_Jsoup快速入门</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-06T21:11:01+08:00">
+                2019-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">J2EE笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Jsoup"><a href="#Jsoup" class="headerlink" title="Jsoup"></a>Jsoup</h1><p>步骤：</p>
+<ol>
+<li>导入jar包</li>
+<li>获取Document对象</li>
+<li>获取对应的标签Element对象</li>
+<li>获取数据 </li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> jsoup;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.jsoup.Jsoup;</span><br><span class="line"><span class="keyword">import</span> org.jsoup.nodes.Document;</span><br><span class="line"><span class="keyword">import</span> org.jsoup.nodes.Element;</span><br><span class="line"><span class="keyword">import</span> org.jsoup.select.Elements;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*Jsoup快速入门 */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JsoupDemo1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">//2.获取Document对象，根据xml文档获取</span></span><br><span class="line">        <span class="comment">//2.1获取student.xml的path</span></span><br><span class="line">        String path=JsoupDemo1.class.getClassLoader().getResource(<span class="string">"student.xml"</span>).getPath();</span><br><span class="line">        <span class="comment">//2.2解析xml文档，加载文档进内存，获取dom树</span></span><br><span class="line">        Document document=Jsoup.parse(<span class="keyword">new</span> File(path),<span class="string">"utf-8"</span>);</span><br><span class="line">        <span class="comment">//3.获取元素对象 Element</span></span><br><span class="line">        Elements elements=document.getElementsByTag(<span class="string">"name"</span>);</span><br><span class="line">        <span class="comment">//3.1获取第一个name的Element对象</span></span><br><span class="line">        Element element = elements.get(<span class="number">0</span>);</span><br><span class="line">        <span class="comment">//3.2获取数据</span></span><br><span class="line">        String name = element.text();</span><br><span class="line">        System.out.println(name);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>简单介绍：</p>
+<ol>
+<li><p>Jsoup:工具类，可以解析html或者xml文档，返回Document</p>
+<ul>
+<li>parse:解析html或者xml文档，返回Document</li>
+<li>parse(File in, String charsetName)：解析xml或html文件的。</li>
+<li>parse(String html)：解析xml或html字符串</li>
+<li>parse(URL url, int timeoutMillis)：通过网络路径获取指定的</li>
+</ul>
+</li>
+<li><p>Document:文档对象。代表内存中的dom树</p>
+<ul>
+<li>获取Element对象<ul>
+<li>getElementById(String id)：根据id属性值获取唯一的element对象</li>
+<li>getElementsByTag(String tagName)：根据标签名称获取元素对象集合</li>
+<li>getElementsByAttribute(String key)：根据属性名称获取元素对象集合</li>
+<li>getElementsByAttributeValue(String key, String value)：根据对应的属性名和属性值获取元素对象集合</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Elements:元素Element对象的集合。可以当作ArrayList<element>来使用</element></p>
+</li>
+<li><p>Element : 元素对象</p>
+<ul>
+<li>获取子元素对象<ul>
+<li>getElementById(String id)：根据id属性值获取唯一的element对象</li>
+<li>getElementsByTag(String tagName)：根据标签名称获取元素对象集合</li>
+<li>getElementsByAttribute(String key)：根据属性名称获取元素对象集合</li>
+<li>getElementsByAttributeValue(String key, String value)：根据对应的属性名和属性值获取元素对象集合</li>
+</ul>
+</li>
+<li>获取属性值<ul>
+<li>String attr(String key)：根据属性名称获取属性值</li>
+</ul>
+</li>
+<li>获取文本内容<ul>
+<li>String text():获取文本内容</li>
+<li>String html():获取标签体的所有内容(包括字标签的字符串内容)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Node : 节点对象</p>
+</li>
+</ol>
+<h4 id="快捷查询方式："><a href="#快捷查询方式：" class="headerlink" title="快捷查询方式："></a>快捷查询方式：</h4><p>selector:选择器</p>
+<ul>
+<li>使用的方法：Elements    select(String cssQuery)</li>
+<li>语法：参考Selector类中定义的语法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> jsoup;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.sun.org.apache.xpath.internal.SourceTree;</span><br><span class="line"><span class="keyword">import</span> org.jsoup.Jsoup;</span><br><span class="line"><span class="keyword">import</span> org.jsoup.nodes.Document;</span><br><span class="line"><span class="keyword">import</span> org.jsoup.nodes.Element;</span><br><span class="line"><span class="keyword">import</span> org.jsoup.select.Elements;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*Jsoup选择器*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JsoupDemo2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">//2.获取Document对象，根据xml文档获取</span></span><br><span class="line">        <span class="comment">//2.1获取student.xml的path</span></span><br><span class="line">        String path= JsoupDemo2.class.getClassLoader().getResource(<span class="string">"student.xml"</span>).getPath();</span><br><span class="line">        <span class="comment">//2.2解析xml文档，加载文档进内存，获取dom树</span></span><br><span class="line">        Document document=Jsoup.parse(<span class="keyword">new</span> File(path),<span class="string">"utf-8"</span>);</span><br><span class="line">        <span class="comment">//3。查询name标签</span></span><br><span class="line">        Elements elements = document.select(<span class="string">"name"</span>);</span><br><span class="line">        System.out.println(elements);</span><br><span class="line">        System.out.println(<span class="string">"==========="</span>);</span><br><span class="line">        <span class="comment">//4.查询id值为itcast的元素</span></span><br><span class="line">        Elements elements1 = document.select(<span class="string">"#itcast"</span>);</span><br><span class="line">        System.out.println(elements1);</span><br><span class="line">        System.out.println(<span class="string">"==========="</span>);</span><br><span class="line">        <span class="comment">//5.获取student标签并且number属性值为itcast_0001的age子标签</span></span><br><span class="line">        <span class="comment">//5.1获取student标签并且number属性值为itcast_0001</span></span><br><span class="line">        Elements elements2 = document.select(<span class="string">"student[number='itcast_0001']"</span>);</span><br><span class="line">        System.out.println(elements2);</span><br><span class="line">        System.out.println(<span class="string">"=============="</span>);</span><br><span class="line">        <span class="comment">//5.2获取student标签并且number属性值为itcast_0001的子标签</span></span><br><span class="line">        Elements elements3 = document.select(<span class="string">"student[number='itcast_0001']&gt;age"</span>);</span><br><span class="line">        System.out.println(elements3);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>XPath：XPath即为XML路径语言，它是一种用来确定XML（标准通用标记语言的子集）文档中某部分位置的语言</p>
+<ul>
+<li>使用Jsoup的Xpath需要额外导入jar包。</li>
+<li>查询w3cshool参考手册，使用xpath的语法完成查询</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> jsoup;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.wanghaomiao.xpath.exception.XpathSyntaxErrorException;</span><br><span class="line"><span class="keyword">import</span> cn.wanghaomiao.xpath.model.JXDocument;</span><br><span class="line"><span class="keyword">import</span> cn.wanghaomiao.xpath.model.JXNode;</span><br><span class="line"><span class="keyword">import</span> org.jsoup.Jsoup;</span><br><span class="line"><span class="keyword">import</span> org.jsoup.nodes.Document;</span><br><span class="line"><span class="keyword">import</span> org.jsoup.select.Elements;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*XPath查询*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JsoupDemo3</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, XpathSyntaxErrorException </span>&#123;</span><br><span class="line">        <span class="comment">//2.获取Document对象，根据xml文档获取</span></span><br><span class="line">        <span class="comment">//2.1获取student.xml的path</span></span><br><span class="line">        String path= JsoupDemo3.class.getClassLoader().getResource(<span class="string">"student.xml"</span>).getPath();</span><br><span class="line">        <span class="comment">//2.2解析xml文档，加载文档进内存，获取dom树</span></span><br><span class="line">        Document document=Jsoup.parse(<span class="keyword">new</span> File(path),<span class="string">"utf-8"</span>);</span><br><span class="line">        <span class="comment">//3.根据document对象，创建JXDocument对象</span></span><br><span class="line">        JXDocument jxDocument = <span class="keyword">new</span> JXDocument(document);</span><br><span class="line">        <span class="comment">//4.结合xpath语法查询</span></span><br><span class="line">        <span class="comment">//4.1查询所有student标签</span></span><br><span class="line">        List&lt;JXNode&gt; jxNodes = jxDocument.selN(<span class="string">"//student"</span>);</span><br><span class="line">        <span class="keyword">for</span> (JXNode jxNode : jxNodes) &#123;</span><br><span class="line">            System.out.println(jxNode);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"============="</span>);</span><br><span class="line">        <span class="comment">//4.2查询所有student标签下的name标签</span></span><br><span class="line">        List&lt;JXNode&gt; jxNodes2 = jxDocument.selN(<span class="string">"//student//name"</span>);</span><br><span class="line">        <span class="keyword">for</span> (JXNode jxNode : jxNodes2) &#123;</span><br><span class="line">            System.out.println(jxNode);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"================"</span>);</span><br><span class="line">        <span class="comment">//4.3查询student标签下带有id属性的name标签</span></span><br><span class="line">        List&lt;JXNode&gt; jxNodes3 = jxDocument.selN(<span class="string">"//student//name[@id]"</span>);</span><br><span class="line">        <span class="keyword">for</span> (JXNode jxNode : jxNodes3) &#123;</span><br><span class="line">            System.out.println(jxNode);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"================"</span>);</span><br><span class="line">        <span class="comment">//4.4查询student标签下的带有id属性的name标签，并且id属性值为itcast.</span></span><br><span class="line">        List&lt;JXNode&gt; jxNodes4 = jxDocument.selN(<span class="string">"//student//name[@id='itcast']"</span>);</span><br><span class="line">        <span class="keyword">for</span> (JXNode jxNode : jxNodes4) &#123;</span><br><span class="line">            System.out.println(jxNode);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/J2EE笔记/" rel="tag"># J2EE笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/05/J2EE笔记/05_框架_BootStrap笔记/" rel="next" title="05_框架_BootStrap笔记">
+                <i class="fa fa-chevron-left"></i> 05_框架_BootStrap笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/07/J2EE笔记/07_xml笔记/" rel="prev" title="07_xml笔记">
+                07_xml笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/me.jpg" alt="倪翔宇">
+            
+              <p class="site-author-name" itemprop="name">倪翔宇</p>
+              <p class="site-description motion-element" itemprop="description">技术博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/nixiangyu1" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Jsoup"><span class="nav-number">1.</span> <span class="nav-text">Jsoup</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#快捷查询方式："><span class="nav-number">1.0.0.1.</span> <span class="nav-text">快捷查询方式：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">倪翔宇</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
