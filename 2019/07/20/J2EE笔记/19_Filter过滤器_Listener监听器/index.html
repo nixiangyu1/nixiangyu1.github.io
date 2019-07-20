@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="J2EE笔记,">
+  <meta name="keywords" content="-过滤敏感词汇 -登录验证,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="Filter过滤器一、作用 过滤器，相当于一个拦路虎，可以把你拦截下来，但也可以给你增强一下功能。 过滤器的作用：  用户完成登录的操作。如：登录验证，统一编码处理，敏感字符过滤。。。  二、步骤 定义一个类，实现接口implements Filter  复写方法  配置拦截路径  注解 @webFiler(“/*”) //在访问所有资源之前，都会执行过滤器 web.xml  1234567891">
-<meta name="keywords" content="J2EE笔记">
+<meta name="keywords" content="-过滤敏感词汇 -登录验证">
 <meta property="og:type" content="article">
 <meta property="og:title" content="19_Filter过滤器_Listener监听器">
 <meta property="og:url" content="http://yoursite.com/2019/07/20/J2EE笔记/19_Filter过滤器_Listener监听器/index.html">
@@ -88,7 +88,10 @@
 <meta property="og:description" content="Filter过滤器一、作用 过滤器，相当于一个拦路虎，可以把你拦截下来，但也可以给你增强一下功能。 过滤器的作用：  用户完成登录的操作。如：登录验证，统一编码处理，敏感字符过滤。。。  二、步骤 定义一个类，实现接口implements Filter  复写方法  配置拦截路径  注解 @webFiler(“/*”) //在访问所有资源之前，都会执行过滤器 web.xml  1234567891">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/Img/1563590330708.png">
-<meta property="og:updated_time" content="2019-07-20T04:32:29.445Z">
+<meta property="og:image" content="http://yoursite.com/Img/1563612736685.png">
+<meta property="og:image" content="http://yoursite.com/Img/1563625577586.png">
+<meta property="og:image" content="http://yoursite.com/Img/1563636026934.png">
+<meta property="og:updated_time" content="2019-07-20T17:11:42.278Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="19_Filter过滤器_Listener监听器">
 <meta name="twitter:description" content="Filter过滤器一、作用 过滤器，相当于一个拦路虎，可以把你拦截下来，但也可以给你增强一下功能。 过滤器的作用：  用户完成登录的操作。如：登录验证，统一编码处理，敏感字符过滤。。。  二、步骤 定义一个类，实现接口implements Filter  复写方法  配置拦截路径  注解 @webFiler(“/*”) //在访问所有资源之前，都会执行过滤器 web.xml  1234567891">
@@ -374,13 +377,113 @@
 
 
 
+</li>
+</ol>
+<h2 id="三、细节"><a href="#三、细节" class="headerlink" title="三、细节"></a>三、细节</h2><ol>
+<li><p>web.xml配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">   </span><br><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>cn.itcast.web.filter.FilterDemo1<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 拦截路径 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生命周期</p>
+<p>服务器启动后，创建Filter对象，然后调用init方法，只执行一次</p>
+<p>请求被拦截资源时，就会执行一次doFilter</p>
+<p>服务器关闭后，Filter对象被销毁。如果服务器正常关闭后，执行destory方法，只销毁一次</p>
+</li>
+</ol>
+<ol start="3">
+<li><p>过滤器配置：</p>
+<p>​    拦截路径配置：<br>​            具体资源路径：index/jsp     只有访问index.jsp时，过滤器才会被执行</p>
+<p>​            拦截目录：/user/*  访问user下的所有资源时，过滤器会被执行</p>
+<p>​            后缀名： *.jsp 访问所有后缀名为jsp资源时，过滤器会被执行</p>
+<p>​            拦截所有资源：/* 访问所有资源时，过滤器会被执行</p>
+<p>​    拦截方式配置：</p>
+<p>​            注解配置：            </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//浏览器直接请求index.jsp资源时，该过滤器会被执行</span></span><br><span class="line"><span class="comment">//@WebFilter(value = "/index.jsp",dispatcherTypes = DispatcherType.REQUEST)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//只有转发访问index.jsp资源时，该过滤器才会被执行</span></span><br><span class="line"><span class="comment">//@WebFilter(value = "/index.jsp", dispatcherTypes = DispatcherType.FORWARD)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//只有直接访问index.jsp资源时，或者转发访问，该过滤器才会被执行</span></span><br><span class="line"><span class="meta">@WebFilter</span>(value = <span class="string">"/index.jsp"</span>, dispatcherTypes = &#123;DispatcherType.FORWARD,DispatcherType.REQUEST&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>​            web.xml配置：</p>
+<p>​            设置标签即可</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dispatcher</span>&gt;</span><span class="tag">&lt;/<span class="name">dispatcher</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 
 
 </li>
 </ol>
-<ol start="4">
-<li>过滤器细节：</li>
+<p>   ​    多个过滤器配置：（过滤器的先后顺序问题）</p>
+<p>   ​            注解配置：按照类名的字符串比较规则比较</p>
+<p>   ​            web.xml配置：谁在上面谁先执行</p>
+<h2 id="四、案例"><a href="#四、案例" class="headerlink" title="四、案例"></a>四、案例</h2><ol>
+<li><p>案例1_登录验证（day17_case）</p>
+<ul>
+<li><p>需求：</p>
+<pre><code>1. 访问day17_case案例的资源。验证其是否登录
+2. 如果登录了，则直接放行。
+3. 如果没有登录，则跳转到登录页面，提示&quot;您尚未登录，请先登录&quot;。</code></pre><p><img src="/Img/1563612736685.png" alt="1563612736685"></p>
+</li>
+</ul>
+</li>
+<li><p>案例2_敏感词汇过滤</p>
+<pre><code>* 需求：
+
+    1. 对day17_case案例录入的数据进行敏感词汇过滤
+    2. 敏感词汇参考《敏感词汇.txt》
+3. 如果是敏感词汇，替换为 ***     </code></pre><p> <img src="/Img/1563625577586.png" alt="1563625577586"></p>
+<ul>
+<li>增强对象的功能：（采用设计模式）<ul>
+<li>装饰模式</li>
+<li>代理模式<ol>
+<li>静态代理</li>
+<li>动态代理</li>
 </ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="五、代理模式"><a href="#五、代理模式" class="headerlink" title="五、代理模式"></a>五、代理模式</h2><p>简单来说代理模式，就是我们日常生活中的代理商模式。代理模式一般有三元素：共同接口，真实对象（厂家），代理对象（代理商）。</p>
+<p>比方说我们需要向厂家买一些商品，但是这些商品是固定好的，而我们有一些特别的需求，厂家不能统一给我们制作。所有我们需要向代理商去买，他那里有定制商品，代理商也是从厂家进货，但是他经过了一系列的处理。</p>
+<p>下面通过图片展示一下：</p>
+<p><img src="/Img/1563636026934.png" alt="1563636026934"></p>
+<h3 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h3><p>程序员编写源码，再进行编译，是在程序运行前，就已经编译号的。</p>
+<ol>
+<li><p>共同接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SaleComputer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sale</span><span class="params">(<span class="keyword">double</span> money)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>真实对象(厂家)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.proxy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 真实类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Lenovo</span> <span class="keyword">implements</span> <span class="title">SaleComputer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sale</span><span class="params">(<span class="keyword">double</span> money)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"花了"</span>+money+<span class="string">"元买了联想电脑"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"联想电脑"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"展示电脑。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>代理对象(代理商)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Proxy</span> <span class="keyword">implements</span> <span class="title">SaleComputer</span> </span>&#123;</span><br><span class="line">   <span class="comment">//声明真实对象</span></span><br><span class="line">    <span class="keyword">private</span> SaleComputer realObject;</span><br><span class="line"> 	<span class="comment">//构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Proxy</span><span class="params">(SaleComputer realObject)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.realObject = realObject;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//实现接口的方法</span></span><br><span class="line">    <span class="comment">//调用真实对象的构造函数，并且进行一些修改</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sale</span><span class="params">(<span class="keyword">double</span> money)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//打八五折</span></span><br><span class="line">        money = money *<span class="number">0.85</span>;</span><br><span class="line">        <span class="comment">//然后调用真实对象的方法，进货</span></span><br><span class="line">        <span class="keyword">return</span> realObject.sale(money);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//new一个代理商，参数传递的是一个真实对象</span></span><br><span class="line">   Proxy proxy = <span class="keyword">new</span> Proxy(<span class="keyword">new</span> Lenovo());</span><br><span class="line"><span class="comment">//调用代理商的方法，代理商会调用真实对象的方法</span></span><br><span class="line">   String computer=proxy.sale(<span class="number">8000</span>);</span><br><span class="line">System.out.println(computer);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<p>优点：扩展原有功能，不用修改真实类的代码</p>
+<p>缺点：如果说有个需求，需要10个真实对象，对应要写10个代理对象，然后一个个调用。会很麻烦，不够灵活。</p>
+<p>所以要用到动态代理。</p>
+<h3 id="动态代理（JDK代理）"><a href="#动态代理（JDK代理）" class="headerlink" title="动态代理（JDK代理）"></a>动态代理（JDK代理）</h3><p>在程序运行时，通过反射机制动态创建的</p>
+<h4 id="实现步骤："><a href="#实现步骤：" class="headerlink" title="实现步骤："></a>实现步骤：</h4><ol>
+<li>代理对象和真实对象实现相同的接口</li>
+<li>代理对象=Proxy.newProxyInstance();</li>
+<li>使用代理对象调用方法</li>
+<li>增强方法<ul>
+<li>增强参数列表（修改参数列表，打折之类的）</li>
+<li>增强方法体执行逻辑（送货啊，上门服务）</li>
+<li>增强返回值类型（买电脑送鼠标）</li>
+</ul>
+</li>
+</ol>
+<p>这里主要用的是匿名内部类的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//1.创建真实对象</span></span><br><span class="line">        Lenovo lenovo = <span class="keyword">new</span> Lenovo();</span><br><span class="line">        <span class="comment">//2.动态代理怎增强lenovo对象</span></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 三个参数：</span></span><br><span class="line"><span class="comment">         *    1.真实类的类加载器</span></span><br><span class="line"><span class="comment">         *    2.接口数组</span></span><br><span class="line"><span class="comment">         *    3.处理器</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        SaleComputer proxy_lenovo = (SaleComputer) Proxy.newProxyInstance(Lenovo.class.getClassLoader(), Lenovo.class.getInterfaces(), <span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">                 代理逻辑编写的方法：代理对象调用的所有方法都会执行该方法</span></span><br><span class="line"><span class="comment">                    参数：</span></span><br><span class="line"><span class="comment">                        1.proxy 代理对象   这里指的是上面的proxy_lenovo</span></span><br><span class="line"><span class="comment">                        2.method:代理对象调用的方法，被封装成对象     调用什么方法，method就是什么</span></span><br><span class="line"><span class="comment">                        3.args：代理对象调用的方法时，传递的实际参数数组    args[0]就是8000</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                <span class="comment">//代理扩展逻辑</span></span><br><span class="line">                <span class="comment">//判断是否是sale方法</span></span><br><span class="line">                <span class="keyword">if</span> (method.getName().equals(<span class="string">"sale"</span>)) &#123;</span><br><span class="line">                    <span class="comment">//1.增强参数</span></span><br><span class="line">                    <span class="comment">//获取了传递过来的参数</span></span><br><span class="line">                    <span class="keyword">double</span> money = (<span class="keyword">double</span>) args[<span class="number">0</span>];</span><br><span class="line">                    <span class="comment">//打了八折</span></span><br><span class="line">                    money = money * <span class="number">0.85</span>;</span><br><span class="line">                    <span class="comment">//调用真实对象的method方法</span></span><br><span class="line">                    String obj = (String)method.invoke(lenovo, money);</span><br><span class="line">                    <span class="comment">//2.增强逻辑</span></span><br><span class="line">                    System.out.println(<span class="string">"免费送货。。。"</span>);</span><br><span class="line">                    <span class="comment">//3.增强返回值</span></span><br><span class="line">                    <span class="keyword">return</span> obj+<span class="string">"送了鼠标垫"</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">//调用真实对象的method方法</span></span><br><span class="line">                    Object obj = method.invoke(lenovo, args[<span class="number">0</span>]);</span><br><span class="line">                    <span class="comment">//代理对象调用方法后的返回值</span></span><br><span class="line">                    <span class="keyword">return</span> obj;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//2.调用方法</span></span><br><span class="line">        String computer = proxy_lenovo.sale(<span class="number">8000</span>);</span><br><span class="line">        System.out.println(computer);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -398,7 +501,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/J2EE笔记/" rel="tag"># J2EE笔记</a>
+            <a href="/tags/过滤敏感词汇-登录验证/" rel="tag"># -过滤敏感词汇 -登录验证</a>
           
         </div>
       
@@ -520,7 +623,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -563,7 +666,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Filter过滤器"><span class="nav-number">1.</span> <span class="nav-text">Filter过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、作用"><span class="nav-number">1.1.</span> <span class="nav-text">一、作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、步骤"><span class="nav-number">1.2.</span> <span class="nav-text">二、步骤</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Filter过滤器"><span class="nav-number">1.</span> <span class="nav-text">Filter过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、作用"><span class="nav-number">1.1.</span> <span class="nav-text">一、作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、步骤"><span class="nav-number">1.2.</span> <span class="nav-text">二、步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、细节"><span class="nav-number">1.3.</span> <span class="nav-text">三、细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、案例"><span class="nav-number">1.4.</span> <span class="nav-text">四、案例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、代理模式"><span class="nav-number">1.5.</span> <span class="nav-text">五、代理模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态代理"><span class="nav-number">1.5.1.</span> <span class="nav-text">静态代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理（JDK代理）"><span class="nav-number">1.5.2.</span> <span class="nav-text">动态代理（JDK代理）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现步骤："><span class="nav-number">1.5.2.1.</span> <span class="nav-text">实现步骤：</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
