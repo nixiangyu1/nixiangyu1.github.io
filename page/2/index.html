@@ -82,7 +82,7 @@
 <meta name="description" content="技术博客">
 <meta property="og:type" content="website">
 <meta property="og:title" content="倪翔宇的博客">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:url" content="github.com/nixiangyu1/page/2/index.html">
 <meta property="og:site_name" content="倪翔宇的博客">
 <meta property="og:description" content="技术博客">
 <meta property="og:locale" content="zh-Hans">
@@ -118,7 +118,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/2/"/>
+  <link rel="canonical" href="github.com/nixiangyu1/page/2/"/>
 
 
 
@@ -262,7 +262,162 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/13/J2EE笔记/13_request、response转发与重定向/">
+    <link itemprop="mainEntityOfPage" href="github.com/nixiangyu1/2019/07/14/J2EE笔记/14_request和response乱码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/14/J2EE笔记/14_request和response乱码/" itemprop="url">14_request和response乱码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-14T21:11:01+08:00">
+                2019-07-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">J2EE笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>原因</p>
+<p>浏览器用了一种编码方式utf-8</p>
+<p>tomcat用的编码方式 ISO-8859-1</p>
+<p>服务器从tomcat默认获取的编码方式ISO-8859-1(我们不认识)</p>
+<p>所以要统一浏览器和服务器的编码方式。</p>
+<p>解决方法</p>
+<p>request：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取对象之前先设置流的编码格式，tomcat默认的编码格式是ISO-8859-1</span></span><br><span class="line">request.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line"><span class="comment">//获取数据</span></span><br><span class="line">String name=request.getParameter(<span class="string">"name"</span>);</span><br><span class="line">System.out.println(name);</span><br></pre></td></tr></table></figure>
+
+<p>response：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取对象之前先设置流的编码格式，tomcat默认的编码格式是ISO-8859-1</span></span><br><span class="line">        response.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line">        <span class="comment">//告诉浏览器，服务器这边发送的编码格式是utf-8</span></span><br><span class="line">        <span class="comment">//response.setHeader("content-type", "text/html;charset=utf-8");</span></span><br><span class="line">        response.setContentType(<span class="string">"text/hmtl;charset=utf-8"</span>);</span><br><span class="line">        <span class="comment">//从tomcat中获取一个字符输出流</span></span><br><span class="line">        PrintWriter pw = response.getWriter();</span><br><span class="line">        pw.write(<span class="string">"你好，hello"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>字符流PrintWriter</p>
+<p>字节流ServletOutputStream</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="github.com/nixiangyu1/2019/07/13/J2EE笔记/13_request、response转发与重定向/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="倪翔宇">
@@ -451,7 +606,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/12/J2EE笔记/12_BeanUtils_封装JavaBean/">
+    <link itemprop="mainEntityOfPage" href="github.com/nixiangyu1/2019/07/12/J2EE笔记/12_BeanUtils_封装JavaBean/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="倪翔宇">
@@ -614,7 +769,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/11/J2EE笔记/11_Servlet/">
+    <link itemprop="mainEntityOfPage" href="github.com/nixiangyu1/2019/07/11/J2EE笔记/11_Servlet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="倪翔宇">
@@ -708,13 +863,13 @@
         
           
             <h1 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h1><h2 id="一、什么是Servlet？"><a href="#一、什么是Servlet？" class="headerlink" title="一、什么是Servlet？"></a>一、什么是Servlet？</h2><p>用来处理服务器请求和发送响应的一个程序</p>
-<p><img src="Img/1562843850278.png" alt="1562843850278"></p>
+<p><img src="/.com/nixiangyu1/2019//1562843850278.png" alt="1562843850278"></p>
 <h2 id="二、Tomcat和Servlet的关系"><a href="#二、Tomcat和Servlet的关系" class="headerlink" title="二、Tomcat和Servlet的关系"></a>二、Tomcat和Servlet的关系</h2><p>Tomcat是Web应用服务器，是Servlet/Jsp的容器，负责将客户端请求发给服务器，将服务器响应传递给客户端，简单来说，是个运输工具。</p>
 <ol>
 <li>Tomcat会将接收到的浏览器请求信息，封装成HttpServletRequest类型的request对象</li>
 <li>Tomcat回想接受到的客户端响应信息，封装成HttpServletResponse类型的response对象</li>
 </ol>
-<p><img src="Img/1562844501669.png" alt="1562844501669"></p>
+<p><img src="/.com/nixiangyu1/2019//1562844501669.png" alt="1562844501669"></p>
 <h2 id="三、编写Servlet"><a href="#三、编写Servlet" class="headerlink" title="三、编写Servlet"></a>三、编写Servlet</h2><p>创建一个ServletDemo1类，继承HttpServlet接口，重写doGet和doPost方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletDemo1</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span></span>&#123;</span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span>  </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">null</span>; </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -733,12 +888,12 @@
 <li><p>服务器关闭时，销毁servlet对象，即执行destroy()方法</p>
 </li>
 </ol>
-<p><img src="Img/1562846210769.png" alt="1562846210769"></p>
+<p><img src="/.com/nixiangyu1/2019//1562846210769.png" alt="1562846210769"></p>
 <h2 id="五、为什么要继承HttpServlet接口，而不是直接继承Servlet接口？"><a href="#五、为什么要继承HttpServlet接口，而不是直接继承Servlet接口？" class="headerlink" title="五、为什么要继承HttpServlet接口，而不是直接继承Servlet接口？"></a>五、为什么要继承HttpServlet接口，而不是直接继承Servlet接口？</h2><p>HttpServlet继承GenericServlet，GenericServlet实现了Servlet，ServletConfig中的方法</p>
 <p>Servlet接口中的主要方法：</p>
-<p><img src="Img/1562846812699.png" alt="1562846812699"></p>
+<p><img src="/.com/nixiangyu1/2019//1562846812699.png" alt="1562846812699"></p>
 <p>ServletConfig接口中的主要方法：</p>
-<p><img src="Img/1562846842714.png" alt="1562846842714"></p>
+<p><img src="/.com/nixiangyu1/2019//1562846842714.png" alt="1562846842714"></p>
 <p>实现Servlet接口了就可以获得SerletContext了，为什么还要实现ServletConfig接口呢？</p>
 <p>因为那样获取太麻烦了，通过ServletConfig可以直接获取。</p>
 <p>参考博客：<a href="https://www.cnblogs.com/whgk/p/6399262.html" target="_blank" rel="noopener">https://www.cnblogs.com/whgk/p/6399262.html</a></p>
@@ -790,7 +945,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/09/J2EE笔记/09_Http协议/">
+    <link itemprop="mainEntityOfPage" href="github.com/nixiangyu1/2019/07/09/J2EE笔记/09_Http协议/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="倪翔宇">
@@ -1030,7 +1185,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/08/J2EE笔记/08_知识回顾/">
+    <link itemprop="mainEntityOfPage" href="github.com/nixiangyu1/2019/07/08/J2EE笔记/08_知识回顾/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="倪翔宇">
@@ -1135,7 +1290,7 @@
 <p>如servlet/jsp/php/asp…</p>
 </li>
 </ol>
-<p><img src="C:%5CUsers%5C%E8%AF%B7%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1561188984874.png" alt="1561188984874"></p>
+<p><img src="/.com/nixiangyu1/2019//C:%5CUsers%5C%E8%AF%B7%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1561188984874.png" alt="1561188984874"></p>
 <p>3.网络通信的三要素：</p>
 <ol>
 <li><p>IP:电子设备(计算机)再网络中的唯一标识</p>
@@ -1225,7 +1380,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/07/J2EE笔记/07_xml笔记/">
+    <link itemprop="mainEntityOfPage" href="github.com/nixiangyu1/2019/07/07/J2EE笔记/07_xml笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="倪翔宇">
@@ -1533,7 +1688,7 @@ for (JXNode jxNode : jxNodes4) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/06/J2EE笔记/06_Jsoup快速入门/">
+    <link itemprop="mainEntityOfPage" href="github.com/nixiangyu1/2019/07/06/J2EE笔记/06_Jsoup快速入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="倪翔宇">
@@ -1743,7 +1898,7 @@ for (JXNode jxNode : jxNodes4) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/05/J2EE笔记/05_框架_BootStrap笔记/">
+    <link itemprop="mainEntityOfPage" href="github.com/nixiangyu1/2019/07/05/J2EE笔记/05_框架_BootStrap笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="倪翔宇">
@@ -1943,7 +2098,7 @@ for (JXNode jxNode : jxNodes4) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/04/J2EE笔记/04_JavaScript高级笔记/">
+    <link itemprop="mainEntityOfPage" href="github.com/nixiangyu1/2019/07/04/J2EE笔记/04_JavaScript高级笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="倪翔宇">
@@ -2280,182 +2435,6 @@ for (JXNode jxNode : jxNodes4) {
 <pre><code>7. 表单事件：
     1. onsubmit    确认按钮被点击。
     2. onreset    重置按钮被点击。</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/J2EE笔记/03_表单标签get和post的区别/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪翔宇的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/03/J2EE笔记/03_表单标签get和post的区别/" itemprop="url">03_表单标签get和post的区别</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-03T21:11:01+08:00">
-                2019-07-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">J2EE笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h1><p>概念：用于采集用户输入的数据的。用于和服务器进行交互。</p>
-<ul>
-<li><p>form：用于定义表单的。可以定义一个范围，范围代表采集用户数据的范围</p>
-<ul>
-<li><p>属性：`</p>
-<ul>
-<li><p>action：指定提交数据的URL</p>
-</li>
-<li><p>method:指定提交方式</p>
-<ul>
-<li><p>分类：一共7种，2种比较常用</p>
-<ul>
-<li><p>get：</p>
-<ol>
-<li>请求参数会在地址栏中显示。会封装到请求行中(HTTP协议后讲解)。</li>
-<li>请求参数大小是有限制的。</li>
-<li>不太安全。</li>
-</ol>
-</li>
-<li><p>post：</p>
-<pre><code>1.请求参数不会再地址栏中显示。会封装在请求体中(HTTP协议后讲解)
-
-2.请求参数的大小没有限制。
-
-3.较为安全。 </code></pre></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>表单项中的数据要想被提交：必须指定其name属性</p>
-
           
         
       

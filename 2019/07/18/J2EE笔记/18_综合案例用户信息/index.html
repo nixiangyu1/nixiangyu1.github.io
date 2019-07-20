@@ -83,22 +83,22 @@
 <meta name="keywords" content="J2EE笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="18_综合案例用户信息">
-<meta property="og:url" content="http://yoursite.com/2019/07/18/J2EE笔记/18_综合案例用户信息/index.html">
+<meta property="og:url" content="github.com/nixiangyu1/2019/07/18/J2EE笔记/18_综合案例用户信息/index.html">
 <meta property="og:site_name" content="倪翔宇的博客">
 <meta property="og:description" content="用户信息一、需求分析 简单功能  列表查询 登录 添加 删除 修改   复杂功能  删除选中  分页查询  复杂条件查询     1.登录12345678910111213141516171819202122232425262728293031323334353637383940414243444546//1.设置编码      request.setCharacterEncoding(&quot;utf-">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/07/18/J2EE笔记/18_综合案例用户信息/.%5CImg%5C1563417246277.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/18/J2EE笔记/18_综合案例用户信息/.%5CImg%5C1563418607871.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/18/J2EE笔记/18_综合案例用户信息/.%5CImg%5C1563422688062.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/18/J2EE笔记/18_综合案例用户信息/.%5CImg%5C1563426907135.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/18/J2EE笔记/18_综合案例用户信息/.%5CImg%5C1563435718468.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/18/J2EE笔记/18_综合案例用户信息/.%5CImg%5C1563436642389.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/18/J2EE笔记/18_综合案例用户信息/.%5CImg%5C1563447147367.png">
+<meta property="og:image" content="/.com/nixiangyu1/2019//.%5CImg%5C1563417246277.png">
+<meta property="og:image" content="/.com/nixiangyu1/2019//.%5CImg%5C1563418607871.png">
+<meta property="og:image" content="/.com/nixiangyu1/2019//.%5CImg%5C1563422688062.png">
+<meta property="og:image" content="/.com/nixiangyu1/2019//.%5CImg%5C1563426907135.png">
+<meta property="og:image" content="/.com/nixiangyu1/2019//.%5CImg%5C1563435718468.png">
+<meta property="og:image" content="/.com/nixiangyu1/2019//.%5CImg%5C1563436642389.png">
+<meta property="og:image" content="/.com/nixiangyu1/2019//.%5CImg%5C1563447147367.png">
 <meta property="og:updated_time" content="2019-07-19T14:02:56.416Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="18_综合案例用户信息">
 <meta name="twitter:description" content="用户信息一、需求分析 简单功能  列表查询 登录 添加 删除 修改   复杂功能  删除选中  分页查询  复杂条件查询     1.登录12345678910111213141516171819202122232425262728293031323334353637383940414243444546//1.设置编码      request.setCharacterEncoding(&quot;utf-">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/18/J2EE笔记/18_综合案例用户信息/.%5CImg%5C1563417246277.png">
+<meta name="twitter:image" content="/.com/nixiangyu1/2019//.%5CImg%5C1563417246277.png">
 
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/18/J2EE笔记/18_综合案例用户信息/">
+  <link rel="canonical" href="github.com/nixiangyu1/2019/07/18/J2EE笔记/18_综合案例用户信息/">
 
 
 
@@ -271,7 +271,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/J2EE笔记/18_综合案例用户信息/">
+    <link itemprop="mainEntityOfPage" href="github.com/nixiangyu1/2019/07/18/J2EE笔记/18_综合案例用户信息/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="倪翔宇">
@@ -383,7 +383,7 @@
 </ol>
 <h3 id="1-登录"><a href="#1-登录" class="headerlink" title="1.登录"></a>1.登录</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.设置编码</span></span><br><span class="line">      request.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line">      <span class="comment">//2.获取数据</span></span><br><span class="line">      <span class="comment">//2.1获取用户填写的验证码</span></span><br><span class="line">      String verifycode = request.getParameter(<span class="string">"verifycode"</span>);</span><br><span class="line">      Map&lt;String, String[]&gt; map = request.getParameterMap();</span><br><span class="line"></span><br><span class="line">      <span class="comment">//3.验证码校验</span></span><br><span class="line">      HttpSession session = request.getSession();</span><br><span class="line">      String checkcode_server = (String) session.getAttribute(<span class="string">"CHECKCODE_SERVER"</span>);</span><br><span class="line">      session.removeAttribute(<span class="string">"CHECKCODE_SERVER"</span>);<span class="comment">//确保验证码一次性</span></span><br><span class="line">      <span class="keyword">if</span> (checkcode_server != <span class="keyword">null</span> &amp;&amp; !checkcode_server.equalsIgnoreCase(verifycode)) &#123;</span><br><span class="line"></span><br><span class="line">          <span class="comment">//验证码不正确</span></span><br><span class="line">          <span class="comment">//提示信息</span></span><br><span class="line">          request.setAttribute(<span class="string">"login_msg"</span>, <span class="string">"验证码错误"</span>);</span><br><span class="line">          <span class="comment">//跳转登录页面,转发</span></span><br><span class="line">          request.getRequestDispatcher(<span class="string">"/login.jsp"</span>).forward(request, response);</span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//4.封装User对象</span></span><br><span class="line">      User user = <span class="keyword">new</span> User();</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          BeanUtils.populate(user,map);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">          e.printStackTrace();</span><br><span class="line">      &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">          e.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//5.调用Service查询</span></span><br><span class="line">      UserService service = <span class="keyword">new</span> UserServiceImpl();</span><br><span class="line">      User loginUser = service.login(user);</span><br><span class="line">      <span class="comment">//6.判断是否登录成功</span></span><br><span class="line">      <span class="keyword">if</span> (loginUser != <span class="keyword">null</span>) &#123;</span><br><span class="line">          <span class="comment">//登录成功</span></span><br><span class="line">          <span class="comment">//将用户存入session</span></span><br><span class="line">          session.setAttribute(<span class="string">"user"</span>, loginUser);</span><br><span class="line">          <span class="comment">//重定向</span></span><br><span class="line">          response.sendRedirect(request.getContextPath()+<span class="string">"/index.jsp"</span>);</span><br><span class="line">      &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">//登录失败</span></span><br><span class="line">          <span class="comment">//提示信息</span></span><br><span class="line">          request.setAttribute(<span class="string">"login_msg"</span>, <span class="string">"用户名或密码错误"</span>);</span><br><span class="line">          <span class="comment">//转发登录页面</span></span><br><span class="line">          request.getRequestDispatcher(<span class="string">"/login.jsp"</span>).forward(request,response);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-添加联系人"><a href="#2-添加联系人" class="headerlink" title="2.添加联系人"></a>2.添加联系人</h3><p><img src=".%5CImg%5C1563417246277.png" alt="1563417246277"></p>
+<h3 id="2-添加联系人"><a href="#2-添加联系人" class="headerlink" title="2.添加联系人"></a>2.添加联系人</h3><p><img src="/.com/nixiangyu1/2019//.%5CImg%5C1563417246277.png" alt="1563417246277"></p>
 <ol>
 <li>设置编码</li>
 <li>获取所有数据</li>
@@ -391,12 +391,12 @@
 <li>调用service完成保存</li>
 <li>跳转到userListServlet，再次查询</li>
 </ol>
-<h3 id="3-删除联系人"><a href="#3-删除联系人" class="headerlink" title="3.删除联系人"></a>3.删除联系人</h3><p><img src=".%5CImg%5C1563418607871.png" alt="1563418607871"></p>
-<h3 id="4-修改"><a href="#4-修改" class="headerlink" title="4.修改"></a>4.修改</h3><p><img src=".%5CImg%5C1563422688062.png" alt="1563422688062"></p>
-<h3 id="5-删除选中"><a href="#5-删除选中" class="headerlink" title="5.删除选中"></a>5.删除选中</h3><p><img src=".%5CImg%5C1563426907135.png" alt="1563426907135"></p>
-<h3 id="6-分页查询"><a href="#6-分页查询" class="headerlink" title="6.分页查询"></a>6.分页查询</h3><p><img src=".%5CImg%5C1563435718468.png" alt="1563435718468"></p>
-<p><img src=".%5CImg%5C1563436642389.png" alt="1563436642389"></p>
-<h3 id="7-复杂条件查询"><a href="#7-复杂条件查询" class="headerlink" title="7.复杂条件查询"></a>7.复杂条件查询</h3><p><img src=".%5CImg%5C1563447147367.png" alt="1563447147367"></p>
+<h3 id="3-删除联系人"><a href="#3-删除联系人" class="headerlink" title="3.删除联系人"></a>3.删除联系人</h3><p><img src="/.com/nixiangyu1/2019//.%5CImg%5C1563418607871.png" alt="1563418607871"></p>
+<h3 id="4-修改"><a href="#4-修改" class="headerlink" title="4.修改"></a>4.修改</h3><p><img src="/.com/nixiangyu1/2019//.%5CImg%5C1563422688062.png" alt="1563422688062"></p>
+<h3 id="5-删除选中"><a href="#5-删除选中" class="headerlink" title="5.删除选中"></a>5.删除选中</h3><p><img src="/.com/nixiangyu1/2019//.%5CImg%5C1563426907135.png" alt="1563426907135"></p>
+<h3 id="6-分页查询"><a href="#6-分页查询" class="headerlink" title="6.分页查询"></a>6.分页查询</h3><p><img src="/.com/nixiangyu1/2019//.%5CImg%5C1563435718468.png" alt="1563435718468"></p>
+<p><img src="/.com/nixiangyu1/2019//.%5CImg%5C1563436642389.png" alt="1563436642389"></p>
+<h3 id="7-复杂条件查询"><a href="#7-复杂条件查询" class="headerlink" title="7.复杂条件查询"></a>7.复杂条件查询</h3><p><img src="/.com/nixiangyu1/2019//.%5CImg%5C1563447147367.png" alt="1563447147367"></p>
 
       
     </div>

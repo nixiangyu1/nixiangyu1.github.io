@@ -83,12 +83,12 @@
 <meta name="keywords" content="Java基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java基础day25">
-<meta property="og:url" content="http://yoursite.com/2019/05/25/Java基础学习笔记/Java学习笔记day25/index.html">
+<meta property="og:url" content="github.com/nixiangyu1/2019/05/25/Java基础学习笔记/Java学习笔记day25/index.html">
 <meta property="og:site_name" content="倪翔宇的博客">
 <meta property="og:description" content="25.1Properties集合类25.1.1Properties集合的注意事项Properties 类表示了一个持久的属性集。Properties 可保存在流中或从流中加载。属性列表中每个键及其对应值都是一个字符串。 特点： 1、Hashtable的子类，map集合中的方法都可以用。 2、该集合没有泛型。键值都是字符串。 3、它是一个可以持久化的属性集。键值可以存储到集合中，也可以存储到持久化的">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="file:///C:%5CUsers%5C%E8%AF%B7%5CAppData%5CLocal%5CTemp%5Cksohtml6168%5Cwps1.jpg">
-<meta property="og:image" content="c:%5CUsers%5C%E8%AF%B7%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1559297163434.png">
+<meta property="og:image" content="/.com/nixiangyu1/2019//C:%5CUsers%5C%E8%AF%B7%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1559297163434.png">
 <meta property="og:updated_time" content="2019-07-19T13:24:12.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础day25">
@@ -123,7 +123,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/25/Java基础学习笔记/Java学习笔记day25/">
+  <link rel="canonical" href="github.com/nixiangyu1/2019/05/25/Java基础学习笔记/Java学习笔记day25/">
 
 
 
@@ -266,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/25/Java基础学习笔记/Java学习笔记day25/">
+    <link itemprop="mainEntityOfPage" href="github.com/nixiangyu1/2019/05/25/Java基础学习笔记/Java学习笔记day25/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="倪翔宇">
@@ -376,7 +376,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">int</span> age;</span><br></pre></td></tr></table></figure>
 
 <h5 id="25-2-5序列化中序列号冲突问题"><a href="#25-2-5序列化中序列号冲突问题" class="headerlink" title="25.2.5序列化中序列号冲突问题"></a>25.2.5序列化中序列号冲突问题</h5><p>序列化之后，更改了Persno类中的成员变量的权限，导致序列号不同，反序列失败</p>
-<p><img src="C:%5CUsers%5C%E8%AF%B7%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1559297163434.png" alt="1559297163434"></p>
+<p><img src="/.com/nixiangyu1/2019//C:%5CUsers%5C%E8%AF%B7%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1559297163434.png" alt="1559297163434"></p>
 <h5 id="25-2-6序列化中自定义的序列号"><a href="#25-2-6序列化中自定义的序列号" class="headerlink" title="25.2.6序列化中自定义的序列号"></a>25.2.6序列化中自定义的序列号</h5><p>在类中粘贴以下代码  不让改序列号</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">42L</span>;</span><br></pre></td></tr></table></figure>
 
