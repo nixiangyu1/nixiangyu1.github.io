@@ -262,6 +262,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/21/Java基础知识再回顾/Map集合的遍历/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/21/Java基础知识再回顾/Map集合的遍历/" itemprop="url">Map集合的遍历</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-21T11:21:06+08:00">
+                2019-07-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java基础知识再回顾/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础知识再回顾</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Map集合遍历"><a href="#Map集合遍历" class="headerlink" title="Map集合遍历"></a>Map集合遍历</h1><p>这里主要介绍两种比较简单的方法：</p>
+<ol>
+<li>通过keySet()键找值</li>
+<li>通过entrySet()键值对找值</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMapDemo</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		function_1();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*	注意</span></span><br><span class="line"><span class="comment">	 *  使用HashMap集合,存储自定义的对象</span></span><br><span class="line"><span class="comment">	 *  自定义对象作为HashMap的键常出现的时候，需要重写自定义类的hashCode和equals方法</span></span><br><span class="line"><span class="comment"> 	 *  Object的 equals默认是比较地址值 </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">function_1</span><span class="params">()</span></span>&#123;</span><br><span class="line">		HashMap&lt;Person, String&gt; map = <span class="keyword">new</span> HashMap&lt;Person, String&gt;();</span><br><span class="line">		map.put(<span class="keyword">new</span> Person(<span class="string">"a"</span>,<span class="number">20</span>), <span class="string">"里约热内卢"</span>);</span><br><span class="line">		map.put(<span class="keyword">new</span> Person(<span class="string">"b"</span>,<span class="number">18</span>), <span class="string">"索马里"</span>);</span><br><span class="line">		map.put(<span class="keyword">new</span> Person(<span class="string">"b"</span>,<span class="number">18</span>), <span class="string">"索马里"</span>);</span><br><span class="line">		map.put(<span class="keyword">new</span> Person(<span class="string">"c"</span>,<span class="number">19</span>), <span class="string">"百慕大"</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 通过keySet()键找值</span></span><br><span class="line"><span class="comment">         * 1.通过map调用keySet方法获取map的所有键，存储到Set集合中</span></span><br><span class="line"><span class="comment">         * 2.遍历Set集合</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">		<span class="keyword">for</span>(Person key : map.keySet())&#123;</span><br><span class="line">			String value = map.get(key);</span><br><span class="line">			System.out.println(key+<span class="string">"..."</span>+value);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">"==================="</span>);</span><br><span class="line">          <span class="comment">/*</span></span><br><span class="line"><span class="comment">         *  通过entrySet方法,键值对映射关系(结婚证)获取</span></span><br><span class="line"><span class="comment">         *    1. 调用map集合方法entrySet()将集合中的映射关系对象,存储到Set集合</span></span><br><span class="line"><span class="comment">         *        Set&lt;Entry &lt;K,V&gt; &gt;</span></span><br><span class="line"><span class="comment">         *    2. 迭代Set集合    </span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        </span><br><span class="line">		<span class="keyword">for</span>(Map.Entry&lt;Person, String&gt; entry : map.entrySet())&#123;</span><br><span class="line">            Person key = entry.getKey();</span><br><span class="line">            String value = entry.getValue()l</span><br><span class="line">			System.out.println(key+<span class="string">"..."</span>+value);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">        </span><br><span class="line">       </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/20/J2EE笔记/19_Filter过滤器_Listener监听器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -355,11 +503,18 @@
       
         
           
-            <h1 id="Filter过滤器"><a href="#Filter过滤器" class="headerlink" title="Filter过滤器"></a>Filter过滤器</h1><h2 id="一、作用"><a href="#一、作用" class="headerlink" title="一、作用"></a>一、作用</h2><p><img src="/Img/1563590330708.png" alt="1563590330708"></p>
-<p>过滤器，相当于一个拦路虎，可以把你拦截下来，但也可以给你增强一下功能。</p>
+            <h1 id="Filter过滤器"><a href="#Filter过滤器" class="headerlink" title="Filter过滤器"></a>Filter过滤器</h1><p>​    过滤器是处于客户端与服务器资源文件之间的一道过滤网，在访问资源文件之前，通过一系列的过滤器对请求进行修改、判断等，把不符合规则的请求在中途拦截或修改。也可以对响应进行过滤，拦截或修改响应。</p>
+<h2 id="一、作用"><a href="#一、作用" class="headerlink" title="一、作用"></a>一、作用</h2><p><img src="/Img/1563590330708.png" alt="1563590330708"></p>
+<p>Filter功能：</p>
+<ul>
+<li>在HttpServletRequest 到达 Servlet 之前，拦截客户的 HttpServletRequest 。 根据需要检查 HttpServletRequest ，也可以修改HttpServletRequest 头和数据。</li>
+<li>在HttpServletResponse 到达客户端之前，拦截HttpServletResponse ，根据需要检查 HttpServletResponse ，也可以修改HttpServletResponse头和数据。</li>
+</ul>
 <p>过滤器的作用：</p>
 <ul>
-<li>用户完成登录的操作。如：登录验证，统一编码处理，敏感字符过滤。。。</li>
+<li>登录验证</li>
+<li>统一编码处理</li>
+<li>敏感字符过滤。。。</li>
 </ul>
 <h2 id="二、步骤"><a href="#二、步骤" class="headerlink" title="二、步骤"></a>二、步骤</h2><ol>
 <li><p>定义一个类，实现接口implements Filter</p>
@@ -373,14 +528,11 @@
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *过滤器快速入门</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@WebFilter</span>(<span class="string">"/*"</span>)<span class="comment">//访问所有资源之前，都会执行该过滤器</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FilterDemo1</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"FileDemo1被执行了"</span>);</span><br><span class="line">        <span class="comment">//考虑是否放行</span></span><br><span class="line">        filterChain.doFilter(servletRequest,servletResponse);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
 </li>
 </ol>
-<h2 id="三、细节"><a href="#三、细节" class="headerlink" title="三、细节"></a>三、细节</h2><ol>
-<li><p>web.xml配置</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">   </span><br><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>cn.itcast.web.filter.FilterDemo1<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 拦截路径 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">   </span><br><span class="line"></span><br><span class="line">## 三、细节</span><br><span class="line"></span><br><span class="line">1. web.xml配置</span><br><span class="line"></span><br><span class="line">   ~~~xml</span><br><span class="line">   </span><br><span class="line">   		&lt;filter&gt;</span><br><span class="line">   	        &lt;filter-name&gt;demo1&lt;/filter-name&gt;</span><br><span class="line">   	        &lt;filter-class&gt;cn.itcast.web.filter.FilterDemo1&lt;/filter-class&gt;</span><br><span class="line">   	    &lt;/filter&gt;</span><br><span class="line">   	    &lt;filter-mapping&gt;</span><br><span class="line">   	        &lt;filter-name&gt;demo1&lt;/filter-name&gt;</span><br><span class="line">   			&lt;!-- 拦截路径 --&gt;</span><br><span class="line">   	        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br><span class="line">   	    &lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
 <li><p>生命周期</p>
 <p>服务器启动后，创建Filter对象，然后调用init方法，只执行一次</p>
 <p>请求被拦截资源时，就会执行一次doFilter</p>
@@ -419,20 +571,29 @@
 </ul>
 </li>
 <li><p>案例2_敏感词汇过滤</p>
-<pre><code>* 需求：
-
-    1. 对day17_case案例录入的数据进行敏感词汇过滤
-    2. 敏感词汇参考《敏感词汇.txt》
-3. 如果是敏感词汇，替换为 ***     </code></pre><p> <img src="/Img/1563625577586.png" alt="1563625577586"></p>
 <ul>
-<li>增强对象的功能：（采用设计模式）<ul>
-<li>装饰模式</li>
-<li>代理模式<ol>
-<li>静态代理</li>
-<li>动态代理</li>
+<li><p>需求：</p>
+<ol>
+<li>对day17_case案例录入的数据进行敏感词汇过滤<ol start="2">
+<li>敏感词汇参考《敏感词汇.txt》</li>
 </ol>
 </li>
-</ul>
+<li>如果是敏感词汇，替换为 ***<br><img src="/Img/1563625577586.png" alt="1563625577586"></li>
+</ol>
+</li>
+<li><p>分析：</p>
+<ol>
+<li><p>对request对象进行增强，增强获取参数相关的方法</p>
+</li>
+<li><p>放行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 敏感词汇过滤器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@WebFilter</span>(<span class="string">"/*"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SensitiveWordsFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line">    <span class="comment">//敏感词汇集合</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//1.获取文件真实路径</span></span><br><span class="line">            ServletContext servletContext = filterConfig.getServletContext();</span><br><span class="line">            String realPath = servletContext.getRealPath(<span class="string">"/WEB-INF/classes/敏感词汇.txt"</span>);</span><br><span class="line">            <span class="comment">//2.读取文件</span></span><br><span class="line">            BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(realPath));</span><br><span class="line">            <span class="comment">//3.将文件的每行数据添加到集合中</span></span><br><span class="line">            String line = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">while</span> ((line = br.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">                list.add(line);</span><br><span class="line">            &#125;</span><br><span class="line">            br.close();</span><br><span class="line">            System.out.println(list);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">        <span class="comment">//1.创建代理对象，增强getParameter方法</span></span><br><span class="line">        ServletRequest proxy_req = (ServletRequest) Proxy.newProxyInstance(servletRequest.getClass().getClassLoader(),</span><br><span class="line">                servletRequest.getClass().getInterfaces(),</span><br><span class="line">                <span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                <span class="comment">//增强getParameter方法</span></span><br><span class="line">                <span class="comment">//判断是否是getParameter方法</span></span><br><span class="line">                <span class="keyword">if</span> (method.getName().equals(<span class="string">"getParameter"</span>)) &#123;</span><br><span class="line">                    <span class="comment">//增强返回值</span></span><br><span class="line">                    <span class="comment">//获取返回值</span></span><br><span class="line">                    String value = (String) method.invoke(servletRequest, args);</span><br><span class="line">                    <span class="keyword">if</span> (value != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        <span class="keyword">for</span> (String str : list) &#123;</span><br><span class="line">                            <span class="keyword">if</span> (value.contains(str)) &#123;</span><br><span class="line">                                value = value.replace(str, <span class="string">"***"</span>);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">return</span> value;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                <span class="comment">//判断方法名是否是getParameterMap</span></span><br><span class="line">                <span class="keyword">if</span> (method.getName().equals(<span class="string">"getParameterMap"</span>)) &#123;</span><br><span class="line">                    <span class="comment">//从request中获取的getParameterMap是个只读的</span></span><br><span class="line">                    Map&lt;String, String[]&gt; readOnlyMap = (Map) method.invoke(servletRequest, args);</span><br><span class="line">                    <span class="comment">//所以这里我们新建一个</span></span><br><span class="line">                    HashMap&lt;String, String[]&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">                    map.putAll(readOnlyMap);</span><br><span class="line">                    <span class="keyword">for</span> (Map.Entry&lt;String, String[]&gt; entry : map.entrySet()) &#123;</span><br><span class="line">                        String[] strings = entry.getValue();</span><br><span class="line">                        String value = strings[<span class="number">0</span>];</span><br><span class="line">                        <span class="keyword">if</span> (value != <span class="keyword">null</span>) &#123;</span><br><span class="line">                            <span class="keyword">for</span> (String str : list) &#123;</span><br><span class="line">                                <span class="keyword">if</span> (value.contains(str)) &#123;</span><br><span class="line">                                    value = value.replace(str, <span class="string">"***"</span>);</span><br><span class="line">                                    strings[<span class="number">0</span>] = value;</span><br><span class="line">                                    map.put(entry.getKey(), strings);</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">return</span> map;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> method.invoke(servletRequest,args);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.放行</span></span><br><span class="line">        filterChain.doFilter(proxy_req,servletResponse);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ol>
 </li>
 </ul>
 </li>
@@ -479,10 +640,56 @@
 </ul>
 </li>
 </ol>
+<p>SaleComputer接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SaleComputer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sale</span><span class="params">(<span class="keyword">double</span> money)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>真实类类实现接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 真实类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Lenovo</span> <span class="keyword">implements</span> <span class="title">SaleComputer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sale</span><span class="params">(<span class="keyword">double</span> money)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"花了"</span>+money+<span class="string">"元买了联想电脑"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"联想电脑"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"展示电脑。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代理类实现InvocationHandler接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.proxy;</span><br><span class="line"></span><br><span class="line">import java.lang.reflect.InvocationHandler;</span><br><span class="line">import java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line">public class LenovoProxy implements InvocationHandler &#123;</span><br><span class="line">    //目标对象</span><br><span class="line">    private Object target;</span><br><span class="line"></span><br><span class="line">    //构造函数</span><br><span class="line">    public LenovoProxy(Object target) &#123;</span><br><span class="line">        this.target = target;</span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;</span><br><span class="line">        //代理扩展逻辑</span><br><span class="line">        //判断是否是sale方法</span><br><span class="line">        if (method.getName().equals(&quot;sale&quot;)) &#123;</span><br><span class="line">            //1.增强参数</span><br><span class="line">            //获取了传递过来的参数</span><br><span class="line">            double money = (double) args[0];</span><br><span class="line">            //打了八折</span><br><span class="line">            money = money * 0.85;</span><br><span class="line">            //调用真实对象的method方法</span><br><span class="line">            String obj = (String)method.invoke(target, money);</span><br><span class="line">            //2.增强逻辑</span><br><span class="line">            System.out.println(&quot;免费送货。。。&quot;);</span><br><span class="line">            //3.增强返回值</span><br><span class="line">            return obj+&quot;送了鼠标垫&quot;;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            //调用真实对象的method方法</span><br><span class="line">            Object obj = method.invoke(target, args[0]);</span><br><span class="line">            //代理对象调用方法后的返回值</span><br><span class="line">            return obj;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyTest1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//我们要代理的真实的对象</span></span><br><span class="line">        Lenovo lenovo = <span class="keyword">new</span> Lenovo();</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">            调用Proxy类的newProxyInstance</span></span><br><span class="line"><span class="comment">            第一个参数是目标类的构造器</span></span><br><span class="line"><span class="comment">            第二个参数是目标类的接口</span></span><br><span class="line"><span class="comment">            第三个参数是代理类的接口，这里需要传参，为了传递给代理类，在代理类的invoke方法中添加业务代码</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        SaleComputer lenove_proxy = (SaleComputer) 		Proxy.newProxyInstance(lenovo.getClass().getClassLoader()</span><br><span class="line">                , lenovo.getClass().getInterfaces(), (InvocationHandler) <span class="keyword">new</span> LenovoProxy(lenovo));</span><br><span class="line">        <span class="comment">//调用的是代理类的方法</span></span><br><span class="line">        lenove_proxy.sale(<span class="number">8000</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>参考：<a href="https://www.zhihu.com/question/20794107" target="_blank" rel="noopener">https://www.zhihu.com/question/20794107</a></p>
 <p>这里主要用的是匿名内部类的方法：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//1.创建真实对象</span></span><br><span class="line">        Lenovo lenovo = <span class="keyword">new</span> Lenovo();</span><br><span class="line">        <span class="comment">//2.动态代理怎增强lenovo对象</span></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 三个参数：</span></span><br><span class="line"><span class="comment">         *    1.真实类的类加载器</span></span><br><span class="line"><span class="comment">         *    2.接口数组</span></span><br><span class="line"><span class="comment">         *    3.处理器</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        SaleComputer proxy_lenovo = (SaleComputer) Proxy.newProxyInstance(Lenovo.class.getClassLoader(), Lenovo.class.getInterfaces(), <span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">                 代理逻辑编写的方法：代理对象调用的所有方法都会执行该方法</span></span><br><span class="line"><span class="comment">                    参数：</span></span><br><span class="line"><span class="comment">                        1.proxy 代理对象   这里指的是上面的proxy_lenovo</span></span><br><span class="line"><span class="comment">                        2.method:代理对象调用的方法，被封装成对象     调用什么方法，method就是什么</span></span><br><span class="line"><span class="comment">                        3.args：代理对象调用的方法时，传递的实际参数数组    args[0]就是8000</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                <span class="comment">//代理扩展逻辑</span></span><br><span class="line">                <span class="comment">//判断是否是sale方法</span></span><br><span class="line">                <span class="keyword">if</span> (method.getName().equals(<span class="string">"sale"</span>)) &#123;</span><br><span class="line">                    <span class="comment">//1.增强参数</span></span><br><span class="line">                    <span class="comment">//获取了传递过来的参数</span></span><br><span class="line">                    <span class="keyword">double</span> money = (<span class="keyword">double</span>) args[<span class="number">0</span>];</span><br><span class="line">                    <span class="comment">//打了八折</span></span><br><span class="line">                    money = money * <span class="number">0.85</span>;</span><br><span class="line">                    <span class="comment">//调用真实对象的method方法</span></span><br><span class="line">                    String obj = (String)method.invoke(lenovo, money);</span><br><span class="line">                    <span class="comment">//2.增强逻辑</span></span><br><span class="line">                    System.out.println(<span class="string">"免费送货。。。"</span>);</span><br><span class="line">                    <span class="comment">//3.增强返回值</span></span><br><span class="line">                    <span class="keyword">return</span> obj+<span class="string">"送了鼠标垫"</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">//调用真实对象的method方法</span></span><br><span class="line">                    Object obj = method.invoke(lenovo, args[<span class="number">0</span>]);</span><br><span class="line">                    <span class="comment">//代理对象调用方法后的返回值</span></span><br><span class="line">                    <span class="keyword">return</span> obj;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//2.调用方法</span></span><br><span class="line">        String computer = proxy_lenovo.sale(<span class="number">8000</span>);</span><br><span class="line">        System.out.println(computer);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h1 id="Listener监听器"><a href="#Listener监听器" class="headerlink" title="Listener监听器"></a>Listener监听器</h1><h2 id="一、定义和作用"><a href="#一、定义和作用" class="headerlink" title="一、定义和作用"></a>一、定义和作用</h2><p>　　监听器Listener就是在application,session,request三个对象创建、销毁或者往其中添加修改删除属性时自动执行代码的功能组件。</p>
+<p>　　Listener是Servlet的监听器，可以监听客户端的请求，服务端的操作等。</p>
+<h2 id="二、Listener的分类与使用"><a href="#二、Listener的分类与使用" class="headerlink" title="二、Listener的分类与使用"></a>二、Listener的分类与使用</h2><p>主要有三类：</p>
+<h3 id="1-ServletContext监听器"><a href="#1-ServletContext监听器" class="headerlink" title="1.ServletContext监听器"></a>1.ServletContext监听器</h3><p><strong>作用：</strong></p>
+<p>监听ServletContext的创建和销毁，也就是监听服务器开启和关闭</p>
+<p>可以在服务器创建后就加载 资源。</p>
+<p><strong>步骤：</strong></p>
+<ol>
+<li><p>创建一个类，实现ServletContextListener接口</p>
+</li>
+<li><p>重写方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ContextLoaderListener</span> <span class="keyword">implements</span> <span class="title">ServletContextListener</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 监听ServletContext对象创建的。ServletContext对象服务器启动后自动创建</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 在服务器启动后自动调用</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> servletContextEvent</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextInitialized</span><span class="params">(ServletContextEvent servletContextEvent)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//加载资源文件</span></span><br><span class="line">        <span class="comment">//1.获取ServletContext对象</span></span><br><span class="line">        ServletContext servletContext = servletContextEvent.getServletContext();</span><br><span class="line">        <span class="comment">//2.通过servletContext的getInitParameter方法获得web.xml中存放的参数</span></span><br><span class="line">        String contextConfigLocation = servletContext.getInitParameter(<span class="string">"contextConfigLocation"</span>);</span><br><span class="line">        <span class="comment">//3.通过获取到的参数，获取真实路径</span></span><br><span class="line">        String realPath = servletContext.getRealPath(contextConfigLocation);</span><br><span class="line">        <span class="comment">//4.加载进入内存(字节流)</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            FileInputStream fis = <span class="keyword">new</span> FileInputStream(realPath);</span><br><span class="line">            System.out.println(fis);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"ServletConText对象被创建了。。"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextDestroyed</span><span class="params">(ServletContextEvent servletContextEvent)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"ServletConText对象被销毁了。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>配置</p>
+<ul>
+<li><p>web.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--监听器的路径--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>cn.itcast.web.listener.ContextLoaderListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!--指定初始化参数--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--给资源命名--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--资源在服务器中的位置--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>/WEB-INF/classes/applicationContext.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>注解：注解直接在该类的上面加@webListener</li>
+</ul>
+<h3 id="2-Session监听器"><a href="#2-Session监听器" class="headerlink" title="2.Session监听器"></a>2.Session监听器</h3><h3 id="3-Request监听器"><a href="#3-Request监听器" class="headerlink" title="3.Request监听器"></a>3.Request监听器</h3>
           
         
       
@@ -2088,172 +2295,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/14/J2EE笔记/14_ServletContext/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪翔宇的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/14/J2EE笔记/14_ServletContext/" itemprop="url">14_ServletContext</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-14T21:12:01+08:00">
-                2019-07-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">J2EE笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="ServletContext对象"><a href="#ServletContext对象" class="headerlink" title="ServletContext对象"></a>ServletContext对象</h1><p>代表整个web应用，可以和程序的容器(服务器)通信</p>
-<h2 id="1-获取方式："><a href="#1-获取方式：" class="headerlink" title="1.获取方式："></a>1.获取方式：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.通过request获取</span></span><br><span class="line">ServletContext servletContext1 = request.getServletContext();</span><br><span class="line"><span class="comment">//2.通过HttpServlet获取</span></span><br><span class="line">ServletContext servletContext2 = <span class="keyword">this</span>.getServletContext();</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-功能"><a href="#2-功能" class="headerlink" title="2.功能"></a>2.功能</h2><ol>
-<li><p>获取MIME类型：</p>
-<p>MIME类型：在互联网通信过程中定义的一种文件数据类型</p>
-<p>格式：大类型/小类型  text/html   img/jpg</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.通过HttpServlet获取ServletContext对象</span></span><br><span class="line">  ServletContext context = <span class="keyword">this</span>.getServletContext();</span><br><span class="line">  <span class="comment">//2.定义文件名称</span></span><br><span class="line">  String filename = <span class="string">"a.jpg"</span>;</span><br><span class="line">  <span class="comment">//3.获取MIME类型</span></span><br><span class="line">  String mimeType = context.getMimeType(filename);</span><br><span class="line">  System.out.println(mimeType);</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<p>2.域对象：共享数据</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.通过HttpServlet获取ServletContext对象</span></span><br><span class="line">ServletContext context = <span class="keyword">this</span>.getServletContext();</span><br><span class="line"><span class="comment">//2.设置数据</span></span><br><span class="line">context.setAttribute(<span class="string">"msg"</span>,<span class="string">"haha"</span>);</span><br><span class="line"><span class="comment">//3.其他Servlet中获取数据</span></span><br><span class="line">Object msg = context.getAttribute(<span class="string">"msg"</span>);</span><br><span class="line"><span class="comment">//4.打印</span></span><br><span class="line">System.out.println(msg);</span><br></pre></td></tr></table></figure>
-
-<p>ServletContext对象范围：所有用户所有请求的数据</p>
-<p>3.获取文件的真实路径</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.通过HttpServlet获取ServletContext对象</span></span><br><span class="line">      ServletContext context = <span class="keyword">this</span>.getServletContext();</span><br><span class="line">      <span class="comment">//2.获取文件的服务器路径</span></span><br><span class="line">      String b = context.getRealPath(<span class="string">"b.txt"</span>);<span class="comment">//web目录下的资源访问</span></span><br><span class="line">      System.out.println(b);</span><br><span class="line">      File file = <span class="keyword">new</span> File(b);</span><br><span class="line"></span><br><span class="line">      String c = context.getRealPath(<span class="string">"/WEB-INF/c.txt"</span>);<span class="comment">//WEB-INF目录下的资源访问</span></span><br><span class="line">      System.out.println(c);</span><br><span class="line"></span><br><span class="line">      String a = context.getRealPath(<span class="string">"/WEB-INF/classes/a.txt"</span>);<span class="comment">//src目录下的资源访问</span></span><br><span class="line">      System.out.println(a);</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2301,7 +2347,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2312,7 +2358,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2323,7 +2369,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

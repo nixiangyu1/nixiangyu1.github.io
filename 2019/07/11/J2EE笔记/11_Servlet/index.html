@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/11/J2EE笔记/11_Servlet/Img/1562846210769.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/11/J2EE笔记/11_Servlet/Img/1562846812699.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/11/J2EE笔记/11_Servlet/Img/1562846842714.png">
-<meta property="og:updated_time" content="2019-07-19T14:00:52.490Z">
+<meta property="og:updated_time" content="2019-07-21T10:40:24.418Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="11_Servlet">
 <meta name="twitter:description" content="Servlet一、什么是Servlet？用来处理服务器请求和发送响应的一个程序  二、Tomcat和Servlet的关系Tomcat是Web应用服务器，是Servlet/Jsp的容器，负责将客户端请求发给服务器，将服务器响应传递给客户端，简单来说，是个运输工具。  Tomcat会将接收到的浏览器请求信息，封装成HttpServletRequest类型的request对象 Tomcat回想接受到的客">
@@ -377,7 +377,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/demo1"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletDemo1</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span></span>&#123;</span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span>  </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">null</span>; </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="四、Servlet的生命周期"><a href="#四、Servlet的生命周期" class="headerlink" title="四、Servlet的生命周期"></a>四、Servlet的生命周期</h2><ol>
-<li><p>服务器启动时加载web.xml<br>load-on-startup=0（默认）：在第一次请求该Servlet时，就会创建servlet对象，即调用init()方法<br>load-on-startup=1:服务器启动时，创建所有servlet对象</p>
+<li><p>服务器启动时加载web.xml<br>load-on-startup=0（默认）：在第一次请求对应的Servlet时，才会创建servlet对象，即调用init()方法<br>load-on-startup=1:服务器启动时，创建所有servlet对象</p>
 </li>
 <li><p>运行时，调用doGet和doPost方法处理客户端请求</p>
 </li>
@@ -514,7 +514,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -525,7 +525,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -536,7 +536,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
