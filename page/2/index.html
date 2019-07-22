@@ -262,6 +262,160 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/14/J2EE笔记/14_文件下载/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/14/J2EE笔记/14_文件下载/" itemprop="url">14_文件下载</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-14T22:11:01+08:00">
+                2019-07-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">J2EE笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>文件下载需求：</p>
+<ol>
+<li>页面显示超链接</li>
+<li>点击超链接后弹出下载提示框</li>
+<li>完成图片文件下载</li>
+</ol>
+<p>download.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/day15/img/1.jpg"</span>&gt;</span>图片1<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/day15/img/1.avi"</span>&gt;</span>视频1<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/day15/downloadServlet?filename=1.jpg"</span>&gt;</span>图片1<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/day15/downloadServlet?filename=1.avi"</span>&gt;</span>视频1<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>DownServlet</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.web.servlet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletContext;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletOutputStream;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/downloadServlet"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DownloadServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//1.获取请求参数</span></span><br><span class="line">        String filename = request.getParameter(<span class="string">"filename"</span>);</span><br><span class="line">        <span class="comment">//2.使用字节输入流加载文件进内存</span></span><br><span class="line">        <span class="comment">//2.1找到文件服务器路径</span></span><br><span class="line">        ServletContext servletContext = <span class="keyword">this</span>.getServletContext();</span><br><span class="line">        String realPath = servletContext.getRealPath(<span class="string">"/img/"</span> + filename);</span><br><span class="line">        <span class="comment">//2.2用字节流关联</span></span><br><span class="line">        FileInputStream fis = <span class="keyword">new</span> FileInputStream(realPath);</span><br><span class="line">        <span class="comment">//3.设置response的响应头</span></span><br><span class="line">        <span class="comment">//3.1设置响应头类型：context-type</span></span><br><span class="line">        String mimeType = servletContext.getMimeType(filename);<span class="comment">//获取文件的mime类型</span></span><br><span class="line">        response.setHeader(<span class="string">"content-type"</span>,mimeType);</span><br><span class="line">        <span class="comment">//3.2设置响应头的打开方式：content-dispositon</span></span><br><span class="line">        response.setHeader(<span class="string">"content-disposition"</span>, <span class="string">"attachment;filename="</span> + filename);</span><br><span class="line">        <span class="comment">//4.将输入流的数据写到输出流中</span></span><br><span class="line">        ServletOutputStream sos = response.getOutputStream();</span><br><span class="line">        <span class="keyword">byte</span>[] buff = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">8</span>];</span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> ((len = fis.read(buff)) != -<span class="number">1</span>) &#123;</span><br><span class="line">            sos.write(buff, <span class="number">0</span>, len);</span><br><span class="line">        &#125;</span><br><span class="line">        fis.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.doPost(request,response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/14/J2EE笔记/14_ServletContext/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2048,206 +2202,6 @@ for (JXNode jxNode : jxNodes4) {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/05/J2EE笔记/05_框架_BootStrap笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪翔宇的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/05/J2EE笔记/05_框架_BootStrap笔记/" itemprop="url">05_框架_BootStrap笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-05T21:11:01+08:00">
-                2019-07-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">J2EE笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h1><p> Bootstrap</p>
-<h2 id="Bootstrap："><a href="#Bootstrap：" class="headerlink" title="Bootstrap："></a>Bootstrap：</h2><ol>
-<li><p>概念： 一个前端开发的框架，Bootstrap，来自 Twitter，是目前很受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、JavaScript 的，它简洁灵活，使得 Web 开发更加快捷。</p>
-<ul>
-<li>框架:一个半成品软件，开发人员可以在框架基础上，在进行开发，简化编码。</li>
-<li>好处：<ol>
-<li>定义了很多的css样式和js插件。我们开发人员直接可以使用这些样式和插件得到丰富的页面效果。</li>
-<li>响应式布局。<ul>
-<li>同一套页面可以兼容不同分辨率的设备。</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>快速入门</p>
-<ol>
-<li>下载Bootstrap</li>
-<li>在项目中将这三个文件夹复制</li>
-<li>创建html页面，引入必要的资源文件</li>
-</ol>
-</li>
-</ol>
-<h2 id="响应式布局"><a href="#响应式布局" class="headerlink" title="响应式布局"></a>响应式布局</h2><pre><code>* 同一套页面可以兼容不同分辨率的设备。
-* 实现：依赖于栅格系统：将一行平均分成12个格子，可以指定元素占几个格子
-* 步骤：
-    1. 定义容器。相当于之前的table、
-        * 容器分类：
-            1. container：两边留白
-            2. container-fluid：每一种设备都是100%宽度
-    2. 定义行。相当于之前的tr   样式：row
-    3. 定义元素。指定该元素在不同的设备上，所占的格子数目。样式：col-设备代号-格子数目
-        * 设备代号：
-            1. xs：超小屏幕 手机 (&lt;768px)：col-xs-12
-            2. sm：小屏幕 平板 (≥768px)
-            3. md：中等屏幕 桌面显示器 (≥992px)
-            4. lg：大屏幕 大桌面显示器 (≥1200px)
-
-    * 注意：
-        1. 一行中如果格子数目超过12，则超出部分自动换行。
-        2. 栅格类属性可以向上兼容。栅格类适用于与屏幕宽度大于或等于分界点大小的设备。
-        3. 如果真实设备宽度小于了设置栅格类属性的设备代码的最小值，会一个元素沾满一整行。</code></pre><h2 id="CSS样式和JS插件"><a href="#CSS样式和JS插件" class="headerlink" title="CSS样式和JS插件"></a>CSS样式和JS插件</h2><pre><code>1. 全局CSS样式：
-    * 按钮：class=&quot;btn btn-default&quot;
-    * 图片：
-        *  class=&quot;img-responsive&quot;：图片在任意尺寸都占100%
-        *  图片形状
-            *  &lt;img src=&quot;...&quot; alt=&quot;...&quot; class=&quot;img-rounded&quot;&gt;：方形
-            *  &lt;img src=&quot;...&quot; alt=&quot;...&quot; class=&quot;img-circle&quot;&gt; ： 圆形
-            *  &lt;img src=&quot;...&quot; alt=&quot;...&quot; class=&quot;img-thumbnail&quot;&gt; ：相框
-    * 表格
-        * table
-        * table-bordered
-        * table-hover
-    * 表单
-        * 给表单项添加：class=&quot;form-control&quot; 
-2. 组件：
-    * 导航条
-    * 分页条
-3. 插件：
-    * 轮播图</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2300,7 +2254,7 @@ for (JXNode jxNode : jxNodes4) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

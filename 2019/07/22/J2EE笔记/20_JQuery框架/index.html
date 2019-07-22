@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JQuery基础JQuery是一个快速简洁的JavaScrip的框架 一、步骤 下载JQuery jquery-xxx.js:开放版本。给程序员看的，有缩紧，有注释 jquery-xxx.min.js:生产版本。没有缩紧，体积小  导包  使用   二、简单使用JQuery对象和js对象相互转换jq –&amp;gt;js  ：jq对象[索引] 或者jq对象.get(索引) js –&amp;gt;jq :  $">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20_JQuery框架">
+<meta property="og:url" content="http://yoursite.com/2019/07/22/J2EE笔记/20_JQuery框架/index.html">
+<meta property="og:site_name" content="倪翔宇的博客">
+<meta property="og:description" content="JQuery基础JQuery是一个快速简洁的JavaScrip的框架 一、步骤 下载JQuery jquery-xxx.js:开放版本。给程序员看的，有缩紧，有注释 jquery-xxx.min.js:生产版本。没有缩紧，体积小  导包  使用   二、简单使用JQuery对象和js对象相互转换jq –&amp;gt;js  ：jq对象[索引] 或者jq对象.get(索引) js –&amp;gt;jq :  $">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-22T08:39:59.210Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20_JQuery框架">
+<meta name="twitter:description" content="JQuery基础JQuery是一个快速简洁的JavaScrip的框架 一、步骤 下载JQuery jquery-xxx.js:开放版本。给程序员看的，有缩紧，有注释 jquery-xxx.min.js:生产版本。没有缩紧，体积小  导包  使用   二、简单使用JQuery对象和js对象相互转换jq –&amp;gt;js  ：jq对象[索引] 或者jq对象.get(索引) js –&amp;gt;jq :  $">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '倪翔宇'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/22/J2EE笔记/20_JQuery框架/">
+
+
+
+
+
+  <title>20_JQuery框架 | 倪翔宇的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">倪翔宇的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录和小刘一起学习的过程</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/22/J2EE笔记/20_JQuery框架/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">20_JQuery框架</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-22T10:28:01+08:00">
+                2019-07-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">J2EE笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="JQuery基础"><a href="#JQuery基础" class="headerlink" title="JQuery基础"></a>JQuery基础</h1><p>JQuery是一个快速简洁的JavaScrip的框架</p>
+<h2 id="一、步骤"><a href="#一、步骤" class="headerlink" title="一、步骤"></a>一、步骤</h2><ol>
+<li><p>下载JQuery</p>
+<p>jquery-xxx.js:开放版本。给程序员看的，有缩紧，有注释</p>
+<p>jquery-xxx.min.js:生产版本。没有缩紧，体积小</p>
+</li>
+<li><p>导包</p>
+</li>
+<li><p>使用</p>
+</li>
+</ol>
+<h2 id="二、简单使用"><a href="#二、简单使用" class="headerlink" title="二、简单使用"></a>二、简单使用</h2><h3 id="JQuery对象和js对象相互转换"><a href="#JQuery对象和js对象相互转换" class="headerlink" title="JQuery对象和js对象相互转换"></a>JQuery对象和js对象相互转换</h3><p>jq –&gt;js  ：jq对象[索引] 或者jq对象.get(索引)</p>
+<p>js –&gt;jq :  $(js对象)</p>
+<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><ol>
+<li>事件绑定</li>
+<li>入口函数</li>
+<li>样式控制</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>事件绑定<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/jquery-3.3.1.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">        // 给b1按钮添加单击事件</span><br><span class="line">        // window.onload = function () &#123;</span><br><span class="line">        //     $("#b1").click(function () &#123;</span><br><span class="line">        //         alert("abc");</span><br><span class="line">        //     &#125;)</span><br><span class="line">        // &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        //jquery入口函数(dom文档加载完成后执行该函数)</span><br><span class="line">        $(function () &#123;</span><br><span class="line">            //1.获取bq按钮</span><br><span class="line">            $("#b1").click(function () &#123;</span><br><span class="line">                alert("abc");</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">        $(function () &#123;</span><br><span class="line">            // $("#div1").css("background-color", "red");</span><br><span class="line">            $("#div1").css("backgroundColor", "red");</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * window.onload和$(function)区别</span><br><span class="line">         *  window.onload只能定义一次</span><br><span class="line">         */</span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span>&gt;</span>div1...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div2"</span>&gt;</span>div2...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"点我"</span> <span class="attr">id</span>=<span class="string">"b1"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><h4 id="基本选择器"><a href="#基本选择器" class="headerlink" title="基本选择器"></a>基本选择器</h4><pre><code>1. 标签选择器（元素选择器）
+    * 语法： $(&quot;html标签名&quot;) 获得所有匹配标签名称的元素
+2. id选择器 </code></pre><ul>
+<li>语法： $(“#id的属性值”) 获得与指定id属性值匹配的元素<pre><code>3. 类选择器</code></pre></li>
+<li>语法： $(“.class的属性值”) 获得与指定的class属性值匹配的元素<pre><code>4. 并集选择器：</code></pre></li>
+<li>语法： $(“选择器1,选择器2….”) 获取多个选择器选中的所有元素</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(function () &#123;</span><br><span class="line">        <span class="comment">// &lt;input type="button" value="改变 id 为 one 的元素的背景色为 红色"  id="b1"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b1"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"#one"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line"></span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// &lt;input type="button" value=" 改变元素名为 &lt;div&gt; 的所有元素的背景色为 红色"  					id="b2"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b2"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"div"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// &lt;input type="button" value=" 改变 class 为 mini 的所有元素的背景色为 红色"  				id="b3"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b3"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">".mini"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// &lt;input type="button" value=" 改变所有的&lt;span&gt;元素和 id 为 two 的元素的背景色为红				色"  id="b4"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b4"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"span,#two"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="层选择器"><a href="#层选择器" class="headerlink" title="层选择器"></a>层选择器</h4><ol>
+<li>后代选择器<pre><code>* 语法： $(&quot;A B &quot;) 选择A元素内部的所有B元素        </code></pre></li>
+<li>子选择器<ul>
+<li>语法： $(“A &gt; B”) 选择A元素内部的所有B子元素</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> &lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(function () &#123;</span><br><span class="line">        <span class="comment">// &lt;input type="button" value=" 改变 &lt;body&gt; 内所有 &lt;div&gt; 的背景色为红色"  					id="b1"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b1"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"body div"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>属性选择器</p>
+<ol>
+<li>属性名称选择器 <pre><code>* 语法： $(&quot;A[属性名]&quot;) 包含指定属性的选择器</code></pre></li>
+<li>属性选择器<ul>
+<li>语法： $(“A[属性名=’值’]”) 包含指定属性等于指定值的选择器</li>
+</ul>
+</li>
+<li>复合属性选择器<ul>
+<li>语法： $(“A[属性名=’值’][]…”) 包含多个属性条件的选择器</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">     $(function () &#123;</span><br><span class="line">         <span class="comment">// &lt;input type="button" value=" 含有属性title 的div元素背景色为红色"  id="b1"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b1"</span>).click(function () &#123;</span><br><span class="line">             $(<span class="string">"div[title]"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">         <span class="comment">// &lt;input type="button" value=" 属性title值等于test的div元素背景色为红色"  					id="b2"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b2"</span>).click(function () &#123;</span><br><span class="line">             $(<span class="string">"div[title='test']"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">         &#125;)</span><br><span class="line"></span><br><span class="line">         <span class="comment">// &lt;input type="button" value=" 属性title值不等于test的div元素(没有属性title的也将					被选中)背景色为红色"  id="b3"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b3"</span>).click(function () &#123;</span><br><span class="line">             $(<span class="string">"div[title !='test']"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">         <span class="comment">// &lt;input type="button" value=" 属性title值 以te开始 的div元素背景色为红色"  					id="b4"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b4"</span>).click(function () &#123;</span><br><span class="line">             $(<span class="string">"div[title ^='te']"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">         <span class="comment">// &lt;input type="button" value=" 属性title值 以est结束 的div元素背景色为红色"  				id="b5"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b5"</span>).click(function () &#123;</span><br><span class="line">             $(<span class="string">"div[title $='est']"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">         <span class="comment">// &lt;input type="button" value="属性title值 含有es的div元素背景色为红色"  						id="b6"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b6"</span>).click(function () &#123;</span><br><span class="line">             $(<span class="string">"div[title *='es']"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">         <span class="comment">// &lt;input type="button" value="选取有属性id的div元素，然后在结果中选取属性title值含					有“es”的 div 元素背景色为红色"  id="b7"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b7"</span>).click(function () &#123;</span><br><span class="line">             $(<span class="string">"div[id][title *='es']"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">     &#125;);</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="过滤选择器"><a href="#过滤选择器" class="headerlink" title="过滤选择器"></a>过滤选择器</h4><ol>
+<li>首元素选择器 <pre><code>* 语法： :first 获得选择的元素中的第一个元素</code></pre></li>
+<li>尾元素选择器 <ul>
+<li>语法： :last 获得选择的元素中的最后一个元素</li>
+</ul>
+</li>
+<li>非元素选择器<ul>
+<li>语法： :not(selector) 不包括指定内容的元素</li>
+</ul>
+</li>
+<li>偶数选择器<ul>
+<li>语法： :even 偶数，从 0 开始计数</li>
+</ul>
+</li>
+<li>奇数选择器<ul>
+<li>语法： :odd 奇数，从 0 开始计数</li>
+</ul>
+</li>
+<li>等于索引选择器<ul>
+<li>语法： :eq(index) 指定索引元素</li>
+</ul>
+</li>
+<li>大于索引选择器 <ul>
+<li>语法： :gt(index) 大于指定索引元素</li>
+</ul>
+</li>
+<li>小于索引选择器 <ul>
+<li>语法： :lt(index) 小于指定索引元素</li>
+</ul>
+</li>
+<li>标题选择器<ul>
+<li>语法： :header 获得标题（h1~h6）元素，固定写法</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(function () &#123;</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 改变第一个 div 元素的背景色为 红色"  id="b1"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b1"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"div:first"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 改变最后一个 div 元素的背景色为 红色"  id="b2"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b2"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"div:last"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 改变class不为 one 的所有 div 元素的背景色为 红色"  				id="b3"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b3"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"div:not(.one)"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 改变索引值为偶数的 div 元素的背景色为 红色"  					id="b4"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b4"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"div:even"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 改变索引值为奇数的 div 元素的背景色为 红色"  					id="b5"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b5"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"div:odd"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 改变索引值为大于 3 的 div 元素的背景色为 红色"  					id="b6"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b6"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"div:gt(3)"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 改变索引值为等于 3 的 div 元素的背景色为 红色"  					id="b7"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b7"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"div:eq(3)"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 改变索引值为小于 3 的 div 元素的背景色为 红色"  					id="b8"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b8"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"div:lt(3)"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 改变所有的标题元素的背景色为 红色"  id="b9"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b9"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">":header"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;);			</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="表单过滤选择器"><a href="#表单过滤选择器" class="headerlink" title="表单过滤选择器"></a>表单过滤选择器</h4><ol>
+<li>可用元素选择器 <ul>
+<li>语法： :enabled 获得可用元素</li>
+</ul>
+</li>
+<li>不可用元素选择器 <ul>
+<li>语法： :disabled 获得不可用元素</li>
+</ul>
+</li>
+<li>选中选择器 <ul>
+<li>语法： :checked 获得单选/复选框选中的元素</li>
+</ul>
+</li>
+<li>选中选择器 <ul>
+<li>语法： :selected 获得下拉框选中的元素</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(function () &#123;</span><br><span class="line">        <span class="comment">// &lt;input type="button" value=" 利用 jQuery 对象的 val() 方法改变表单内可用 &lt;input&gt; 元				素的值"  id="b1"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b1"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"input[type='text']:enabled"</span>).val(<span class="string">"aaa"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 利用 jQuery 对象的 val() 方法改变表单内不可用 &lt;input&gt; 			元素的值"  id="b2"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b2"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"input[type='text']:disabled"</span>).val(<span class="string">"aaa"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 利用 jQuery 对象的 length 属性获取复选框选中的个数"  			id="b3"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b3"</span>).click(function () &#123;</span><br><span class="line">            alert($(<span class="string">"input[type='checkbox']:checked"</span>).length);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 利用 jQuery 对象的 length 属性获取下拉框选中的个数"  			id="b4"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b4"</span>).click(function () &#123;</span><br><span class="line">            alert($(<span class="string">"#job&gt;option:selected"</span>).length);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="DOM操作"><a href="#DOM操作" class="headerlink" title="DOM操作"></a>DOM操作</h3><h4 id="内容操作"><a href="#内容操作" class="headerlink" title="内容操作"></a>内容操作</h4><ol>
+<li>html(): 获取/设置元素的标签体内容   <a><font>内容</font></a>  –&gt; <font>内容</font></li>
+<li>text(): 获取/设置元素的标签体纯文本内容   <a><font>内容</font></a> –&gt; 内容</li>
+<li>val()： 获取/设置元素的value属性值</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    $(function () &#123;</span><br><span class="line">        <span class="comment">// 获取myinput 的value值</span></span><br><span class="line">        <span class="keyword">var</span> value = $(<span class="string">"#myinput"</span>).val();</span><br><span class="line">        alert(value)</span><br><span class="line">        $(<span class="string">"#myinput"</span>).val(<span class="string">"刘猪猪"</span>);</span><br><span class="line">        <span class="comment">// 获取mydiv的标签体内容</span></span><br><span class="line">        <span class="keyword">var</span> html = $(<span class="string">"#mydiv"</span>).html();</span><br><span class="line">        alert(html);</span><br><span class="line">        <span class="comment">// $("#mydiv").html("&lt;p&gt;aaa&lt;/p&gt;")</span></span><br><span class="line">        <span class="comment">// 获取mydiv文本内容</span></span><br><span class="line">        <span class="keyword">var</span> text = $(<span class="string">"#mydiv"</span>).text();</span><br><span class="line">        alert(text);</span><br><span class="line">        $(<span class="string">"#mydiv"</span>).text(<span class="string">"bbb"</span>)</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="属性操作"><a href="#属性操作" class="headerlink" title="属性操作"></a>属性操作</h4><ol>
+<li><p>通用属性操作</p>
+<ol>
+<li><p>attr(): 获取/设置元素的属性</p>
+</li>
+<li><p>removeAttr():删除属性</p>
+</li>
+<li><p>prop():获取/设置元素的属性</p>
+</li>
+<li><p>removeProp():删除属性</p>
+<p>attr和prop区别？</p>
+<pre><code>1. 如果操作的是元素的固有属性，则建议使用prop
+2. 如果操作的是元素自定义的属性，则建议使用attr</code></pre></li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(function () &#123;</span><br><span class="line">        <span class="comment">//获取北京节点的name属性值</span></span><br><span class="line">        <span class="keyword">var</span> name = $(<span class="string">"#bj"</span>).attr(<span class="string">"name"</span>);</span><br><span class="line">        alert(name);</span><br><span class="line">        <span class="comment">//设置北京节点的name属性的值为dabeijing</span></span><br><span class="line">        $(<span class="string">"#bj"</span>).attr(<span class="string">"name"</span>, <span class="string">"dabeijing"</span>);</span><br><span class="line">        <span class="comment">//新增北京节点的discription属性 属性值是didu</span></span><br><span class="line">        $(<span class="string">"#bj"</span>).attr(<span class="string">"discription"</span>, <span class="string">"didu"</span>);</span><br><span class="line">        <span class="comment">//删除北京节点的name属性并检验name属性是否存在</span></span><br><span class="line">        $(<span class="string">"#bj"</span>).removeAttr(<span class="string">"name"</span>);</span><br><span class="line">        <span class="comment">//获得hobby的的选中状态</span></span><br><span class="line">        <span class="keyword">var</span> checked = $(<span class="string">"#hobby"</span>).prop(<span class="string">"checked"</span>);</span><br><span class="line">        alert(checked)</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>对class属性操作</p>
+<ol>
+<li>addClass():添加class属性值</li>
+<li>removeClass():删除class属性值</li>
+<li>toggleClass():切换class属性<ul>
+<li>toggleClass(“one”): </li>
+<li>判断如果元素对象上存在class=”one”，则将属性值one删除掉。 如果元素对象上不存在class=”one”，则添加</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(function () &#123;</span><br><span class="line">        <span class="comment">//&lt;input type="button" value="采用属性增加样式(改变id=one的样式)"  id="b1"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b1"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"#one"</span>).prop(<span class="string">"class"</span>, <span class="string">"second"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//&lt;input type="button" value=" addClass"  id="b2"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b2"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"#one"</span>).addClass(<span class="string">"second"</span>);</span><br><span class="line"></span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//&lt;input type="button" value="removeClass"  id="b3"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b3"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"#one"</span>).removeClass(<span class="string">"second"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//&lt;input type="button" value=" 切换样式"  id="b4"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b4"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"#one"</span>).toggleClass(<span class="string">"second"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//&lt;input type="button" value=" 通过css()获得id为one背景颜色"  id="b5"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b5"</span>).click(function () &#123;</span><br><span class="line">            <span class="keyword">var</span> backgruondColor = $(<span class="string">"#one"</span>).css(<span class="string">"backgroundColor"</span>);</span><br><span class="line">            alert(backgruondColor);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//&lt;input type="button" value=" 通过css()设置id为one背景颜色为绿色"  id="b6"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b6"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"#one"</span>).css(<span class="string">"backgroundColor"</span>,<span class="string">"green"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="CRUD操作"><a href="#CRUD操作" class="headerlink" title="CRUD操作"></a>CRUD操作</h4><ol>
+<li><p>append():父元素将子元素追加到末尾</p>
+<pre><code>* 对象1.append(对象2): 将对象2添加到对象1元素内部，并且在末尾</code></pre></li>
+<li><p>prepend():父元素将子元素追加到开头</p>
+<ul>
+<li>对象1.prepend(对象2):将对象2添加到对象1元素内部，并且在开头</li>
+</ul>
+</li>
+<li><p>appendTo():</p>
+<ul>
+<li>对象1.appendTo(对象2):将对象1添加到对象2内部，并且在末尾</li>
+</ul>
+</li>
+<li><p>prependTo()：</p>
+<ul>
+<li>对象1.prependTo(对象2):将对象1添加到对象2内部，并且在开头</li>
+</ul>
+</li>
+<li><p>after():添加元素到元素后边</p>
+<pre><code>* 对象1.after(对象2)： 将对象2添加到对象1后边。对象1和对象2是兄弟关系</code></pre></li>
+<li><p>before():添加元素到元素前边</p>
+<ul>
+<li>对象1.before(对象2)： 将对象2添加到对象1前边。对象1和对象2是兄弟关系</li>
+</ul>
+</li>
+<li><p>insertAfter()</p>
+<ul>
+<li>对象1.insertAfter(对象2)：将对象2添加到对象1后边。对象1和对象2是兄弟关系</li>
+</ul>
+</li>
+<li><p>insertBefore()</p>
+<ul>
+<li>对象1.insertBefore(对象2)： 将对象2添加到对象1前边。对象1和对象2是兄弟关系</li>
+</ul>
+</li>
+<li><p>remove():移除元素</p>
+<ul>
+<li>对象.remove():将对象删除掉</li>
+</ul>
+</li>
+<li><p>empty():清空元素的所有后代元素。</p>
+<ul>
+<li>对象.empty():将对象的后代元素全部清空，但是保留当前对象以及其属性节点</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> &lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">     $(function () &#123;</span><br><span class="line">         <span class="comment">// &lt;input type="button" value="将反恐放置到city的后面"  id="b1"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b1"</span>).click(function () &#123;</span><br><span class="line">             <span class="comment">// $("#city").append($("#fk"));</span></span><br><span class="line">             $(<span class="string">"#fk"</span>).appendTo($(<span class="string">"#city"</span>));</span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">         <span class="comment">// &lt;input type="button" value="将反恐放置到city的最前面"  id="b2"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b2"</span>).click(function () &#123;</span><br><span class="line">             <span class="comment">// $("#city").prepend($("#fk"));</span></span><br><span class="line">             $(<span class="string">"#fk"</span>).prependTo($(<span class="string">"#city"</span>));</span><br><span class="line">         &#125;);</span><br><span class="line">         <span class="comment">// &lt;input type="button" value="将反恐插入到天津后面"  id="b3"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b3"</span>).click(function () &#123;</span><br><span class="line">             <span class="comment">// $("#tj").after($("#fk"));</span></span><br><span class="line">             $(<span class="string">"#fk"</span>).insertAfter($(<span class="string">"#tj"</span>));</span><br><span class="line">         &#125;);</span><br><span class="line">         <span class="comment">// &lt;input type="button" value="将反恐插入到天津前面"  id="b4"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b4"</span>).click(function () &#123;</span><br><span class="line">             <span class="comment">// $("#tj").before($("#fk"));</span></span><br><span class="line">             $(<span class="string">"#fk"</span>).insertBefore()($(<span class="string">"#tj"</span>));</span><br><span class="line">         &#125;);</span><br><span class="line">     &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(function () &#123;</span><br><span class="line">        <span class="comment">// &lt;input type="button" value="删除&lt;li id='bj' name='beijing'&gt;北京&lt;/li&gt;"  					id="b1"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b1"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"#bj"</span>).remove();</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">// &lt;input type="button" value="删除city所有的li节点   清空元素中的所有后代节点(不包含					属性节点)"  id="b2"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b1"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"#city"</span>).empty()</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、案例"><a href="#三、案例" class="headerlink" title="三、案例"></a>三、案例</h2><ol>
+<li><p>隔行换色</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//需求：将数据行的奇数行背景色设置为 pink，偶数行背景色设置为 yellow</span></span><br><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//1.获取奇数行的tr背景色设置为pink</span></span><br><span class="line">    $(<span class="string">"tr:gt(1):odd"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">    <span class="comment">//2.获取偶数行的tr背景色设置为yellow</span></span><br><span class="line">    $(<span class="string">"tr:gt(1):even"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"yellow"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>全选全不选</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//需要保证下面的选中状态和第一个选中状态一致即可</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">selectAll</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//获取下边的复选框</span></span><br><span class="line">    $(<span class="string">".itemSelect"</span>).prop(<span class="string">"checked"</span>,obj.checked);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>qq表情选择</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//需求：点击qq表情，将其追加到发言框中</span></span><br><span class="line"></span><br><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//1.给img图片添加onclick事件</span></span><br><span class="line">    $(<span class="string">"ul img"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">//2.追加到p标签中</span></span><br><span class="line">        $(<span class="string">".word"</span>).append($(<span class="keyword">this</span>).clone());</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="4">
+<li><p>多选下拉列表左右移动</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//需求：实现下拉列表选择条目左右选择功能</span></span><br><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//toRight</span></span><br><span class="line">    $(<span class="string">"#toRight"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">//获取右边的下拉列表对象，append(左边下拉列表选中的option)</span></span><br><span class="line">        $(<span class="string">"#rightName"</span>).append($(<span class="string">"#leftName &gt; option:selected"</span>));</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">//toleft</span></span><br><span class="line">    $(<span class="string">"#toLeft"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">//appendto  获取右边选中的opption，将其移动到左边下拉列表中</span></span><br><span class="line">        $(<span class="string">"#rightName &gt; option:selected"</span>).appendTo($(<span class="string">"#leftName"</span>));</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<p>day20</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/21/Java基础知识再回顾/Map集合的遍历/" rel="next" title="Map集合的遍历">
+                <i class="fa fa-chevron-left"></i> Map集合的遍历
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/me.jpg" alt="倪翔宇">
+            
+              <p class="site-author-name" itemprop="name">倪翔宇</p>
+              <p class="site-description motion-element" itemprop="description">技术博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/nixiangyu1" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JQuery基础"><span class="nav-number">1.</span> <span class="nav-text">JQuery基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、步骤"><span class="nav-number">1.1.</span> <span class="nav-text">一、步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、简单使用"><span class="nav-number">1.2.</span> <span class="nav-text">二、简单使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JQuery对象和js对象相互转换"><span class="nav-number">1.2.1.</span> <span class="nav-text">JQuery对象和js对象相互转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本语法"><span class="nav-number">1.2.2.</span> <span class="nav-text">基本语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类"><span class="nav-number">1.2.3.</span> <span class="nav-text">分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本选择器"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">基本选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#层选择器"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">层选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#过滤选择器"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">过滤选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表单过滤选择器"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">表单过滤选择器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM操作"><span class="nav-number">1.2.4.</span> <span class="nav-text">DOM操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内容操作"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">内容操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#属性操作"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">属性操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CRUD操作"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">CRUD操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、案例"><span class="nav-number">1.3.</span> <span class="nav-text">三、案例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">倪翔宇</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
