@@ -262,6 +262,333 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/17/J2EE笔记/17_EL表达式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/17/J2EE笔记/17_EL表达式/" itemprop="url">17_EL表达式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-17T21:11:01+08:00">
+                2019-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">J2EE笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="EL表达式"><a href="#EL表达式" class="headerlink" title="EL表达式"></a>EL表达式</h1><h5 id="概念：Expression-Language-表达式语言"><a href="#概念：Expression-Language-表达式语言" class="headerlink" title="概念：Expression Language 表达式语言"></a>概念：Expression Language 表达式语言</h5><h5 id="作用：替换和简化jsp页面中的java代码编写"><a href="#作用：替换和简化jsp页面中的java代码编写" class="headerlink" title="作用：替换和简化jsp页面中的java代码编写"></a>作用：替换和简化jsp页面中的java代码编写</h5><h5 id="语法：-表达式"><a href="#语法：-表达式" class="headerlink" title="语法：${表达式}"></a>语法：${表达式}</h5><h5 id="注意：jsp默认支持EL表达式"><a href="#注意：jsp默认支持EL表达式" class="headerlink" title="注意：jsp默认支持EL表达式"></a>注意：jsp默认支持EL表达式</h5><h5 id="使用："><a href="#使用：" class="headerlink" title="使用："></a>使用：</h5><ol>
+<li><p>运算</p>
+<ul>
+<li>加减乘除取余 </li>
+</ul>
+</li>
+<li><p>获取值</p>
+<ol>
+<li><p>el表达式只能从域对象中获取值</p>
+</li>
+<li><p>语法：</p>
+<ol>
+<li><p>${域名称.键名}</p>
+<ul>
+<li>域名称：<ul>
+<li>pageScope</li>
+<li>requestScope</li>
+<li>sessionScope</li>
+<li>applicationScope</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>${键名}：表示依次从最小的域中查找是否有该键对应的值，直到找到为止。</p>
+<ol start="3">
+<li><p>获取对象、List集合、Map集合的值</p>
+<pre><code>            1. 对象：${域名称.键名.属性名}
+                * 本质上会去调用对象的getter方法
+            2. List集合：${域名称.键名[索引]}
+            3. Map集合：
+* ${域名称.键名.key名称}
+* ${域名称.键名[&quot;key名称&quot;]}</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line"> <span class="comment">//在域中存储数据</span></span><br><span class="line">    session.setAttribute(<span class="string">"name"</span>,<span class="string">"张三"</span>)</span><br><span class="line">    request.setAttribute(<span class="string">"age"</span>,<span class="string">"11"</span>)</span><br><span class="line"> %&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//获取session存储的name</span></span><br><span class="line">$&#123;sessionScope.name&#125;</span><br><span class="line"><span class="comment">//获取requestScope中存储的age</span></span><br><span class="line">$&#123;requestScope.age&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/J2EE笔记/16_验证码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/16/J2EE笔记/16_验证码/" itemprop="url">16_验证码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-16T21:11:01+08:00">
+                2019-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">J2EE笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="一、需求分析"><a href="#一、需求分析" class="headerlink" title="一、需求分析"></a>一、需求分析</h1><p><img src="Img/1563275921474.png" alt="1563275921474"></p>
+<p>具体代码参考</p>
+<p>day16</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/15/J2EE笔记/15_会话技术_cookie_session/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1827,509 +2154,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/08/J2EE笔记/08_知识回顾/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪翔宇的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/08/J2EE笔记/08_知识回顾/" itemprop="url">08_知识回顾</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-08T21:11:01+08:00">
-                2019-07-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">J2EE笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="web相关知识回顾"><a href="#web相关知识回顾" class="headerlink" title="web相关知识回顾"></a>web相关知识回顾</h1><h4 id="1-软件架构"><a href="#1-软件架构" class="headerlink" title="1.软件架构"></a>1.软件架构</h4><ol>
-<li>C/S:客户端/服务器端    （需要客户安装客户端）</li>
-<li>B/S:浏览器/服务端          （主要学习的这部分）</li>
-</ol>
-<h4 id="2-资源分配"><a href="#2-资源分配" class="headerlink" title="2.资源分配"></a>2.资源分配</h4><ol>
-<li><p>静态资源:所有用户访问后，得到的结果都一样，称为静态资源。静态资源可以直接被浏览器解析。</p>
-<p>如:html,css,JavaScript</p>
-</li>
-<li><p>动态资源:每个用户访问相同资源后，得到的结果可能不一样，称为动态资源。动态资源被访问后，需要先转化为静态资源，再返回给浏览器</p>
-<p>如servlet/jsp/php/asp…</p>
-</li>
-</ol>
-<p><img src="C:%5CUsers%5C%E8%AF%B7%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1561188984874.png" alt="1561188984874"></p>
-<p>3.网络通信的三要素：</p>
-<ol>
-<li><p>IP:电子设备(计算机)再网络中的唯一标识</p>
-</li>
-<li><p>端口：应用程序在计算机种的唯一标识。0~65536</p>
-</li>
-<li><p>传输协议:规定了数据传输的规则</p>
-<p>1.基础协议：</p>
-<ol>
-<li><p>​    tcp:安全协议，三次握手，速度较慢</p>
-</li>
-<li><p>​    udp：不安全协议。速度快</p>
-</li>
-</ol>
-</li>
-</ol>
-<h4 id="3-web服务器软件"><a href="#3-web服务器软件" class="headerlink" title="3.web服务器软件"></a>3.web服务器软件</h4><ul>
-<li>服务器：安装了服务器软件的计算机</li>
-<li>服务器软件：接收用户的请求，处理请求，做出响应</li>
-<li>web服务器软件:接受用户的请求，处理请求，做出响应<ul>
-<li>在web服务器软件中，可以部署web项目，让用户通过浏览器来访问这些项目</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>常见的java相关的web服务器软件:</p>
-<ul>
-<li><p>webLogic：oracle公司，大型的JavaEE服务器，支持所有的JavaEE规范，收费的。   </p>
-</li>
-<li><p>webSphere：IBM公司，大型的JavaEE服务器，支持所有的JavaEE规范，收费的。</p>
-</li>
-<li><p>JBOSS：JBOSS公司的，大型的JavaEE服务器，支持所有的JavaEE规范，收费的。</p>
-</li>
-<li><p>Tomcat：Apache基金组织，中小型的JavaEE服务器，仅仅支持少量的JavaEE规范servlet/jsp。开源的，免费的。</p>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/07/J2EE笔记/07_xml笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪翔宇的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/07/J2EE笔记/07_xml笔记/" itemprop="url">07_xml笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-07T21:11:01+08:00">
-                2019-07-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">J2EE笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h1><pre><code>1. XML
-    1. 概念
-    2. 语法
-    3. 解析</code></pre><h2 id="XML："><a href="#XML：" class="headerlink" title="XML："></a>XML：</h2><pre><code>1. 概念：Extensible Markup Language 可扩展标记语言
-    * 可扩展：标签都是自定义的。 &lt;user&gt;  &lt;student&gt;
-
-    * 功能
-        * 存储数据
-            1. 配置文件
-            2. 在网络中传输
-    * xml与html的区别
-        1. xml标签都是自定义的，html标签是预定义。
-        2. xml的语法严格，html语法松散
-        3. xml是存储数据的，html是展示数据
-
-    * w3c:万维网联盟
-
-2. 语法：
-    * 基本语法：
-        1. xml文档的后缀名 .xml
-        2. xml第一行必须定义为文档声明
-        3. xml文档中有且仅有一个根标签
-        4. 属性值必须使用引号(单双都可)引起来
-        5. 标签必须正确关闭
-        6. xml标签名称区分大小写
-    * 快速入门：
-        &lt;?xml version=&apos;1.0&apos; ?&gt;
-        &lt;users&gt;
-            &lt;user id=&apos;1&apos;&gt;
-                &lt;name&gt;zhangsan&lt;/name&gt;
-                &lt;age&gt;23&lt;/age&gt;
-                &lt;gender&gt;male&lt;/gender&gt;
-                &lt;br/&gt;
-            &lt;/user&gt;
-
-            &lt;user id=&apos;2&apos;&gt;
-                &lt;name&gt;lisi&lt;/name&gt;
-                &lt;age&gt;24&lt;/age&gt;
-                &lt;gender&gt;female&lt;/gender&gt;
-            &lt;/user&gt;
-        &lt;/users&gt;
-
-    * 组成部分：
-        1. 文档声明
-            1. 格式：&lt;?xml 属性列表 ?&gt;
-            2. 属性列表：
-                * version：版本号，必须的属性
-                * encoding：编码方式。告知解析引擎当前文档使用的字符集，默认值：ISO-8859-1
-                * standalone：是否独立
-                    * 取值：
-                        * yes：不依赖其他文件
-                        * no：依赖其他文件
-        2. 指令(了解)：结合css的
-            * &lt;?xml-stylesheet type=&quot;text/css&quot; href=&quot;a.css&quot; ?&gt;
-        3. 标签：标签名称自定义的
-            * 规则：
-                * 名称可以包含字母、数字以及其他的字符 
-                * 名称不能以数字或者标点符号开始 
-                * 名称不能以字母 xml（或者 XML、Xml 等等）开始 
-                * 名称不能包含空格 
-
-        4. 属性：
-            id属性值唯一
-        5. 文本：
-            * CDATA区：在该区域中的数据会被原样展示
-                * 格式：  &lt;![CDATA[ 数据 ]]&gt;</code></pre><p>​<br>​        * 约束：规定xml文档的书写规则<br>​            * 作为框架的使用者(程序员)：<br>​                1. 能够在xml中引入约束文档<br>​                2. 能够简单的读懂约束文档<br>​<br>​            * 分类：<br>​                1. DTD:一种简单的约束技术<br>​                2. Schema:一种复杂的约束技术</p>
-<pre><code>* DTD：
-    * 引入dtd文档到xml文档中
-        * 内部dtd：将约束规则定义在xml文档中
-        * 外部dtd：将约束的规则定义在外部的dtd文件中
-            * 本地：&lt;!DOCTYPE 根标签名 SYSTEM &quot;dtd文件的位置&quot;&gt;
-            * 网络：&lt;!DOCTYPE 根标签名 PUBLIC &quot;dtd文件名字&quot; &quot;dtd文件的位置URL&quot;&gt;
-
-
-* Schema:
-    * 引入：
-        1.填写xml文档的根元素
-        2.引入xsi前缀.  xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-        3.引入xsd文件命名空间.  xsi:schemaLocation=&quot;http://www.itcast.cn/xml  student.xsd&quot;
-        4.为每一个xsd约束声明一个前缀,作为标识  xmlns=&quot;http://www.itcast.cn/xml&quot; 
-
-    &lt;students   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-        xmlns=&quot;http://www.itcast.cn/xml&quot;
-        xsi:schemaLocation=&quot;http://www.itcast.cn/xml  student.xsd&quot;&gt;</code></pre><p>​    </p>
-<pre><code>3. 解析：操作xml文档，将文档中的数据读取到内存中
-    * 操作xml文档
-        1. 解析(读取)：将文档中的数据读取到内存中
-        2. 写入：将内存中的数据保存到xml文档中。持久化的存储
-
-    * 解析xml的方式：
-        1. DOM：将标记语言文档一次性加载进内存，在内存中形成一颗dom树
-            * 优点：操作方便，可以对文档进行CRUD的所有操作
-            * 缺点：占内存
-        2. SAX：逐行读取，基于事件驱动的。
-            * 优点：不占内存。
-            * 缺点：只能读取，不能增删改</code></pre><p>​<br>​        * xml常见的解析器：<br>​            1. JAXP：sun公司提供的解析器，支持dom和sax两种思想<br>​            2. DOM4J：一款非常优秀的解析器<br>​            3. Jsoup：jsoup 是一款Java 的HTML解析器，可直接解析某个URL地址、HTML文本内容。它提供了一套非常省力的API，可通过DOM，CSS以及类似于jQuery的操作方法来取出和操作数据。<br>​            4. PULL：Android操作系统内置的解析器，sax方式的。</p>
-<pre><code>* Jsoup：jsoup 是一款Java 的HTML解析器，可直接解析某个URL地址、HTML文本内容。它提供了一套非常省力的API，可通过DOM，CSS以及类似于jQuery的操作方法来取出和操作数据。
-    * 快速入门：
-        * 步骤：
-            1. 导入jar包
-            2. 获取Document对象
-            3. 获取对应的标签Element对象
-            4. 获取数据
-
-    * 代码：
-         //2.1获取student.xml的path
-        String path = JsoupDemo1.class.getClassLoader().getResource(&quot;student.xml&quot;).getPath();
-        //2.2解析xml文档，加载文档进内存，获取dom树---&gt;Document
-        Document document = Jsoup.parse(new File(path), &quot;utf-8&quot;);
-        //3.获取元素对象 Element
-        Elements elements = document.getElementsByTag(&quot;name&quot;);
-
-        System.out.println(elements.size());
-        //3.1获取第一个name的Element对象
-        Element element = elements.get(0);
-        //3.2获取数据
-        String name = element.text();
-        System.out.println(name);
-
-* 对象的使用：
-    1. Jsoup：工具类，可以解析html或xml文档，返回Document
-        * parse：解析html或xml文档，返回Document
-            * parse​(File in, String charsetName)：解析xml或html文件的。
-            * parse​(String html)：解析xml或html字符串
-            * parse​(URL url, int timeoutMillis)：通过网络路径获取指定的html或xml的文档对象
-    2. Document：文档对象。代表内存中的dom树
-        * 获取Element对象
-            * getElementById​(String id)：根据id属性值获取唯一的element对象
-            * getElementsByTag​(String tagName)：根据标签名称获取元素对象集合
-            * getElementsByAttribute​(String key)：根据属性名称获取元素对象集合
-            * getElementsByAttributeValue​(String key, String value)：根据对应的属性名和属性值获取元素对象集合
-    3. Elements：元素Element对象的集合。可以当做 ArrayList&lt;Element&gt;来使用
-    4. Element：元素对象
-        1. 获取子元素对象
-            * getElementById​(String id)：根据id属性值获取唯一的element对象
-            * getElementsByTag​(String tagName)：根据标签名称获取元素对象集合
-            * getElementsByAttribute​(String key)：根据属性名称获取元素对象集合
-            * getElementsByAttributeValue​(String key, String value)：根据对应的属性名和属性值获取元素对象集合
-
-        2. 获取属性值
-            * String attr(String key)：根据属性名称获取属性值
-        3. 获取文本内容
-            * String text():获取文本内容
-            * String html():获取标签体的所有内容(包括字标签的字符串内容)
-    5. Node：节点对象
-        * 是Document和Element的父类</code></pre><p>​<br>​        * 快捷查询方式：<br>​            1. selector:选择器<br>​                * 使用的方法：Elements    select​(String cssQuery)<br>​                    * 语法：参考Selector类中定义的语法<br>​            2. XPath：XPath即为XML路径语言，它是一种用来确定XML（标准通用标记语言的子集）文档中某部分位置的语言<br>​                * 使用Jsoup的Xpath需要额外导入jar包。<br>​                * 查询w3cshool参考手册，使用xpath的语法完成查询<br>​                * 代码：<br>​                    //1.获取student.xml的path<br>​                    String path = JsoupDemo6.class.getClassLoader().getResource(“student.xml”).getPath();<br>​                    //2.获取Document对象<br>​                    Document document = Jsoup.parse(new File(path), “utf-8”);<br>​<br>​                    //3.根据document对象，创建JXDocument对象<br>​                    JXDocument jxDocument = new JXDocument(document);<br>​<br>                    //4.结合xpath语法查询<br>                    //4.1查询所有student标签<br>                    List<jxnode> jxNodes = jxDocument.selN(“//student”);<br>                    for (JXNode jxNode : jxNodes) {<br>                        System.out.println(jxNode);<br>                    }</jxnode></p>
-<pre><code>System.out.println(&quot;--------------------&quot;);
-
-//4.2查询所有student标签下的name标签
-List&lt;JXNode&gt; jxNodes2 = jxDocument.selN(&quot;//student/name&quot;);
-for (JXNode jxNode : jxNodes2) {
-    System.out.println(jxNode);
-}
-
-System.out.println(&quot;--------------------&quot;);
-
-//4.3查询student标签下带有id属性的name标签
-List&lt;JXNode&gt; jxNodes3 = jxDocument.selN(&quot;//student/name[@id]&quot;);
-for (JXNode jxNode : jxNodes3) {
-    System.out.println(jxNode);
-}
-System.out.println(&quot;--------------------&quot;);
-//4.4查询student标签下带有id属性的name标签 并且id属性值为itcast
-
-List&lt;JXNode&gt; jxNodes4 = jxDocument.selN(&quot;//student/name[@id=&apos;itcast&apos;]&quot;);
-for (JXNode jxNode : jxNodes4) {
-    System.out.println(jxNode);
-}</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2382,7 +2206,7 @@ for (JXNode jxNode : jxNodes4) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2404,7 +2228,7 @@ for (JXNode jxNode : jxNodes4) {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
