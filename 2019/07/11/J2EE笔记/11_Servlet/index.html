@@ -87,16 +87,16 @@
 <meta property="og:site_name" content="倪翔宇的博客">
 <meta property="og:description" content="Servlet一、什么是Servlet？用来处理服务器请求和发送响应的一个程序  二、Tomcat和Servlet的关系Tomcat是Web应用服务器，是Servlet/Jsp的容器，负责将客户端请求发给服务器，将服务器响应传递给客户端，简单来说，是个运输工具。  Tomcat会将接收到的浏览器请求信息，封装成HttpServletRequest类型的request对象 Tomcat回想接受到的客">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/07/11/J2EE笔记/11_Servlet/Img/1562843850278.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/11/J2EE笔记/11_Servlet/Img/1562844501669.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/11/J2EE笔记/11_Servlet/Img/1562846210769.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/11/J2EE笔记/11_Servlet/Img/1562846812699.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/11/J2EE笔记/11_Servlet/Img/1562846842714.png">
-<meta property="og:updated_time" content="2019-07-21T10:40:24.418Z">
+<meta property="og:image" content="http://yoursite.com/Img/1562843850278.png">
+<meta property="og:image" content="http://yoursite.com/Img/1562844501669.png">
+<meta property="og:image" content="http://yoursite.com/Img/1562846210769.png">
+<meta property="og:image" content="http://yoursite.com/Img/1562846812699.png">
+<meta property="og:image" content="http://yoursite.com/Img/1562846842714.png">
+<meta property="og:updated_time" content="2019-07-23T17:36:49.578Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="11_Servlet">
 <meta name="twitter:description" content="Servlet一、什么是Servlet？用来处理服务器请求和发送响应的一个程序  二、Tomcat和Servlet的关系Tomcat是Web应用服务器，是Servlet/Jsp的容器，负责将客户端请求发给服务器，将服务器响应传递给客户端，简单来说，是个运输工具。  Tomcat会将接收到的浏览器请求信息，封装成HttpServletRequest类型的request对象 Tomcat回想接受到的客">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/11/J2EE笔记/11_Servlet/Img/1562843850278.png">
+<meta name="twitter:image" content="http://yoursite.com/Img/1562843850278.png">
 
 
 
@@ -359,13 +359,13 @@
 
       
         <h1 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h1><h2 id="一、什么是Servlet？"><a href="#一、什么是Servlet？" class="headerlink" title="一、什么是Servlet？"></a>一、什么是Servlet？</h2><p>用来处理服务器请求和发送响应的一个程序</p>
-<p><img src="Img/1562843850278.png" alt="1562843850278"></p>
+<p><img src="/Img/1562843850278.png" alt="1562843850278"></p>
 <h2 id="二、Tomcat和Servlet的关系"><a href="#二、Tomcat和Servlet的关系" class="headerlink" title="二、Tomcat和Servlet的关系"></a>二、Tomcat和Servlet的关系</h2><p>Tomcat是Web应用服务器，是Servlet/Jsp的容器，负责将客户端请求发给服务器，将服务器响应传递给客户端，简单来说，是个运输工具。</p>
 <ol>
 <li>Tomcat会将接收到的浏览器请求信息，封装成HttpServletRequest类型的request对象</li>
 <li>Tomcat回想接受到的客户端响应信息，封装成HttpServletResponse类型的response对象</li>
 </ol>
-<p><img src="Img/1562844501669.png" alt="1562844501669"></p>
+<p><img src="/Img/1562844501669.png" alt="1562844501669"></p>
 <h2 id="三、编写Servlet"><a href="#三、编写Servlet" class="headerlink" title="三、编写Servlet"></a>三、编写Servlet</h2><p>创建一个ServletDemo1类，继承HttpServlet接口，重写doGet和doPost方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletDemo1</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span></span>&#123;</span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span>  </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">null</span>; </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -384,12 +384,12 @@
 <li><p>服务器关闭时，销毁servlet对象，即执行destroy()方法</p>
 </li>
 </ol>
-<p><img src="Img/1562846210769.png" alt="1562846210769"></p>
+<p><img src="/Img/1562846210769.png" alt="1562846210769"></p>
 <h2 id="五、为什么要继承HttpServlet接口，而不是直接继承Servlet接口？"><a href="#五、为什么要继承HttpServlet接口，而不是直接继承Servlet接口？" class="headerlink" title="五、为什么要继承HttpServlet接口，而不是直接继承Servlet接口？"></a>五、为什么要继承HttpServlet接口，而不是直接继承Servlet接口？</h2><p>HttpServlet继承GenericServlet，GenericServlet实现了Servlet，ServletConfig中的方法</p>
 <p>Servlet接口中的主要方法：</p>
-<p><img src="Img/1562846812699.png" alt="1562846812699"></p>
+<p><img src="/Img/1562846812699.png" alt="1562846812699"></p>
 <p>ServletConfig接口中的主要方法：</p>
-<p><img src="Img/1562846842714.png" alt="1562846842714"></p>
+<p><img src="/Img/1562846842714.png" alt="1562846842714"></p>
 <p>实现Servlet接口了就可以获得SerletContext了，为什么还要实现ServletConfig接口呢？</p>
 <p>因为那样获取太麻烦了，通过ServletConfig可以直接获取。</p>
 <p>参考博客：<a href="https://www.cnblogs.com/whgk/p/6399262.html" target="_blank" rel="noopener">https://www.cnblogs.com/whgk/p/6399262.html</a></p>
