@@ -262,6 +262,505 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/J2EE笔记/23_Jedis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/26/J2EE笔记/23_Jedis/" itemprop="url">23_redis</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-26T13:28:01+08:00">
+                2019-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">J2EE笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Java客户端Jedis"><a href="#Java客户端Jedis" class="headerlink" title="Java客户端Jedis"></a>Java客户端Jedis</h1><p>Jedis是一款操作redis数据库的工具</p>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><ol>
+<li><p>下载jedis的jar包</p>
+</li>
+<li><p>导入jar包</p>
+</li>
+<li><p>输入代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> test1&#123;</span><br><span class="line">        <span class="comment">//1.获取连接</span></span><br><span class="line">        Jedis jedis = <span class="keyword">new</span> Jedis(<span class="string">"localhost"</span>, <span class="number">6379</span>);</span><br><span class="line">        <span class="comment">//2.操作</span></span><br><span class="line">        jedis.set(<span class="string">"username"</span>, <span class="string">"zhangsan"</span>);</span><br><span class="line">        <span class="comment">//3.关闭连接</span></span><br><span class="line">        jedis.close();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h2><ol>
+<li><p>字符串 String</p>
+<ol>
+<li>存储：set key value</li>
+<li>获取：get key</li>
+<li>删除：del key</li>
+</ol>
+</li>
+<li><p>哈希类型：hash</p>
+<ol>
+<li><p>存储：hset key field value</p>
+</li>
+<li><p>获取：</p>
+<p>hget key field：获取指定的field对应的值</p>
+<p>hgetall key:获取所有的field的value </p>
+</li>
+<li><p>删除：hdel key field</p>
+</li>
+</ol>
+</li>
+<li><p>列表类型：list 可以添加一个元素到列表的头部或者尾部</p>
+<ol>
+<li>添加<ul>
+<li>lpush key value：将元素加入列表的左表</li>
+<li>rpush key value: 将匀速加入列表的右表</li>
+</ul>
+</li>
+<li>获取：<ul>
+<li>lrange key start end :范围获取 start end 为下标值</li>
+</ul>
+</li>
+<li>删除:<ul>
+<li>lpop key ：删除列表最左边的元素，并元素返回</li>
+<li>rpop key:删除列表最右边的元素，并将元素返回</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>集合类型set ： 不允许重复元素</p>
+<ol>
+<li>存储：sadd key value</li>
+<li>获取：smembers key 获取集合中的所有元素</li>
+<li>删除： srem key value：删除set集合中的某个元素</li>
+</ol>
+</li>
+<li><p>有序集合类型：不允许重复元素，且元素有顺序</p>
+<ol>
+<li>存储：zadd key score value</li>
+<li>获取：zrange key start end   </li>
+<li>删除 ： zrem key  value</li>
+</ol>
+</li>
+</ol>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.jedis.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> redis.clients.jedis.Jedis;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JedisTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * string 数据结构操作</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//1.获取连接</span></span><br><span class="line">        <span class="comment">//如果使用空参，默认值就是本机6379</span></span><br><span class="line">        Jedis jedis = <span class="keyword">new</span> Jedis(<span class="string">"localhost"</span>, <span class="number">6379</span>);</span><br><span class="line">        <span class="comment">//2.操作</span></span><br><span class="line">        jedis.set(<span class="string">"username"</span>, <span class="string">"zhangsan"</span>);</span><br><span class="line">        String username = jedis.get(<span class="string">"username"</span>);</span><br><span class="line">        System.out.println(username);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//可以用setex()方法存储指定时间过期的</span></span><br><span class="line">        <span class="comment">//20秒后过期</span></span><br><span class="line">        jedis.setex(<span class="string">"activecode"</span>, <span class="number">20</span>, <span class="string">"hehe"</span>);</span><br><span class="line">        <span class="comment">//3.关闭连接</span></span><br><span class="line">        jedis.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * hash类型数据格式</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//1.获取连接</span></span><br><span class="line">        <span class="comment">//如果使用空参，默认值就是本机6379</span></span><br><span class="line">        Jedis jedis = <span class="keyword">new</span> Jedis();</span><br><span class="line">        <span class="comment">//2.操作</span></span><br><span class="line">        <span class="comment">//存储hash</span></span><br><span class="line">        jedis.hset(<span class="string">"user"</span>, <span class="string">"name"</span>, <span class="string">"lisi"</span>);</span><br><span class="line">        jedis.hset(<span class="string">"user"</span>, <span class="string">"age"</span>, <span class="string">"23"</span>);</span><br><span class="line">        jedis.hset(<span class="string">"user"</span>, <span class="string">"gender"</span>, <span class="string">"male"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取hash</span></span><br><span class="line">        String name = jedis.hget(<span class="string">"user"</span>, <span class="string">"name"</span>);</span><br><span class="line">        System.out.println(name);</span><br><span class="line">        <span class="comment">//获取hash中的所有map中的数据</span></span><br><span class="line">        Map&lt;String, String&gt; user = jedis.hgetAll(<span class="string">"user"</span>);</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;String, String&gt; entry : user.entrySet()) &#123;</span><br><span class="line">            String key = entry.getKey();</span><br><span class="line">            String value = entry.getValue();</span><br><span class="line">            System.out.println(key+<span class="string">":"</span>+value);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.关闭连接</span></span><br><span class="line">        jedis.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * list数据格式</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//1.获取连接</span></span><br><span class="line">        <span class="comment">//如果使用空参，默认值就是本机6379</span></span><br><span class="line">        Jedis jedis = <span class="keyword">new</span> Jedis(<span class="string">"localhost"</span>, <span class="number">6379</span>);</span><br><span class="line">        <span class="comment">//2.操作</span></span><br><span class="line">        <span class="comment">//list存储</span></span><br><span class="line">        jedis.lpush(<span class="string">"mylist"</span>, <span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>);</span><br><span class="line">        jedis.rpush(<span class="string">"mylist"</span>, <span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//list 范围获取</span></span><br><span class="line">        List&lt;String&gt; mylist = jedis.lrange(<span class="string">"mylist"</span>, <span class="number">0</span>, -<span class="number">1</span>);</span><br><span class="line">        System.out.println(mylist);</span><br><span class="line">        <span class="comment">//list弹出</span></span><br><span class="line">        String element1 = jedis.lpop(<span class="string">"mylist"</span>);</span><br><span class="line">        String element2 = jedis.rpop(<span class="string">"mylist"</span>);</span><br><span class="line">        List&lt;String&gt; mylist2 = jedis.lrange(<span class="string">"mylist"</span>, <span class="number">0</span>, -<span class="number">1</span>);</span><br><span class="line">        System.out.println(mylist2);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.关闭连接</span></span><br><span class="line">        jedis.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Set数据格式</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//1.获取连接</span></span><br><span class="line">        <span class="comment">//如果使用空参，默认值就是本机6379</span></span><br><span class="line">        Jedis jedis = <span class="keyword">new</span> Jedis(<span class="string">"localhost"</span>, <span class="number">6379</span>);</span><br><span class="line">        <span class="comment">//2.操作</span></span><br><span class="line">        <span class="comment">//set存储</span></span><br><span class="line">        jedis.sadd(<span class="string">"myset"</span>, <span class="string">"java"</span>, <span class="string">"php"</span>, <span class="string">"c++"</span>);</span><br><span class="line">        <span class="comment">//set获取</span></span><br><span class="line">        Set&lt;String&gt; myset = jedis.smembers(<span class="string">"myset"</span>);</span><br><span class="line">        System.out.println(myset);</span><br><span class="line">        <span class="comment">//3.关闭连接</span></span><br><span class="line">        jedis.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * sortedset数据格式</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test5</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//1.获取连接</span></span><br><span class="line">        <span class="comment">//如果使用空参，默认值就是本机6379</span></span><br><span class="line">        Jedis jedis = <span class="keyword">new</span> Jedis(<span class="string">"localhost"</span>, <span class="number">6379</span>);</span><br><span class="line">        <span class="comment">//2.操作</span></span><br><span class="line">        <span class="comment">//sortedset存储</span></span><br><span class="line">        jedis.zadd(<span class="string">"mysortedset"</span>, <span class="number">3</span>, <span class="string">"亚瑟"</span>);</span><br><span class="line">        jedis.zadd(<span class="string">"mysortedset"</span>, <span class="number">30</span>, <span class="string">"后裔"</span>);</span><br><span class="line">        jedis.zadd(<span class="string">"mysortedset"</span>, <span class="number">344</span>, <span class="string">"孙悟空"</span>);</span><br><span class="line">        <span class="comment">//sortedset获取</span></span><br><span class="line">        Set&lt;String&gt; mysortedset = jedis.zrange(<span class="string">"mysortedset"</span>, <span class="number">0</span>, -<span class="number">1</span>);</span><br><span class="line">        System.out.println(mysortedset);</span><br><span class="line">        <span class="comment">//3.关闭连接</span></span><br><span class="line">        jedis.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Jedis连接池：JedisPool"><a href="#Jedis连接池：JedisPool" class="headerlink" title="Jedis连接池：JedisPool"></a>Jedis连接池：JedisPool</h2><p>使用步骤：</p>
+<ol>
+<li>创建JedisPool连接池对象</li>
+<li>调用方法 getResource()方法获取Jedis连接</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test6</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">//0.创建一个配置对象</span></span><br><span class="line">        JedisPoolConfig config = <span class="keyword">new</span> JedisPoolConfig();</span><br><span class="line">        <span class="comment">//最大连接数</span></span><br><span class="line">        config.setMaxTotal(<span class="number">50</span>);</span><br><span class="line">        <span class="comment">//最大空闲连接</span></span><br><span class="line">        config.setMaxIdle(<span class="number">10</span>);</span><br><span class="line">        <span class="comment">//1.创建Jedis连接池对象</span></span><br><span class="line">        JedisPool jedisPool = <span class="keyword">new</span> JedisPool(config,<span class="string">"localhost"</span>,<span class="number">6379</span>);</span><br><span class="line">        <span class="comment">//2.获取连接</span></span><br><span class="line">        Jedis jedis = jedisPool.getResource();</span><br><span class="line">        <span class="comment">//3.使用</span></span><br><span class="line">        jedis.set(<span class="string">"hehe"</span>, <span class="string">"haha"</span>);</span><br><span class="line">        <span class="comment">//4.关闭归还到连接池中</span></span><br><span class="line">        jedis.close();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#最大活动对象数     </span><br><span class="line">redis.pool.maxTotal=1000    </span><br><span class="line">#最大能够保持idel状态的对象数      </span><br><span class="line">redis.pool.maxIdle=100  </span><br><span class="line">#最小能够保持idel状态的对象数   </span><br><span class="line">redis.pool.minIdle=50    </span><br><span class="line">#当池内没有返回对象时，最大等待时间    </span><br><span class="line">redis.pool.maxWaitMillis=10000    </span><br><span class="line">#当调用borrow Object方法时，是否进行有效性检查    </span><br><span class="line">redis.pool.testOnBorrow=true    </span><br><span class="line">#当调用return Object方法时，是否进行有效性检查    </span><br><span class="line">redis.pool.testOnReturn=true  </span><br><span class="line">#“空闲链接”检测线程，检测的周期，毫秒数。如果为负值，表示不运行“检测线程”。默认为-1.  </span><br><span class="line">redis.pool.timeBetweenEvictionRunsMillis=30000  </span><br><span class="line">#向调用者输出“链接”对象时，是否检测它的空闲超时；  </span><br><span class="line">redis.pool.testWhileIdle=true  </span><br><span class="line"># 对于“空闲链接”检测线程而言，每次检测的链接资源的个数。默认为3.  </span><br><span class="line">redis.pool.numTestsPerEvictionRun=50  </span><br><span class="line">#redis服务器的IP    </span><br><span class="line">redis.ip=xxxxxx  </span><br><span class="line">#redis服务器的Port    </span><br><span class="line">redis1.port=6379</span><br></pre></td></tr></table></figure>
+
+<h2 id="Jedis连接池工具类"><a href="#Jedis连接池工具类" class="headerlink" title="Jedis连接池工具类"></a>Jedis连接池工具类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * JedisPool工具类</span></span><br><span class="line"><span class="comment"> *  加载配置文件，配置连接参数</span></span><br><span class="line"><span class="comment"> *  提供连接方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JedisPoolUtils</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> JedisPool jedisPool;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="comment">//读取配置文件</span></span><br><span class="line">        InputStream is = JedisPool.class.getClassLoader().getResourceAsStream(<span class="string">"jedis.properties"</span>);</span><br><span class="line">        <span class="comment">//创建Properties对象</span></span><br><span class="line">        Properties pro = <span class="keyword">new</span> Properties();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            pro.load(is);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//获取数据，设置到JedisPoolConfig中</span></span><br><span class="line">        JedisPoolConfig config = <span class="keyword">new</span> JedisPoolConfig();</span><br><span class="line">        config.setMaxTotal(Integer.parseInt(pro.getProperty(<span class="string">"maxTotal"</span>)));</span><br><span class="line">        config.setMaxIdle(Integer.parseInt(pro.getProperty(<span class="string">"maxIdle"</span>)));</span><br><span class="line">        <span class="comment">//初始化JedisPool</span></span><br><span class="line">        jedisPool = <span class="keyword">new</span> JedisPool(config, pro.getProperty(<span class="string">"host"</span>), Integer.parseInt(pro.getProperty(<span class="string">"port"</span>)));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取连接的方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Jedis <span class="title">getJedis</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> jedisPool.getResource();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p>day23</p>
+<p>案例需求：<br>     1. 提供index.html页面，页面中有一个省份 下拉列表<br>     2. 当 页面加载完成后 发送ajax请求，加载所有省份</p>
+<p>注意：使用redis缓存一些不经常发生变化的数据。</p>
+<ul>
+<li>数据库的数据一旦发生改变，则需要更新缓存。<ul>
+<li>数据库的表执行 增删改的相关操作，需要将redis缓存数据情况，再次存入</li>
+<li>在service对应的增删改方法中，将redis数据删除。</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/J2EE笔记/23_redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/26/J2EE笔记/23_redis/" itemprop="url">23_redis</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-26T12:28:01+08:00">
+                2019-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">J2EE笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="什么是Redis？"><a href="#什么是Redis？" class="headerlink" title="什么是Redis？"></a>什么是Redis？</h2><p>Redis是一款高性能的NOSQL系列的非关系型数据库</p>
+<p>关系型数据库：</p>
+<ol>
+<li>数据之间有关 联关系</li>
+<li>数据存储在硬盘文件上</li>
+</ol>
+<p>非关系型数据库：</p>
+<ol>
+<li>数据之间没有关联关系</li>
+<li>数据存储在内存中</li>
+</ol>
+<p>非关系型数据库的优势：</p>
+<ol>
+<li>成本：大部分都是开源的。免费</li>
+<li>查询速度：数据存储在缓存中，查询速度快</li>
+<li>存储数据的格式，存储的是key，value形式，可以存储基本数据类型和引用数据类型</li>
+<li>扩展性：关系型数据库有类似join这样的多表查询机制的限制导致扩展很难</li>
+</ol>
+<p>缺点:</p>
+<ol>
+<li>不支持sql语句复杂查询</li>
+<li>不提供事务处理</li>
+</ol>
+<h2 id="下载和安装"><a href="#下载和安装" class="headerlink" title="下载和安装"></a>下载和安装</h2><ol>
+<li><a href="http://www.redis.net.cn/" target="_blank" rel="noopener">http://www.redis.net.cn/</a></li>
+<li>解压直接使用<ul>
+<li>redis.windows.conf:配置文件</li>
+<li>redis-cli.exe:redis的客户端</li>
+<li>redis-server.exe:redis服务器端</li>
+</ul>
+</li>
+</ol>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>存储的是key，value的数据格式</p>
+<p>key是字符串</p>
+<p>value的数据结构:</p>
+<ol>
+<li>字符串类型:string</li>
+<li>哈希类型 hash:map格式</li>
+<li>列表类型 list ： linkedList格式 支持重复元素</li>
+<li>集合类型 set  不允许重复元素</li>
+<li>有序集合类型 sortedset 不允许重复元素，元素有序</li>
+</ol>
+<p><img src="/Img/1564136237915.png" alt="1564136237915"></p>
+<h2 id="命令操作"><a href="#命令操作" class="headerlink" title="命令操作"></a>命令操作</h2><ol>
+<li><p>字符串 String</p>
+<ol>
+<li>存储：set key value</li>
+<li>获取：get key</li>
+<li>删除：del key</li>
+</ol>
+</li>
+<li><p>哈希类型：hash</p>
+<ol>
+<li><p>存储：hset key field value</p>
+</li>
+<li><p>获取：</p>
+<p>hget key field：获取指定的field对应的值</p>
+<p>hgetall key:获取所有的field的value </p>
+</li>
+<li><p>删除：hdel key field</p>
+</li>
+</ol>
+</li>
+<li><p>列表类型：list 可以添加一个元素到列表的头部或者尾部</p>
+<ol>
+<li>添加<ul>
+<li>lpush key value：将元素加入列表的左表</li>
+<li>rpush key value: 将匀速加入列表的右表</li>
+</ul>
+</li>
+<li>获取：<ul>
+<li>lrange key start end :范围获取 start end 为下标值</li>
+</ul>
+</li>
+<li>删除:<ul>
+<li>lpop key ：删除列表最左边的元素，并元素返回</li>
+<li>rpop key:删除列表最右边的元素，并将元素返回</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>集合类型set ： 不允许重复元素</p>
+<ol>
+<li>存储：sadd key value</li>
+<li>获取：smembers key 获取集合中的所有元素</li>
+<li>删除： srem key value：删除set集合中的某个元素</li>
+</ol>
+</li>
+<li><p>有序集合类型：不允许重复元素，且元素有顺序</p>
+<ol>
+<li>存储：zadd key score value</li>
+<li>获取：zrange key start end   </li>
+<li>删除 ： zrem key  value</li>
+</ol>
+</li>
+<li><p>通用命令</p>
+<ol>
+<li>keys * :查询所有的键</li>
+<li>type key ：获取对应的value类型</li>
+<li>del key:删除指定的key</li>
+</ol>
+</li>
+</ol>
+<h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><p>redis是个内存数据库，当redis服务器重启，获取电脑重启，数据</p>
+<p> 会丢失，我们可以将redis内存中的数据持久化保存到硬盘文件中。</p>
+<p>redis持久化机制：</p>
+<ol>
+<li><p>RDB:默认方式，在一定的间隔时间里，检测key的变化情况，然后持久化数据</p>
+<ul>
+<li><p>save 900 1     900秒后1个key方式改变，持久化 1次</p>
+</li>
+<li><p>save 300 10</p>
+</li>
+<li><p>save 60 10000</p>
+<p>需要更改conf文件，然后在命令行下启动</p>
+<p>conf redis-server.exe redis.window.conf</p>
+</li>
+</ul>
+</li>
+<li><p>AOF：日志记录的方式，可以记录每一条命令的操作。可以每次命令操作后，持久化数据。</p>
+<ol>
+<li><p>编辑conf</p>
+<p>appendonly no(默认关闭) —-》appendonly yes (开启aof)</p>
+<p>appendfysnc always ：每一次操作都进行持久化</p>
+<p>appendfysnc everysec ：每隔一秒进行一次持久化</p>
+<p>appendfsync no:不进行持久化</p>
+</li>
+</ol>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/J2EE笔记/22_AJAX_JSON/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2231,368 +2730,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/17/J2EE笔记/17_MVC开发模式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪翔宇的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/17/J2EE笔记/17_MVC开发模式/" itemprop="url">17_MVC开发模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-17T23:21:01+08:00">
-                2019-07-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">J2EE笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="MVC开发模式"><a href="#MVC开发模式" class="headerlink" title="MVC开发模式"></a>MVC开发模式</h1><h2 id="JSP演变历史"><a href="#JSP演变历史" class="headerlink" title="JSP演变历史"></a>JSP演变历史</h2><ol>
-<li>早期只有servlet，只能使用response输出标签数据，非常麻烦</li>
-<li>后来有jsp，简化了servlet开发，但是过度使用jsp，jsp中既写了大量java代码，又写了html表，造成了难以维护，很难分工合作</li>
-<li>再后来，java的web开发，借鉴mvc开发模式，使程序设计更加合理</li>
-</ol>
-<h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC:"></a>MVC:</h2><ol>
-<li><p>M:Model,模型      JavaBean</p>
-<ul>
-<li>完成具体的业务操作，如：查询数据库，封装对象</li>
-</ul>
-</li>
-<li><p>V:View,视图     JSP</p>
-<ul>
-<li>展示数据</li>
-</ul>
-</li>
-<li><p>C:Controller，控制器      Servlet</p>
-<ul>
-<li>获取用户的输入</li>
-<li>调用模型</li>
-<li>将数据交给视图进行展示</li>
-</ul>
-</li>
-</ol>
-<p>优缺点：</p>
-<ol>
-<li>优点：耦合性低，重用性高</li>
-<li>缺点：项目架构复杂，对开发人员要求高</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/17/J2EE笔记/17_JSTL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪翔宇的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/17/J2EE笔记/17_JSTL/" itemprop="url">17_JSTL</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-17T23:11:01+08:00">
-                2019-07-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">J2EE笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="JSTL"><a href="#JSTL" class="headerlink" title="JSTL"></a>JSTL</h1><ol>
-<li><p>概念：JavaServer Pages Tag Library JSP标准标签库</p>
-<ul>
-<li>是由Apache组织提供的开源的免费的jsp标签</li>
-</ul>
-</li>
-<li><p>作用：用于简化和替换jsp页面上的Java代码</p>
-</li>
-<li><p>使用步骤：</p>
-<ol>
-<li>导入JSTL的相关jar包</li>
-<li>引入标签库:taglib指令:&lt;%@ taglib %&gt;</li>
-<li>使用标签</li>
-</ol>
-</li>
-<li><p>常用的JSTL标签</p>
-<ol>
-<li><p>if:相当于java代码的if语句</p>
-<ol>
-<li><p>属性：</p>
-<ul>
-<li>test 必须属性，接受boolean表达式<ul>
-<li>如果表达式为true，则显示if标签体内容，如果为false，则不显示标签体内容</li>
-<li>一般情况下，test属性值会结合el表达式一起使用</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>注意：</p>
-<pre><code>* c:if标签没有else情况，想要else情况，则可以在定义一个c:if标签</code></pre></li>
-</ol>
-</li>
-<li><p>choose:相当于java代码的switch语句</p>
-<ol>
-<li>使用choose标签声明                     相当于switch声明<ol start="2">
-<li>使用when标签做判断                     相当于case</li>
-</ol>
-</li>
-<li>使用otherwise标签做其他情况的声明        相当于default</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>foreach:相当于java代码的for语句</p>
-</li>
-<li><p>练习：</p>
-<ul>
-<li>需求：在request域中有一个存有User对象的List集合。需要使用jstl+el将list集合数据展示到jsp页面的表格table中</li>
-</ul>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2647,7 +2784,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2669,7 +2806,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

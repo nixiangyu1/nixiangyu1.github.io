@@ -262,6 +262,422 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/11/J2EE笔记/11_Servlet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/11/J2EE笔记/11_Servlet/" itemprop="url">11_Servlet</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-11T21:11:01+08:00">
+                2019-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">J2EE笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h1><h2 id="一、什么是Servlet？"><a href="#一、什么是Servlet？" class="headerlink" title="一、什么是Servlet？"></a>一、什么是Servlet？</h2><p>用来处理服务器请求和发送响应的一个程序</p>
+<p><img src="/Img/1562843850278.png" alt="1562843850278"></p>
+<h2 id="二、Tomcat和Servlet的关系"><a href="#二、Tomcat和Servlet的关系" class="headerlink" title="二、Tomcat和Servlet的关系"></a>二、Tomcat和Servlet的关系</h2><p>Tomcat是Web应用服务器，是Servlet/Jsp的容器，负责将客户端请求发给服务器，将服务器响应传递给客户端，简单来说，是个运输工具。</p>
+<ol>
+<li>Tomcat会将接收到的浏览器请求信息，封装成HttpServletRequest类型的request对象</li>
+<li>Tomcat回想接受到的客户端响应信息，封装成HttpServletResponse类型的response对象</li>
+</ol>
+<p><img src="/Img/1562844501669.png" alt="1562844501669"></p>
+<h2 id="三、编写Servlet"><a href="#三、编写Servlet" class="headerlink" title="三、编写Servlet"></a>三、编写Servlet</h2><p>创建一个ServletDemo1类，继承HttpServlet接口，重写doGet和doPost方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletDemo1</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span></span>&#123;</span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span>  </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">null</span>; </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要我们配置Servlet在服务器中的位置，让Tomcat知道传递给谁</p>
+<p>主要在web.xml中配置四个东西</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置Servlet--&gt;</span></span><br><span class="line">   <span class="comment">&lt;!--给路径定义一个名字--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--给Servlet取一个名字，要和下面map映射的名字对应--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--Servlet所在的位置--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>cn.itcast.web.servlet.ServletDemo1<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!--做个映射--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--Servlet的名字，和上面的Servlet名字对应--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!--浏览器通过url的地址，注意要加/--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/demo1<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>JDK1.5之后，出现的注解的方式，大大简化了Xml的配置！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/demo1"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletDemo1</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span></span>&#123;</span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span>  </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">null</span>; </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、Servlet的生命周期"><a href="#四、Servlet的生命周期" class="headerlink" title="四、Servlet的生命周期"></a>四、Servlet的生命周期</h2><ol>
+<li><p>服务器启动时加载web.xml<br>load-on-startup=0（默认）：在第一次请求对应的Servlet时，才会创建servlet对象，即调用init()方法<br>load-on-startup=1:服务器启动时，创建所有servlet对象</p>
+</li>
+<li><p>运行时，调用doGet和doPost方法处理客户端请求</p>
+</li>
+<li><p>服务器关闭时，销毁servlet对象，即执行destroy()方法</p>
+</li>
+</ol>
+<p><img src="/Img/1562846210769.png" alt="1562846210769"></p>
+<h2 id="五、为什么要继承HttpServlet接口，而不是直接继承Servlet接口？"><a href="#五、为什么要继承HttpServlet接口，而不是直接继承Servlet接口？" class="headerlink" title="五、为什么要继承HttpServlet接口，而不是直接继承Servlet接口？"></a>五、为什么要继承HttpServlet接口，而不是直接继承Servlet接口？</h2><p>HttpServlet继承GenericServlet，GenericServlet实现了Servlet，ServletConfig中的方法</p>
+<p>Servlet接口中的主要方法：</p>
+<p><img src="/Img/1562846812699.png" alt="1562846812699"></p>
+<p>ServletConfig接口中的主要方法：</p>
+<p><img src="/Img/1562846842714.png" alt="1562846842714"></p>
+<p>实现Servlet接口了就可以获得SerletContext了，为什么还要实现ServletConfig接口呢？</p>
+<p>因为那样获取太麻烦了，通过ServletConfig可以直接获取。</p>
+<p>参考博客：<a href="https://www.cnblogs.com/whgk/p/6399262.html" target="_blank" rel="noopener">https://www.cnblogs.com/whgk/p/6399262.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/09/J2EE笔记/09_Http协议/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/09/J2EE笔记/09_Http协议/" itemprop="url">09_Http协议</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-09T21:11:01+08:00">
+                2019-07-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">J2EE笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Http协议"><a href="#Http协议" class="headerlink" title="Http协议"></a>Http协议</h1><h2 id="HTTP简介"><a href="#HTTP简介" class="headerlink" title="HTTP简介"></a>HTTP简介</h2><p>HTTP协议是Hyper Text Transfer Protocol（超文本传输协议）的缩写,是用于从万维网（WWW:World Wide Web ）服务器传输超文本到本地浏览器的传送协议。</p>
+<p>HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件, 查询结果等）。</p>
+<p>HTTP是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。它于1990年提出，经过几年的使用与发展，得到不断地完善和扩展。目前在WWW中使用的是HTTP/1.0的第六版，HTTP/1.1的规范化工作正在进行之中，而且HTTP-NG(Next Generation of HTTP)的建议已经提出。</p>
+<p>HTTP协议工作于客户端-服务端架构为上。浏览器作为HTTP客户端通过URL向HTTP服务端即WEB服务器发送所有请求。Web服务器根据接收到的请求后，向客户端发送响应信息。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2964446-5a35e17f298a48e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2" alt="img"></p>
+<p>http请求-响应模型.jpg</p>
+<h2 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h2><p>1、简单快速：客户向服务器请求服务时，只需传送请求方法和路径。请求方法常用的有GET、HEAD、POST。每种方法规定了客户与服务器联系的类型不同。由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快。</p>
+<p>2、灵活：HTTP允许传输任意类型的数据对象。正在传输的类型由Content-Type加以标记。</p>
+<p>3.无连接：无连接的含义是限制每次连接只处理一个请求。服务器处理完客户的请求，并收到客户的应答后，即断开连接。采用这种方式可以节省传输时间。</p>
+<p>4.无状态：HTTP协议是无状态协议。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。<br>5、支持B/S及C/S模式。</p>
+<h2 id="HTTP之URL"><a href="#HTTP之URL" class="headerlink" title="HTTP之URL"></a>HTTP之URL</h2><p>HTTP使用统一资源标识符（Uniform Resource Identifiers, URI）来传输数据和建立连接。URL是一种特殊类型的URI，包含了用于查找某个资源的足够的信息</p>
+<p>URL,全称是UniformResourceLocator, 中文叫统一资源定位符,是互联网上用来标识某一处资源的地址。以下面这个URL为例，介绍下普通URL的各部分组成：</p>
+<h4 id="http-www-aspxfans-com-8080-news-index-asp-boardID-5-amp-ID-24618-amp-page-1-name"><a href="#http-www-aspxfans-com-8080-news-index-asp-boardID-5-amp-ID-24618-amp-page-1-name" class="headerlink" title="http://www.aspxfans.com:8080/news/index.asp?boardID=5&amp;ID=24618&amp;page=1#name"></a><a href="http://www.aspxfans.com:8080/news/index.asp?boardID=5&amp;ID=24618&amp;page=1#name" target="_blank" rel="noopener">http://www.aspxfans.com:8080/news/index.asp?boardID=5&amp;ID=24618&amp;page=1#name</a></h4><p>从上面的URL可以看出，一个完整的URL包括以下几部分：<br>1.协议部分：该URL的协议部分为“http：”，这代表网页使用的是HTTP协议。在Internet中可以使用多种协议，如HTTP，FTP等等本例中使用的是HTTP协议。在”HTTP”后面的“//”为分隔符</p>
+<p>2.域名部分：该URL的域名部分为“<a href="http://www.aspxfans.com”。一个URL中，也可以使用IP地址作为域名使用" target="_blank" rel="noopener">www.aspxfans.com”。一个URL中，也可以使用IP地址作为域名使用</a></p>
+<p>3.端口部分：跟在域名后面的是端口，域名和端口之间使用“:”作为分隔符。端口不是一个URL必须的部分，如果省略端口部分，将采用默认端口</p>
+<p>4.虚拟目录部分：从域名后的第一个“/”开始到最后一个“/”为止，是虚拟目录部分。虚拟目录也不是一个URL必须的部分。本例中的虚拟目录是“/news/”</p>
+<p>5.文件名部分：从域名后的最后一个“/”开始到“？”为止，是文件名部分，如果没有“?”,则是从域名后的最后一个“/”开始到“#”为止，是文件部分，如果没有“？”和“#”，那么从域名后的最后一个“/”开始到结束，都是文件名部分。本例中的文件名是“index.asp”。文件名部分也不是一个URL必须的部分，如果省略该部分，则使用默认的文件名</p>
+<p>6.锚部分：从“#”开始到最后，都是锚部分。本例中的锚部分是“name”。锚部分也不是一个URL必须的部分</p>
+<p>7.参数部分：从“？”开始到“#”为止之间的部分为参数部分，又称搜索部分、查询部分。本例中的参数部分为“boardID=5&amp;ID=24618&amp;page=1”。参数可以允许有多个参数，参数与参数之间用“&amp;”作为分隔符。</p>
+<p>（原文：<a href="http://blog.csdn.net/ergouge/article/details/8185219" target="_blank" rel="noopener">http://blog.csdn.net/ergouge/article/details/8185219</a> ）</p>
+<h2 id="URI和URL的区别"><a href="#URI和URL的区别" class="headerlink" title="URI和URL的区别"></a>URI和URL的区别</h2><h5 id="URI，是uniform-resource-identifier，统一资源标识符，用来唯一的标识一个资源。"><a href="#URI，是uniform-resource-identifier，统一资源标识符，用来唯一的标识一个资源。" class="headerlink" title="URI，是uniform resource identifier，统一资源标识符，用来唯一的标识一个资源。"></a>URI，是uniform resource identifier，统一资源标识符，用来唯一的标识一个资源。</h5><p>Web上可用的每种资源如HTML文档、图像、视频片段、程序等都是一个来URI来定位的<br>URI一般由三部组成：<br>①访问资源的命名机制<br>②存放资源的主机名<br>③资源自身的名称，由路径表示，着重强调于资源。</p>
+<h5 id="URL是uniform-resource-locator，统一资源定位器，它是一种具体的URI，即URL可以用来标识一个资源，而且还指明了如何locate这个资源。"><a href="#URL是uniform-resource-locator，统一资源定位器，它是一种具体的URI，即URL可以用来标识一个资源，而且还指明了如何locate这个资源。" class="headerlink" title="URL是uniform resource locator，统一资源定位器，它是一种具体的URI，即URL可以用来标识一个资源，而且还指明了如何locate这个资源。"></a>URL是uniform resource locator，统一资源定位器，它是一种具体的URI，即URL可以用来标识一个资源，而且还指明了如何locate这个资源。</h5><p>URL是Internet上用来描述信息资源的字符串，主要用在各种WWW客户程序和服务器程序上，特别是著名的Mosaic。<br>采用URL可以用一种统一的格式来描述各种信息资源，包括文件、服务器的地址和目录等。URL一般由三部组成：<br>①协议(或称为服务方式)<br>②存有该资源的主机IP地址(有时也包括端口号)<br>③主机资源的具体地址。如目录和文件名等</p>
+<h5 id="URN，uniform-resource-name，统一资源命名，是通过名字来标识资源，比如mailto-java-net-java-sun-com。"><a href="#URN，uniform-resource-name，统一资源命名，是通过名字来标识资源，比如mailto-java-net-java-sun-com。" class="headerlink" title="URN，uniform resource name，统一资源命名，是通过名字来标识资源，比如mailto:java-net@java.sun.com。"></a>URN，uniform resource name，统一资源命名，是通过名字来标识资源，比如mailto:<a href="mailto:java-net@java.sun.com" target="_blank" rel="noopener">java-net@java.sun.com</a>。</h5><p>URI是以一种抽象的，高层次概念定义统一资源标识，而URL和URN则是具体的资源标识的方式。URL和URN都是一种URI。笼统地说，每个 URL 都是 URI，但不一定每个 URI 都是 URL。这是因为 URI 还包括一个子类，即统一资源名称 (URN)，它命名资源但不指定如何定位资源。上面的 mailto、news 和 isbn URI 都是 URN 的示例。</p>
+<p>在Java的URI中，一个URI实例可以代表绝对的，也可以是相对的，只要它符合URI的语法规则。而URL类则不仅符合语义，还包含了定位该资源的信息，因此它不能是相对的。<br>在Java类库中，URI类不包含任何访问资源的方法，它唯一的作用就是解析。<br>相反的是，URL类可以打开一个到达资源的流。</p>
+<h2 id="HTTP之请求消息Request"><a href="#HTTP之请求消息Request" class="headerlink" title="HTTP之请求消息Request"></a>HTTP之请求消息Request</h2><p>客户端发送一个HTTP请求到服务器的请求消息包括以下格式：</p>
+<h5 id="请求行（request-line）、请求头部（header）、空行和请求数据四个部分组成。"><a href="#请求行（request-line）、请求头部（header）、空行和请求数据四个部分组成。" class="headerlink" title="请求行（request line）、请求头部（header）、空行和请求数据四个部分组成。"></a>请求行（request line）、请求头部（header）、空行和请求数据四个部分组成。</h5><p><img src="https://upload-images.jianshu.io/upload_images/2964446-fdfb1a8fce8de946.png?imageMogr2/auto-orient/strip%7CimageView2/2" alt="img"></p>
+<p>Http请求消息结构.png</p>
+<ul>
+<li>请求行以一个方法符号开头，以空格分开，后面跟着请求的URI和协议的版本。</li>
+</ul>
+<h5 id="Get请求例子，使用Charles抓取的request："><a href="#Get请求例子，使用Charles抓取的request：" class="headerlink" title="Get请求例子，使用Charles抓取的request："></a>Get请求例子，使用Charles抓取的request：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GET /562f25980001b1b106000338.jpg HTTP/1.1</span><br><span class="line">Host    img.mukewang.com</span><br><span class="line">User-Agent    Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36</span><br><span class="line">Accept    image/webp,image/*,*/*;q=0.8</span><br><span class="line">Referer    http://www.imooc.com/</span><br><span class="line">Accept-Encoding    gzip, deflate, sdch</span><br><span class="line">Accept-Language    zh-CN,zh;q=0.8</span><br></pre></td></tr></table></figure>
+
+<h5 id="第一部分：请求行，用来说明请求类型-要访问的资源以及所使用的HTTP版本"><a href="#第一部分：请求行，用来说明请求类型-要访问的资源以及所使用的HTTP版本" class="headerlink" title="第一部分：请求行，用来说明请求类型,要访问的资源以及所使用的HTTP版本."></a>第一部分：请求行，用来说明请求类型,要访问的资源以及所使用的HTTP版本.</h5><p>GET说明请求类型为GET,[/562f25980001b1b106000338.jpg]为要访问的资源，该行的最后一部分说明使用的是HTTP1.1版本。</p>
+<h5 id="第二部分：请求头部，紧接着请求行（即第一行）之后的部分，用来说明服务器要使用的附加信息"><a href="#第二部分：请求头部，紧接着请求行（即第一行）之后的部分，用来说明服务器要使用的附加信息" class="headerlink" title="第二部分：请求头部，紧接着请求行（即第一行）之后的部分，用来说明服务器要使用的附加信息"></a>第二部分：请求头部，紧接着请求行（即第一行）之后的部分，用来说明服务器要使用的附加信息</h5><p>从第二行起为请求头部，HOST将指出请求的目的地.User-Agent,服务器端和客户端脚本都能访问它,它是浏览器类型检测逻辑的重要基础.该信息由你的浏览器来定义,并且在每个请求中自动发送等等</p>
+<h5 id="第三部分：空行，请求头部后面的空行是必须的"><a href="#第三部分：空行，请求头部后面的空行是必须的" class="headerlink" title="第三部分：空行，请求头部后面的空行是必须的"></a>第三部分：空行，请求头部后面的空行是必须的</h5><p>即使第四部分的请求数据为空，也必须有空行。</p>
+<h5 id="第四部分：请求数据也叫主体，可以添加任意的其他数据。"><a href="#第四部分：请求数据也叫主体，可以添加任意的其他数据。" class="headerlink" title="第四部分：请求数据也叫主体，可以添加任意的其他数据。"></a>第四部分：请求数据也叫主体，可以添加任意的其他数据。</h5><p>这个例子的请求数据为空。</p>
+<h5 id="POST请求例子，使用Charles抓取的request："><a href="#POST请求例子，使用Charles抓取的request：" class="headerlink" title="POST请求例子，使用Charles抓取的request："></a>POST请求例子，使用Charles抓取的request：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP1.1</span><br><span class="line">Host:www.wrox.com</span><br><span class="line">User-Agent:Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022)</span><br><span class="line">Content-Type:application/x-www-form-urlencoded</span><br><span class="line">Content-Length:40</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line"></span><br><span class="line">name=Professional%20Ajax&amp;publisher=Wiley</span><br></pre></td></tr></table></figure>
+
+<p>第一部分：请求行，第一行明了是post请求，以及http1.1版本。<br>第二部分：请求头部，第二行至第六行。<br>第三部分：空行，第七行的空行。<br>第四部分：请求数据，第八行。</p>
+<h2 id="HTTP之响应消息Response"><a href="#HTTP之响应消息Response" class="headerlink" title="HTTP之响应消息Response"></a>HTTP之响应消息Response</h2><p>一般情况下，服务器接收并处理客户端发过来的请求后会返回一个HTTP的响应消息。</p>
+<h5 id="HTTP响应也由四个部分组成，分别是：状态行、消息报头、空行和响应正文。"><a href="#HTTP响应也由四个部分组成，分别是：状态行、消息报头、空行和响应正文。" class="headerlink" title="HTTP响应也由四个部分组成，分别是：状态行、消息报头、空行和响应正文。"></a>HTTP响应也由四个部分组成，分别是：状态行、消息报头、空行和响应正文。</h5><p><img src="https://upload-images.jianshu.io/upload_images/2964446-1c4cab46f270d8ee.jpg?imageMogr2/auto-orient/strip%7CimageView2/2" alt="img"></p>
+<p>http响应消息格式.jpg</p>
+<p><strong>例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Date: Fri, 22 May 2009 06:07:21 GMT</span><br><span class="line">Content-Type: text/html; charset=UTF-8</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">      &lt;head&gt;&lt;/head&gt;</span><br><span class="line">      &lt;body&gt;</span><br><span class="line">            &lt;!--body goes here--&gt;</span><br><span class="line">      &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="第一部分：状态行，由HTTP协议版本号，-状态码，-状态消息-三部分组成。"><a href="#第一部分：状态行，由HTTP协议版本号，-状态码，-状态消息-三部分组成。" class="headerlink" title="第一部分：状态行，由HTTP协议版本号， 状态码， 状态消息 三部分组成。"></a>第一部分：状态行，由HTTP协议版本号， 状态码， 状态消息 三部分组成。</h5><p>第一行为状态行，（HTTP/1.1）表明HTTP版本为1.1版本，状态码为200，状态消息为（ok）</p>
+<h5 id="第二部分：消息报头，用来说明客户端要使用的一些附加信息"><a href="#第二部分：消息报头，用来说明客户端要使用的一些附加信息" class="headerlink" title="第二部分：消息报头，用来说明客户端要使用的一些附加信息"></a>第二部分：消息报头，用来说明客户端要使用的一些附加信息</h5><p>第二行和第三行为消息报头，<br>Date:生成响应的日期和时间；Content-Type:指定了MIME类型的HTML(text/html),编码类型是UTF-8</p>
+<h5 id="第三部分：空行，消息报头后面的空行是必须的"><a href="#第三部分：空行，消息报头后面的空行是必须的" class="headerlink" title="第三部分：空行，消息报头后面的空行是必须的"></a>第三部分：空行，消息报头后面的空行是必须的</h5><h5 id="第四部分：响应正文，服务器返回给客户端的文本信息。"><a href="#第四部分：响应正文，服务器返回给客户端的文本信息。" class="headerlink" title="第四部分：响应正文，服务器返回给客户端的文本信息。"></a>第四部分：响应正文，服务器返回给客户端的文本信息。</h5><p>空行后面的html部分为响应正文。</p>
+<h2 id="HTTP之状态码"><a href="#HTTP之状态码" class="headerlink" title="HTTP之状态码"></a>HTTP之状态码</h2><p>状态代码有三位数字组成，第一个数字定义了响应的类别，共分五种类别:</p>
+<h6 id="1xx：指示信息–表示请求已接收，继续处理"><a href="#1xx：指示信息–表示请求已接收，继续处理" class="headerlink" title="1xx：指示信息–表示请求已接收，继续处理"></a>1xx：指示信息–表示请求已接收，继续处理</h6><h6 id="2xx：成功–表示请求已被成功接收、理解、接受"><a href="#2xx：成功–表示请求已被成功接收、理解、接受" class="headerlink" title="2xx：成功–表示请求已被成功接收、理解、接受"></a>2xx：成功–表示请求已被成功接收、理解、接受</h6><h6 id="3xx：重定向–要完成请求必须进行更进一步的操作"><a href="#3xx：重定向–要完成请求必须进行更进一步的操作" class="headerlink" title="3xx：重定向–要完成请求必须进行更进一步的操作"></a>3xx：重定向–要完成请求必须进行更进一步的操作</h6><h6 id="4xx：客户端错误–请求有语法错误或请求无法实现"><a href="#4xx：客户端错误–请求有语法错误或请求无法实现" class="headerlink" title="4xx：客户端错误–请求有语法错误或请求无法实现"></a>4xx：客户端错误–请求有语法错误或请求无法实现</h6><h6 id="5xx：服务器端错误–服务器未能实现合法的请求"><a href="#5xx：服务器端错误–服务器未能实现合法的请求" class="headerlink" title="5xx：服务器端错误–服务器未能实现合法的请求"></a>5xx：服务器端错误–服务器未能实现合法的请求</h6><p>常见状态码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">200 OK                        //客户端请求成功</span><br><span class="line">400 Bad Request               //客户端请求有语法错误，不能被服务器所理解</span><br><span class="line">401 Unauthorized              //请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用 </span><br><span class="line">403 Forbidden                 //服务器收到请求，但是拒绝提供服务</span><br><span class="line">404 Not Found                 //请求资源不存在，eg：输入了错误的URL</span><br><span class="line">500 Internal Server Error     //服务器发生不可预期的错误</span><br><span class="line">503 Server Unavailable        //服务器当前不能处理客户端的请求，一段时间后可能恢复正常</span><br></pre></td></tr></table></figure>
+
+<p>更多状态码<a href="http://www.runoob.com/http/http-status-codes.html" target="_blank" rel="noopener">http://www.runoob.com/http/http-status-codes.html</a></p>
+<h2 id="HTTP请求方法"><a href="#HTTP请求方法" class="headerlink" title="HTTP请求方法"></a>HTTP请求方法</h2><p>根据HTTP标准，HTTP请求可以使用多种请求方法。<br>HTTP1.0定义了三种请求方法： GET, POST 和 HEAD方法。<br>HTTP1.1新增了五种请求方法：OPTIONS, PUT, DELETE, TRACE 和 CONNECT 方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET     请求指定的页面信息，并返回实体主体。</span><br><span class="line">HEAD     类似于get请求，只不过返回的响应中没有具体的内容，用于获取报头</span><br><span class="line">POST     向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST请求可能会导致新的资源的建立和/或已有资源的修改。</span><br><span class="line">PUT     从客户端向服务器传送的数据取代指定的文档的内容。</span><br><span class="line">DELETE      请求服务器删除指定的页面。</span><br><span class="line">CONNECT     HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器。</span><br><span class="line">OPTIONS     允许客户端查看服务器的性能。</span><br><span class="line">TRACE     回显服务器收到的请求，主要用于测试或诊断。</span><br></pre></td></tr></table></figure>
+
+<h2 id="HTTP工作原理"><a href="#HTTP工作原理" class="headerlink" title="HTTP工作原理"></a>HTTP工作原理</h2><p>HTTP协议定义Web客户端如何从Web服务器请求Web页面，以及服务器如何把Web页面传送给客户端。HTTP协议采用了请求/响应模型。客户端向服务器发送一个请求报文，请求报文包含请求的方法、URL、协议版本、请求头部和请求数据。服务器以一个状态行作为响应，响应的内容包括协议的版本、成功或者错误代码、服务器信息、响应头部和响应数据。</p>
+<p>以下是 HTTP 请求/响应的步骤：</p>
+<h6 id="1、客户端连接到Web服务器"><a href="#1、客户端连接到Web服务器" class="headerlink" title="1、客户端连接到Web服务器"></a>1、客户端连接到Web服务器</h6><p>一个HTTP客户端，通常是浏览器，与Web服务器的HTTP端口（默认为80）建立一个TCP套接字连接。例如，<a href="http://www.oakcms.cn./" target="_blank" rel="noopener">http://www.oakcms.cn。</a></p>
+<h6 id="2、发送HTTP请求"><a href="#2、发送HTTP请求" class="headerlink" title="2、发送HTTP请求"></a>2、发送HTTP请求</h6><p>通过TCP套接字，客户端向Web服务器发送一个文本的请求报文，一个请求报文由请求行、请求头部、空行和请求数据4部分组成。</p>
+<h6 id="3、服务器接受请求并返回HTTP响应"><a href="#3、服务器接受请求并返回HTTP响应" class="headerlink" title="3、服务器接受请求并返回HTTP响应"></a>3、服务器接受请求并返回HTTP响应</h6><p>Web服务器解析请求，定位请求资源。服务器将资源复本写到TCP套接字，由客户端读取。一个响应由状态行、响应头部、空行和响应数据4部分组成。</p>
+<h6 id="4、释放连接TCP连接"><a href="#4、释放连接TCP连接" class="headerlink" title="4、释放连接TCP连接"></a>4、释放连接<a href="http://www.jianshu.com/p/ef892323e68f" target="_blank" rel="noopener">TCP连接</a></h6><p>若connection 模式为close，则服务器主动关闭<a href="http://www.jianshu.com/p/ef892323e68f" target="_blank" rel="noopener">TCP连接</a>，客户端被动关闭连接，释放<a href="http://www.jianshu.com/p/ef892323e68f" target="_blank" rel="noopener">TCP连接</a>;若connection 模式为keepalive，则该连接会保持一段时间，在该时间内可以继续接收请求;</p>
+<h6 id="5、客户端浏览器解析HTML内容"><a href="#5、客户端浏览器解析HTML内容" class="headerlink" title="5、客户端浏览器解析HTML内容"></a>5、客户端浏览器解析HTML内容</h6><p>客户端浏览器首先解析状态行，查看表明请求是否成功的状态代码。然后解析每一个响应头，响应头告知以下为若干字节的HTML文档和文档的字符集。客户端浏览器读取响应数据HTML，根据HTML的语法对其进行格式化，并在浏览器窗口中显示。</p>
+<p>例如：在浏览器地址栏键入URL，按下回车之后会经历以下流程：</p>
+<p>1、浏览器向 DNS 服务器请求解析该 URL 中的域名所对应的 IP 地址;</p>
+<p>2、解析出 IP 地址后，根据该 IP 地址和默认端口 80，和服务器建立<a href="http://www.jianshu.com/p/ef892323e68f" target="_blank" rel="noopener">TCP连接</a>;</p>
+<p>3、浏览器发出读取文件(URL 中域名后面部分对应的文件)的HTTP 请求，该请求报文作为 <a href="http://www.jianshu.com/p/ef892323e68f" target="_blank" rel="noopener">TCP 三次握手</a>的第三个报文的数据发送给服务器;</p>
+<p>4、服务器对浏览器请求作出响应，并把对应的 html 文本发送给浏览器;</p>
+<p>5、释放 <a href="http://www.jianshu.com/p/ef892323e68f" target="_blank" rel="noopener">TCP连接</a>;</p>
+<p>6、浏览器将该 html 文本并显示内容; 　　</p>
+<h2 id="GET和POST请求的区别"><a href="#GET和POST请求的区别" class="headerlink" title="GET和POST请求的区别"></a>GET和POST请求的区别</h2><h6 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET /books/?sex=man&amp;name=Professional HTTP/1.1</span><br><span class="line">Host: www.wrox.com</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.6)</span><br><span class="line">Gecko/20050225 Firefox/1.0.1</span><br><span class="line">Connection: Keep-Alive</span><br></pre></td></tr></table></figure>
+
+<p>注意最后一行是空行</p>
+<h6 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP/1.1</span><br><span class="line">Host: www.wrox.com</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.6)</span><br><span class="line">Gecko/20050225 Firefox/1.0.1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 40</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line"></span><br><span class="line">name=Professional%20Ajax&amp;publisher=Wiley</span><br></pre></td></tr></table></figure>
+
+<p>1、GET提交，请求的数据会附在URL之后（就是把数据放置在HTTP协议头中），以?分割URL和传输数据，多个参数用&amp;连接；例 如：login.action?name=hyddd&amp;password=idontknow&amp;verify=%E4%BD%A0 %E5%A5%BD。如果数据是英文字母/数字，原样发送，如果是空格，转换为+，如果是中文/其他字符，则直接把字符串用BASE64加密，得出如： %E4%BD%A0%E5%A5%BD，其中％XX中的XX为该符号以16进制表示的ASCII。</p>
+<p>POST提交：把提交的数据放置在是HTTP包的包体中。上文示例中红色字体标明的就是实际的传输数据</p>
+<h6 id="因此，GET提交的数据会在地址栏中显示出来，而POST提交，地址栏不会改变"><a href="#因此，GET提交的数据会在地址栏中显示出来，而POST提交，地址栏不会改变" class="headerlink" title="因此，GET提交的数据会在地址栏中显示出来，而POST提交，地址栏不会改变"></a>因此，GET提交的数据会在地址栏中显示出来，而POST提交，地址栏不会改变</h6><p>2、传输数据的大小：首先声明：HTTP协议没有对传输的数据大小进行限制，HTTP协议规范也没有对URL长度进行限制。</p>
+<p>而在实际开发中存在的限制主要有：</p>
+<p><strong>GET</strong>:特定浏览器和服务器对URL长度有限制，例如 IE对URL长度的限制是2083字节(2K+35)。对于其他浏览器，如Netscape、FireFox等，理论上没有长度限制，其限制取决于操作系 统的支持。</p>
+<p>因此对于GET提交时，传输数据就会受到URL长度的 限制。</p>
+<p><strong>POST</strong>:由于不是通过URL传值，理论上数据不受 限。但实际各个WEB服务器会规定对post提交数据大小进行限制，Apache、IIS6都有各自的配置。</p>
+<p>3、安全性</p>
+<p>POST的安全性要比GET的安全性高。比如：通过GET提交数据，用户名和密码将明文出现在URL上，因为(1)登录页面有可能被浏览器缓存；(2)其他人查看浏览器的历史纪录，那么别人就可以拿到你的账号和密码了，除此之外，使用GET提交数据还可能会造成Cross-site request forgery攻击</p>
+<p>4、Http get,post,soap协议都是在http上运行的</p>
+<p>（1）get：请求参数是作为一个key/value对的序列（查询字符串）附加到URL上的<br>查询字符串的长度受到web浏览器和web服务器的限制（如IE最多支持2048个字符），不适合传输大型数据集同时，它很不安全</p>
+<p>（2）post：请求参数是在http标题的一个不同部分（名为entity body）传输的，这一部分用来传输表单信息，因此必须将Content-type设置为:application/x-www-form- urlencoded。post设计用来支持web窗体上的用户字段，其参数也是作为key/value对传输。<br>但是：它不支持复杂数据类型，因为post没有定义传输数据结构的语义和规则。</p>
+<p>（3）soap：是http post的一个专用版本，遵循一种特殊的xml消息格式<br>Content-type设置为: text/xml 任何数据都可以xml化。</p>
+<p>Http协议定义了很多与服务器交互的方法，最基本的有4种，分别是GET,POST,PUT,DELETE. 一个URL地址用于描述一个网络上的资源，而HTTP中的GET, POST, PUT, DELETE就对应着对这个资源的查，改，增，删4个操作。 我们最常见的就是GET和POST了。GET一般用于获取/查询资源信息，而POST一般用于更新资源信息.</p>
+<p>我们看看GET和POST的区别</p>
+<ol>
+<li><ol>
+<li>GET提交的数据会放在URL之后，以?分割URL和传输数据，参数之间以&amp;相连，如EditPosts.aspx?name=test1&amp;id=123456. POST方法是把提交的数据放在HTTP包的Body中.</li>
+<li>GET提交的数据大小有限制（因为浏览器对URL的长度有限制），而POST方法提交的数据没有限制.</li>
+<li>GET方式需要使用Request.QueryString来取得变量的值，而POST方式通过Request.Form来获取变量的值。</li>
+<li>GET方式提交数据，会带来安全问题，比如一个登录页面，通过GET方式提交数据时，用户名和密码将出现在URL上，如果页面可以被缓存或者其他人可以访问这台机器，就可以从历史记录获得该用户的账号和密码.</li>
+</ol>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/08/J2EE笔记/08_知识回顾/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2127,371 +2543,6 @@ for (JXNode jxNode : jxNodes4) {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/01/J2EE笔记/01_JavaScript基础/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪翔宇的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/01/J2EE笔记/01_JavaScript基础/" itemprop="url">01_JavaScript基础</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-01T21:11:01+08:00">
-                2019-07-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">J2EE笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1. JavaScript基础</span><br></pre></td></tr></table></figure>
-
-<h2 id="JavaScript："><a href="#JavaScript：" class="headerlink" title="JavaScript："></a>JavaScript：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">* 概念：	一门客户端脚本语言</span><br><span class="line">	* 运行在客户端浏览器中的。每一个浏览器都有JavaScript的解析引擎</span><br><span class="line">	* 脚本语言：不需要编译，直接就可以被浏览器解析执行了</span><br><span class="line"></span><br><span class="line">* 功能：</span><br><span class="line">	* 可以来增强用户和html页面的交互过程，可以来控制html元素，让页面有一些动态的效果，增强用户的体验。</span><br><span class="line"></span><br><span class="line">* JavaScript发展史：</span><br><span class="line">	1. 1992年，Nombase公司，开发出第一门客户端脚本语言，专门用于表单的校验。命名为 ： C--	，后来更名为：ScriptEase</span><br><span class="line">	2. 1995年，Netscape(网景)公司，开发了一门客户端脚本语言：LiveScript。后来，请来SUN公司的专家，修改LiveScript，命名为JavaScript</span><br><span class="line">	3. 1996年，微软抄袭JavaScript开发出JScript语言</span><br><span class="line">	4. 1997年，ECMA(欧洲计算机制造商协会)，制定出客户端脚本语言的标准：ECMAScript，就是统一了所有客户端脚本语言的编码方式。</span><br><span class="line"></span><br><span class="line">	* JavaScript = ECMAScript + JavaScript自己特有的东西(BOM+DOM)</span><br><span class="line"></span><br><span class="line">* ECMAScript：客户端脚本语言的标准</span><br><span class="line">	1. 基本语法：</span><br><span class="line">		1. 与html结合方式</span><br><span class="line">			1. 内部JS：</span><br><span class="line">				* 定义&lt;script&gt;，标签体内容就是js代码</span><br><span class="line">			2. 外部JS：</span><br><span class="line">				* 定义&lt;script&gt;，通过src属性引入外部的js文件</span><br><span class="line"></span><br><span class="line">			* 注意：</span><br><span class="line">				1. &lt;script&gt;可以定义在html页面的任何地方。但是定义的位置会影响执行顺序。</span><br><span class="line">				2. &lt;script&gt;可以定义多个。</span><br><span class="line">		2. 注释</span><br><span class="line">			1. 单行注释：//注释内容</span><br><span class="line">			2. 多行注释：/*注释内容*/</span><br><span class="line">		3. 数据类型：</span><br><span class="line">			1. 原始数据类型(基本数据类型)：</span><br><span class="line">				1. number：数字。 整数/小数/NaN(not a number 一个不是数字的数字类型)</span><br><span class="line">				2. string：字符串。 字符串  &quot;abc&quot; &quot;a&quot; &apos;abc&apos;</span><br><span class="line">				3. boolean: true和false</span><br><span class="line">				4. null：一个对象为空的占位符</span><br><span class="line">				5. undefined：未定义。如果一个变量没有给初始化值，则会被默认赋值为undefined</span><br><span class="line">				</span><br><span class="line">			2. 引用数据类型：对象</span><br><span class="line">			</span><br><span class="line">		4. 变量</span><br><span class="line">			* 变量：一小块存储数据的内存空间</span><br><span class="line">			* Java语言是强类型语言，而JavaScript是弱类型语言。</span><br><span class="line">				* 强类型：在开辟变量存储空间时，定义了空间将来存储的数据的数据类型。只能存储固定类型的数据</span><br><span class="line">				* 弱类型：在开辟变量存储空间时，不定义空间将来的存储数据类型，可以存放任意类型的数据。</span><br><span class="line">			* 语法：</span><br><span class="line">				* var 变量名 = 初始化值;</span><br><span class="line">			</span><br><span class="line">			* typeof运算符：获取变量的类型。</span><br><span class="line">				* 注：null运算后得到的是object</span><br><span class="line">		5. 运算符</span><br><span class="line">			1. 一元运算符：只有一个运算数的运算符</span><br><span class="line">				++，-- ， +(正号)  </span><br><span class="line">				* ++ --: 自增(自减)</span><br><span class="line">					* ++(--) 在前，先自增(自减)，再运算</span><br><span class="line">					* ++(--) 在后，先运算，再自增(自减)</span><br><span class="line">				* +(-)：正负号</span><br><span class="line">			    * 注意：在JS中，如果运算数不是运算符所要求的类型，那么js引擎会自动的将运算数进行类型转换</span><br><span class="line">                    * 其他类型转number：</span><br><span class="line">                        * string转number：按照字面值转换。如果字面值不是数字，则转为NaN（不是数字的数字）</span><br><span class="line">                        * boolean转number：true转为1，false转为0</span><br><span class="line">			2. 算数运算符</span><br><span class="line">				+ - * / % ...</span><br><span class="line"></span><br><span class="line">			3. 赋值运算符</span><br><span class="line">				= += -+....</span><br><span class="line"></span><br><span class="line">			4. 比较运算符</span><br><span class="line">				&gt; &lt; &gt;= &lt;= == ===(全等于)</span><br><span class="line">				* 比较方式</span><br><span class="line">                  1. 类型相同：直接比较</span><br><span class="line">                      * 字符串：按照字典顺序比较。按位逐一比较，直到得出大小为止。</span><br><span class="line">                  2. 类型不同：先进行类型转换，再比较</span><br><span class="line">                      * ===：全等于。在比较之前，先判断类型，如果类型不一样，则直接返回false</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">	5. 逻辑运算符</span><br><span class="line">		&amp;&amp; || !</span><br><span class="line">		* 其他类型转boolean：</span><br><span class="line">                 1. number：0或NaN为假，其他为真</span><br><span class="line">                 2. string：除了空字符串(&quot;&quot;)，其他都是true</span><br><span class="line">                 3. null&amp;undefined:都是false</span><br><span class="line">                 4. 对象：所有对象都为true</span><br><span class="line">	</span><br><span class="line">	6. 三元运算符</span><br><span class="line">		? : 表达式</span><br><span class="line">		var a = 3;</span><br><span class="line">        var b = 4;</span><br><span class="line"></span><br><span class="line">        var c = a &gt; b ? 1:0;</span><br><span class="line">		* 语法：</span><br><span class="line">			* 表达式? 值1:值2;</span><br><span class="line">			* 判断表达式的值，如果是true则取值1，如果是false则取值2；</span><br><span class="line">	</span><br><span class="line">6. 流程控制语句：</span><br><span class="line">	1. if...else...</span><br><span class="line">	2. switch:</span><br><span class="line">		* 在java中，switch语句可以接受的数据类型： byte int shor char,枚举(1.5) ,String(1.7)</span><br><span class="line">			* switch(变量):</span><br><span class="line">				case 值:</span><br><span class="line">		* 在JS中,switch语句可以接受任意的原始数据类型</span><br><span class="line">	3. while</span><br><span class="line">	4. do...while</span><br><span class="line">	5. for</span><br><span class="line">7. JS特殊语法：</span><br><span class="line">	1. 语句以;结尾，如果一行只有一条语句则 ;可以省略 (不建议)</span><br><span class="line">	2. 变量的定义使用var关键字，也可以不使用</span><br><span class="line">      		* 用： 定义的变量是局部变量</span><br><span class="line">              * 不用：定义的变量是全局变量(不建议)</span><br><span class="line"></span><br><span class="line">8. 练习：99乘法表</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;99乘法表&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        td&#123;</span><br><span class="line">            border: 1px solid;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &lt;/style&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script&gt;</span><br><span class="line"></span><br><span class="line">        document.write(&quot;&lt;table  align=&apos;center&apos;&gt;&quot;);</span><br></pre></td></tr></table></figure>
-
-<p>​            </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line">		        //1.完成基本的for循环嵌套，展示乘法表</span><br><span class="line">		        for (var i = 1; i &lt;= 9 ; i++) &#123;</span><br><span class="line">		            document.write(&quot;&lt;tr&gt;&quot;);</span><br><span class="line">		            for (var j = 1; j &lt;=i ; j++) &#123;</span><br><span class="line">		                document.write(&quot;&lt;td&gt;&quot;);</span><br><span class="line">		</span><br><span class="line">		                //输出  1 * 1 = 1</span><br><span class="line">		                document.write(i + &quot; * &quot; + j + &quot; = &quot; + ( i*j) +&quot;&amp;nbsp;&amp;nbsp;&amp;nbsp;&quot;);</span><br><span class="line">		</span><br><span class="line">		                document.write(&quot;&lt;/td&gt;&quot;);</span><br><span class="line">		            &#125;</span><br><span class="line">		            /*//输出换行</span><br><span class="line">		            document.write(&quot;&lt;br&gt;&quot;);*/</span><br><span class="line">		</span><br><span class="line">		            document.write(&quot;&lt;/tr&gt;&quot;);</span><br><span class="line">		        &#125;</span><br><span class="line">		</span><br><span class="line">		        //2.完成表格嵌套</span><br><span class="line">		        document.write(&quot;&lt;/table&gt;&quot;);</span><br><span class="line">		</span><br><span class="line">		    &lt;/script&gt;</span><br><span class="line">		&lt;/head&gt;</span><br><span class="line">		&lt;body&gt;</span><br><span class="line">		</span><br><span class="line">		&lt;/body&gt;</span><br><span class="line">		&lt;/html&gt;</span><br><span class="line"></span><br><span class="line">	2. 基本对象：</span><br><span class="line">		1. Function：函数(方法)对象</span><br><span class="line">            1. 创建：</span><br><span class="line">                1. var fun = new Function(形式参数列表,方法体);  //忘掉吧</span><br><span class="line">                2. </span><br><span class="line">                    function 方法名称(形式参数列表)&#123;</span><br><span class="line">                        方法体</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                3. </span><br><span class="line">                   var 方法名 = function(形式参数列表)&#123;</span><br><span class="line">                        方法体</span><br><span class="line">                   &#125;</span><br><span class="line">            2. 方法：</span><br><span class="line"></span><br><span class="line">            3. 属性：</span><br><span class="line">                length:代表形参的个数</span><br><span class="line">            4. 特点：</span><br><span class="line">                1. 方法定义是，形参的类型不用写,返回值类型也不写。</span><br><span class="line">                2. 方法是一个对象，如果定义名称相同的方法，会覆盖</span><br><span class="line">                3. 在JS中，方法的调用只与方法的名称有关，和参数列表无关</span><br><span class="line">                4. 在方法声明中有一个隐藏的内置对象（数组），arguments,封装所有的实际参数</span><br><span class="line">            5. 调用：</span><br><span class="line">                方法名称(实际参数列表);</span><br><span class="line">		</span><br><span class="line">		2. Array:数组对象</span><br><span class="line">            1. 创建：</span><br><span class="line">                1. var arr = new Array(元素列表);</span><br><span class="line">                2. var arr = new Array(默认长度);</span><br><span class="line">                3. var arr = [元素列表];</span><br><span class="line">            2. 方法</span><br><span class="line">                join(参数):将数组中的元素按照指定的分隔符拼接为字符串</span><br><span class="line">                push()	向数组的末尾添加一个或更多元素，并返回新的长度。</span><br><span class="line">            3. 属性</span><br><span class="line">                length:数组的长度</span><br><span class="line">            4. 特点：</span><br><span class="line">                1. JS中，数组元素的类型可变的。</span><br><span class="line">                2. JS中，数组长度可变的。</span><br><span class="line">		3. Boolean</span><br><span class="line">		4. Date：日期对象</span><br><span class="line">            1. 创建：</span><br><span class="line">                var date = new Date();</span><br><span class="line"></span><br><span class="line">            2. 方法：</span><br><span class="line">                toLocaleString()：返回当前date对象对应的时间本地字符串格式</span><br><span class="line">                getTime():获取毫秒值。返回当前如期对象描述的时间到1970年1月1日零点的毫秒值差</span><br><span class="line">		5. Math：数学对象</span><br><span class="line">            1. 创建：</span><br><span class="line">                * 特点：Math对象不用创建，直接使用。  Math.方法名();</span><br><span class="line"></span><br><span class="line">            2. 方法：</span><br><span class="line">                random():返回 0 ~ 1 之间的随机数。 含0不含1</span><br><span class="line">                ceil(x)：对数进行上舍入。</span><br><span class="line">                floor(x)：对数进行下舍入。</span><br><span class="line">                round(x)：把数四舍五入为最接近的整数。</span><br><span class="line">            3. 属性：</span><br><span class="line">                PI</span><br><span class="line">		6. Number</span><br><span class="line">		7. String</span><br><span class="line">		8. RegExp：正则表达式对象</span><br><span class="line">			1. 正则表达式：定义字符串的组成规则。</span><br><span class="line">				1. 单个字符:[]</span><br><span class="line">					如： [a] [ab] [a-zA-Z0-9_]</span><br><span class="line">					* 特殊符号代表特殊含义的单个字符:</span><br><span class="line">						\d:单个数字字符 [0-9]</span><br><span class="line">						\w:单个单词字符[a-zA-Z0-9_]</span><br><span class="line">				2. 量词符号：</span><br><span class="line">					?：表示出现0次或1次</span><br><span class="line">					*：表示出现0次或多次</span><br><span class="line">					+：出现1次或多次</span><br><span class="line">					&#123;m,n&#125;:表示 m&lt;= 数量 &lt;= n</span><br><span class="line">						* m如果缺省： &#123;,n&#125;:最多n次</span><br><span class="line">						* n如果缺省：&#123;m,&#125; 最少m次</span><br><span class="line">				3. 开始结束符号</span><br><span class="line">					* ^:开始</span><br><span class="line">					* $:结束</span><br><span class="line">			2. 正则对象：</span><br><span class="line">				1. 创建</span><br><span class="line">					1. var reg = new RegExp(&quot;正则表达式&quot;);</span><br><span class="line">					2. var reg = /正则表达式/;</span><br><span class="line">				2. 方法	</span><br><span class="line">					1. test(参数):验证指定的字符串是否符合正则定义的规范	</span><br><span class="line">		9. Global</span><br><span class="line">			1. 特点：全局对象，这个Global中封装的方法不需要对象就可以直接调用。  方法名();</span><br><span class="line">			2. 方法：</span><br><span class="line">			    encodeURI():url编码</span><br><span class="line">			    decodeURI():url解码</span><br><span class="line"></span><br><span class="line">			    encodeURIComponent():url编码,编码的字符更多</span><br><span class="line">			    decodeURIComponent():url解码</span><br><span class="line"></span><br><span class="line">			    parseInt():将字符串转为数字</span><br><span class="line">			        * 逐一判断每一个字符是否是数字，直到不是数字为止，将前边数字部分转为number</span><br><span class="line">			    isNaN():判断一个值是否是NaN</span><br><span class="line">			        * NaN六亲不认，连自己都不认。NaN参与的==比较全部问false</span><br><span class="line"></span><br><span class="line">			    eval():讲 JavaScript 字符串，并把它作为脚本代码来执行。</span><br><span class="line">            3. URL编码</span><br><span class="line">               传智播客 =  %E4%BC%A0%E6%99%BA%E6%92%AD%E5%AE%A2</span><br><span class="line"></span><br><span class="line">* BOM</span><br><span class="line"></span><br><span class="line">* DOM</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/02/Java基础学习笔记/Java学习笔记day33/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪翔宇的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/02/Java基础学习笔记/Java学习笔记day33/" itemprop="url">Java基础day33</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-02T21:11:19+08:00">
-                2019-06-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Java基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="33-1类加载器"><a href="#33-1类加载器" class="headerlink" title="33.1类加载器"></a>33.1类加载器</h4><h5 id="1-1-类的加载"><a href="#1-1-类的加载" class="headerlink" title="1.1 类的加载"></a>1.1 类的加载</h5><p>当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过加载，连接，初始化三步来实现对这个类进行初始化。</p>
-<ul>
-<li>加载 </li>
-</ul>
-<p>就是指将class文件读入内存，并为之创建一个Class对象。</p>
-<p>任何类被使用时系统都会建立一个Class对象</p>
-<ul>
-<li>连接</li>
-</ul>
-<p>验证 是否有正确的内部结构，并和其他类协调一致</p>
-<p>准备 负责为类的静态成员分配内存，并设置默认初始化值</p>
-<p>解析 将类的二进制数据中的符号引用替换为直接引用</p>
-<ul>
-<li>初始化 </li>
-</ul>
-<p>就是我们以前讲过的初始化步骤</p>
-<h5 id="1-2-类初始化时机"><a href="#1-2-类初始化时机" class="headerlink" title="1.2 类初始化时机"></a>1.2 类初始化时机</h5><ol>
-<li><p>创建类的实例</p>
-</li>
-<li><p>类的静态变量，或者为静态变量赋值</p>
-</li>
-<li><p>类的静态方法</p>
-</li>
-<li><p>使用反射方式来强制创建某个类或接口对应的java.lang.Class对象</p>
-</li>
-<li><p>初始化某个类的子类</p>
-</li>
-<li><h6 id="直接使用java-exe命令来运行某个主类"><a href="#直接使用java-exe命令来运行某个主类" class="headerlink" title="直接使用java.exe命令来运行某个主类"></a>直接使用java.exe命令来运行某个主类</h6></li>
-</ol>
-<h5 id="1-3类加载器"><a href="#1-3类加载器" class="headerlink" title="1.3类加载器"></a>1.3类加载器</h5><p> 负责将.class文件加载到内在中，并为之生成对应的Class对象。</p>
-<p>虽然我们不需要关心类加载机制，但是了解这个机制我们就能更好的理解程序的运行</p>
-<h5 id="1-4类加载器的组成"><a href="#1-4类加载器的组成" class="headerlink" title="1.4类加载器的组成"></a>1.4类加载器的组成</h5><ul>
-<li>ootstrap ClassLoader 根类加载器</li>
-</ul>
-<p>也被称为引导类加载器，负责Java核心类的加载</p>
-<p>比如System,String等。在JDK中JRE的lib目录下rt.jar文件中</p>
-<ul>
-<li>Extension ClassLoader 扩展类加载器</li>
-</ul>
-<p>负责JRE的扩展目录中jar包的加载。</p>
-<p>在JDK中JRE的lib目录下ext目录</p>
-<ul>
-<li>System ClassLoader 系统类加载器</li>
-</ul>
-<p>负责在JVM启动时加载来自java命令的class文件，以及classpath环境变量所指定的jar包和类路径。</p>
-<h4 id="33-2反射"><a href="#33-2反射" class="headerlink" title="33.2反射"></a>33.2反射</h4><p>JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。</p>
-<p>要想解剖一个类,必须先要获取到该类的字节码文件对象。而解剖使用的就是Class类中的方法.所以先要获取到每一个字节码文件对应的Class类型的对象。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*static&#123;</span></span><br><span class="line"><span class="comment">		System.out.println("静态代码块");</span></span><br><span class="line"><span class="comment">	&#125;*/</span></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span></span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name,<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">		<span class="keyword">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Person</span><span class="params">(<span class="keyword">int</span> age,String name)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">		<span class="keyword">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"人吃饭"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">(String s, <span class="keyword">int</span> a,<span class="keyword">double</span> d)</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"人在睡觉"</span>+s+<span class="string">"....."</span>+a+<span class="string">"....."</span>+d);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">playGame</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"人在打游戏"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"Person [name="</span> + name + <span class="string">", age="</span> + age + <span class="string">"]"</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-1Class类"><a href="#2-1Class类" class="headerlink" title="2.1Class类"></a>2.1Class类</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  获取一个类的class文件对象的三种方式</span></span><br><span class="line"><span class="comment"> *   1. 对象获取</span></span><br><span class="line"><span class="comment"> *   2. 类名获取</span></span><br><span class="line"><span class="comment"> *   3. Class类的静态方法获取</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> ClassNotFoundException </span>&#123;</span><br><span class="line">		<span class="comment">//1. 对象获取</span></span><br><span class="line">		Person p = <span class="keyword">new</span> Person();</span><br><span class="line">		<span class="comment">//调用Person类的父类的方法 getClass</span></span><br><span class="line">		Class c = p.getClass();</span><br><span class="line">		System.out.println(c);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//2. 类名获取</span></span><br><span class="line">	    <span class="comment">//每个类型,包括基本和引用,都会赋予这个类型一个静态的属性,属性名字class</span></span><br><span class="line">		Class c1 = Person.class;</span><br><span class="line">		System.out.println(c1);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//3. Class类的静态方法获取 forName(字符串的类名)包名.类名</span></span><br><span class="line">		Class c2 = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		System.out.println(c2);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-2通过反射获取空参数构造方法并使用"><a href="#2-2通过反射获取空参数构造方法并使用" class="headerlink" title="2.2通过反射获取空参数构造方法并使用"></a>2.2通过反射获取空参数构造方法并使用</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  通过反射获取class文件中的构造方法,运行构造方法</span></span><br><span class="line"><span class="comment"> *  运行构造方法,创建对象</span></span><br><span class="line"><span class="comment"> *    获取class文件对象</span></span><br><span class="line"><span class="comment"> *    从class文件对象中,获取需要的成员</span></span><br><span class="line"><span class="comment"> *    </span></span><br><span class="line"><span class="comment"> *  Constructor 描述构造方法对象类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo1</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">	</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		<span class="comment">//使用class文件对象,获取类中的构造方法</span></span><br><span class="line">		<span class="comment">//  Constructor[]  getConstructors() 获取class文件对象中的所有公共的构造方法</span></span><br><span class="line">		<span class="comment">/*Constructor[] cons = c.getConstructors();</span></span><br><span class="line"><span class="comment">		for(Constructor con : cons)&#123;</span></span><br><span class="line"><span class="comment">			System.out.println(con);</span></span><br><span class="line"><span class="comment">		&#125;*/</span></span><br><span class="line">		<span class="comment">//获取指定的构造方法,空参数的构造方法</span></span><br><span class="line">		Constructor con =  c.getConstructor();</span><br><span class="line">		<span class="comment">//运行空参数构造方法,Constructor类方法 newInstance()运行获取到的构造方法</span></span><br><span class="line">		Object obj = con.newInstance();</span><br><span class="line">		System.out.println(obj.toString());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-3通过反射获取有参数构造方法并使用"><a href="#2-3通过反射获取有参数构造方法并使用" class="headerlink" title="2.3通过反射获取有参数构造方法并使用"></a>2.3通过反射获取有参数构造方法并使用</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  通过反射,获取有参数的构造方法并运行</span></span><br><span class="line"><span class="comment"> *  方法getConstructor,传递可以构造方法相对应的参数列表即可</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo2</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		<span class="comment">//获取带有,String和int参数的构造方法</span></span><br><span class="line">		<span class="comment">//Constructor&lt;T&gt; getConstructor(Class&lt;?&gt;... parameterTypes)  </span></span><br><span class="line">		<span class="comment">//Class&lt;?&gt;... parameterTypes 传递要获取的构造方法的参数列表</span></span><br><span class="line">		Constructor con = c.getConstructor(String.class,<span class="keyword">int</span>.class);</span><br><span class="line">		<span class="comment">//运行构造方法</span></span><br><span class="line">		<span class="comment">// T newInstance(Object... initargs)  </span></span><br><span class="line">		<span class="comment">//Object... initargs 运行构造方法后,传递的实际参数</span></span><br><span class="line">		Object obj = con.newInstance(<span class="string">"张三"</span>,<span class="number">20</span>);</span><br><span class="line">		System.out.println(obj);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-4通过反射获取构造方法并运行，快捷方式"><a href="#2-4通过反射获取构造方法并运行，快捷方式" class="headerlink" title="2.4通过反射获取构造方法并运行，快捷方式"></a>2.4通过反射获取构造方法并运行，快捷方式</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 反射获取构造方法并运行,有快捷点的方式</span></span><br><span class="line"><span class="comment"> * 有前提:</span></span><br><span class="line"><span class="comment"> *   被反射的类,必须具有空参数构造方法</span></span><br><span class="line"><span class="comment"> *   构造方法权限必须public</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo3</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		<span class="comment">// Class类中定义方法, T newInstance() 直接创建被反射类的对象实例</span></span><br><span class="line">		Object obj = c.newInstance();</span><br><span class="line">		System.out.println(obj);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-5反射获取私有的构造方法并运行"><a href="#2-5反射获取私有的构造方法并运行" class="headerlink" title="2.5反射获取私有的构造方法并运行"></a>2.5反射获取私有的构造方法并运行</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  反射获取私有的构造方法运行</span></span><br><span class="line"><span class="comment"> *  不推荐,破坏了程序的封装性,安全性</span></span><br><span class="line"><span class="comment"> *  暴力反射</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo4</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		<span class="comment">//Constructor[] getDeclaredConstructors()获取所有的构造方法,包括私有的</span></span><br><span class="line">		<span class="comment">/*Constructor[] cons = c.getDeclaredConstructors();</span></span><br><span class="line"><span class="comment">		for(Constructor con : cons)&#123;</span></span><br><span class="line"><span class="comment">			System.out.println(con);</span></span><br><span class="line"><span class="comment">		&#125;*/</span></span><br><span class="line">		<span class="comment">//Constructor getDeclaredConstructor(Class...c)获取到指定参数列表的构造方法</span></span><br><span class="line">		Constructor con = c.getDeclaredConstructor(<span class="keyword">int</span>.class,String.class);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//Constructor类,父类AccessibleObject,定义方法setAccessible(boolean b)</span></span><br><span class="line">		con.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">		</span><br><span class="line">		Object obj = con.newInstance(<span class="number">18</span>,<span class="string">"lisi"</span>);</span><br><span class="line">		System.out.println(obj);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-6反射获取成员变量并改值"><a href="#2-6反射获取成员变量并改值" class="headerlink" title="2.6反射获取成员变量并改值"></a>2.6反射获取成员变量并改值</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  反射获取成员变量,并修改值</span></span><br><span class="line"><span class="comment"> *  Person类中的成员String name</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo5</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		Object obj = c.newInstance();</span><br><span class="line">		<span class="comment">//获取成员变量 Class类的方法 getFields() class文件中的所有公共的成员变量</span></span><br><span class="line">		<span class="comment">//返回值是Field[]    Field类描述成员变量对象的类</span></span><br><span class="line">		<span class="comment">/*Field[] fields = c.getFields();</span></span><br><span class="line"><span class="comment">		for(Field f : fields)&#123;</span></span><br><span class="line"><span class="comment">			System.out.println(f);</span></span><br><span class="line"><span class="comment">		&#125;*/</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//获取指定的成员变量 String name</span></span><br><span class="line">		<span class="comment">//Class类的方法  Field getField(传递字符串类型的变量名) 获取指定的成员变量</span></span><br><span class="line">		Field field = c.getField(<span class="string">"name"</span>);</span><br><span class="line">	   </span><br><span class="line">		<span class="comment">//Field类的方法 void set(Object obj, Object value) ,修改成员变量的值</span></span><br><span class="line">		<span class="comment">//Object obj 必须有对象的支持,  Object value 修改后的值</span></span><br><span class="line">		field.set(obj,<span class="string">"王五"</span>);</span><br><span class="line">		System.out.println(obj);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-7反射获取空参数成员方法并运行"><a href="#2-7反射获取空参数成员方法并运行" class="headerlink" title="2.7反射获取空参数成员方法并运行"></a>2.7反射获取空参数成员方法并运行</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  反射获取成员方法并运行</span></span><br><span class="line"><span class="comment"> *  public void eat()&#123;&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo6</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		Object obj = c.newInstance();</span><br><span class="line">		<span class="comment">//获取class对象中的成员方法</span></span><br><span class="line">		<span class="comment">// Method[] getMethods()获取的是class文件中的所有公共成员方法,包括继承的</span></span><br><span class="line">		<span class="comment">// Method类是描述成员方法的对象</span></span><br><span class="line">		<span class="comment">/*Method[] methods = c.getMethods();</span></span><br><span class="line"><span class="comment">		for(Method m : methods)&#123;</span></span><br><span class="line"><span class="comment">			System.out.println(m);</span></span><br><span class="line"><span class="comment">		&#125;*/</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//获取指定的方法eat运行</span></span><br><span class="line">		<span class="comment">// Method getMethod(String methodName,Class...c)</span></span><br><span class="line">		<span class="comment">// methodName获取的方法名  c 方法的参数列表</span></span><br><span class="line">		Method method = c.getMethod(<span class="string">"eat"</span>);</span><br><span class="line">		<span class="comment">//使用Method类中的方法,运行获取到的方法eat</span></span><br><span class="line">		<span class="comment">//Object invoke(Object obj, Object...o)</span></span><br><span class="line">		method.invoke(obj);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-8反射获取有参数的成员方法并运行"><a href="#2-8反射获取有参数的成员方法并运行" class="headerlink" title="2.8反射获取有参数的成员方法并运行"></a>2.8反射获取有参数的成员方法并运行</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  反射获取有参数的成员方法并执行</span></span><br><span class="line"><span class="comment"> *  public void sleep(String,int,double)&#123;&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo7</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		Object obj = c.newInstance();</span><br><span class="line">		<span class="comment">//调用Class类的方法getMethod获取指定的方法sleep</span></span><br><span class="line">		Method method = c.getMethod(<span class="string">"sleep"</span>, String.class,<span class="keyword">int</span>.class,<span class="keyword">double</span>.class);</span><br><span class="line">		<span class="comment">//调用Method类的方法invoke运行sleep方法</span></span><br><span class="line">		method.invoke(obj, <span class="string">"休眠"</span>,<span class="number">100</span>,<span class="number">888.99</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-9泛型擦出"><a href="#2-9泛型擦出" class="headerlink" title="2.9泛型擦出"></a>2.9泛型擦出</h5><p>ArrayList的对象array进行操作，对ArrayList.class进行操作</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *   定义集合类,泛型String</span></span><br><span class="line"><span class="comment"> *   要求向集合中添加Integer类型</span></span><br><span class="line"><span class="comment"> *   </span></span><br><span class="line"><span class="comment"> *   反射方式,获取出集合ArrayList类的class文件对象</span></span><br><span class="line"><span class="comment"> *   通过class文件对象,调用add方法</span></span><br><span class="line"><span class="comment"> *   </span></span><br><span class="line"><span class="comment"> *   对反射调用方法是否理解</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectTest</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		ArrayList&lt;String&gt; array  = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		array.add(<span class="string">"a"</span>);</span><br><span class="line">		<span class="comment">//反射方式,获取出集合ArrayList类的class文件对象</span></span><br><span class="line">		Class c = array.getClass();</span><br><span class="line">		<span class="comment">//获取ArrayList.class文件中的方法add</span></span><br><span class="line">		Method method = c.getMethod(<span class="string">"add"</span>,Object.class);</span><br><span class="line">		<span class="comment">//使用invoke运行ArrayList方法add</span></span><br><span class="line">		method.invoke(array, <span class="number">150</span>);</span><br><span class="line">		method.invoke(array, <span class="number">1500</span>);</span><br><span class="line">		method.invoke(array, <span class="number">15000</span>);</span><br><span class="line">		System.out.println(array);</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-10反射通过配置文件运行的步骤"><a href="#2-10反射通过配置文件运行的步骤" class="headerlink" title="2.10反射通过配置文件运行的步骤"></a>2.10反射通过配置文件运行的步骤</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileReader;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  调用Person方法,调用Student方法,调用Worker方法</span></span><br><span class="line"><span class="comment"> *  类不清楚,方法也不清楚</span></span><br><span class="line"><span class="comment"> *  通过配置文件实现此功能</span></span><br><span class="line"><span class="comment"> *    运行的类名和方法名字,以键值对的形式,写在文本中</span></span><br><span class="line"><span class="comment"> *    运行哪个类,读取配置文件即可</span></span><br><span class="line"><span class="comment"> *  实现步骤:</span></span><br><span class="line"><span class="comment"> *    1. 准备配置文件,键值对</span></span><br><span class="line"><span class="comment"> *    2. IO流读取配置文件  Reader</span></span><br><span class="line"><span class="comment"> *    3. 文件中的键值对存储到集合中 Properties</span></span><br><span class="line"><span class="comment"> *        集合保存的键值对,就是类名和方法名</span></span><br><span class="line"><span class="comment"> *    4. 反射获取指定类的class文件对象</span></span><br><span class="line"><span class="comment"> *    5. class文件对象,获取指定的方法</span></span><br><span class="line"><span class="comment"> *    6. 运行方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		<span class="comment">//IO流读取配置文件</span></span><br><span class="line">		FileReader r = <span class="keyword">new</span> FileReader(<span class="string">"config.properties"</span>);</span><br><span class="line">		<span class="comment">//创建集合对象</span></span><br><span class="line">		Properties pro = <span class="keyword">new</span> Properties();</span><br><span class="line">		<span class="comment">//调用集合方法load,传递流对象</span></span><br><span class="line">		pro.load(r);</span><br><span class="line">		r.close();</span><br><span class="line">		<span class="comment">//通过键获取值</span></span><br><span class="line">		String className = pro.getProperty(<span class="string">"className"</span>);</span><br><span class="line">		String methodName = pro.getProperty(<span class="string">"methodName"</span>);</span><br><span class="line">		<span class="comment">//反射获取指定类的class文件对象</span></span><br><span class="line">		Class c = Class.forName(className);</span><br><span class="line">		Object obj = c.newInstance();</span><br><span class="line">		<span class="comment">//获取指定的方法名</span></span><br><span class="line">		Method method = c.getMethod(methodName);</span><br><span class="line">		method.invoke(obj);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">study</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"学生在学习"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">className=cn.itcast.demo3.Student</span><br><span class="line">methodName=study</span><br><span class="line">#className=cn.itcast.demo3.Person</span><br><span class="line">#methodName=eat</span><br><span class="line">#className=cn.itcast.demo3.Worker</span><br><span class="line">#methodName=job</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2546,7 +2597,7 @@ for (JXNode jxNode : jxNodes4) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2568,7 +2619,7 @@ for (JXNode jxNode : jxNodes4) {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
