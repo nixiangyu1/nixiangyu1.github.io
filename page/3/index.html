@@ -6,10 +6,10 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -118,7 +118,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/3/"/>
+  <link rel="canonical" href="http://yoursite.com/page/3/">
 
 
 
@@ -153,7 +153,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">倪翔宇的博客</span>
         <span class="logo-line-after"><i></i></span>
@@ -183,7 +183,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -193,7 +193,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -203,7 +203,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -213,7 +213,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -223,7 +223,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -262,11 +262,681 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/14/J2EE笔记/14_ServletContext/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/14/J2EE笔记/14_ServletContext/" itemprop="url">14_ServletContext</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-14T21:12:01+08:00">
+                2019-07-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">J2EE笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="ServletContext对象"><a href="#ServletContext对象" class="headerlink" title="ServletContext对象"></a>ServletContext对象</h1><p>servletContext可以理解为服务端的一个共享空间，可以被所有的客户端访问</p>
+<h2 id="1-生命周期"><a href="#1-生命周期" class="headerlink" title="1.生命周期"></a>1.生命周期</h2><p>从服务器开启到服务器关闭结束</p>
+<h2 id="2-获取方式："><a href="#2-获取方式：" class="headerlink" title="2.获取方式："></a>2.获取方式：</h2><p>主要有两种方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.通过request获取</span></span><br><span class="line">ServletContext servletContext1 = request.getServletContext();</span><br><span class="line"><span class="comment">//2.通过HttpServlet获取</span></span><br><span class="line">ServletContext servletContext2 = <span class="keyword">this</span>.getServletContext();</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-功能"><a href="#3-功能" class="headerlink" title="3.功能"></a>3.功能</h2><ol>
+<li><p>获取MIME类型：</p>
+<p>MIME类型：在互联网通信过程中定义的一种文件数据类型</p>
+<p>格式：大类型/小类型  text/html   img/jpg</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.通过HttpServlet获取ServletContext对象</span></span><br><span class="line">  ServletContext context = <span class="keyword">this</span>.getServletContext();</span><br><span class="line">  <span class="comment">//2.定义文件名称</span></span><br><span class="line">  String filename = <span class="string">"a.jpg"</span>;</span><br><span class="line">  <span class="comment">//3.获取MIME类型</span></span><br><span class="line">  String mimeType = context.getMimeType(filename);</span><br><span class="line">  System.out.println(mimeType);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<p>2.域对象：共享数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.通过HttpServlet获取ServletContext对象</span></span><br><span class="line">ServletContext context = <span class="keyword">this</span>.getServletContext();</span><br><span class="line"><span class="comment">//2.设置数据</span></span><br><span class="line">context.setAttribute(<span class="string">"msg"</span>,<span class="string">"haha"</span>);</span><br><span class="line"><span class="comment">//3.其他Servlet中获取数据</span></span><br><span class="line">Object msg = context.getAttribute(<span class="string">"msg"</span>);</span><br><span class="line"><span class="comment">//4.打印</span></span><br><span class="line">System.out.println(msg);</span><br></pre></td></tr></table></figure>
+
+<p>ServletContext对象范围：所有用户所有请求的数据</p>
+<p>3.获取文件的真实路径</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.通过HttpServlet获取ServletContext对象</span></span><br><span class="line">      ServletContext context = <span class="keyword">this</span>.getServletContext();</span><br><span class="line">      <span class="comment">//2.获取文件的服务器路径</span></span><br><span class="line">      String b = context.getRealPath(<span class="string">"b.txt"</span>);<span class="comment">//web目录下的资源访问</span></span><br><span class="line">      System.out.println(b);</span><br><span class="line">      File file = <span class="keyword">new</span> File(b);</span><br><span class="line"></span><br><span class="line">      String c = context.getRealPath(<span class="string">"/WEB-INF/c.txt"</span>);<span class="comment">//WEB-INF目录下的资源访问</span></span><br><span class="line">      System.out.println(c);</span><br><span class="line"></span><br><span class="line">      String a = context.getRealPath(<span class="string">"/WEB-INF/classes/a.txt"</span>);<span class="comment">//src目录下的资源访问</span></span><br><span class="line">      System.out.println(a);</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/14/J2EE笔记/14_request和response乱码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/14/J2EE笔记/14_request和response乱码/" itemprop="url">14_request和response乱码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-14T21:11:01+08:00">
+                2019-07-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">J2EE笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>原因</p>
+<p>浏览器用了一种编码方式utf-8</p>
+<p>tomcat用的编码方式 ISO-8859-1</p>
+<p>服务器从tomcat默认获取的编码方式ISO-8859-1(我们不认识)</p>
+<p>所以要统一浏览器和服务器的编码方式。</p>
+<p>解决方法</p>
+<p>request：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取对象之前先设置流的编码格式，tomcat默认的编码格式是ISO-8859-1</span></span><br><span class="line">request.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line"><span class="comment">//获取数据</span></span><br><span class="line">String name=request.getParameter(<span class="string">"name"</span>);</span><br><span class="line">System.out.println(name);</span><br></pre></td></tr></table></figure>
+
+<p>response：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取对象之前先设置流的编码格式，tomcat默认的编码格式是ISO-8859-1</span></span><br><span class="line">        response.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line">        <span class="comment">//告诉浏览器，服务器这边发送的编码格式是utf-8</span></span><br><span class="line">        <span class="comment">//response.setHeader("content-type", "text/html;charset=utf-8");</span></span><br><span class="line">        response.setContentType(<span class="string">"text/hmtl;charset=utf-8"</span>);</span><br><span class="line">        <span class="comment">//从tomcat中获取一个字符输出流</span></span><br><span class="line">        PrintWriter pw = response.getWriter();</span><br><span class="line">        pw.write(<span class="string">"你好，hello"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>字符流PrintWriter</p>
+<p>字节流ServletOutputStream</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/13/J2EE笔记/13_request、response转发与重定向/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/13/J2EE笔记/13_request、response转发与重定向/" itemprop="url">13_request、response转发与重定向</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-13T21:11:01+08:00">
+                2019-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">J2EE笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="转发和重定向的区别"><a href="#转发和重定向的区别" class="headerlink" title="转发和重定向的区别"></a>转发和重定向的区别</h1><p>在做页面的请求与响应的时候我们多用request与response进行操作，而我们大家也知道，request是表示用户发向服务器的请求，而response是对用户请求的一个响应。</p>
+<p>​     关于转发和重定向，通俗的讲转发就像是你向售后技术支持打电话问问题，打过去是客服小王接的，但是小王无法解决，但是小王知道小李可以解决，把电话转接给小李，</p>
+<pre><code>而重定向呢，就是小王说这个解决不了，让你打给技术部，挂掉电话，你再打给技术部。</code></pre><p>​       因此在转发的时候你的地址栏内容不会变，发过去的请求也在，也就是说request中的内容没有改变，可以使用request进行值传递。</p>
+<p>而重定向的过程地址栏发生改变，你的请求也在重定向的时候丢失，原因是在第二次请求时，是再一次对服务器的访问，服务器会重写request内容。</p>
+<p><strong>下面是转发和重定向的代码：</strong></p>
+<p><strong>转发：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.getRequestDispatcher(&quot;/responseDemo02&quot;).forward(request, response);</span><br></pre></td></tr></table></figure>
+
+<p><strong>重定向：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//动态获取虚拟目录</span></span><br><span class="line">String contextPath = request.getContextPath();</span><br><span class="line">response.sendRedirect(contextPath+<span class="string">"/responseDemo02"</span>);</span><br><span class="line"><span class="comment">//response.sendRedirect("/day15/responseDemo02");</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>谈到转发和重定向就不得不提一下其中的区别：</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>转发</th>
+<th>重定向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>请求次数</td>
+<td>浏览器仅发送一次请求、一次响应</td>
+<td>发送两次请求，两次响应</td>
+</tr>
+<tr>
+<td>地址栏是否变化</td>
+<td>地址栏不发生变化</td>
+<td>地址栏变成重定向的地址</td>
+</tr>
+<tr>
+<td>范围</td>
+<td>只能转到本项目的Servlet或其他页面</td>
+<td>能重定向到不只本项目的Servlet或者其他页面</td>
+</tr>
+<tr>
+<td>实施及地址</td>
+<td>是有服务器转发的，根目录为项目地址</td>
+<td>是由浏览器再次请求，根目录是浏览器目录</td>
+</tr>
+</tbody></table>
+<p><strong>用到重定向和转发时要注意的问题：</strong></p>
+<p><strong>在做增删改请求操作的时候不可用转发，只能用重定向</strong></p>
+<p><strong>原因：</strong>由于转发之后地址栏不变，请求（request）内容不变，再次刷新页面的时候，请求将再次发送，造成重复操作执行，造成错误。</p>
+<p><strong>在做查询操作时，只能转发，不能使用重定性。</strong></p>
+<p><strong>原因：</strong>重定向后请求会将原本的查询请求覆盖，刷新之后将得不到要查询的数据。</p>
+<p>转发后浏览器其中的url不变，浏览器刷新后会跳转到的第一个页面</p>
+<p>重定向之后，浏览器中的url改变，浏览器刷新后停留在第二个页面</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/12/J2EE笔记/12_BeanUtils_封装JavaBean/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/12/J2EE笔记/12_BeanUtils_封装JavaBean/" itemprop="url">12_BeanUtils_封装JavaBean</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-12T21:11:01+08:00">
+                2019-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">J2EE笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="BeanUtils"><a href="#BeanUtils" class="headerlink" title="BeanUtils"></a>BeanUtils</h1><p>BeanUtils工具是由Apache编写的</p>
+<p>作用是把对象的属性数据封装到对象中。</p>
+<h2 id="一、什么是JavaBean？"><a href="#一、什么是JavaBean？" class="headerlink" title="一、什么是JavaBean？"></a>一、什么是JavaBean？</h2><p> JavaBean:标准的Java类</p>
+<ol>
+<li>类必须被public修饰</li>
+<li>必须提供空参的构造器</li>
+<li>成员变量必须使用private修饰</li>
+<li>提供公共setter和getter方法</li>
+</ol>
+<p>简单来说就是domain层的Java类</p>
+<h2 id="二、如何使用BeanUtils？"><a href="#二、如何使用BeanUtils？" class="headerlink" title="二、如何使用BeanUtils？"></a>二、如何使用BeanUtils？</h2><p>方法：</p>
+<ol>
+<li>setProperty(User user,“属性名”,”属性值”)</li>
+<li>getProperty(User user,“属性名”,”属性值”)</li>
+<li>populate(Object obj,Map map):将map集合中的键值对信息，封装到对应的JavaBean对象中</li>
+</ol>
+<h2 id="三、setPorperty和getProperty操作的对象是什么？"><a href="#三、setPorperty和getProperty操作的对象是什么？" class="headerlink" title="三、setPorperty和getProperty操作的对象是什么？"></a>三、setPorperty和getProperty操作的对象是什么？</h2><p><strong>类的属性</strong></p>
+<p><strong>成员变量和属性的区别，什么是属性？</strong></p>
+<p>setter和getter方法截取后的产物</p>
+<p>getUsername()方法 —&gt;Username —-&gt;username</p>
+<p>getHehe()方法—–&gt;Hehe——–&gt;hehe</p>
+<p>操作的是get和set方法的属性！！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/11/J2EE笔记/11_Servlet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/me.jpg">
     </span>
 
@@ -304,7 +974,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -442,7 +1112,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/me.jpg">
     </span>
 
@@ -480,7 +1150,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -682,7 +1352,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/me.jpg">
     </span>
 
@@ -720,7 +1390,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -877,7 +1547,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/me.jpg">
     </span>
 
@@ -915,7 +1585,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -1185,7 +1855,7 @@ for (JXNode jxNode : jxNodes4) {
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/me.jpg">
     </span>
 
@@ -1223,7 +1893,7 @@ for (JXNode jxNode : jxNodes4) {
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -1395,7 +2065,7 @@ for (JXNode jxNode : jxNodes4) {
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/me.jpg">
     </span>
 
@@ -1433,7 +2103,7 @@ for (JXNode jxNode : jxNodes4) {
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -1578,976 +2248,11 @@ for (JXNode jxNode : jxNodes4) {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/04/J2EE笔记/04_JavaScript高级笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪翔宇的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/04/J2EE笔记/04_JavaScript高级笔记/" itemprop="url">04_JavaScript高级笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-04T21:11:01+08:00">
-                2019-07-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">J2EE笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="今日内容："><a href="#今日内容：" class="headerlink" title="今日内容："></a>今日内容：</h1><pre><code>1. JavaScript：
-    1. ECMAScript：
-    2. BOM：
-    3. DOM：
-        1. 事件</code></pre><h2 id="DOM简单学习：为了满足案例要求"><a href="#DOM简单学习：为了满足案例要求" class="headerlink" title="DOM简单学习：为了满足案例要求"></a>DOM简单学习：为了满足案例要求</h2><pre><code>* 功能：控制html文档的内容
-* 获取页面标签(元素)对象：Element
-    * document.getElementById(&quot;id值&quot;):通过元素的id获取元素对象
-
-* 操作Element对象：
-    1. 修改属性值：
-        1. 明确获取的对象是哪一个？
-        2. 查看API文档，找其中有哪些属性可以设置
-    2. 修改标签体内容：
-        * 属性：innerHTML
-        1. 获取元素对象
-        2. 使用innerHTML属性修改标签体内容</code></pre><h2 id="事件简单学习"><a href="#事件简单学习" class="headerlink" title="事件简单学习"></a>事件简单学习</h2><pre><code>* 功能： 某些组件被执行了某些操作后，触发某些代码的执行。
-    * 造句：  xxx被xxx,我就xxx
-        * 我方水晶被摧毁后，我就责备对友。
-        * 敌方水晶被摧毁后，我就夸奖自己。
-
-* 如何绑定事件
-    1. 直接在html标签上，指定事件的属性(操作)，属性值就是js代码
-        1. 事件：onclick--- 单击事件
-
-    2. 通过js获取元素对象，指定事件属性，设置一个函数
-
-    * 代码：
-        &lt;body&gt;
-            &lt;img id=&quot;light&quot; src=&quot;img/off.gif&quot;  onclick=&quot;fun();&quot;&gt;
-            &lt;img id=&quot;light2&quot; src=&quot;img/off.gif&quot;&gt;
-
-            &lt;script&gt;
-                function fun(){
-                    alert(&apos;我被点了&apos;);
-                    alert(&apos;我又被点了&apos;);
-                }
-
-                function fun2(){
-                    alert(&apos;咋老点我？&apos;);
-                }
-
-                //1.获取light2对象
-                var light2 = document.getElementById(&quot;light2&quot;);
-                //2.绑定事件
-                light2.onclick = fun2;</code></pre><p>​<br>​                <br>​            <br>​<br>​    * 案例1：电灯开关<br>​        <!DOCTYPE html><br>​        <html lang="en"><br>​        <head><meta name="generator" content="Hexo 3.9.0"><br>​            <meta charset="UTF-8"><br>​            <title>电灯开关</title><br>​<br>​        </head><br>​        <body><br>​<br>        <img id="light" src="img/off.gif"></body></html></p>
-<pre><code>&lt;script&gt;
-    /*
-        分析：
-            1.获取图片对象
-            2.绑定单击事件
-            3.每次点击切换图片
-                * 规则：
-                    * 如果灯是开的 on,切换图片为 off
-                    * 如果灯是关的 off,切换图片为 on
-                * 使用标记flag来完成
-
-     */
-
-    //1.获取图片对象
-    var light = document.getElementById(&quot;light&quot;);
-
-    var flag = false;//代表灯是灭的。 off图片
-
-    //2.绑定单击事件
-    light.onclick = function(){
-        if(flag){//判断如果灯是开的，则灭掉
-            light.src = &quot;img/off.gif&quot;;
-            flag = false;
-
-        }else{
-            //如果灯是灭的，则打开
-
-            light.src = &quot;img/on.gif&quot;;
-            flag = true;
-        }</code></pre><p>​<br>​            }<br>​<br>​        <br>​        <br>​        </p>
-<h1 id="BOM"><a href="#BOM" class="headerlink" title="BOM:"></a>BOM:</h1><pre><code>1. 概念：Browser Object Model 浏览器对象模型
-    * 将浏览器的各个组成部分封装成对象。
-
-2. 组成：
-    * Window：窗口对象
-    * Navigator：浏览器对象
-    * Screen：显示器屏幕对象
-    * History：历史记录对象
-    * Location：地址栏对象
-
-3. Window：窗口对象
-    1. 创建
-    2. 方法
-         1. 与弹出框有关的方法：
-            alert()    显示带有一段消息和一个确认按钮的警告框。
-            confirm()    显示带有一段消息以及确认按钮和取消按钮的对话框。
-                * 如果用户点击确定按钮，则方法返回true
-                * 如果用户点击取消按钮，则方法返回false
-            prompt()    显示可提示用户输入的对话框。
-                * 返回值：获取用户输入的值
-         2. 与打开关闭有关的方法：
-            close()    关闭浏览器窗口。
-                * 谁调用我 ，我关谁
-            open()    打开一个新的浏览器窗口
-                * 返回新的Window对象
-         3. 与定时器有关的方式
-            setTimeout()    在指定的毫秒数后调用函数或计算表达式。
-                * 参数：
-                    1. js代码或者方法对象
-                    2. 毫秒值
-                * 返回值：唯一标识，用于取消定时器
-            clearTimeout()    取消由 setTimeout() 方法设置的 timeout。
-
-            setInterval()    按照指定的周期（以毫秒计）来调用函数或计算表达式。
-            clearInterval()    取消由 setInterval() 设置的 timeout。
-
-    3. 属性：
-        1. 获取其他BOM对象：
-            history
-            location
-            Navigator
-            Screen:
-        2. 获取DOM对象
-            document
-    4. 特点
-        * Window对象不需要创建可以直接使用 window使用。 window.方法名();
-        * window引用可以省略。  方法名();
-
-
-4. Location：地址栏对象
-    1. 创建(获取)：
-        1. window.location
-        2. location
-
-    2. 方法：
-        * reload()    重新加载当前文档。刷新
-    3. 属性
-        * href    设置或返回完整的 URL。
-
-
-5. History：历史记录对象
-    1. 创建(获取)：
-        1. window.history
-        2. history
-
-    2. 方法：
-        * back()    加载 history 列表中的前一个 URL。
-        * forward()    加载 history 列表中的下一个 URL。
-        * go(参数)    加载 history 列表中的某个具体页面。
-            * 参数：
-                * 正数：前进几个历史记录
-                * 负数：后退几个历史记录
-    3. 属性：
-        * length    返回当前窗口历史列表中的 URL 数量。</code></pre><h2 id="DOM："><a href="#DOM：" class="headerlink" title="DOM："></a>DOM：</h2><pre><code>* 概念： Document Object Model 文档对象模型
-    * 将标记语言文档的各个组成部分，封装为对象。可以使用这些对象，对标记语言文档进行CRUD的动态操作
-
-* W3C DOM 标准被分为 3 个不同的部分：
-
-    * 核心 DOM - 针对任何结构化文档的标准模型
-        * Document：文档对象
-        * Element：元素对象
-        * Attribute：属性对象
-        * Text：文本对象
-        * Comment:注释对象
-
-        * Node：节点对象，其他5个的父对象
-    * XML DOM - 针对 XML 文档的标准模型
-    * HTML DOM - 针对 HTML 文档的标准模型
-
-
-
-
-
-* 核心DOM模型：
-    * Document：文档对象
-        1. 创建(获取)：在html dom模型中可以使用window对象来获取
-            1. window.document
-            2. document
-        2. 方法：
-            1. 获取Element对象：
-                1. getElementById()    ： 根据id属性值获取元素对象。id属性值一般唯一
-                2. getElementsByTagName()：根据元素名称获取元素对象们。返回值是一个数组
-                3. getElementsByClassName():根据Class属性值获取元素对象们。返回值是一个数组
-                4. getElementsByName(): 根据name属性值获取元素对象们。返回值是一个数组
-            2. 创建其他DOM对象：
-                createAttribute(name)
-                createComment()
-                createElement()
-                createTextNode()
-        3. 属性
-    * Element：元素对象
-        1. 获取/创建：通过document来获取和创建
-        2. 方法：
-            1. removeAttribute()：删除属性
-            2. setAttribute()：设置属性
-    * Node：节点对象，其他5个的父对象
-        * 特点：所有dom对象都可以被认为是一个节点
-        * 方法：
-            * CRUD dom树：
-                * appendChild()：向节点的子节点列表的结尾添加新的子节点。
-                * removeChild()    ：删除（并返回）当前节点的指定子节点。
-                * replaceChild()：用新节点替换一个子节点。
-        * 属性：
-            * parentNode 返回节点的父节点。
-
-
-* HTML DOM
-    1. 标签体的设置和获取：innerHTML
-    2. 使用html元素对象的属性
-    3. 控制元素样式
-        1. 使用元素的style属性来设置
-            如：
-                 //修改样式方式1
-                div1.style.border = &quot;1px solid red&quot;;
-                div1.style.width = &quot;200px&quot;;
-                //font-size--&gt; fontSize
-                div1.style.fontSize = &quot;20px&quot;;
-        2. 提前定义好类选择器的样式，通过元素的className属性来设置其class属性值。</code></pre><h2 id="事件监听机制："><a href="#事件监听机制：" class="headerlink" title="事件监听机制："></a>事件监听机制：</h2><pre><code>* 概念：某些组件被执行了某些操作后，触发某些代码的执行。    
-    * 事件：某些操作。如： 单击，双击，键盘按下了，鼠标移动了
-    * 事件源：组件。如： 按钮 文本输入框...
-    * 监听器：代码。
-    * 注册监听：将事件，事件源，监听器结合在一起。 当事件源上发生了某个事件，则触发执行某个监听器代码。
-
-
-* 常见的事件：
-    1. 点击事件：
-        1. onclick：单击事件
-        2. ondblclick：双击事件
-    2. 焦点事件
-        1. onblur：失去焦点
-        2. onfocus:元素获得焦点。
-
-    3. 加载事件：
-        1. onload：一张页面或一幅图像完成加载。
-
-    4. 鼠标事件：
-        1. onmousedown    鼠标按钮被按下。
-        2. onmouseup    鼠标按键被松开。
-        3. onmousemove    鼠标被移动。
-        4. onmouseover    鼠标移到某元素之上。
-        5. onmouseout    鼠标从某元素移开。</code></pre><p>​<br>​        5. 键盘事件：<br>​            1. onkeydown    某个键盘按键被按下。<br>​            2. onkeyup        某个键盘按键被松开。<br>​            3. onkeypress    某个键盘按键被按下并松开。<br>​<br>​        6. 选择和改变<br>​            1. onchange    域的内容被改变。<br>​            2. onselect    文本被选中。<br>​<br>​        7. 表单事件：<br>​            1. onsubmit    确认按钮被点击。<br>​            2. onreset    重置按钮被点击。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/J2EE笔记/03_表单标签get和post的区别/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪翔宇的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/03/J2EE笔记/03_表单标签get和post的区别/" itemprop="url">03_表单标签get和post的区别</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-03T21:11:01+08:00">
-                2019-07-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">J2EE笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h1><p>概念：用于采集用户输入的数据的。用于和服务器进行交互。</p>
-<ul>
-<li><p>form：用于定义表单的。可以定义一个范围，范围代表采集用户数据的范围</p>
-<ul>
-<li><p>属性：`</p>
-<ul>
-<li><p>action：指定提交数据的URL</p>
-</li>
-<li><p>method:指定提交方式</p>
-<ul>
-<li><p>分类：一共7种，2种比较常用</p>
-<ul>
-<li><p>get：</p>
-<ol>
-<li>请求参数会在地址栏中显示。会封装到请求行中(HTTP协议后讲解)。</li>
-<li>请求参数大小是有限制的。</li>
-<li>不太安全。</li>
-</ol>
-</li>
-<li><p>post：</p>
-<pre><code>1.请求参数不会再地址栏中显示。会封装在请求体中(HTTP协议后讲解)
-
-2.请求参数的大小没有限制。
-
-3.较为安全。 </code></pre></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>表单项中的数据要想被提交：必须指定其name属性</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/02/J2EE笔记/02_表单标签_表单项/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪翔宇的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/02/J2EE笔记/02_表单标签_表单项/" itemprop="url">02_表单标签_表单项</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-02T21:11:01+08:00">
-                2019-07-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">J2EE笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p>表单项标签：</p>
-<ul>
-<li><p>input：可以通过type属性值，改变元素展示的样式</p>
-<ul>
-<li><p>type属性：</p>
-<ul>
-<li><p>text：文本输入框，默认值</p>
-<ul>
-<li>placeholder：指定输入框的提示信息，当输入框的内容发生变化，会自动清空提示信息    </li>
-</ul>
-</li>
-<li><p>password：密码输入框</p>
-</li>
-<li><p>radio:单选框</p>
-<ul>
-<li>注意：<ol>
-<li>要想让多个单选框实现单选的效果，则多个单选框的name属性值必须一样。</li>
-<li>一般会给每一个单选框提供value属性，指定其被选中后提交的值</li>
-<li>checked属性，可以指定默认值</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>checkbox：复选框</p>
-<ul>
-<li>注意：<ol>
-<li>一般会给每一个单选框提供value属性，指定其被选中后提交的值</li>
-<li>checked属性，可以指定默认值</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>file：文件选择框</p>
-</li>
-<li><p>hidden：隐藏域，用于提交一些信息。</p>
-</li>
-<li><p>按钮：</p>
-<ul>
-<li>submit：提交按钮。可以提交表单</li>
-<li>button：普通按钮</li>
-<li>image：图片提交按钮<ul>
-<li>src属性指定图片的路径    </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>label：指定输入项的文字描述信息<ul>
-<li>注意：<ul>
-<li>label的for属性一般会和 input 的 id属性值 对应。如果对应了，则点击label区域，会让input输入框获取焦点。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>select: 下拉列表</p>
-<ul>
-<li>子元素：option，指定列表项</li>
-</ul>
-</li>
-<li><p>textarea：文本域</p>
-<ul>
-<li>cols：指定列数，每一行有多少个字符</li>
-<li>rows：默认多少行。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/01/J2EE笔记/17_JSP/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪翔宇的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/01/J2EE笔记/17_JSP/" itemprop="url">17_JSP</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-01T22:11:01+08:00">
-                2019-07-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">J2EE笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="JSP"><a href="#JSP" class="headerlink" title="JSP"></a>JSP</h1><h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><ul>
-<li><p>作用：用于配置JSP页面，导入资源文件</p>
-</li>
-<li><p>格式：<br>  &lt;%@ 指令名称 属性名1=属性值1 属性名2=属性值2 … %&gt;</p>
-</li>
-<li><p>分类：</p>
-<ol>
-<li><p>page        ： 配置JSP页面的</p>
-<ul>
-<li>contentType：等同于response.setContentType()<ol>
-<li>设置响应体的mime类型以及字符集</li>
-<li>设置当前jsp页面的编码（只能是高级的IDE才能生效，如果使用低级工具，则需要设置pageEncoding属性设置当前页面的字符集）</li>
-</ol>
-</li>
-<li>import：导包</li>
-<li>errorPage：当前页面发生异常后，会自动跳转到指定的错误页面</li>
-<li>isErrorPage：标识当前也是是否是错误页面。<ul>
-<li>true：是，可以使用内置对象exception</li>
-<li>false：否。默认值。不可以使用内置对象exception</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>include    ： 页面包含的。导入页面的资源文件</p>
-<pre><code>* &lt;%@include file=&quot;top.jsp&quot;%&gt;</code></pre></li>
-<li><p>taglib    ： 导入资源</p>
-<ul>
-<li>&lt;%@ taglib prefix=”c” uri=”<a href="http://java.sun.com/jsp/jstl/core&quot;" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/core&quot;</a> %&gt;</li>
-<li>prefix：前缀，自定义的</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-<h2 id="注释"><a href="#注释" class="headerlink" title="注释:"></a>注释:</h2><ol>
-<li><p>html注释：</p>
-   <!-- -->:只能注释html代码片段</li>
-<li><p>jsp注释：推荐使用</p>
-<p>   &lt;%– –%&gt;：可以注释所有</p>
-</li>
-</ol>
-<h2 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h2><ul>
-<li>在jsp页面中不需要创建，直接使用的对象</li>
-<li>一共有9个：<pre><code>变量名                    真实类型                        作用</code></pre><ul>
-<li>pageContext                PageContext                    当前页面共享数据，还可以获取其他八个内置对象</li>
-<li>request                    HttpServletRequest            一次请求访问的多个资源(转发)</li>
-<li>session                    HttpSession                    一次会话的多个请求间</li>
-<li>application                ServletContext                所有用户间共享数据</li>
-<li>response                    HttpServletResponse            响应对象</li>
-<li>page                        Object                        当前页面(Servlet)的对象  this</li>
-<li>out                        JspWriter                    输出对象，数据输出到页面上</li>
-<li>config                    ServletConfig                Servlet的配置对象</li>
-<li>exception                    Throwable                    异常对象</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2582,9 +2287,7 @@ for (JXNode jxNode : jxNodes4) {
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/images/me.jpg"
-                alt="倪翔宇" />
+              <img class="site-author-image" itemprop="image" src="/images/me.jpg" alt="倪翔宇">
             
               <p class="site-author-name" itemprop="name">倪翔宇</p>
               <p class="site-description motion-element" itemprop="description">技术博客</p>
@@ -2597,7 +2300,7 @@ for (JXNode jxNode : jxNodes4) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2608,7 +2311,7 @@ for (JXNode jxNode : jxNodes4) {
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2619,7 +2322,7 @@ for (JXNode jxNode : jxNodes4) {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
