@@ -88,7 +88,7 @@
 <meta property="og:description" content="代理模式简单来说代理模式，就是我们日常生活中的代理商模式。代理模式一般有三元素：共同接口，真实对象（厂家），代理对象（代理商）。 比方说我们需要向厂家买一些商品，但是这些商品是固定好的，而我们有一些特别的需求，厂家不能统一给我们制作。所有我们需要向代理商去买，他那里有定制商品，代理商也是从厂家进货，但是他经过了一系列的处理。 下面通过图片展示一下：  静态代理程序员编写源码，再进行编译，是在程序运">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/07/29/设计模式/J2EE%E7%AC%94%E8%AE%B0/Img/1563636026934.png">
-<meta property="og:updated_time" content="2019-07-29T10:51:34.264Z">
+<meta property="og:updated_time" content="2019-07-31T05:49:02.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="倪翔宇的博客">
 <meta name="twitter:description" content="代理模式简单来说代理模式，就是我们日常生活中的代理商模式。代理模式一般有三元素：共同接口，真实对象（厂家），代理对象（代理商）。 比方说我们需要向厂家买一些商品，但是这些商品是固定好的，而我们有一些特别的需求，厂家不能统一给我们制作。所有我们需要向代理商去买，他那里有定制商品，代理商也是从厂家进货，但是他经过了一系列的处理。 下面通过图片展示一下：  静态代理程序员编写源码，再进行编译，是在程序运">
@@ -412,6 +412,7 @@
 <p>这里主要用的是匿名内部类的方法：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//1.创建真实对象</span></span><br><span class="line">        Lenovo lenovo = <span class="keyword">new</span> Lenovo();</span><br><span class="line">        <span class="comment">//2.动态代理怎增强lenovo对象</span></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 三个参数：</span></span><br><span class="line"><span class="comment">         *    1.真实类的类加载器</span></span><br><span class="line"><span class="comment">         *    2.接口数组</span></span><br><span class="line"><span class="comment">         *    3.处理器</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        SaleComputer proxy_lenovo = (SaleComputer) Proxy.newProxyInstance(Lenovo.class.getClassLoader(), Lenovo.class.getInterfaces(), <span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">                 代理逻辑编写的方法：代理对象调用的所有方法都会执行该方法</span></span><br><span class="line"><span class="comment">                    参数：</span></span><br><span class="line"><span class="comment">                        1.proxy 代理对象   这里指的是上面的proxy_lenovo</span></span><br><span class="line"><span class="comment">                        2.method:代理对象调用的方法，被封装成对象     调用什么方法，method就是什么</span></span><br><span class="line"><span class="comment">                        3.args：代理对象调用的方法时，传递的实际参数数组    args[0]就是8000</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                <span class="comment">//代理扩展逻辑</span></span><br><span class="line">                <span class="comment">//判断是否是sale方法</span></span><br><span class="line">                <span class="keyword">if</span> (method.getName().equals(<span class="string">"sale"</span>)) &#123;</span><br><span class="line">                    <span class="comment">//1.增强参数</span></span><br><span class="line">                    <span class="comment">//获取了传递过来的参数</span></span><br><span class="line">                    <span class="keyword">double</span> money = (<span class="keyword">double</span>) args[<span class="number">0</span>];</span><br><span class="line">                    <span class="comment">//打了八折</span></span><br><span class="line">                    money = money * <span class="number">0.85</span>;</span><br><span class="line">                    <span class="comment">//调用真实对象的method方法</span></span><br><span class="line">                    String obj = (String)method.invoke(lenovo, money);</span><br><span class="line">                    <span class="comment">//2.增强逻辑</span></span><br><span class="line">                    System.out.println(<span class="string">"免费送货。。。"</span>);</span><br><span class="line">                    <span class="comment">//3.增强返回值</span></span><br><span class="line">                    <span class="keyword">return</span> obj+<span class="string">"送了鼠标垫"</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">//调用真实对象的method方法</span></span><br><span class="line">                    Object obj = method.invoke(lenovo, args[<span class="number">0</span>]);</span><br><span class="line">                    <span class="comment">//代理对象调用方法后的返回值</span></span><br><span class="line">                    <span class="keyword">return</span> obj;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//2.调用方法</span></span><br><span class="line">        String computer = proxy_lenovo.sale(<span class="number">8000</span>);</span><br><span class="line">        System.out.println(computer);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>推荐博客：<a href="https://www.cnblogs.com/xdp-gacl/p/3971367.html" target="_blank" rel="noopener">https://www.cnblogs.com/xdp-gacl/p/3971367.html</a></p>
 
       
     </div>
@@ -442,7 +443,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/29/框架学习/01_Mybatis入门/" rel="next" title="01_Mybatis入门">
+              <a href="/2019/07/29/框架学习/Mybatis/01_Mybatis入门/" rel="next" title="01_Mybatis入门">
                 <i class="fa fa-chevron-left"></i> 01_Mybatis入门
               </a>
             
@@ -451,6 +452,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/30/设计模式/工厂模式/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -529,7 +534,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -551,7 +556,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
