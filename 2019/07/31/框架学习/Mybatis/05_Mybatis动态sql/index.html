@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Mybatis动态sql123456789101112&amp;lt;!--根据传入的具体内容查找--&amp;gt;    &amp;lt;select id=&quot;findByCondition&quot; parameterType=&quot;user&quot; resultMap=&quot;userMap&quot;&amp;gt;        select * from user        &amp;lt;where&amp;gt;            &amp;lt;if tes">
+<meta name="description" content="Mybatis动态sql具体看Mybatis官网教程 123456789101112&amp;lt;!--根据传入的具体内容查找--&amp;gt;    &amp;lt;select id=&quot;findByCondition&quot; parameterType=&quot;user&quot; resultMap=&quot;userMap&quot;&amp;gt;        select * from user        &amp;lt;where&amp;gt;">
 <meta name="keywords" content="mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="05_Mybatis动态sql">
 <meta property="og:url" content="http://yoursite.com/2019/07/31/框架学习/Mybatis/05_Mybatis动态sql/index.html">
 <meta property="og:site_name" content="倪翔宇的博客">
-<meta property="og:description" content="Mybatis动态sql123456789101112&amp;lt;!--根据传入的具体内容查找--&amp;gt;    &amp;lt;select id=&quot;findByCondition&quot; parameterType=&quot;user&quot; resultMap=&quot;userMap&quot;&amp;gt;        select * from user        &amp;lt;where&amp;gt;            &amp;lt;if tes">
+<meta property="og:description" content="Mybatis动态sql具体看Mybatis官网教程 123456789101112&amp;lt;!--根据传入的具体内容查找--&amp;gt;    &amp;lt;select id=&quot;findByCondition&quot; parameterType=&quot;user&quot; resultMap=&quot;userMap&quot;&amp;gt;        select * from user        &amp;lt;where&amp;gt;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-31T16:31:11.723Z">
+<meta property="og:updated_time" content="2019-08-01T06:38:24.414Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="05_Mybatis动态sql">
-<meta name="twitter:description" content="Mybatis动态sql123456789101112&amp;lt;!--根据传入的具体内容查找--&amp;gt;    &amp;lt;select id=&quot;findByCondition&quot; parameterType=&quot;user&quot; resultMap=&quot;userMap&quot;&amp;gt;        select * from user        &amp;lt;where&amp;gt;            &amp;lt;if tes">
+<meta name="twitter:description" content="Mybatis动态sql具体看Mybatis官网教程 123456789101112&amp;lt;!--根据传入的具体内容查找--&amp;gt;    &amp;lt;select id=&quot;findByCondition&quot; parameterType=&quot;user&quot; resultMap=&quot;userMap&quot;&amp;gt;        select * from user        &amp;lt;where&amp;gt;">
 
 
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/框架学习/" itemprop="url" rel="index">
-                    <span itemprop="name">框架学习</span>
+                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">Mybatis</span>
                   </a>
                 </span>
 
@@ -352,7 +352,8 @@
       
 
       
-        <h1 id="Mybatis动态sql"><a href="#Mybatis动态sql" class="headerlink" title="Mybatis动态sql"></a>Mybatis动态sql</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--根据传入的具体内容查找--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findByCondition"</span> <span class="attr">parameterType</span>=<span class="string">"user"</span> <span class="attr">resultMap</span>=<span class="string">"userMap"</span>&gt;</span></span><br><span class="line">        select * from user</span><br><span class="line">        <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"username != null"</span>&gt;</span></span><br><span class="line">                and username = #&#123;username&#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"sex != null"</span>&gt;</span></span><br><span class="line">                and sex = #&#123;sex&#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        <h1 id="Mybatis动态sql"><a href="#Mybatis动态sql" class="headerlink" title="Mybatis动态sql"></a>Mybatis动态sql</h1><p>具体看Mybatis官网教程</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--根据传入的具体内容查找--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findByCondition"</span> <span class="attr">parameterType</span>=<span class="string">"user"</span> <span class="attr">resultMap</span>=<span class="string">"userMap"</span>&gt;</span></span><br><span class="line">        select * from user</span><br><span class="line">        <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"username != null"</span>&gt;</span></span><br><span class="line">                and username = #&#123;username&#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"sex != null"</span>&gt;</span></span><br><span class="line">                and sex = #&#123;sex&#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">&lt;!--根据QueryVo中的ids集合查询用户--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findUserInIds"</span> <span class="attr">parameterType</span>=<span class="string">"queryvo"</span> <span class="attr">resultMap</span>=<span class="string">"userMap"</span>&gt;</span></span><br><span class="line">    select * from user</span><br><span class="line">    <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"ids !=null and ids.size&gt;0"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"ids"</span> <span class="attr">open</span>=<span class="string">"and id in("</span> <span class="attr">close</span>=<span class="string">")"</span> <span class="attr">item</span>=<span class="string">"id"</span> <span class="attr">separator</span>=<span class="string">","</span>&gt;</span></span><br><span class="line">              #&#123;id&#125;</span><br><span class="line">          <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -395,6 +396,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/01/框架学习/Mybatis/06_Mybatis表之间的关系/" rel="prev" title="06_Mybatis表之间的关系">
+                06_Mybatis表之间的关系 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -473,7 +478,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">63</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -484,7 +489,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -495,7 +500,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
