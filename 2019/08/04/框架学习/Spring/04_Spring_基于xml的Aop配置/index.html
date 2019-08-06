@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="04_Spring_基于xml的Aop配置为什么要使用？代替了代理模式，提供增强方法 实现步骤maven依赖中加入aspectjweaver用来解析切入点表达式 12345678910111213141516171819202122232425&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;    &amp;lt;project xmlns=&quot;http://mave">
+<meta name="description" content="Spring_基于xml的Aop配置为什么要使用？代替了代理模式，提供增强方法 实现步骤maven依赖中加入aspectjweaver用来解析切入点表达式 12345678910111213141516171819202122232425&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;    &amp;lt;project xmlns=&quot;http://maven.a">
 <meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="04_Spring_基于xml的Aop配置">
 <meta property="og:url" content="http://yoursite.com/2019/08/04/框架学习/Spring/04_Spring_基于xml的Aop配置/index.html">
 <meta property="og:site_name" content="倪翔宇的博客">
-<meta property="og:description" content="04_Spring_基于xml的Aop配置为什么要使用？代替了代理模式，提供增强方法 实现步骤maven依赖中加入aspectjweaver用来解析切入点表达式 12345678910111213141516171819202122232425&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;    &amp;lt;project xmlns=&quot;http://mave">
+<meta property="og:description" content="Spring_基于xml的Aop配置为什么要使用？代替了代理模式，提供增强方法 实现步骤maven依赖中加入aspectjweaver用来解析切入点表达式 12345678910111213141516171819202122232425&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;    &amp;lt;project xmlns=&quot;http://maven.a">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/Img/1564918586277.png">
-<meta property="og:updated_time" content="2019-08-04T11:58:02.980Z">
+<meta property="og:updated_time" content="2019-08-06T05:01:34.499Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="04_Spring_基于xml的Aop配置">
-<meta name="twitter:description" content="04_Spring_基于xml的Aop配置为什么要使用？代替了代理模式，提供增强方法 实现步骤maven依赖中加入aspectjweaver用来解析切入点表达式 12345678910111213141516171819202122232425&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;    &amp;lt;project xmlns=&quot;http://mave">
+<meta name="twitter:description" content="Spring_基于xml的Aop配置为什么要使用？代替了代理模式，提供增强方法 实现步骤maven依赖中加入aspectjweaver用来解析切入点表达式 12345678910111213141516171819202122232425&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;    &amp;lt;project xmlns=&quot;http://maven.a">
 <meta name="twitter:image" content="http://yoursite.com/Img/1564918586277.png">
 
 
@@ -354,7 +354,7 @@
       
 
       
-        <h1 id="04-Spring-基于xml的Aop配置"><a href="#04-Spring-基于xml的Aop配置" class="headerlink" title="04_Spring_基于xml的Aop配置"></a>04_Spring_基于xml的Aop配置</h1><h2 id="为什么要使用？"><a href="#为什么要使用？" class="headerlink" title="为什么要使用？"></a>为什么要使用？</h2><p>代替了代理模式，提供增强方法</p>
+        <h1 id="Spring-基于xml的Aop配置"><a href="#Spring-基于xml的Aop配置" class="headerlink" title="Spring_基于xml的Aop配置"></a>Spring_基于xml的Aop配置</h1><h2 id="为什么要使用？"><a href="#为什么要使用？" class="headerlink" title="为什么要使用？"></a>为什么要使用？</h2><p>代替了代理模式，提供增强方法</p>
 <h2 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h2><p>maven依赖中加入aspectjweaver用来解析切入点表达式</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">             <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">             <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.itheima<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>day03_eesy_03SpringAop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>jar<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.0.2.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.aspectj<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aspectjweaver<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.8.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -497,7 +497,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-count">73</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -508,7 +508,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -519,7 +519,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -562,7 +562,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#04-Spring-基于xml的Aop配置"><span class="nav-number">1.</span> <span class="nav-text">04_Spring_基于xml的Aop配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要使用？"><span class="nav-number">1.1.</span> <span class="nav-text">为什么要使用？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现步骤"><span class="nav-number">1.2.</span> <span class="nav-text">实现步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四种通知类型和环绕通知"><span class="nav-number">1.3.</span> <span class="nav-text">四种通知类型和环绕通知</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环绕通知"><span class="nav-number">1.4.</span> <span class="nav-text">环绕通知</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-基于xml的Aop配置"><span class="nav-number">1.</span> <span class="nav-text">Spring_基于xml的Aop配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要使用？"><span class="nav-number">1.1.</span> <span class="nav-text">为什么要使用？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现步骤"><span class="nav-number">1.2.</span> <span class="nav-text">实现步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四种通知类型和环绕通知"><span class="nav-number">1.3.</span> <span class="nav-text">四种通知类型和环绕通知</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环绕通知"><span class="nav-number">1.4.</span> <span class="nav-text">环绕通知</span></a></li></ol></li></ol></div>
             
 
           </div>
