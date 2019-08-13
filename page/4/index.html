@@ -262,6 +262,376 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/30/设计模式/工厂模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/30/设计模式/工厂模式/" itemprop="url">工厂模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-30T12:28:01+08:00">
+                2019-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h1><p>工厂模式的实现方式和原理都不难理解和掌握。但是，在学习完之后，发现网上给的例子，根本体现不了工厂模式的作用。先不说存在有的例子本身就是错误的，主要是例子中的代码太简单，可以说没必要用工厂模式，只不过是为了说明实现方式和原理。所以，会产生一种错觉：还不如直接new 一个对象来的方便，有效。</p>
+<p>的确，设计模式本身就有其适用的场景，并不是滥用的，否则还不如不用。</p>
+<p>现在，我记录一下在翻阅一些资料后，自己的理解。</p>
+<p>首先，工厂模式是为了解耦：把对象的创建和使用的过程分开。就是Class A 想调用 Class B ，那么A只是调用B的方法，而至于B的实例化，就交给工厂类。</p>
+<p>其次，工厂模式可以降低代码重复。如果创建对象B的过程都很复杂，需要一定的代码量，而且很多地方都要用到，那么就会有很多的重复代码。我们可以这些创建对象B的代码放到工厂里统一管理。既减少了重复代码，也方便以后对B的创建过程的修改维护。（当然，我个人觉得也可以把这些创建过程的代码放到类的构造函数里，同样可以降低重复率，而且构造函数本身的作用也是初始化对象。不过，这样也会导致构造函数过于复杂，做的事太多，不符合java 的设计原则。）</p>
+<p>由于创建过程都由工厂统一管理，所以发生业务逻辑变化，不需要找到所有需要创建B的地方去逐个修正，只需要在工厂里修改即可，降低维护成本。同理，想把所有调用B的地方改成B的子类B1，只需要在对应生产B的工厂中或者工厂的方法中修改其生产的对象为B1即可，而不需要找到所有的new B（）改为new B1()。</p>
+<p>另外，因为工厂管理了对象的创建逻辑，使用者并不需要知道具体的创建过程，只管使用即可，减少了使用者因为创建逻辑导致的错误。</p>
+<p>举个例子：</p>
+<p>一个数据库工厂：可以返回一个数据库实例，可以是mysql，oracle等。</p>
+<p>这个工厂就可以把数据库连接需要的用户名，地址，密码等封装好，直接返回对应的数据库对象就好。不需要调用者自己初始化，减少了写错密码等等这些错误。调用者只负责使用，不需要管怎么去创建、初始化对象。</p>
+<p>还有，如果一个类有多个构造方法（构造的重写），我们也可以将它抽出来，放到工厂中，一个构造方法对应一个工厂方法并命名一个友好的名字，这样我们就不再只是根据参数的不同来判断，而是可以根据工厂的方法名来直观判断将要创建的对象的特点。这对于使用者来说，体验比较好。</p>
+<p>工厂模式适用的一些场景（不仅限于以下场景）：</p>
+<ol>
+<li>对象的创建过程/实例化准备工作很复杂，需要初始化很多参数、查询数据库等。</li>
+<li>类本身有好多子类，这些类的创建过程在业务中容易发生改变，或者对类的调用容易发生改变。</li>
+</ol>
+<p>参考博客： <a href="https://blog.csdn.net/fmyzc/article/details/79614944" target="_blank" rel="noopener">https://blog.csdn.net/fmyzc/article/details/79614944</a></p>
+<p>​         抽象工厂看下面的博客</p>
+<p>​       <a href="https://zhuanlan.zhihu.com/p/37095996" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/37095996</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/29/设计模式/代理模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/29/设计模式/代理模式/" itemprop="url">代理模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-29T15:28:01+08:00">
+                2019-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h1><p>简单来说代理模式，就是我们日常生活中的代理商模式。代理模式一般有三元素：共同接口，真实对象（厂家），代理对象（代理商）。</p>
+<p>比方说我们需要向厂家买一些商品，但是这些商品是固定好的，而我们有一些特别的需求，厂家不能统一给我们制作。所有我们需要向代理商去买，他那里有定制商品，代理商也是从厂家进货，但是他经过了一系列的处理。</p>
+<p>下面通过图片展示一下：</p>
+<p><img src="/Img/1563636026934.png" alt="1563636026934"></p>
+<h3 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h3><p>程序员编写源码，再进行编译，是在程序运行前，就已经编译号的。</p>
+<ol>
+<li><p>共同接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SaleComputer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sale</span><span class="params">(<span class="keyword">double</span> money)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>真实对象(厂家)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.proxy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 真实类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Lenovo</span> <span class="keyword">implements</span> <span class="title">SaleComputer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sale</span><span class="params">(<span class="keyword">double</span> money)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"花了"</span>+money+<span class="string">"元买了联想电脑"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"联想电脑"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"展示电脑。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>代理对象(代理商)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Proxy</span> <span class="keyword">implements</span> <span class="title">SaleComputer</span> </span>&#123;</span><br><span class="line">   <span class="comment">//声明真实对象</span></span><br><span class="line">    <span class="keyword">private</span> SaleComputer realObject;</span><br><span class="line"> 	<span class="comment">//构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Proxy</span><span class="params">(SaleComputer realObject)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.realObject = realObject;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//实现接口的方法</span></span><br><span class="line">    <span class="comment">//调用真实对象的构造函数，并且进行一些修改</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sale</span><span class="params">(<span class="keyword">double</span> money)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//打八五折</span></span><br><span class="line">        money = money *<span class="number">0.85</span>;</span><br><span class="line">        <span class="comment">//然后调用真实对象的方法，进货</span></span><br><span class="line">        <span class="keyword">return</span> realObject.sale(money);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//new一个代理商，参数传递的是一个真实对象</span></span><br><span class="line">   Proxy proxy = <span class="keyword">new</span> Proxy(<span class="keyword">new</span> Lenovo());</span><br><span class="line"><span class="comment">//调用代理商的方法，代理商会调用真实对象的方法</span></span><br><span class="line">   String computer=proxy.sale(<span class="number">8000</span>);</span><br><span class="line">System.out.println(computer);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<p>优点：扩展原有功能，不用修改真实类的代码</p>
+<p>缺点：如果说有个需求，需要10个真实对象，对应要写10个代理对象，然后一个个调用。会很麻烦，不够灵活。</p>
+<p>所以要用到动态代理。</p>
+<h3 id="动态代理（JDK代理）"><a href="#动态代理（JDK代理）" class="headerlink" title="动态代理（JDK代理）"></a>动态代理（JDK代理）</h3><p>在程序运行时，通过反射机制动态创建的</p>
+<h4 id="实现步骤："><a href="#实现步骤：" class="headerlink" title="实现步骤："></a>实现步骤：</h4><ol>
+<li>代理对象和真实对象实现相同的接口</li>
+<li>代理对象=Proxy.newProxyInstance();</li>
+<li>使用代理对象调用方法</li>
+<li>增强方法<ul>
+<li>增强参数列表（修改参数列表，打折之类的）</li>
+<li>增强方法体执行逻辑（送货啊，上门服务）</li>
+<li>增强返回值类型（买电脑送鼠标）</li>
+</ul>
+</li>
+</ol>
+<p>SaleComputer接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SaleComputer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sale</span><span class="params">(<span class="keyword">double</span> money)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>真实类类实现接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 真实类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Lenovo</span> <span class="keyword">implements</span> <span class="title">SaleComputer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sale</span><span class="params">(<span class="keyword">double</span> money)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"花了"</span>+money+<span class="string">"元买了联想电脑"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"联想电脑"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"展示电脑。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代理类实现InvocationHandler接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.proxy;</span><br><span class="line"></span><br><span class="line">import java.lang.reflect.InvocationHandler;</span><br><span class="line">import java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line">public class LenovoProxy implements InvocationHandler &#123;</span><br><span class="line">    //目标对象</span><br><span class="line">    private Object target;</span><br><span class="line"></span><br><span class="line">    //构造函数</span><br><span class="line">    public LenovoProxy(Object target) &#123;</span><br><span class="line">        this.target = target;</span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;</span><br><span class="line">        //代理扩展逻辑</span><br><span class="line">        //判断是否是sale方法</span><br><span class="line">        if (method.getName().equals(&quot;sale&quot;)) &#123;</span><br><span class="line">            //1.增强参数</span><br><span class="line">            //获取了传递过来的参数</span><br><span class="line">            double money = (double) args[0];</span><br><span class="line">            //打了八折</span><br><span class="line">            money = money * 0.85;</span><br><span class="line">            //调用真实对象的method方法</span><br><span class="line">            String obj = (String)method.invoke(target, money);</span><br><span class="line">            //2.增强逻辑</span><br><span class="line">            System.out.println(&quot;免费送货。。。&quot;);</span><br><span class="line">            //3.增强返回值</span><br><span class="line">            return obj+&quot;送了鼠标垫&quot;;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            //调用真实对象的method方法</span><br><span class="line">            Object obj = method.invoke(target, args[0]);</span><br><span class="line">            //代理对象调用方法后的返回值</span><br><span class="line">            return obj;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyTest1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//我们要代理的真实的对象</span></span><br><span class="line">        Lenovo lenovo = <span class="keyword">new</span> Lenovo();</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">            调用Proxy类的newProxyInstance</span></span><br><span class="line"><span class="comment">            第一个参数是目标类的构造器</span></span><br><span class="line"><span class="comment">            第二个参数是目标类的接口</span></span><br><span class="line"><span class="comment">            第三个参数是代理类的接口，这里需要传参，为了传递给代理类，在代理类的invoke方法中添加业务代码</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        SaleComputer lenove_proxy = (SaleComputer) 		Proxy.newProxyInstance(lenovo.getClass().getClassLoader()</span><br><span class="line">                , lenovo.getClass().getInterfaces(), (InvocationHandler) <span class="keyword">new</span> LenovoProxy(lenovo));</span><br><span class="line">        <span class="comment">//调用的是代理类的方法</span></span><br><span class="line">        lenove_proxy.sale(<span class="number">8000</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>参考：<a href="https://www.zhihu.com/question/20794107" target="_blank" rel="noopener">https://www.zhihu.com/question/20794107</a></p>
+<p>这里主要用的是匿名内部类的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//1.创建真实对象</span></span><br><span class="line">        Lenovo lenovo = <span class="keyword">new</span> Lenovo();</span><br><span class="line">        <span class="comment">//2.动态代理怎增强lenovo对象</span></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 三个参数：</span></span><br><span class="line"><span class="comment">         *    1.真实类的类加载器</span></span><br><span class="line"><span class="comment">         *    2.接口数组</span></span><br><span class="line"><span class="comment">         *    3.处理器</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        SaleComputer proxy_lenovo = (SaleComputer) Proxy.newProxyInstance(Lenovo.class.getClassLoader(), Lenovo.class.getInterfaces(), <span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">                 代理逻辑编写的方法：代理对象调用的所有方法都会执行该方法</span></span><br><span class="line"><span class="comment">                    参数：</span></span><br><span class="line"><span class="comment">                        1.proxy 代理对象   这里指的是上面的proxy_lenovo</span></span><br><span class="line"><span class="comment">                        2.method:代理对象调用的方法，被封装成对象     调用什么方法，method就是什么</span></span><br><span class="line"><span class="comment">                        3.args：代理对象调用的方法时，传递的实际参数数组    args[0]就是8000</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                <span class="comment">//代理扩展逻辑</span></span><br><span class="line">                <span class="comment">//判断是否是sale方法</span></span><br><span class="line">                <span class="keyword">if</span> (method.getName().equals(<span class="string">"sale"</span>)) &#123;</span><br><span class="line">                    <span class="comment">//1.增强参数</span></span><br><span class="line">                    <span class="comment">//获取了传递过来的参数</span></span><br><span class="line">                    <span class="keyword">double</span> money = (<span class="keyword">double</span>) args[<span class="number">0</span>];</span><br><span class="line">                    <span class="comment">//打了八折</span></span><br><span class="line">                    money = money * <span class="number">0.85</span>;</span><br><span class="line">                    <span class="comment">//调用真实对象的method方法</span></span><br><span class="line">                    String obj = (String)method.invoke(lenovo, money);</span><br><span class="line">                    <span class="comment">//2.增强逻辑</span></span><br><span class="line">                    System.out.println(<span class="string">"免费送货。。。"</span>);</span><br><span class="line">                    <span class="comment">//3.增强返回值</span></span><br><span class="line">                    <span class="keyword">return</span> obj+<span class="string">"送了鼠标垫"</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">//调用真实对象的method方法</span></span><br><span class="line">                    Object obj = method.invoke(lenovo, args[<span class="number">0</span>]);</span><br><span class="line">                    <span class="comment">//代理对象调用方法后的返回值</span></span><br><span class="line">                    <span class="keyword">return</span> obj;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//2.调用方法</span></span><br><span class="line">        String computer = proxy_lenovo.sale(<span class="number">8000</span>);</span><br><span class="line">        System.out.println(computer);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="cglib代理"><a href="#cglib代理" class="headerlink" title="cglib代理"></a>cglib代理</h3><p>导入jar包：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cglib<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cglib<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1_3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>消费者：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.cglib;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> net.sf.cglib.proxy.Enhancer;</span><br><span class="line"><span class="keyword">import</span> net.sf.cglib.proxy.MethodInterceptor;</span><br><span class="line"><span class="keyword">import</span> net.sf.cglib.proxy.MethodProxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 模拟一个消费者</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Producer producer = <span class="keyword">new</span> Producer();</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 动态代理：</span></span><br><span class="line"><span class="comment">         *  特点：字节码随用随创建，随用随加载</span></span><br><span class="line"><span class="comment">         *  作用：不修改源码的基础上对方法增强</span></span><br><span class="line"><span class="comment">         *  分类：</span></span><br><span class="line"><span class="comment">         *      基于接口的动态代理</span></span><br><span class="line"><span class="comment">         *      基于子类的动态代理</span></span><br><span class="line"><span class="comment">         *  基于子类的动态代理：</span></span><br><span class="line"><span class="comment">         *      涉及的类：Enhancer</span></span><br><span class="line"><span class="comment">         *      提供者：第三方cglib库</span></span><br><span class="line"><span class="comment">         *  如何创建代理对象：</span></span><br><span class="line"><span class="comment">         *      使用Enhancer类中的create方法</span></span><br><span class="line"><span class="comment">         *  创建代理对象的要求：</span></span><br><span class="line"><span class="comment">         *      被代理类不能是最终类</span></span><br><span class="line"><span class="comment">         *  create方法的参数：</span></span><br><span class="line"><span class="comment">         *      Class：字节码</span></span><br><span class="line"><span class="comment">         *          它是用于指定被代理对象的字节码。</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         *      Callback：用于提供增强的代码</span></span><br><span class="line"><span class="comment">         *          它是让我们写如何代理。我们一般都是些一个该接口的实现类，通常情况下都是匿名内部类，但不是必须的。</span></span><br><span class="line"><span class="comment">         *          此接口的实现类都是谁用谁写。</span></span><br><span class="line"><span class="comment">         *          我们一般写的都是该接口的子接口实现类：MethodInterceptor</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        Producer cglibProducer = (Producer)Enhancer.create(producer.getClass(), <span class="keyword">new</span> MethodInterceptor() &#123;</span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * 执行北地阿里对象的任何方法都会经过该方法</span></span><br><span class="line"><span class="comment">             * <span class="doctag">@param</span> proxy</span></span><br><span class="line"><span class="comment">             * <span class="doctag">@param</span> method</span></span><br><span class="line"><span class="comment">             * <span class="doctag">@param</span> args</span></span><br><span class="line"><span class="comment">             *    以上三个参数和基于接口的动态代理中invoke方法的参数是一样的</span></span><br><span class="line"><span class="comment">             * <span class="doctag">@param</span> methodProxy ：当前执行方法的代理对象</span></span><br><span class="line"><span class="comment">             * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">             * <span class="doctag">@throws</span> Throwable</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object proxy, Method method, Object[] args, MethodProxy methodProxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                <span class="comment">//提供增强的代码</span></span><br><span class="line">                Object returnValue = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//1.获取方法执行的参数</span></span><br><span class="line">                Float money = (Float)args[<span class="number">0</span>];</span><br><span class="line">                <span class="comment">//2.判断当前方法是不是销售</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="string">"saleProduct"</span>.equals(method.getName())) &#123;</span><br><span class="line">                    returnValue = method.invoke(producer, money*<span class="number">0.8f</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> returnValue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        cglibProducer.saleProduct(<span class="number">12000f</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>生产者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.cglib;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 一个生产者</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Producer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 销售</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> money</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saleProduct</span><span class="params">(<span class="keyword">float</span> money)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"销售产品，并拿到钱："</span>+money);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 售后</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> money</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterService</span><span class="params">(<span class="keyword">float</span> money)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"提供售后服务，并拿到钱："</span>+money);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试类</p>
+<p>推荐博客：<a href="https://www.cnblogs.com/xdp-gacl/p/3971367.html" target="_blank" rel="noopener">https://www.cnblogs.com/xdp-gacl/p/3971367.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/29/框架学习/Mybatis/01_Mybatis入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2020,534 +2390,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/22/J2EE笔记/20_JQuery框架/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪翔宇的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/22/J2EE笔记/20_JQuery框架/" itemprop="url">20_JQuery框架</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-22T10:28:01+08:00">
-                2019-07-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/J2EE笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">J2EE笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="JQuery基础"><a href="#JQuery基础" class="headerlink" title="JQuery基础"></a>JQuery基础</h1><p>JQuery是一个快速简洁的JavaScrip的框架</p>
-<h2 id="一、步骤"><a href="#一、步骤" class="headerlink" title="一、步骤"></a>一、步骤</h2><ol>
-<li><p>下载JQuery</p>
-<p>jquery-xxx.js:开放版本。给程序员看的，有缩紧，有注释</p>
-<p>jquery-xxx.min.js:生产版本。没有缩紧，体积小</p>
-</li>
-<li><p>导包</p>
-</li>
-<li><p>使用</p>
-</li>
-</ol>
-<h2 id="二、简单使用"><a href="#二、简单使用" class="headerlink" title="二、简单使用"></a>二、简单使用</h2><h3 id="JQuery对象和js对象相互转换"><a href="#JQuery对象和js对象相互转换" class="headerlink" title="JQuery对象和js对象相互转换"></a>JQuery对象和js对象相互转换</h3><p>jq –&gt;js  ：jq对象[索引] 或者jq对象.get(索引)</p>
-<p>js –&gt;jq :  $(js对象)</p>
-<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><ol>
-<li>事件绑定</li>
-<li>入口函数</li>
-<li>样式控制</li>
-</ol>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>事件绑定<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/jquery-3.3.1.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 给b1按钮添加单击事件</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">// window.onload = function () &#123;</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">//     $("#b1").click(function () &#123;</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">//         alert("abc");</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">//     &#125;)</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">// &#125;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="comment">//jquery入口函数(dom文档加载完成后执行该函数)</span></span></span><br><span class="line"><span class="javascript">        $(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="comment">//1.获取bq按钮</span></span></span><br><span class="line"><span class="javascript">            $(<span class="string">"#b1"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                alert(<span class="string">"abc"</span>);</span></span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line"><span class="javascript">        $(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="comment">// $("#div1").css("background-color", "red");</span></span></span><br><span class="line"><span class="javascript">            $(<span class="string">"#div1"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"red"</span>);</span></span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line"><span class="javascript">         * <span class="built_in">window</span>.onload和$(<span class="function"><span class="keyword">function</span>)区别</span></span></span><br><span class="line"><span class="javascript">         *  <span class="built_in">window</span>.onload只能定义一次</span></span><br><span class="line">         */</span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span>&gt;</span>div1...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div2"</span>&gt;</span>div2...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"点我"</span> <span class="attr">id</span>=<span class="string">"b1"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><h4 id="基本选择器"><a href="#基本选择器" class="headerlink" title="基本选择器"></a>基本选择器</h4><pre><code>1. 标签选择器（元素选择器）
-    * 语法： $(&quot;html标签名&quot;) 获得所有匹配标签名称的元素
-2. id选择器 </code></pre><ul>
-<li>语法： $(“#id的属性值”) 获得与指定id属性值匹配的元素<pre><code>3. 类选择器</code></pre></li>
-<li>语法： $(“.class的属性值”) 获得与指定的class属性值匹配的元素<pre><code>4. 并集选择器：</code></pre></li>
-<li>语法： $(“选择器1,选择器2….”) 获取多个选择器选中的所有元素</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(function () &#123;</span><br><span class="line">        <span class="comment">// &lt;input type="button" value="改变 id 为 one 的元素的背景色为 红色"  id="b1"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b1"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"#one"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line"></span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// &lt;input type="button" value=" 改变元素名为 &lt;div&gt; 的所有元素的背景色为 红色"  					id="b2"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b2"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"div"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// &lt;input type="button" value=" 改变 class 为 mini 的所有元素的背景色为 红色"  				id="b3"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b3"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">".mini"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// &lt;input type="button" value=" 改变所有的&lt;span&gt;元素和 id 为 two 的元素的背景色为红				色"  id="b4"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b4"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"span,#two"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="层选择器"><a href="#层选择器" class="headerlink" title="层选择器"></a>层选择器</h4><ol>
-<li>后代选择器<pre><code>* 语法： $(&quot;A B &quot;) 选择A元素内部的所有B元素        </code></pre></li>
-<li>子选择器<ul>
-<li>语法： $(“A &gt; B”) 选择A元素内部的所有B子元素</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> &lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(function () &#123;</span><br><span class="line">        <span class="comment">// &lt;input type="button" value=" 改变 &lt;body&gt; 内所有 &lt;div&gt; 的背景色为红色"  					id="b1"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b1"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"body div"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>属性选择器</p>
-<ol>
-<li>属性名称选择器 <pre><code>* 语法： $(&quot;A[属性名]&quot;) 包含指定属性的选择器</code></pre></li>
-<li>属性选择器<ul>
-<li>语法： $(“A[属性名=’值’]”) 包含指定属性等于指定值的选择器</li>
-</ul>
-</li>
-<li>复合属性选择器<ul>
-<li>语法： $(“A[属性名=’值’][]…”) 包含多个属性条件的选择器</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">     $(function () &#123;</span><br><span class="line">         <span class="comment">// &lt;input type="button" value=" 含有属性title 的div元素背景色为红色"  id="b1"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b1"</span>).click(function () &#123;</span><br><span class="line">             $(<span class="string">"div[title]"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">         <span class="comment">// &lt;input type="button" value=" 属性title值等于test的div元素背景色为红色"  					id="b2"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b2"</span>).click(function () &#123;</span><br><span class="line">             $(<span class="string">"div[title='test']"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">         &#125;)</span><br><span class="line"></span><br><span class="line">         <span class="comment">// &lt;input type="button" value=" 属性title值不等于test的div元素(没有属性title的也将					被选中)背景色为红色"  id="b3"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b3"</span>).click(function () &#123;</span><br><span class="line">             $(<span class="string">"div[title !='test']"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">         <span class="comment">// &lt;input type="button" value=" 属性title值 以te开始 的div元素背景色为红色"  					id="b4"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b4"</span>).click(function () &#123;</span><br><span class="line">             $(<span class="string">"div[title ^='te']"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">         <span class="comment">// &lt;input type="button" value=" 属性title值 以est结束 的div元素背景色为红色"  				id="b5"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b5"</span>).click(function () &#123;</span><br><span class="line">             $(<span class="string">"div[title $='est']"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">         <span class="comment">// &lt;input type="button" value="属性title值 含有es的div元素背景色为红色"  						id="b6"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b6"</span>).click(function () &#123;</span><br><span class="line">             $(<span class="string">"div[title *='es']"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">         <span class="comment">// &lt;input type="button" value="选取有属性id的div元素，然后在结果中选取属性title值含					有“es”的 div 元素背景色为红色"  id="b7"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b7"</span>).click(function () &#123;</span><br><span class="line">             $(<span class="string">"div[id][title *='es']"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">     &#125;);</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="过滤选择器"><a href="#过滤选择器" class="headerlink" title="过滤选择器"></a>过滤选择器</h4><ol>
-<li>首元素选择器 <pre><code>* 语法： :first 获得选择的元素中的第一个元素</code></pre></li>
-<li>尾元素选择器 <ul>
-<li>语法： :last 获得选择的元素中的最后一个元素</li>
-</ul>
-</li>
-<li>非元素选择器<ul>
-<li>语法： :not(selector) 不包括指定内容的元素</li>
-</ul>
-</li>
-<li>偶数选择器<ul>
-<li>语法： :even 偶数，从 0 开始计数</li>
-</ul>
-</li>
-<li>奇数选择器<ul>
-<li>语法： :odd 奇数，从 0 开始计数</li>
-</ul>
-</li>
-<li>等于索引选择器<ul>
-<li>语法： :eq(index) 指定索引元素</li>
-</ul>
-</li>
-<li>大于索引选择器 <ul>
-<li>语法： :gt(index) 大于指定索引元素</li>
-</ul>
-</li>
-<li>小于索引选择器 <ul>
-<li>语法： :lt(index) 小于指定索引元素</li>
-</ul>
-</li>
-<li>标题选择器<ul>
-<li>语法： :header 获得标题（h1~h6）元素，固定写法</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(function () &#123;</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 改变第一个 div 元素的背景色为 红色"  id="b1"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b1"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"div:first"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 改变最后一个 div 元素的背景色为 红色"  id="b2"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b2"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"div:last"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 改变class不为 one 的所有 div 元素的背景色为 红色"  				id="b3"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b3"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"div:not(.one)"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 改变索引值为偶数的 div 元素的背景色为 红色"  					id="b4"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b4"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"div:even"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 改变索引值为奇数的 div 元素的背景色为 红色"  					id="b5"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b5"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"div:odd"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 改变索引值为大于 3 的 div 元素的背景色为 红色"  					id="b6"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b6"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"div:gt(3)"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 改变索引值为等于 3 的 div 元素的背景色为 红色"  					id="b7"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b7"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"div:eq(3)"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 改变索引值为小于 3 的 div 元素的背景色为 红色"  					id="b8"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b8"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"div:lt(3)"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 改变所有的标题元素的背景色为 红色"  id="b9"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b9"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">":header"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;);			</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="表单过滤选择器"><a href="#表单过滤选择器" class="headerlink" title="表单过滤选择器"></a>表单过滤选择器</h4><ol>
-<li>可用元素选择器 <ul>
-<li>语法： :enabled 获得可用元素</li>
-</ul>
-</li>
-<li>不可用元素选择器 <ul>
-<li>语法： :disabled 获得不可用元素</li>
-</ul>
-</li>
-<li>选中选择器 <ul>
-<li>语法： :checked 获得单选/复选框选中的元素</li>
-</ul>
-</li>
-<li>选中选择器 <ul>
-<li>语法： :selected 获得下拉框选中的元素</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(function () &#123;</span><br><span class="line">        <span class="comment">// &lt;input type="button" value=" 利用 jQuery 对象的 val() 方法改变表单内可用 &lt;input&gt; 元				素的值"  id="b1"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b1"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"input[type='text']:enabled"</span>).val(<span class="string">"aaa"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 利用 jQuery 对象的 val() 方法改变表单内不可用 &lt;input&gt; 			元素的值"  id="b2"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b2"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"input[type='text']:disabled"</span>).val(<span class="string">"aaa"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 利用 jQuery 对象的 length 属性获取复选框选中的个数"  			id="b3"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b3"</span>).click(function () &#123;</span><br><span class="line">            alert($(<span class="string">"input[type='checkbox']:checked"</span>).length);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">// 	&lt;input type="button" value=" 利用 jQuery 对象的 length 属性获取下拉框选中的个数"  			id="b4"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b4"</span>).click(function () &#123;</span><br><span class="line">            alert($(<span class="string">"#job&gt;option:selected"</span>).length);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="DOM操作"><a href="#DOM操作" class="headerlink" title="DOM操作"></a>DOM操作</h3><h4 id="内容操作"><a href="#内容操作" class="headerlink" title="内容操作"></a>内容操作</h4><ol>
-<li>html(): 获取/设置元素的标签体内容   <a><font>内容</font></a>  –&gt; <font>内容</font></li>
-<li>text(): 获取/设置元素的标签体纯文本内容   <a><font>内容</font></a> –&gt; 内容</li>
-<li>val()： 获取/设置元素的value属性值</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    $(function () &#123;</span><br><span class="line">        <span class="comment">// 获取myinput 的value值</span></span><br><span class="line">        <span class="keyword">var</span> value = $(<span class="string">"#myinput"</span>).val();</span><br><span class="line">        alert(value)</span><br><span class="line">        $(<span class="string">"#myinput"</span>).val(<span class="string">"刘猪猪"</span>);</span><br><span class="line">        <span class="comment">// 获取mydiv的标签体内容</span></span><br><span class="line">        <span class="keyword">var</span> html = $(<span class="string">"#mydiv"</span>).html();</span><br><span class="line">        alert(html);</span><br><span class="line">        <span class="comment">// $("#mydiv").html("&lt;p&gt;aaa&lt;/p&gt;")</span></span><br><span class="line">        <span class="comment">// 获取mydiv文本内容</span></span><br><span class="line">        <span class="keyword">var</span> text = $(<span class="string">"#mydiv"</span>).text();</span><br><span class="line">        alert(text);</span><br><span class="line">        $(<span class="string">"#mydiv"</span>).text(<span class="string">"bbb"</span>)</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="属性操作"><a href="#属性操作" class="headerlink" title="属性操作"></a>属性操作</h4><ol>
-<li><p>通用属性操作</p>
-<ol>
-<li><p>attr(): 获取/设置元素的属性</p>
-</li>
-<li><p>removeAttr():删除属性</p>
-</li>
-<li><p>prop():获取/设置元素的属性</p>
-</li>
-<li><p>removeProp():删除属性</p>
-<p>attr和prop区别？</p>
-<pre><code>1. 如果操作的是元素的固有属性，则建议使用prop
-   2. 如果操作的是元素自定义的属性，则建议使用attr</code></pre></li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(function () &#123;</span><br><span class="line">        <span class="comment">//获取北京节点的name属性值</span></span><br><span class="line">        <span class="keyword">var</span> name = $(<span class="string">"#bj"</span>).attr(<span class="string">"name"</span>);</span><br><span class="line">        alert(name);</span><br><span class="line">        <span class="comment">//设置北京节点的name属性的值为dabeijing</span></span><br><span class="line">        $(<span class="string">"#bj"</span>).attr(<span class="string">"name"</span>, <span class="string">"dabeijing"</span>);</span><br><span class="line">        <span class="comment">//新增北京节点的discription属性 属性值是didu</span></span><br><span class="line">        $(<span class="string">"#bj"</span>).attr(<span class="string">"discription"</span>, <span class="string">"didu"</span>);</span><br><span class="line">        <span class="comment">//删除北京节点的name属性并检验name属性是否存在</span></span><br><span class="line">        $(<span class="string">"#bj"</span>).removeAttr(<span class="string">"name"</span>);</span><br><span class="line">        <span class="comment">//获得hobby的的选中状态</span></span><br><span class="line">        <span class="keyword">var</span> checked = $(<span class="string">"#hobby"</span>).prop(<span class="string">"checked"</span>);</span><br><span class="line">        alert(checked)</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="2">
-<li><p>对class属性操作</p>
-<ol>
-<li>addClass():添加class属性值</li>
-<li>removeClass():删除class属性值</li>
-<li>toggleClass():切换class属性<ul>
-<li>toggleClass(“one”): </li>
-<li>判断如果元素对象上存在class=”one”，则将属性值one删除掉。 如果元素对象上不存在class=”one”，则添加</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(function () &#123;</span><br><span class="line">        <span class="comment">//&lt;input type="button" value="采用属性增加样式(改变id=one的样式)"  id="b1"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b1"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"#one"</span>).prop(<span class="string">"class"</span>, <span class="string">"second"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//&lt;input type="button" value=" addClass"  id="b2"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b2"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"#one"</span>).addClass(<span class="string">"second"</span>);</span><br><span class="line"></span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//&lt;input type="button" value="removeClass"  id="b3"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b3"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"#one"</span>).removeClass(<span class="string">"second"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//&lt;input type="button" value=" 切换样式"  id="b4"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b4"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"#one"</span>).toggleClass(<span class="string">"second"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//&lt;input type="button" value=" 通过css()获得id为one背景颜色"  id="b5"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b5"</span>).click(function () &#123;</span><br><span class="line">            <span class="keyword">var</span> backgruondColor = $(<span class="string">"#one"</span>).css(<span class="string">"backgroundColor"</span>);</span><br><span class="line">            alert(backgruondColor);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//&lt;input type="button" value=" 通过css()设置id为one背景颜色为绿色"  id="b6"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b6"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"#one"</span>).css(<span class="string">"backgroundColor"</span>,<span class="string">"green"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h4 id="CRUD操作"><a href="#CRUD操作" class="headerlink" title="CRUD操作"></a>CRUD操作</h4><ol>
-<li><p>append():父元素将子元素追加到末尾</p>
-<pre><code>* 对象1.append(对象2): 将对象2添加到对象1元素内部，并且在末尾</code></pre></li>
-<li><p>prepend():父元素将子元素追加到开头</p>
-<ul>
-<li>对象1.prepend(对象2):将对象2添加到对象1元素内部，并且在开头</li>
-</ul>
-</li>
-<li><p>appendTo():</p>
-<ul>
-<li>对象1.appendTo(对象2):将对象1添加到对象2内部，并且在末尾</li>
-</ul>
-</li>
-<li><p>prependTo()：</p>
-<ul>
-<li>对象1.prependTo(对象2):将对象1添加到对象2内部，并且在开头</li>
-</ul>
-</li>
-<li><p>after():添加元素到元素后边</p>
-<pre><code>* 对象1.after(对象2)： 将对象2添加到对象1后边。对象1和对象2是兄弟关系</code></pre></li>
-<li><p>before():添加元素到元素前边</p>
-<ul>
-<li>对象1.before(对象2)： 将对象2添加到对象1前边。对象1和对象2是兄弟关系</li>
-</ul>
-</li>
-<li><p>insertAfter()</p>
-<ul>
-<li>对象1.insertAfter(对象2)：将对象2添加到对象1后边。对象1和对象2是兄弟关系</li>
-</ul>
-</li>
-<li><p>insertBefore()</p>
-<ul>
-<li>对象1.insertBefore(对象2)： 将对象2添加到对象1前边。对象1和对象2是兄弟关系</li>
-</ul>
-</li>
-<li><p>remove():移除元素</p>
-<ul>
-<li>对象.remove():将对象删除掉</li>
-</ul>
-</li>
-<li><p>empty():清空元素的所有后代元素。</p>
-<ul>
-<li>对象.empty():将对象的后代元素全部清空，但是保留当前对象以及其属性节点</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> &lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">     $(function () &#123;</span><br><span class="line">         <span class="comment">// &lt;input type="button" value="将反恐放置到city的后面"  id="b1"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b1"</span>).click(function () &#123;</span><br><span class="line">             <span class="comment">// $("#city").append($("#fk"));</span></span><br><span class="line">             $(<span class="string">"#fk"</span>).appendTo($(<span class="string">"#city"</span>));</span><br><span class="line">         &#125;);</span><br><span class="line"></span><br><span class="line">         <span class="comment">// &lt;input type="button" value="将反恐放置到city的最前面"  id="b2"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b2"</span>).click(function () &#123;</span><br><span class="line">             <span class="comment">// $("#city").prepend($("#fk"));</span></span><br><span class="line">             $(<span class="string">"#fk"</span>).prependTo($(<span class="string">"#city"</span>));</span><br><span class="line">         &#125;);</span><br><span class="line">         <span class="comment">// &lt;input type="button" value="将反恐插入到天津后面"  id="b3"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b3"</span>).click(function () &#123;</span><br><span class="line">             <span class="comment">// $("#tj").after($("#fk"));</span></span><br><span class="line">             $(<span class="string">"#fk"</span>).insertAfter($(<span class="string">"#tj"</span>));</span><br><span class="line">         &#125;);</span><br><span class="line">         <span class="comment">// &lt;input type="button" value="将反恐插入到天津前面"  id="b4"/&gt;</span></span><br><span class="line">         $(<span class="string">"#b4"</span>).click(function () &#123;</span><br><span class="line">             <span class="comment">// $("#tj").before($("#fk"));</span></span><br><span class="line">             $(<span class="string">"#fk"</span>).insertBefore()($(<span class="string">"#tj"</span>));</span><br><span class="line">         &#125;);</span><br><span class="line">     &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    $(function () &#123;</span><br><span class="line">        <span class="comment">// &lt;input type="button" value="删除&lt;li id='bj' name='beijing'&gt;北京&lt;/li&gt;"  					id="b1"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b1"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"#bj"</span>).remove();</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">// &lt;input type="button" value="删除city所有的li节点   清空元素中的所有后代节点(不包含					属性节点)"  id="b2"/&gt;</span></span><br><span class="line">        $(<span class="string">"#b1"</span>).click(function () &#123;</span><br><span class="line">            $(<span class="string">"#city"</span>).empty()</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="三、案例"><a href="#三、案例" class="headerlink" title="三、案例"></a>三、案例</h2><ol>
-<li><p>隔行换色</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//需求：将数据行的奇数行背景色设置为 pink，偶数行背景色设置为 yellow</span></span><br><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//1.获取奇数行的tr背景色设置为pink</span></span><br><span class="line">    $(<span class="string">"tr:gt(1):odd"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"pink"</span>);</span><br><span class="line">    <span class="comment">//2.获取偶数行的tr背景色设置为yellow</span></span><br><span class="line">    $(<span class="string">"tr:gt(1):even"</span>).css(<span class="string">"backgroundColor"</span>, <span class="string">"yellow"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="2">
-<li><p>全选全不选</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//需要保证下面的选中状态和第一个选中状态一致即可</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">selectAll</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//获取下边的复选框</span></span><br><span class="line">    $(<span class="string">".itemSelect"</span>).prop(<span class="string">"checked"</span>,obj.checked);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="3">
-<li><p>qq表情选择</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//需求：点击qq表情，将其追加到发言框中</span></span><br><span class="line"></span><br><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//1.给img图片添加onclick事件</span></span><br><span class="line">    $(<span class="string">"ul img"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">//2.追加到p标签中</span></span><br><span class="line">        $(<span class="string">".word"</span>).append($(<span class="keyword">this</span>).clone());</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="4">
-<li><p>多选下拉列表左右移动</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//需求：实现下拉列表选择条目左右选择功能</span></span><br><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//toRight</span></span><br><span class="line">    $(<span class="string">"#toRight"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">//获取右边的下拉列表对象，append(左边下拉列表选中的option)</span></span><br><span class="line">        $(<span class="string">"#rightName"</span>).append($(<span class="string">"#leftName &gt; option:selected"</span>));</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">//toleft</span></span><br><span class="line">    $(<span class="string">"#toLeft"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">//appendto  获取右边选中的opption，将其移动到左边下拉列表中</span></span><br><span class="line">        $(<span class="string">"#rightName &gt; option:selected"</span>).appendTo($(<span class="string">"#leftName"</span>));</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<p>day20</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/21/Java基础知识再回顾/Map集合的遍历/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪翔宇的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/21/Java基础知识再回顾/Map集合的遍历/" itemprop="url">Map集合的遍历</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-21T11:21:06+08:00">
-                2019-07-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java基础知识再回顾/" itemprop="url" rel="index">
-                    <span itemprop="name">Java基础知识再回顾</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Map集合遍历"><a href="#Map集合遍历" class="headerlink" title="Map集合遍历"></a>Map集合遍历</h1><p>这里主要介绍两种比较简单的方法：</p>
-<ol>
-<li>通过keySet()键找值</li>
-<li>通过entrySet()键值对找值</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMapDemo</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		function_1();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*	注意</span></span><br><span class="line"><span class="comment">	 *  使用HashMap集合,存储自定义的对象</span></span><br><span class="line"><span class="comment">	 *  自定义对象作为HashMap的键常出现的时候，需要重写自定义类的hashCode和equals方法</span></span><br><span class="line"><span class="comment"> 	 *  Object的 equals默认是比较地址值 </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">function_1</span><span class="params">()</span></span>&#123;</span><br><span class="line">		HashMap&lt;Person, String&gt; map = <span class="keyword">new</span> HashMap&lt;Person, String&gt;();</span><br><span class="line">		map.put(<span class="keyword">new</span> Person(<span class="string">"a"</span>,<span class="number">20</span>), <span class="string">"里约热内卢"</span>);</span><br><span class="line">		map.put(<span class="keyword">new</span> Person(<span class="string">"b"</span>,<span class="number">18</span>), <span class="string">"索马里"</span>);</span><br><span class="line">		map.put(<span class="keyword">new</span> Person(<span class="string">"b"</span>,<span class="number">18</span>), <span class="string">"索马里"</span>);</span><br><span class="line">		map.put(<span class="keyword">new</span> Person(<span class="string">"c"</span>,<span class="number">19</span>), <span class="string">"百慕大"</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 通过keySet()键找值</span></span><br><span class="line"><span class="comment">         * 1.通过map调用keySet方法获取map的所有键，存储到Set集合中</span></span><br><span class="line"><span class="comment">         * 2.遍历Set集合</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">		<span class="keyword">for</span>(Person key : map.keySet())&#123;</span><br><span class="line">			String value = map.get(key);</span><br><span class="line">			System.out.println(key+<span class="string">"..."</span>+value);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">"==================="</span>);</span><br><span class="line">          <span class="comment">/*</span></span><br><span class="line"><span class="comment">         *  通过entrySet方法,键值对映射关系(结婚证)获取</span></span><br><span class="line"><span class="comment">         *    1. 调用map集合方法entrySet()将集合中的映射关系对象,存储到Set集合</span></span><br><span class="line"><span class="comment">         *        Set&lt;Entry &lt;K,V&gt; &gt;</span></span><br><span class="line"><span class="comment">         *    2. 迭代Set集合    </span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        </span><br><span class="line">		<span class="keyword">for</span>(Map.Entry&lt;Person, String&gt; entry : map.entrySet())&#123;</span><br><span class="line">            Person key = entry.getKey();</span><br><span class="line">            String value = entry.getValue()l</span><br><span class="line">			System.out.println(key+<span class="string">"..."</span>+value);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">        </span><br><span class="line">       </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2597,7 +2444,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2608,7 +2455,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2619,7 +2466,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

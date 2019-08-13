@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Oracle,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="oracle入门创建用户和用户授权1234567891011121314151617181920212223create tablespace itheimadatafile &apos;c:\itheima.dbf&apos;size 100mautoextend onnext 10m;--删除表空间drop tablespace itheima;--创建用户create user itheimaidentifie">
+<meta name="keywords" content="Oracle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01_oracle入门">
+<meta property="og:url" content="http://yoursite.com/2019/08/12/数据库/oracle/01_oracle入门/index.html">
+<meta property="og:site_name" content="倪翔宇的博客">
+<meta property="og:description" content="oracle入门创建用户和用户授权1234567891011121314151617181920212223create tablespace itheimadatafile &apos;c:\itheima.dbf&apos;size 100mautoextend onnext 10m;--删除表空间drop tablespace itheima;--创建用户create user itheimaidentifie">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-13T04:55:35.141Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="01_oracle入门">
+<meta name="twitter:description" content="oracle入门创建用户和用户授权1234567891011121314151617181920212223create tablespace itheimadatafile &apos;c:\itheima.dbf&apos;size 100mautoextend onnext 10m;--删除表空间drop tablespace itheima;--创建用户create user itheimaidentifie">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '倪翔宇'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/12/数据库/oracle/01_oracle入门/">
+
+
+
+
+
+  <title>01_oracle入门 | 倪翔宇的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">倪翔宇的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录和小刘一起学习的过程</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/12/数据库/oracle/01_oracle入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">01_oracle入门</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-12T14:28:01+08:00">
+                2019-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Oracle/" itemprop="url" rel="index">
+                    <span itemprop="name">Oracle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="oracle入门"><a href="#oracle入门" class="headerlink" title="oracle入门"></a>oracle入门</h1><h2 id="创建用户和用户授权"><a href="#创建用户和用户授权" class="headerlink" title="创建用户和用户授权"></a>创建用户和用户授权</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">tablespace</span> itheima</span><br><span class="line"><span class="keyword">datafile</span> <span class="string">'c:\itheima.dbf'</span></span><br><span class="line"><span class="keyword">size</span> <span class="number">100</span>m</span><br><span class="line"><span class="keyword">autoextend</span> <span class="keyword">on</span></span><br><span class="line"><span class="keyword">next</span> <span class="number">10</span>m;</span><br><span class="line"></span><br><span class="line"><span class="comment">--删除表空间</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">tablespace</span> itheima;</span><br><span class="line"></span><br><span class="line"><span class="comment">--创建用户</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> itheima</span><br><span class="line"><span class="keyword">identified</span> <span class="keyword">by</span> itheima</span><br><span class="line"><span class="keyword">default</span> <span class="keyword">tablespace</span> itheima;</span><br><span class="line"></span><br><span class="line"><span class="comment">--给用户授权</span></span><br><span class="line"><span class="comment">--oracle数据库中常用角色</span></span><br><span class="line">connect <span class="comment">--连接角色，基本角色</span></span><br><span class="line">resource <span class="comment">--开发者角色</span></span><br><span class="line">dba <span class="comment">--超级管理员角色</span></span><br><span class="line"><span class="comment">--给itheima用户授予dba角色</span></span><br><span class="line"><span class="keyword">grant</span> dba <span class="keyword">to</span> itheima;</span><br><span class="line"></span><br><span class="line"><span class="comment">--切换到itheima用户</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="增删改查操作序列"><a href="#增删改查操作序列" class="headerlink" title="增删改查操作序列"></a>增删改查操作序列</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> person(</span><br><span class="line">       pid <span class="built_in">number</span>(<span class="number">20</span>),</span><br><span class="line">       pname varchar2(<span class="number">10</span>)</span><br><span class="line">); </span><br><span class="line"><span class="comment">--修改表结构</span></span><br><span class="line"><span class="comment">--添加一列</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> person <span class="keyword">add</span> (gender <span class="built_in">number</span>(<span class="number">1</span>));</span><br><span class="line"><span class="comment">--修改列类型</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> person <span class="keyword">modify</span> gender <span class="built_in">char</span>(<span class="number">1</span>);</span><br><span class="line"><span class="comment">--修改列名称</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> person <span class="keyword">rename</span> <span class="keyword">column</span> gender <span class="keyword">to</span> sex;</span><br><span class="line"><span class="comment">--删除一列</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> person <span class="keyword">drop</span> <span class="keyword">column</span> sex;</span><br><span class="line"></span><br><span class="line"><span class="comment">--查询表中记录</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> person;</span><br><span class="line"><span class="comment">--添加一条记录</span></span><br><span class="line"><span class="keyword">Insert</span> <span class="keyword">into</span> person(pid,pname) <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'小明'</span>);</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line"><span class="comment">--修改一条记录</span></span><br><span class="line"><span class="keyword">update</span> person <span class="keyword">set</span> pname =<span class="string">'小马'</span> <span class="keyword">where</span> pid =<span class="number">1</span>;</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">--三个删除</span></span><br><span class="line"><span class="comment">--删除表中全部记录</span></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> person;</span><br><span class="line"><span class="comment">--删除表结构</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> person;</span><br><span class="line"><span class="comment">--先删除表，再创建表，效果等同于删除表中全部记录</span></span><br><span class="line"><span class="comment">--再数据量大的情况下，尤其在表中带有索引的情况下，该操作效率高</span></span><br><span class="line"><span class="comment">--索引可以提高查询效率，但是会影响增删改效率</span></span><br><span class="line"><span class="keyword">truncate</span> <span class="keyword">table</span> person;</span><br><span class="line"></span><br><span class="line"><span class="comment">--序列不真的属于</span></span><br><span class="line"><span class="comment">--序列：默认从1开始，一次递增,主要用来给主键赋值使用</span></span><br><span class="line"><span class="comment">--dual:虚表，只是为了补全语法，没有意义</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">sequence</span> s_person;</span><br><span class="line"><span class="keyword">select</span> s_person.nextval <span class="keyword">from</span> dual;</span><br><span class="line"></span><br><span class="line"><span class="comment">--添加一条记录</span></span><br><span class="line"><span class="keyword">Insert</span> <span class="keyword">into</span> person(pid,pname) <span class="keyword">values</span>(s_person.nextval,<span class="string">'小明'</span>);</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> person;</span><br></pre></td></tr></table></figure>
+
+<h2 id="单行函数-条件表达式，多行函数"><a href="#单行函数-条件表达式，多行函数" class="headerlink" title="单行函数,条件表达式，多行函数"></a>单行函数,条件表达式，多行函数</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--scott用户,密码tiger。</span></span><br><span class="line"><span class="comment">--解锁scott用户</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> scott <span class="keyword">account</span> <span class="keyword">unlock</span>;</span><br><span class="line"><span class="comment">--解锁scott用户的密码</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> scott <span class="keyword">identified</span> <span class="keyword">by</span> tiger;</span><br><span class="line"><span class="comment">--切换到scott用户下</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> EMP t</span><br><span class="line"></span><br><span class="line"><span class="comment">--单行函数:作用于一行，返回一个值</span></span><br><span class="line"><span class="comment">--字符函数</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">upper</span>(<span class="string">'yes'</span>) <span class="keyword">from</span> dual;<span class="comment">--YES</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">lower</span>(<span class="string">'YES'</span>) <span class="keyword">from</span> dual;<span class="comment">--yes</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--数值函数</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">round</span>(<span class="number">26.18</span>,<span class="number">1</span>) <span class="keyword">from</span> dual;<span class="comment">--四舍五入，后面的参数表示保留的位数</span></span><br><span class="line"><span class="keyword">select</span> trunc(<span class="number">26.18</span>,<span class="number">1</span>) <span class="keyword">from</span> dual;<span class="comment">--直接截取，不再看后面的位数是否大于5</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">mod</span>(<span class="number">10</span>,<span class="number">3</span>) <span class="keyword">from</span> dual; <span class="comment">--求余数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--日期函数</span></span><br><span class="line"><span class="comment">--查询出emp表中所有员工入职距离现在几天</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">sysdate</span>-e.hiredate <span class="keyword">from</span> emp e;</span><br><span class="line"><span class="comment">--算出明天刺客</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">sysdate</span>+<span class="number">1</span> <span class="keyword">from</span> dual;</span><br><span class="line"><span class="comment">--查询出emp表中所有员工入职距离现在几月</span></span><br><span class="line"><span class="keyword">select</span> months_between(<span class="keyword">sysdate</span>,e.hiredate) <span class="keyword">from</span> emp e;</span><br><span class="line"><span class="comment">--查询出emp表中所有员工入职距离现在几年</span></span><br><span class="line"><span class="keyword">select</span> months_between(<span class="keyword">sysdate</span>,e.hiredate)/<span class="number">12</span> <span class="keyword">from</span> emp e;</span><br><span class="line"><span class="comment">--查询出emp表中所有员工入职距离现在几周</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">round</span>((<span class="keyword">sysdate</span>-e.hiredate)/<span class="number">7</span>) <span class="keyword">from</span> emp e;</span><br><span class="line"></span><br><span class="line"><span class="comment">--转换函数</span></span><br><span class="line"><span class="comment">--日期转字符串</span></span><br><span class="line"><span class="keyword">select</span> to_char(<span class="keyword">sysdate</span>,<span class="string">'fm yyyy-mm-dd hh24:mi:ss'</span>) <span class="keyword">from</span> dual;</span><br><span class="line"><span class="comment">--字符串转日期</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">to_date</span>(<span class="string">'2019-8-12 14:45:57'</span>,<span class="string">'fm yyyy-mm-dd hh24:mi:ss'</span>) <span class="keyword">from</span> dual;</span><br><span class="line"></span><br><span class="line"><span class="comment">--通用函数</span></span><br><span class="line"><span class="comment">--算出emp表中所有员工的年薪</span></span><br><span class="line"><span class="comment">--奖金里面有null值，如果null值和任意数字做运算，结果都是null</span></span><br><span class="line"><span class="keyword">select</span> e.sal*<span class="number">12</span>+nvl(e.comm,<span class="number">0</span>) <span class="keyword">from</span> emp e;</span><br><span class="line"></span><br><span class="line"><span class="comment">--条件表达式</span></span><br><span class="line"><span class="comment">--条件表达式的通用写法，在mysql和oracle中都可以用</span></span><br><span class="line"><span class="keyword">select</span> ename <span class="keyword">from</span> emp;</span><br><span class="line"><span class="comment">--给emp表中的员工起中文名</span></span><br><span class="line"><span class="keyword">select</span> e.ename,</span><br><span class="line">       <span class="keyword">case</span> e.ename</span><br><span class="line">         <span class="keyword">when</span>	<span class="string">'SMITH'</span> <span class="keyword">then</span> <span class="string">'曹贼'</span></span><br><span class="line">           <span class="keyword">when</span> <span class="string">'ALLEN'</span> <span class="keyword">then</span> <span class="string">'大耳贼'</span></span><br><span class="line">             <span class="keyword">else</span> <span class="string">'无名'</span></span><br><span class="line">               <span class="keyword">end</span></span><br><span class="line"><span class="keyword">from</span> emp e;</span><br><span class="line"><span class="comment">--判断emp表中员工工资，如果高于3000显示高收入，如果高于1500低于3000显示中等收入，其他显示低收入</span></span><br><span class="line"><span class="keyword">select</span> e.sal,</span><br><span class="line">       <span class="keyword">case</span> </span><br><span class="line">         <span class="keyword">when</span>	e.sal&gt;<span class="number">3000</span> <span class="keyword">then</span> <span class="string">'高收入'</span></span><br><span class="line">           <span class="keyword">when</span> e.sal&gt;<span class="number">1500</span> <span class="keyword">then</span> <span class="string">'中等收入'</span></span><br><span class="line">             <span class="keyword">else</span> <span class="string">'低收入'</span></span><br><span class="line">               <span class="keyword">end</span></span><br><span class="line"><span class="keyword">from</span> emp e;</span><br><span class="line"><span class="comment">--oracle中除了起别名，都用单引号。</span></span><br><span class="line"><span class="comment">--oracle专用的条件表达式</span></span><br><span class="line"><span class="keyword">select</span> e.ename,</span><br><span class="line">       <span class="keyword">decode</span>( e.ename,</span><br><span class="line">        	<span class="string">'SMITH'</span>,<span class="string">'曹贼'</span>,</span><br><span class="line">            <span class="string">'ALLEN'</span> , <span class="string">'大耳贼'</span>,</span><br><span class="line">            <span class="string">'无名'</span>) 中文名</span><br><span class="line">     </span><br><span class="line"><span class="keyword">from</span> emp e;</span><br><span class="line"></span><br><span class="line"><span class="comment">--多行函数:作用于多行，返回一个值</span></span><br><span class="line"> <span class="keyword">select</span> <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">from</span> emp;<span class="comment">--查询总数量</span></span><br><span class="line"> <span class="keyword">select</span> <span class="keyword">sum</span>(sal) <span class="keyword">from</span> emp;<span class="comment">--工资总和</span></span><br><span class="line"> <span class="keyword">select</span> <span class="keyword">max</span>(sal) <span class="keyword">from</span> emp;<span class="comment">--最大工资</span></span><br><span class="line"> <span class="keyword">select</span> <span class="keyword">min</span>(sal) <span class="keyword">from</span> emp;<span class="comment">--最低工资</span></span><br><span class="line"> <span class="keyword">select</span> <span class="keyword">avg</span>(sal) <span class="keyword">from</span> emp;<span class="comment">--平均工资</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--分组查询</span></span><br><span class="line"> <span class="comment">--查询出每个部门的平均工资</span></span><br><span class="line"> <span class="comment">--分组查询中，出现在group by后面的原始列，才能出现在select后面</span></span><br><span class="line"> <span class="comment">--没有出现在group by 后面的列，想在select后面，必须加上聚合函数</span></span><br><span class="line"> <span class="comment">--聚合函数有一个特性，可以把多行记录变成一个值</span></span><br><span class="line"> <span class="keyword">select</span> e.deptno,<span class="keyword">avg</span>(e.sal)<span class="comment">--,e.ename</span></span><br><span class="line"> <span class="keyword">from</span> emp e</span><br><span class="line"> <span class="keyword">group</span> <span class="keyword">by</span> e.deptno</span><br><span class="line"><span class="comment">--查询出平均工资高于2000的部门信息</span></span><br><span class="line"><span class="keyword">select</span> e.deptno,<span class="keyword">avg</span>(e.sal) asal</span><br><span class="line"><span class="keyword">from</span> emp e</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> e.deptno</span><br><span class="line"><span class="keyword">having</span> <span class="keyword">avg</span>(e.sal)&gt;<span class="number">2000</span>;</span><br><span class="line"><span class="comment">--所有条件都不能使用别名来判断</span></span><br><span class="line"><span class="comment">--比如下面的条件语句也不能使用别名来当条件</span></span><br><span class="line"><span class="keyword">select</span> ename,sal s <span class="keyword">from</span> emp <span class="keyword">where</span> sal&gt;<span class="number">1500</span>;</span><br><span class="line"><span class="comment">--查询每个部门工资高于800的员工的平均工资</span></span><br><span class="line"><span class="keyword">select</span> e.deptno,<span class="keyword">avg</span>(e.sal)</span><br><span class="line"><span class="keyword">from</span> emp e</span><br><span class="line"><span class="keyword">where</span> e.sal&gt;<span class="number">800</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> e.deptno</span><br><span class="line"><span class="comment">--where是过滤分组前的数据，having是过滤分组后的数据</span></span><br><span class="line"><span class="comment">--表现形式:where必须在group by之前，having是在group by之后</span></span><br><span class="line"><span class="comment">--查询每个部门工资高于800的员工的平均工资</span></span><br><span class="line"><span class="comment">--然后查询出平均工资高于2000的部门信息</span></span><br><span class="line"><span class="keyword">select</span> e.deptno,<span class="keyword">avg</span>(e.sal)</span><br><span class="line"><span class="keyword">from</span> emp e</span><br><span class="line"><span class="keyword">where</span> e.sal&gt;<span class="number">800</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> e.deptno</span><br><span class="line"><span class="keyword">having</span> <span class="keyword">avg</span>(e.sal)&gt;<span class="number">2000</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--多表查询的一些概念</span></span><br><span class="line"><span class="comment">--笛卡尔积</span></span><br><span class="line"><span class="keyword">select</span> * </span><br><span class="line"><span class="keyword">from</span> emp e,dept d;</span><br><span class="line"><span class="comment">--等值连接</span></span><br><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> emp e,dept d</span><br><span class="line"><span class="keyword">where</span> e.deptno =d.deptno;</span><br><span class="line"><span class="comment">--内连接</span></span><br><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> emp e <span class="keyword">inner</span> <span class="keyword">join</span> dept d</span><br><span class="line"><span class="keyword">on</span> e.deptno = d.deptno;</span><br><span class="line"><span class="comment">--查询出所有部门，以及部门下的员工信息【外连接】</span></span><br><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> emp e <span class="keyword">right</span> <span class="keyword">join</span> dept d</span><br><span class="line"><span class="keyword">on</span> e.deptno=d.deptno;</span><br><span class="line"><span class="comment">--查询所有员工信息，以及员工所属部门</span></span><br><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> emp e <span class="keyword">left</span> <span class="keyword">join</span> dept d</span><br><span class="line"><span class="keyword">on</span> e.deptno =d.deptno;</span><br><span class="line"><span class="comment">--oracle中专用的外连接</span></span><br><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> emp e,dept d</span><br><span class="line"><span class="keyword">where</span> e.deptno=d.deptno(+);</span><br></pre></td></tr></table></figure>
+
+<h2 id="自连接"><a href="#自连接" class="headerlink" title="自连接"></a>自连接</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--查询出员工姓名，员工领导姓名</span></span><br><span class="line"><span class="comment">--自连接：自连接其实就是站在不同的角度把一张表看成多张表</span></span><br><span class="line"><span class="keyword">select</span> e1.ename <span class="string">"员工姓名"</span> ,e2.ename <span class="string">"领导姓名"</span></span><br><span class="line"><span class="keyword">from</span> emp e1,emp e2</span><br><span class="line"><span class="keyword">where</span> e1.mgr =e2.empno;</span><br><span class="line"><span class="comment">--查询出员工姓名，员工部门名称，员工领导姓名，员工领导部门名称</span></span><br><span class="line"><span class="keyword">select</span> e1.ename <span class="string">"员工姓名"</span> ,d1.dname,e2.ename <span class="string">"领导姓名"</span>,d2.dname</span><br><span class="line"><span class="keyword">from</span> emp e1,emp e2,dept d1,dept d2</span><br><span class="line"><span class="keyword">where</span> e1.mgr =e2.empno</span><br><span class="line"><span class="keyword">and</span> e1.deptno=d1.deptno</span><br><span class="line"><span class="keyword">and</span> e2.deptno=d2.deptno;</span><br><span class="line"><span class="comment">--查询出每个员工编号，姓名，部门名称，工资等级和他的上级领导的姓名，工资等级</span></span><br><span class="line"><span class="keyword">select</span> e.empno,</span><br><span class="line">       e.ename,</span><br><span class="line">       <span class="keyword">decode</span>(s.grade,</span><br><span class="line">       <span class="number">1</span>,<span class="string">'一级'</span>,</span><br><span class="line">       <span class="number">2</span>,<span class="string">'二级'</span>,</span><br><span class="line">       <span class="number">3</span>,<span class="string">'三级'</span>,</span><br><span class="line">       <span class="number">4</span>,<span class="string">'四级'</span>,</span><br><span class="line">       <span class="number">5</span>,<span class="string">'五级'</span></span><br><span class="line">       )grade,</span><br><span class="line">       d.dname,</span><br><span class="line">       e1.empno,</span><br><span class="line">       e1.ename,</span><br><span class="line">        <span class="keyword">decode</span>(s1.grade,</span><br><span class="line">       <span class="number">1</span>,<span class="string">'一级'</span>,</span><br><span class="line">       <span class="number">2</span>,<span class="string">'二级'</span>,</span><br><span class="line">       <span class="number">3</span>,<span class="string">'三级'</span>,</span><br><span class="line">       <span class="number">4</span>,<span class="string">'四级'</span>,</span><br><span class="line">       <span class="number">5</span>,<span class="string">'五级'</span></span><br><span class="line">       )grade</span><br><span class="line">       <span class="keyword">from</span> emp e, emp e1,dept d, salgrade s ,salgrade s1</span><br><span class="line">       <span class="keyword">where</span> e.mgr=e1.empno</span><br><span class="line">       <span class="keyword">and</span> e.deptno =d.deptno</span><br><span class="line">       <span class="keyword">and</span> e.sal <span class="keyword">between</span> s.losal <span class="keyword">and</span> s.hisal</span><br><span class="line">       <span class="keyword">and</span> e1.sal <span class="keyword">between</span> s1.losal <span class="keyword">and</span> s1.hisal;</span><br></pre></td></tr></table></figure>
+
+<h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--子查询</span></span><br><span class="line"><span class="comment">--子查询返回一个值</span></span><br><span class="line"><span class="comment">--查询出工资和SCOTT一样的员工信息</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp <span class="keyword">where</span> sal <span class="keyword">in</span></span><br><span class="line">(<span class="keyword">select</span> sal <span class="keyword">from</span> emp <span class="keyword">where</span> ename =<span class="string">'SCOTT'</span>);</span><br><span class="line"><span class="comment">--子查询返回一个集合</span></span><br><span class="line"><span class="comment">--查询出工资和10号部门任意员工一样的员工信息</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp <span class="keyword">where</span> sal <span class="keyword">in</span></span><br><span class="line">(<span class="keyword">select</span> sal <span class="keyword">from</span> emp <span class="keyword">where</span> deptno =<span class="number">10</span>);</span><br><span class="line"><span class="comment">--子查询返回一张表</span></span><br><span class="line"><span class="comment">--查询出每个部门最低工资，和最低工资员工姓名，和该员工所在部门名称</span></span><br><span class="line"><span class="comment">--1，先查询出每个部门最低工资</span></span><br><span class="line"><span class="keyword">select</span> deptno ,<span class="keyword">min</span>(sal) msal </span><br><span class="line"><span class="keyword">from</span> emp</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> deptno</span><br><span class="line"><span class="comment">--2，三表联查，得到最终结果</span></span><br><span class="line"><span class="keyword">select</span> t.deptno,t.msal,e.ename,d.dname</span><br><span class="line"><span class="keyword">from</span> (<span class="keyword">select</span> deptno ,<span class="keyword">min</span>(sal) msal </span><br><span class="line">     <span class="keyword">from</span> emp</span><br><span class="line">     <span class="keyword">group</span> <span class="keyword">by</span> deptno) t ,emp e ,dept d</span><br><span class="line"><span class="keyword">where</span> t.deptno = e.deptno </span><br><span class="line"><span class="keyword">and</span> t.msal = e.sal</span><br><span class="line"><span class="keyword">and</span> e.deptno =d.deptno;</span><br></pre></td></tr></table></figure>
+
+<h2 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--oracle分页查询</span></span><br><span class="line"><span class="comment">--rownum行号:当我们做select操作的时候</span></span><br><span class="line"><span class="comment">--每查询出一行记录，就会在该行上加上一个行号</span></span><br><span class="line"><span class="comment">--行号从1开始，一次递增，不能跳着走</span></span><br><span class="line"><span class="comment">----emp表工资倒叙排列后，每页五条记录，查询第二页</span></span><br><span class="line"><span class="comment">----排序操作会影响rownum的顺序</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">rownum</span>,e.* <span class="keyword">from</span> emp e <span class="keyword">order</span> <span class="keyword">by</span> e.sal <span class="keyword">desc</span></span><br><span class="line"><span class="comment">----如果涉及到排序，但还要使用rownum的话，我们可以再次嵌套查询</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">rownum</span>, t.* <span class="keyword">from</span>(</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">rownum</span>,e.* <span class="keyword">from</span> emp e <span class="keyword">order</span> <span class="keyword">by</span> e.sal <span class="keyword">desc</span>) t;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--emp表工资倒叙排列后，每页五条记录，查询第二页</span></span><br><span class="line"><span class="comment">--rownumb行号不能写上大于一个正数</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span>(</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">rownum</span> rn,tt.* <span class="keyword">from</span> (</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> sal <span class="keyword">desc</span></span><br><span class="line">) tt <span class="keyword">where</span> <span class="keyword">rownum</span> &lt;<span class="number">11</span> </span><br><span class="line">)  <span class="keyword">where</span> rn&gt;<span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">--视图</span></span><br><span class="line"><span class="comment">--视图的概念：视图就是提供一个查询的窗口，所有数据来自于原表</span></span><br><span class="line"><span class="comment">--查询语句创建表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> emp <span class="keyword">as</span> <span class="keyword">select</span> * <span class="keyword">from</span> scott.emp</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp;</span><br><span class="line"><span class="comment">--创建视图【必须有dba权限】</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> v_emp <span class="keyword">as</span> <span class="keyword">select</span> ename,job <span class="keyword">from</span> emp;</span><br><span class="line"><span class="comment">--查询视图</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> v_emp; </span><br><span class="line"><span class="comment">--修改视图[不推荐]</span></span><br><span class="line"><span class="keyword">update</span> v_emp <span class="keyword">set</span> job =<span class="string">'CLERK'</span> <span class="keyword">where</span> ename=<span class="string">'ALLEN'</span>;</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line"><span class="comment">--创建只读视图</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> v_emp1 <span class="keyword">as</span> <span class="keyword">select</span> ename,job <span class="keyword">from</span> emp <span class="keyword">with</span> <span class="keyword">read</span> <span class="keyword">only</span>;</span><br><span class="line"><span class="comment">--视图的作用？</span></span><br><span class="line"><span class="comment">--第一：视图可以屏蔽一些敏感字段。工资之类的</span></span><br><span class="line"><span class="comment">--第二：保证总部和分布数据及时统一。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--索引</span></span><br><span class="line"><span class="comment">--索引的概念：在表的列上构建一个二叉树</span></span><br><span class="line"><span class="comment">--达到大幅度提高查询效率的目的，但索引会影响增删改的效率</span></span><br><span class="line"><span class="comment">--单列索引</span></span><br><span class="line"><span class="comment">--创建单列索引</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">index</span> idx_ename <span class="keyword">on</span> emp(ename);</span><br><span class="line"><span class="comment">--单列索引触发规则，条件必须是索引列中的原始值</span></span><br><span class="line"><span class="comment">--单行函数，模糊查询，都会影响索引的触发</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp <span class="keyword">where</span> ename =<span class="string">'SCOTT'</span>;</span><br><span class="line"><span class="comment">--复合索引</span></span><br><span class="line"><span class="comment">--创建复合索引</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">index</span> idx_enamejob <span class="keyword">on</span> emp(ename,job);</span><br><span class="line"><span class="comment">--符合索引第一列为优先检索列</span></span><br><span class="line"><span class="comment">--如果要触发复合索引，必须包含有优先检索列中的原始值</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp <span class="keyword">where</span> ename =<span class="string">'SCOTT'</span> <span class="keyword">and</span> job=<span class="string">'xx'</span>;<span class="comment">--触发复合索引</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp <span class="keyword">where</span> ename =<span class="string">'SCOTT'</span> <span class="keyword">or</span> job=<span class="string">'xx'</span>;<span class="comment">--不触发索引</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp <span class="keyword">where</span> ename =<span class="string">'SCOTT'</span>;<span class="comment">--触发单列索引</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="plsql中定义变量"><a href="#plsql中定义变量" class="headerlink" title="plsql中定义变量"></a>plsql中定义变量</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--pl/sql编程语言</span></span><br><span class="line"><span class="comment">--pl/sql编程语言对sql语言的扩展，使得sql语言具有过程化编程的特性</span></span><br><span class="line"><span class="comment">---pl/sql编程语言比一般的过程化编程语言，更加灵活高效。</span></span><br><span class="line"><span class="comment">--pl/sql编程语言主要用来编写存储过程和存储函数等。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">---声明方法</span></span><br><span class="line"><span class="comment">--赋值操作可以用:=也可以使用into查询语句赋值</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">    i <span class="built_in">number</span>(<span class="number">2</span>) := <span class="number">10</span>;</span><br><span class="line">    s varchar2(10) :='小明';</span><br><span class="line">    ena emp.ename%type;<span class="comment">--引用型变量</span></span><br><span class="line">    emprow emp%rowtype;<span class="comment">--记录型变量</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    dbms_output.put_line(i);</span><br><span class="line">    dbms_output.put_line(s);</span><br><span class="line">    <span class="keyword">select</span> ename <span class="keyword">into</span> ena <span class="keyword">from</span> emp <span class="keyword">where</span> empno =<span class="number">7788</span>;</span><br><span class="line">    dbms_output.put_line(ena);</span><br><span class="line">    <span class="keyword">select</span> * <span class="keyword">into</span> emprow <span class="keyword">from</span> emp <span class="keyword">where</span> empno =<span class="number">7788</span>;</span><br><span class="line">    dbms_output.put_line(emprow.ename||'的工作为'||emprow.job);</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="plsql中的if判断"><a href="#plsql中的if判断" class="headerlink" title="plsql中的if判断"></a>plsql中的if判断</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--pl/sql中if判断</span></span><br><span class="line"><span class="comment">--输入小于18的数字，输入未成年</span></span><br><span class="line"><span class="comment">--输入大于18小于40的数字，输出中年人</span></span><br><span class="line"><span class="comment">--输入大于40的数字，输出老年人</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">  i <span class="built_in">number</span>(<span class="number">3</span>) := &amp;ii;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">if</span> i&lt;<span class="number">18</span> <span class="keyword">then</span></span><br><span class="line">     dbms_output.put_line(<span class="string">'未成年'</span>);</span><br><span class="line">  elsif i&lt;40 then</span><br><span class="line">      dbms_output.put_line('中年人');  </span><br><span class="line">  else</span><br><span class="line">      dbms_output.put_line('老年人');</span><br><span class="line">  <span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="plsql中的loop循环"><a href="#plsql中的loop循环" class="headerlink" title="plsql中的loop循环"></a>plsql中的loop循环</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--pl/sql中的loop循环</span></span><br><span class="line"><span class="comment">---用三种方式输出1到10个数字</span></span><br><span class="line"><span class="comment">--while循环</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">  i <span class="built_in">number</span>(<span class="number">2</span>) :=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">while</span> i&lt;<span class="number">11</span> <span class="keyword">loop</span></span><br><span class="line">    dbms_output.put_line(i);</span><br><span class="line">    i := i+1;</span><br><span class="line">  <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"><span class="comment">--exit循环</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">  i <span class="built_in">number</span>(<span class="number">2</span>) :=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">loop</span></span><br><span class="line">    <span class="keyword">exit</span> <span class="keyword">when</span> i&gt;<span class="number">10</span>;  </span><br><span class="line">    dbms_output.put_line(i);</span><br><span class="line">    i := i+1;</span><br><span class="line">  <span class="keyword">end</span> <span class="keyword">loop</span>;  </span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"><span class="comment">--for循环</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1.</span><span class="number">.10</span> <span class="keyword">loop</span>    </span><br><span class="line">  dbms_output.put_line(i);</span><br><span class="line">  <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="游标"><a href="#游标" class="headerlink" title="游标"></a>游标</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--游标:可以存放多个对象，多行记录</span></span><br><span class="line"><span class="comment">--输出emp表中的所有员工姓名</span></span><br><span class="line"><span class="keyword">declare</span> </span><br><span class="line">  <span class="keyword">cursor</span> c1 <span class="keyword">is</span>  <span class="keyword">select</span> * <span class="keyword">from</span> emp;</span><br><span class="line">  emprow emp%rowtype;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">open</span> c1;</span><br><span class="line">    loop</span><br><span class="line">      fetch c1 into emprow;</span><br><span class="line">      exit when c1%notfound;</span><br><span class="line">      dbms_output.put_line(emprow.ename);</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line">  close c1;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"><span class="comment">---给指定部门员工涨工资</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">  <span class="keyword">cursor</span> c2(eno emp.deptno%<span class="keyword">type</span>) </span><br><span class="line">  <span class="keyword">is</span> <span class="keyword">select</span> empno <span class="keyword">from</span> emp <span class="keyword">where</span> deptno =eno;</span><br><span class="line">  en emp.empno%type;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">open</span> c2(<span class="number">10</span>);</span><br><span class="line">       loop</span><br><span class="line">         fetch c2 into en;</span><br><span class="line">         exit when c2%notfound;</span><br><span class="line">         <span class="keyword">update</span> emp <span class="keyword">set</span> sal=sal+<span class="number">100</span> <span class="keyword">where</span> empno = en;</span><br><span class="line">         <span class="keyword">commit</span>;</span><br><span class="line">       <span class="keyword">end</span> <span class="keyword">loop</span>;</span><br><span class="line">  close c2;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"><span class="comment">--查询10号部门员工信息</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp <span class="keyword">where</span> deptno=<span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">--存储过程</span></span><br><span class="line"><span class="comment">--存储过程就是提前已经编译好的一段pl/sql语言，放置在数据库端</span></span><br><span class="line"><span class="comment">--可以直接被调用。这段pl/sql一般都是固定步骤的业务</span></span><br><span class="line"><span class="comment">--给指定员工涨100块钱</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> p1(eno emp.empno%<span class="keyword">type</span>)</span><br><span class="line"><span class="keyword">is</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">update</span> emp <span class="keyword">set</span> sal=sal+<span class="number">100</span> <span class="keyword">where</span> empno = eno;</span><br><span class="line">  <span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp <span class="keyword">where</span> empno =<span class="number">7788</span>;</span><br><span class="line"><span class="comment">---测试p1</span></span><br><span class="line"><span class="keyword">declare</span> </span><br><span class="line"></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  p1(<span class="number">7788</span>);</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--out类型参数如何使用</span></span><br><span class="line"><span class="comment">--使用存储过程来算年薪</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">procedure</span> p_yearsal(eno emp.empno%<span class="keyword">type</span>, yearsal <span class="keyword">out</span> <span class="built_in">number</span>)</span><br><span class="line"><span class="keyword">is</span></span><br><span class="line">   s <span class="built_in">number</span>(<span class="number">10</span>);</span><br><span class="line">   c emp.comm%type;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">   <span class="keyword">select</span> sal*<span class="number">12</span> ,nvl(comm,<span class="number">0</span>) <span class="keyword">into</span> s,c <span class="keyword">from</span> emp <span class="keyword">where</span> empno =eno;</span><br><span class="line">   yearsal := s+c;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"><span class="comment">--测试p_yearsal</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">  yearsal <span class="built_in">number</span>(<span class="number">10</span>);</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  p_yearsal(<span class="number">7788</span>,yearsal);</span><br><span class="line">  dbms_output.put_line(yearsal);</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">----in和out类型参数的区别是什么？</span></span><br><span class="line"><span class="comment">---凡是涉及到into查询语句赋值或者:=赋值操作的参数，都必须使用out来修饰</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="存储函数"><a href="#存储函数" class="headerlink" title="存储函数"></a>存储函数</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">---通过存储函数实现计算指定员工的年薪</span></span><br><span class="line"><span class="comment">---存储过程和存储函数的参数都不能带长度</span></span><br><span class="line"><span class="comment">---存储函数的返回值类型不能带长度</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">function</span> f_yearsal(eno emp.empno%<span class="keyword">type</span>) <span class="keyword">return</span> <span class="built_in">number</span></span><br><span class="line"><span class="keyword">is</span></span><br><span class="line">  s <span class="built_in">number</span>(<span class="number">10</span>);</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">select</span> sal*<span class="number">12</span>+nvl(comm,<span class="number">0</span>) <span class="keyword">into</span> s <span class="keyword">from</span> emp <span class="keyword">where</span> empno = eno;</span><br><span class="line">  return s;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"><span class="comment">---测试f_yearsal</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line">  s <span class="built_in">number</span>(<span class="number">10</span>);</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  s := f_yearsal(<span class="number">7788</span>);</span><br><span class="line">  dbms_output.put_line(s);</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="存储过程和存储函数的区别"><a href="#存储过程和存储函数的区别" class="headerlink" title="存储过程和存储函数的区别"></a>存储过程和存储函数的区别</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--存储过程和存储函数的区别</span></span><br><span class="line"><span class="comment">--语法区别:关键字不一样</span></span><br><span class="line"><span class="comment">----------存储函数比存储过程多了两个return</span></span><br><span class="line"><span class="comment">--本质区别：存储函数有返回值，而存储过程没有返回值</span></span><br><span class="line"><span class="comment">-----------如果存储过程想实现有返回值的业务，我们就必须使用out类型的参数</span></span><br><span class="line"><span class="comment">-----------即便存储过程使用了out类型的参数，其本质也不是真的有返回值</span></span><br><span class="line"><span class="comment">-----------而是在存储过程内部给out类型参数赋值，在执行完毕后，我们直接拿到输出类型参数的值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">---我们可以使用存储函数有返回值的特性，来自定义函数。</span></span><br><span class="line"><span class="comment">---而存储过程不能用来自定义函数。</span></span><br><span class="line"><span class="comment">--案例需求：查询出员工姓名，员工所在部门名称</span></span><br><span class="line"><span class="comment">--案例准备工作：把scott用户下的dept表复制到当前用户下</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> dept <span class="keyword">as</span> <span class="keyword">select</span> * <span class="keyword">from</span> scott.dept;</span><br><span class="line"><span class="comment">--使用传统方式来是实现案例需求</span></span><br><span class="line"><span class="keyword">select</span> e.ename,d.dname</span><br><span class="line"><span class="keyword">from</span> emp e,dept d</span><br><span class="line"><span class="keyword">where</span> e.deptno=d.deptno;</span><br><span class="line"><span class="comment">--使用存储函数来实现提供一个部门编号，输出一个部门名称</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">function</span> fdna(dno dept.deptno%<span class="keyword">type</span>) <span class="keyword">return</span> dept.dname%<span class="keyword">type</span></span><br><span class="line"><span class="keyword">is</span></span><br><span class="line">  dna dept.dname%<span class="keyword">type</span>;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">select</span> dname <span class="keyword">into</span> dna <span class="keyword">from</span> dept <span class="keyword">where</span> deptno =dno;</span><br><span class="line">  return dna;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"><span class="comment">---使用fdna存储函数来实现案例需求：查询出员工姓名，员工所在部门名称</span></span><br><span class="line"><span class="keyword">select</span> e.ename,fdna(e.deptno)</span><br><span class="line"><span class="keyword">from</span> emp e;</span><br></pre></td></tr></table></figure>
+
+<h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">---触发器，就是指定一个规则，在我们做增删改操作的时候，</span></span><br><span class="line"><span class="comment">---只要满足改规则，自动触发，无需调用。</span></span><br><span class="line"><span class="comment">---语句级触发器：不包含有for each row 的就是行级触发器</span></span><br><span class="line"><span class="comment">---行级触发器:包含有for each row 的就是行级触发器</span></span><br><span class="line"><span class="comment">--------------加for each row是为了使用：old或者:new对象或者一行记录</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--语句级触发器</span></span><br><span class="line"><span class="comment">--插入一条记录，输出一个新员工入职</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">trigger</span> t1</span><br><span class="line"><span class="keyword">after</span></span><br><span class="line"><span class="keyword">insert</span></span><br><span class="line"><span class="keyword">on</span> person</span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  dbms_output.put_line(<span class="string">'一个新员工入职'</span>);</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"><span class="comment">--触发t1</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> person <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'小红'</span>);</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> person;</span><br><span class="line"></span><br><span class="line"><span class="comment">--行级触发器</span></span><br><span class="line"><span class="comment">--不能给员工降薪</span></span><br><span class="line"><span class="comment">--raise_application_error(-20001~-20999之间,'错误提示信息')</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">trigger</span> t2</span><br><span class="line"><span class="keyword">before</span></span><br><span class="line"><span class="keyword">update</span></span><br><span class="line"><span class="keyword">on</span> emp</span><br><span class="line"><span class="keyword">for</span> <span class="keyword">each</span> <span class="keyword">row</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">if</span> :old.sal&gt;:new.sal <span class="keyword">then</span></span><br><span class="line">    raise_application_error(<span class="number">-20001</span>,<span class="string">'不能给员工降薪'</span>);</span><br><span class="line">  <span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"><span class="comment">--触发t2</span></span><br><span class="line"><span class="keyword">update</span> emp <span class="keyword">set</span> sal=sal<span class="number">-1</span> <span class="keyword">where</span> empno=<span class="number">7788</span>;</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">---触发器实现主键自增【行级触发器】</span></span><br><span class="line"><span class="comment">---分析：在用户做插入操作之前，拿到即将插入的数据</span></span><br><span class="line"><span class="comment">-----给该数据中的主键列赋值</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">trigger</span> auid</span><br><span class="line"><span class="keyword">before</span></span><br><span class="line"><span class="keyword">insert</span></span><br><span class="line"><span class="keyword">on</span> person</span><br><span class="line"><span class="keyword">for</span> <span class="keyword">each</span> <span class="keyword">row</span></span><br><span class="line"><span class="keyword">declare</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">select</span> s_person.nextval <span class="keyword">into</span> :new.pid <span class="keyword">from</span> dual;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"><span class="comment">--使用auid实现主键自增</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> person (pname) <span class="keyword">values</span> (<span class="string">'a'</span>);</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> person;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">---oracle 10g  ojdbc14.jar</span></span><br><span class="line"><span class="comment">---oracle 11g  ojdbc6.jar</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="java调用存储过程和存储函数"><a href="#java调用存储过程和存储函数" class="headerlink" title="java调用存储过程和存储函数"></a>java调用存储过程和存储函数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> nixiangyu</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2019/8/13</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OracleDemo</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">javaCallOracle</span><span class="params">()</span> <span class="keyword">throws</span> ClassNotFoundException, SQLException </span>&#123;</span><br><span class="line">        <span class="comment">//加载数据库驱动</span></span><br><span class="line">        Class.forName(<span class="string">"oracle.jdbc.driver.OracleDriver"</span>);</span><br><span class="line">        <span class="comment">//得到Connection连接</span></span><br><span class="line">        Connection connection = DriverManager.getConnection(<span class="string">"jdbc:oracle:thin:@192.168.121.6:1521:orcl"</span>, <span class="string">"itheima"</span>, <span class="string">"itheima"</span>);</span><br><span class="line">        <span class="comment">//得到预编译的Statement对象</span></span><br><span class="line">        PreparedStatement pstm = connection.prepareStatement(<span class="string">"select * from emp where empno =?"</span>);</span><br><span class="line">        <span class="comment">//给参数赋值</span></span><br><span class="line">        pstm.setObject (<span class="number">1</span>, <span class="number">7788</span>);</span><br><span class="line">        <span class="comment">//执行查询操作</span></span><br><span class="line">        ResultSet resultSet = pstm.executeQuery();</span><br><span class="line">        <span class="comment">//输出结果</span></span><br><span class="line">        <span class="keyword">while</span> (resultSet.next()) &#123;</span><br><span class="line">            System.out.println(resultSet.getString(<span class="string">"ename"</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//释放资源</span></span><br><span class="line">        resultSet.close();</span><br><span class="line">        pstm.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Java调用存储过程</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ClassNotFoundException</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> SQLException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">javaCallProcedure</span><span class="params">()</span> <span class="keyword">throws</span> ClassNotFoundException, SQLException </span>&#123;</span><br><span class="line">        <span class="comment">//加载数据库驱动</span></span><br><span class="line">        Class.forName(<span class="string">"oracle.jdbc.driver.OracleDriver"</span>);</span><br><span class="line">        <span class="comment">//得到Connection连接</span></span><br><span class="line">        Connection connection = DriverManager.getConnection(<span class="string">"jdbc:oracle:thin:@192.168.121.6:1521:orcl"</span>, <span class="string">"itheima"</span>, <span class="string">"itheima"</span>);</span><br><span class="line">        <span class="comment">//得到预编译的Statement对象</span></span><br><span class="line">        CallableStatement pstm = connection.prepareCall(<span class="string">"&#123;call p_yearsal(?,?)&#125;"</span>);</span><br><span class="line">        <span class="comment">//给参数赋值</span></span><br><span class="line">        pstm.setObject (<span class="number">1</span>, <span class="number">7788</span>);</span><br><span class="line">        pstm.registerOutParameter(<span class="number">2</span>, OracleTypes.NUMBER);</span><br><span class="line">        <span class="comment">//执行查询操作</span></span><br><span class="line">        pstm.execute();</span><br><span class="line">        <span class="comment">//输出结果</span></span><br><span class="line">        System.out.println(pstm.getObject(<span class="number">2</span>));</span><br><span class="line">        pstm.close();</span><br><span class="line">        connection.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Java调用存储函数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ClassNotFoundException</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> SQLException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">javaCallFunction</span><span class="params">()</span> <span class="keyword">throws</span> ClassNotFoundException, SQLException </span>&#123;</span><br><span class="line">        <span class="comment">//加载数据库驱动</span></span><br><span class="line">        Class.forName(<span class="string">"oracle.jdbc.driver.OracleDriver"</span>);</span><br><span class="line">        <span class="comment">//得到Connection连接</span></span><br><span class="line">        Connection connection = DriverManager.getConnection(<span class="string">"jdbc:oracle:thin:@192.168.121.6:1521:orcl"</span>, <span class="string">"itheima"</span>, <span class="string">"itheima"</span>);</span><br><span class="line">        <span class="comment">//得到预编译的Statement对象</span></span><br><span class="line">        CallableStatement pstm = connection.prepareCall(<span class="string">"&#123;?=call f_yearsal(?)&#125;"</span>);</span><br><span class="line">        <span class="comment">//给参数赋值</span></span><br><span class="line">        pstm.setObject (<span class="number">2</span>, <span class="number">7788</span>);</span><br><span class="line">        pstm.registerOutParameter(<span class="number">1</span>, OracleTypes.NUMBER);</span><br><span class="line">        <span class="comment">//执行查询操作</span></span><br><span class="line">        pstm.execute();</span><br><span class="line">        <span class="comment">//输出结果</span></span><br><span class="line">        System.out.println(pstm.getObject(<span class="number">1</span>));</span><br><span class="line">        pstm.close();</span><br><span class="line">        connection.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Oracle/" rel="tag"># Oracle</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/09/框架学习/Maven/Maven/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/13/框架学习/后台管理系统/01_环境配置/" rel="prev" title="01_环境配置">
+                01_环境配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/me.jpg" alt="倪翔宇">
+            
+              <p class="site-author-name" itemprop="name">倪翔宇</p>
+              <p class="site-description motion-element" itemprop="description">技术博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/nixiangyu1" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#oracle入门"><span class="nav-number">1.</span> <span class="nav-text">oracle入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建用户和用户授权"><span class="nav-number">1.1.</span> <span class="nav-text">创建用户和用户授权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增删改查操作序列"><span class="nav-number">1.2.</span> <span class="nav-text">增删改查操作序列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单行函数-条件表达式，多行函数"><span class="nav-number">1.3.</span> <span class="nav-text">单行函数,条件表达式，多行函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分组查询"><span class="nav-number">1.4.</span> <span class="nav-text">分组查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多表查询"><span class="nav-number">1.5.</span> <span class="nav-text">多表查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自连接"><span class="nav-number">1.6.</span> <span class="nav-text">自连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子查询"><span class="nav-number">1.7.</span> <span class="nav-text">子查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分页查询"><span class="nav-number">1.8.</span> <span class="nav-text">分页查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图"><span class="nav-number">1.9.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">1.10.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plsql中定义变量"><span class="nav-number">1.11.</span> <span class="nav-text">plsql中定义变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plsql中的if判断"><span class="nav-number">1.12.</span> <span class="nav-text">plsql中的if判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plsql中的loop循环"><span class="nav-number">1.13.</span> <span class="nav-text">plsql中的loop循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#游标"><span class="nav-number">1.14.</span> <span class="nav-text">游标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储过程"><span class="nav-number">1.15.</span> <span class="nav-text">存储过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储函数"><span class="nav-number">1.16.</span> <span class="nav-text">存储函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储过程和存储函数的区别"><span class="nav-number">1.17.</span> <span class="nav-text">存储过程和存储函数的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#触发器"><span class="nav-number">1.18.</span> <span class="nav-text">触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#java调用存储过程和存储函数"><span class="nav-number">1.18.1.</span> <span class="nav-text">java调用存储过程和存储函数</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">倪翔宇</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

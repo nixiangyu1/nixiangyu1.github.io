@@ -262,6 +262,326 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/01/框架学习/Spring/01_Spring入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/01/框架学习/Spring/01_Spring入门/" itemprop="url">01_Spring入门</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-01T15:28:01+08:00">
+                2019-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Spring入门"><a href="#Spring入门" class="headerlink" title="Spring入门"></a>Spring入门</h1><h2 id="Ioc控制反转-解耦"><a href="#Ioc控制反转-解耦" class="headerlink" title="Ioc控制反转    解耦"></a>Ioc控制反转    解耦</h2><p>交给工厂类 </p>
+<p>new              编译期 依赖</p>
+<p>工厂模式    通过反射    运行时依赖</p>
+<h2 id="ApplicationContext和BeanFactory的区别"><a href="#ApplicationContext和BeanFactory的区别" class="headerlink" title="ApplicationContext和BeanFactory的区别"></a>ApplicationContext和BeanFactory的区别</h2><h3 id="什么是ApplicationContext，Beanfactory？"><a href="#什么是ApplicationContext，Beanfactory？" class="headerlink" title="什么是ApplicationContext，Beanfactory？"></a>什么是ApplicationContext，Beanfactory？</h3><p>核心容器的两个接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取spring的Ioc核心容器，并根据id获取对象</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * ApplicationContext的三个常用实现类：</span></span><br><span class="line"><span class="comment">     *      ClassPathXmlApplicationContext：它可以加载类路径下的配置文件，要求配置文件必须在类路径下。不在的话，加载不了。(更常用)</span></span><br><span class="line"><span class="comment">     *      FileSystemXmlApplicationContext：它可以加载磁盘任意路径下的配置文件(必须有访问权限）</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     *      AnnotationConfigApplicationContext：它是用于读取注解创建容器的，是明天的内容。</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 核心容器的两个接口引发出的问题：</span></span><br><span class="line"><span class="comment">     *  ApplicationContext:     单例对象适用              采用此接口</span></span><br><span class="line"><span class="comment">     *      它在构建核心容器时，创建对象采取的策略是采用立即加载的方式。也就是说，只要一读取完配置文件马上就创建配置文件中配置的对象。</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     *  BeanFactory:            多例对象使用</span></span><br><span class="line"><span class="comment">     *      它在构建核心容器时，创建对象采取的策略是采用延迟加载的方式。也就是说，什么时候根据id获取对象了，什么时候才真正的创建对象。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> args</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//1.获取核心容器对象</span></span><br><span class="line">        ApplicationContext ac = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"bean.xml"</span>);</span><br><span class="line"><span class="comment">//        ApplicationContext ac = new FileSystemXmlApplicationContext("C:\\Users\\zhy\\Desktop\\bean.xml");</span></span><br><span class="line">        <span class="comment">//2.根据id获取Bean对象</span></span><br><span class="line">        IAccountService as  = (IAccountService)ac.getBean(<span class="string">"accountService"</span>);</span><br><span class="line">        IAccountDao adao = ac.getBean(<span class="string">"accountDao"</span>,IAccountDao.class);</span><br><span class="line"></span><br><span class="line">        System.out.println(as);</span><br><span class="line">        System.out.println(adao);</span><br><span class="line">        as.saveAccount();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//--------BeanFactory----------</span></span><br><span class="line"><span class="comment">//        Resource resource = new ClassPathResource("bean.xml");</span></span><br><span class="line"><span class="comment">//        BeanFactory factory = new XmlBeanFactory(resource);</span></span><br><span class="line"><span class="comment">//        IAccountService as  = (IAccountService)factory.getBean("accountService");</span></span><br><span class="line"><span class="comment">//        System.out.println(as);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ApplicationContext:</p>
+<ol>
+<li>立即实例化</li>
+<li>创建时将所有Bean对象实例化存放到核心容器中</li>
+<li>单例</li>
+</ol>
+<p>BeanFactory:</p>
+<ol>
+<li>延迟实例化</li>
+<li>使用时将用到的Bean对象实例化</li>
+<li>多例</li>
+</ol>
+<h2 id="三种创建Bean对象的方式"><a href="#三种创建Bean对象的方式" class="headerlink" title="三种创建Bean对象的方式"></a>三种创建Bean对象的方式</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--把对象的创建交给spring来管理--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--第一种使用默认构造函数创建对象，存入核心容器中--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">    &lt;bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl"&gt;&lt;/bean&gt;</span></span><br><span class="line"><span class="comment">    &lt;bean id="accountDao" class="com.itheima.dao.impl.AccountDaoImpl"/&gt;</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--第二种使用工厂中的方法创建对象，存入核心容器中--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">    &lt;bean id="instanceFactroy" class="com.itheima.factory.InstanceFactory"&gt;&lt;/bean&gt;</span></span><br><span class="line"><span class="comment">    &lt;bean id="accountService" factory-bean="instanceFactroy" factory-method="getAccountService"&gt;&lt;/bean&gt;</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--第三种使用静态工厂中的静态方法创建对象，存入核心容器--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"accountService"</span> <span class="attr">class</span>=<span class="string">"com.itheima.factory.StaticFactory"</span> <span class="attr">factory-method</span>=<span class="string">"getAccountService"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Bean对象的作用范围"><a href="#Bean对象的作用范围" class="headerlink" title="Bean对象的作用范围"></a>Bean对象的作用范围</h2><p>定义bean标签的scope属性</p>
+<ol>
+<li>singleton:单例的(默认值)</li>
+<li>prototype:多例的</li>
+<li>request:作用于web应用的请求范围</li>
+<li>session:作用于web应用的会话范围</li>
+<li>global-session:作用于集群环境的会话范围</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"accountService"</span> <span class="attr">class</span>=<span class="string">"com.itheima.service.impl.AccountServiceImpl"</span> <span class="attr">scope</span>=<span class="string">"prototype"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Bean对象的生命周期"><a href="#Bean对象的生命周期" class="headerlink" title="Bean对象的生命周期"></a>Bean对象的生命周期</h2><p>单例对象：</p>
+<p>​    出生:核心容器创建时，Bean对象出生</p>
+<p>​    活着:只要容器还在，对象一直或者</p>
+<p>​    死亡:容器销毁，对象消亡</p>
+<p>多例对象：</p>
+<p>​    出生：第一次使用Bean对象时    </p>
+<p>​    活着: 在使用过程中一直活着</p>
+<p>​    死亡：长时间不使用，且没有被其他对象引用时</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/01/框架学习/Mybatis/08_Mybatis中的缓存/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/01/框架学习/Mybatis/08_Mybatis中的缓存/" itemprop="url">08_Mybatis中的缓存</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-01T14:28:01+08:00">
+                2019-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">Mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Mybatis中的缓存"><a href="#Mybatis中的缓存" class="headerlink" title="Mybatis中的缓存"></a>Mybatis中的缓存</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/01/框架学习/Mybatis/07_Mybatis中的延迟加载/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1420,381 +1740,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/30/设计模式/工厂模式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪翔宇的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/30/设计模式/工厂模式/" itemprop="url">工厂模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-30T12:28:01+08:00">
-                2019-07-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h1><p>工厂模式的实现方式和原理都不难理解和掌握。但是，在学习完之后，发现网上给的例子，根本体现不了工厂模式的作用。先不说存在有的例子本身就是错误的，主要是例子中的代码太简单，可以说没必要用工厂模式，只不过是为了说明实现方式和原理。所以，会产生一种错觉：还不如直接new 一个对象来的方便，有效。</p>
-<p>的确，设计模式本身就有其适用的场景，并不是滥用的，否则还不如不用。</p>
-<p>现在，我记录一下在翻阅一些资料后，自己的理解。</p>
-<p>首先，工厂模式是为了解耦：把对象的创建和使用的过程分开。就是Class A 想调用 Class B ，那么A只是调用B的方法，而至于B的实例化，就交给工厂类。</p>
-<p>其次，工厂模式可以降低代码重复。如果创建对象B的过程都很复杂，需要一定的代码量，而且很多地方都要用到，那么就会有很多的重复代码。我们可以这些创建对象B的代码放到工厂里统一管理。既减少了重复代码，也方便以后对B的创建过程的修改维护。（当然，我个人觉得也可以把这些创建过程的代码放到类的构造函数里，同样可以降低重复率，而且构造函数本身的作用也是初始化对象。不过，这样也会导致构造函数过于复杂，做的事太多，不符合java 的设计原则。）</p>
-<p>由于创建过程都由工厂统一管理，所以发生业务逻辑变化，不需要找到所有需要创建B的地方去逐个修正，只需要在工厂里修改即可，降低维护成本。同理，想把所有调用B的地方改成B的子类B1，只需要在对应生产B的工厂中或者工厂的方法中修改其生产的对象为B1即可，而不需要找到所有的new B（）改为new B1()。</p>
-<p>另外，因为工厂管理了对象的创建逻辑，使用者并不需要知道具体的创建过程，只管使用即可，减少了使用者因为创建逻辑导致的错误。</p>
-<p>举个例子：</p>
-<p>一个数据库工厂：可以返回一个数据库实例，可以是mysql，oracle等。</p>
-<p>这个工厂就可以把数据库连接需要的用户名，地址，密码等封装好，直接返回对应的数据库对象就好。不需要调用者自己初始化，减少了写错密码等等这些错误。调用者只负责使用，不需要管怎么去创建、初始化对象。</p>
-<p>还有，如果一个类有多个构造方法（构造的重写），我们也可以将它抽出来，放到工厂中，一个构造方法对应一个工厂方法并命名一个友好的名字，这样我们就不再只是根据参数的不同来判断，而是可以根据工厂的方法名来直观判断将要创建的对象的特点。这对于使用者来说，体验比较好。</p>
-<p>工厂模式适用的一些场景（不仅限于以下场景）：</p>
-<ol>
-<li>对象的创建过程/实例化准备工作很复杂，需要初始化很多参数、查询数据库等。</li>
-<li>类本身有好多子类，这些类的创建过程在业务中容易发生改变，或者对类的调用容易发生改变。</li>
-</ol>
-<p>参考博客： <a href="https://blog.csdn.net/fmyzc/article/details/79614944" target="_blank" rel="noopener">https://blog.csdn.net/fmyzc/article/details/79614944</a></p>
-<p>​         抽象工厂看下面的博客</p>
-<p>​       <a href="https://zhuanlan.zhihu.com/p/37095996" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/37095996</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/29/设计模式/代理模式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="倪翔宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪翔宇的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/29/设计模式/代理模式/" itemprop="url">代理模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-29T15:28:01+08:00">
-                2019-07-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h1><p>简单来说代理模式，就是我们日常生活中的代理商模式。代理模式一般有三元素：共同接口，真实对象（厂家），代理对象（代理商）。</p>
-<p>比方说我们需要向厂家买一些商品，但是这些商品是固定好的，而我们有一些特别的需求，厂家不能统一给我们制作。所有我们需要向代理商去买，他那里有定制商品，代理商也是从厂家进货，但是他经过了一系列的处理。</p>
-<p>下面通过图片展示一下：</p>
-<p><img src="/Img/1563636026934.png" alt="1563636026934"></p>
-<h3 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h3><p>程序员编写源码，再进行编译，是在程序运行前，就已经编译号的。</p>
-<ol>
-<li><p>共同接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SaleComputer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sale</span><span class="params">(<span class="keyword">double</span> money)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>真实对象(厂家)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.proxy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 真实类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Lenovo</span> <span class="keyword">implements</span> <span class="title">SaleComputer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sale</span><span class="params">(<span class="keyword">double</span> money)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"花了"</span>+money+<span class="string">"元买了联想电脑"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"联想电脑"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"展示电脑。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="3">
-<li><p>代理对象(代理商)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Proxy</span> <span class="keyword">implements</span> <span class="title">SaleComputer</span> </span>&#123;</span><br><span class="line">   <span class="comment">//声明真实对象</span></span><br><span class="line">    <span class="keyword">private</span> SaleComputer realObject;</span><br><span class="line"> 	<span class="comment">//构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Proxy</span><span class="params">(SaleComputer realObject)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.realObject = realObject;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//实现接口的方法</span></span><br><span class="line">    <span class="comment">//调用真实对象的构造函数，并且进行一些修改</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sale</span><span class="params">(<span class="keyword">double</span> money)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//打八五折</span></span><br><span class="line">        money = money *<span class="number">0.85</span>;</span><br><span class="line">        <span class="comment">//然后调用真实对象的方法，进货</span></span><br><span class="line">        <span class="keyword">return</span> realObject.sale(money);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//new一个代理商，参数传递的是一个真实对象</span></span><br><span class="line">   Proxy proxy = <span class="keyword">new</span> Proxy(<span class="keyword">new</span> Lenovo());</span><br><span class="line"><span class="comment">//调用代理商的方法，代理商会调用真实对象的方法</span></span><br><span class="line">   String computer=proxy.sale(<span class="number">8000</span>);</span><br><span class="line">System.out.println(computer);</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<p>优点：扩展原有功能，不用修改真实类的代码</p>
-<p>缺点：如果说有个需求，需要10个真实对象，对应要写10个代理对象，然后一个个调用。会很麻烦，不够灵活。</p>
-<p>所以要用到动态代理。</p>
-<h3 id="动态代理（JDK代理）"><a href="#动态代理（JDK代理）" class="headerlink" title="动态代理（JDK代理）"></a>动态代理（JDK代理）</h3><p>在程序运行时，通过反射机制动态创建的</p>
-<h4 id="实现步骤："><a href="#实现步骤：" class="headerlink" title="实现步骤："></a>实现步骤：</h4><ol>
-<li>代理对象和真实对象实现相同的接口</li>
-<li>代理对象=Proxy.newProxyInstance();</li>
-<li>使用代理对象调用方法</li>
-<li>增强方法<ul>
-<li>增强参数列表（修改参数列表，打折之类的）</li>
-<li>增强方法体执行逻辑（送货啊，上门服务）</li>
-<li>增强返回值类型（买电脑送鼠标）</li>
-</ul>
-</li>
-</ol>
-<p>SaleComputer接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SaleComputer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sale</span><span class="params">(<span class="keyword">double</span> money)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>真实类类实现接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 真实类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Lenovo</span> <span class="keyword">implements</span> <span class="title">SaleComputer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sale</span><span class="params">(<span class="keyword">double</span> money)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"花了"</span>+money+<span class="string">"元买了联想电脑"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"联想电脑"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"展示电脑。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>代理类实现InvocationHandler接口</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.proxy;</span><br><span class="line"></span><br><span class="line">import java.lang.reflect.InvocationHandler;</span><br><span class="line">import java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line">public class LenovoProxy implements InvocationHandler &#123;</span><br><span class="line">    //目标对象</span><br><span class="line">    private Object target;</span><br><span class="line"></span><br><span class="line">    //构造函数</span><br><span class="line">    public LenovoProxy(Object target) &#123;</span><br><span class="line">        this.target = target;</span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;</span><br><span class="line">        //代理扩展逻辑</span><br><span class="line">        //判断是否是sale方法</span><br><span class="line">        if (method.getName().equals(&quot;sale&quot;)) &#123;</span><br><span class="line">            //1.增强参数</span><br><span class="line">            //获取了传递过来的参数</span><br><span class="line">            double money = (double) args[0];</span><br><span class="line">            //打了八折</span><br><span class="line">            money = money * 0.85;</span><br><span class="line">            //调用真实对象的method方法</span><br><span class="line">            String obj = (String)method.invoke(target, money);</span><br><span class="line">            //2.增强逻辑</span><br><span class="line">            System.out.println(&quot;免费送货。。。&quot;);</span><br><span class="line">            //3.增强返回值</span><br><span class="line">            return obj+&quot;送了鼠标垫&quot;;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            //调用真实对象的method方法</span><br><span class="line">            Object obj = method.invoke(target, args[0]);</span><br><span class="line">            //代理对象调用方法后的返回值</span><br><span class="line">            return obj;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>测试类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyTest1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//我们要代理的真实的对象</span></span><br><span class="line">        Lenovo lenovo = <span class="keyword">new</span> Lenovo();</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">            调用Proxy类的newProxyInstance</span></span><br><span class="line"><span class="comment">            第一个参数是目标类的构造器</span></span><br><span class="line"><span class="comment">            第二个参数是目标类的接口</span></span><br><span class="line"><span class="comment">            第三个参数是代理类的接口，这里需要传参，为了传递给代理类，在代理类的invoke方法中添加业务代码</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        SaleComputer lenove_proxy = (SaleComputer) 		Proxy.newProxyInstance(lenovo.getClass().getClassLoader()</span><br><span class="line">                , lenovo.getClass().getInterfaces(), (InvocationHandler) <span class="keyword">new</span> LenovoProxy(lenovo));</span><br><span class="line">        <span class="comment">//调用的是代理类的方法</span></span><br><span class="line">        lenove_proxy.sale(<span class="number">8000</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>参考：<a href="https://www.zhihu.com/question/20794107" target="_blank" rel="noopener">https://www.zhihu.com/question/20794107</a></p>
-<p>这里主要用的是匿名内部类的方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//1.创建真实对象</span></span><br><span class="line">        Lenovo lenovo = <span class="keyword">new</span> Lenovo();</span><br><span class="line">        <span class="comment">//2.动态代理怎增强lenovo对象</span></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 三个参数：</span></span><br><span class="line"><span class="comment">         *    1.真实类的类加载器</span></span><br><span class="line"><span class="comment">         *    2.接口数组</span></span><br><span class="line"><span class="comment">         *    3.处理器</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        SaleComputer proxy_lenovo = (SaleComputer) Proxy.newProxyInstance(Lenovo.class.getClassLoader(), Lenovo.class.getInterfaces(), <span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">                 代理逻辑编写的方法：代理对象调用的所有方法都会执行该方法</span></span><br><span class="line"><span class="comment">                    参数：</span></span><br><span class="line"><span class="comment">                        1.proxy 代理对象   这里指的是上面的proxy_lenovo</span></span><br><span class="line"><span class="comment">                        2.method:代理对象调用的方法，被封装成对象     调用什么方法，method就是什么</span></span><br><span class="line"><span class="comment">                        3.args：代理对象调用的方法时，传递的实际参数数组    args[0]就是8000</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                <span class="comment">//代理扩展逻辑</span></span><br><span class="line">                <span class="comment">//判断是否是sale方法</span></span><br><span class="line">                <span class="keyword">if</span> (method.getName().equals(<span class="string">"sale"</span>)) &#123;</span><br><span class="line">                    <span class="comment">//1.增强参数</span></span><br><span class="line">                    <span class="comment">//获取了传递过来的参数</span></span><br><span class="line">                    <span class="keyword">double</span> money = (<span class="keyword">double</span>) args[<span class="number">0</span>];</span><br><span class="line">                    <span class="comment">//打了八折</span></span><br><span class="line">                    money = money * <span class="number">0.85</span>;</span><br><span class="line">                    <span class="comment">//调用真实对象的method方法</span></span><br><span class="line">                    String obj = (String)method.invoke(lenovo, money);</span><br><span class="line">                    <span class="comment">//2.增强逻辑</span></span><br><span class="line">                    System.out.println(<span class="string">"免费送货。。。"</span>);</span><br><span class="line">                    <span class="comment">//3.增强返回值</span></span><br><span class="line">                    <span class="keyword">return</span> obj+<span class="string">"送了鼠标垫"</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">//调用真实对象的method方法</span></span><br><span class="line">                    Object obj = method.invoke(lenovo, args[<span class="number">0</span>]);</span><br><span class="line">                    <span class="comment">//代理对象调用方法后的返回值</span></span><br><span class="line">                    <span class="keyword">return</span> obj;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//2.调用方法</span></span><br><span class="line">        String computer = proxy_lenovo.sale(<span class="number">8000</span>);</span><br><span class="line">        System.out.println(computer);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="cglib代理"><a href="#cglib代理" class="headerlink" title="cglib代理"></a>cglib代理</h3><p>导入jar包：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cglib<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cglib<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1_3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>消费者：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.cglib;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> net.sf.cglib.proxy.Enhancer;</span><br><span class="line"><span class="keyword">import</span> net.sf.cglib.proxy.MethodInterceptor;</span><br><span class="line"><span class="keyword">import</span> net.sf.cglib.proxy.MethodProxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 模拟一个消费者</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Producer producer = <span class="keyword">new</span> Producer();</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 动态代理：</span></span><br><span class="line"><span class="comment">         *  特点：字节码随用随创建，随用随加载</span></span><br><span class="line"><span class="comment">         *  作用：不修改源码的基础上对方法增强</span></span><br><span class="line"><span class="comment">         *  分类：</span></span><br><span class="line"><span class="comment">         *      基于接口的动态代理</span></span><br><span class="line"><span class="comment">         *      基于子类的动态代理</span></span><br><span class="line"><span class="comment">         *  基于子类的动态代理：</span></span><br><span class="line"><span class="comment">         *      涉及的类：Enhancer</span></span><br><span class="line"><span class="comment">         *      提供者：第三方cglib库</span></span><br><span class="line"><span class="comment">         *  如何创建代理对象：</span></span><br><span class="line"><span class="comment">         *      使用Enhancer类中的create方法</span></span><br><span class="line"><span class="comment">         *  创建代理对象的要求：</span></span><br><span class="line"><span class="comment">         *      被代理类不能是最终类</span></span><br><span class="line"><span class="comment">         *  create方法的参数：</span></span><br><span class="line"><span class="comment">         *      Class：字节码</span></span><br><span class="line"><span class="comment">         *          它是用于指定被代理对象的字节码。</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         *      Callback：用于提供增强的代码</span></span><br><span class="line"><span class="comment">         *          它是让我们写如何代理。我们一般都是些一个该接口的实现类，通常情况下都是匿名内部类，但不是必须的。</span></span><br><span class="line"><span class="comment">         *          此接口的实现类都是谁用谁写。</span></span><br><span class="line"><span class="comment">         *          我们一般写的都是该接口的子接口实现类：MethodInterceptor</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        Producer cglibProducer = (Producer)Enhancer.create(producer.getClass(), <span class="keyword">new</span> MethodInterceptor() &#123;</span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * 执行北地阿里对象的任何方法都会经过该方法</span></span><br><span class="line"><span class="comment">             * <span class="doctag">@param</span> proxy</span></span><br><span class="line"><span class="comment">             * <span class="doctag">@param</span> method</span></span><br><span class="line"><span class="comment">             * <span class="doctag">@param</span> args</span></span><br><span class="line"><span class="comment">             *    以上三个参数和基于接口的动态代理中invoke方法的参数是一样的</span></span><br><span class="line"><span class="comment">             * <span class="doctag">@param</span> methodProxy ：当前执行方法的代理对象</span></span><br><span class="line"><span class="comment">             * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">             * <span class="doctag">@throws</span> Throwable</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object proxy, Method method, Object[] args, MethodProxy methodProxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                <span class="comment">//提供增强的代码</span></span><br><span class="line">                Object returnValue = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//1.获取方法执行的参数</span></span><br><span class="line">                Float money = (Float)args[<span class="number">0</span>];</span><br><span class="line">                <span class="comment">//2.判断当前方法是不是销售</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="string">"saleProduct"</span>.equals(method.getName())) &#123;</span><br><span class="line">                    returnValue = method.invoke(producer, money*<span class="number">0.8f</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> returnValue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        cglibProducer.saleProduct(<span class="number">12000f</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>生产者</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.cglib;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 一个生产者</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Producer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 销售</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> money</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saleProduct</span><span class="params">(<span class="keyword">float</span> money)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"销售产品，并拿到钱："</span>+money);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 售后</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> money</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterService</span><span class="params">(<span class="keyword">float</span> money)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"提供售后服务，并拿到钱："</span>+money);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>测试类</p>
-<p>推荐博客：<a href="https://www.cnblogs.com/xdp-gacl/p/3971367.html" target="_blank" rel="noopener">https://www.cnblogs.com/xdp-gacl/p/3971367.html</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1842,7 +1792,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1853,7 +1803,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1864,7 +1814,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
