@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/13/框架学习/后台管理系统/01_环境配置/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/20/版本管理/Git/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="倪翔宇">
@@ -281,7 +281,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/13/框架学习/后台管理系统/01_环境配置/" itemprop="url">01_环境配置</a></h1>
+                <a class="post-title-link" href="/2019/08/20/版本管理/Git/" itemprop="url">Git</a></h1>
         
 
         <div class="post-meta">
@@ -293,8 +293,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-13T12:28:01+08:00">
-                2019-08-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-20T11:28:01+08:00">
+                2019-08-20
               </time>
             
 
@@ -316,8 +316,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/后台管理系统/" itemprop="url" rel="index">
-                    <span itemprop="name">后台管理系统</span>
+                  <a href="/categories/版本管理/" itemprop="url" rel="index">
+                    <span itemprop="name">版本管理</span>
                   </a>
                 </span>
 
@@ -355,7 +355,65 @@
       
         
           
-            <h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p><img src="/Img/1.ssm%E6%95%B4%E5%90%88.bmp" alt="1.ssm整合"></p>
+            <h1 id="Git使用方法"><a href="#Git使用方法" class="headerlink" title="Git使用方法"></a>Git使用方法</h1><p>参考视频:<a href="https://www.bilibili.com/video/av33238577/?p=1" target="_blank" rel="noopener">https://www.bilibili.com/video/av33238577/?p=1</a></p>
+<p>参考博客<a href="https://blog.csdn.net/jerryhanjj/article/details/72777618" target="_blank" rel="noopener">https://blog.csdn.net/jerryhanjj/article/details/72777618</a></p>
+<p>进入想要创建库的地址  cd </p>
+<p>首先登陆用户名     git config –global user.name ‘用户名’</p>
+<p>登陆email               git config –global user.email’邮箱’</p>
+<p>创建库                     git init</p>
+<p>与远端github相连       git remote add origin   远端地址</p>
+<p>检查本地文件与github文件：git status</p>
+<p>更新github文件:        git add 文件名字</p>
+<p>​                                      git commit -m ‘说明’</p>
+<p>推送到github:            git push -u origin master</p>
+<p>github上的代码同步到本地（代码合并）：git pull –rebase origin master</p>
+<p>创建新的分支：git branch &lt;分支名&gt;</p>
+<p>切换分支：  git cheackout   &lt;分支名&gt;</p>
+<p>合并分支  git merge  &lt;分支名&gt;</p>
+<p>将分支上的提交记录合并到master上  </p>
+<h2 id="把本地仓库推送到远端"><a href="#把本地仓库推送到远端" class="headerlink" title="把本地仓库推送到远端"></a>把本地仓库推送到远端</h2><h3 id="1-通过密匙建立连接"><a href="#1-通过密匙建立连接" class="headerlink" title="1.通过密匙建立连接"></a>1.通过密匙建立连接</h3><ol>
+<li>首先创建一个本地仓库</li>
+<li>打开 git Bash 输入ssh-keygen -t rsa，一直回车</li>
+<li>c盘的当前用户下的.ssh文件夹下，创建公钥和私钥，没有后缀的是私钥</li>
+<li>复制有后缀的公钥,打开github的settings点击SSH and GPG keys添加公钥</li>
+<li>重新打开git Bash，输入 git remote add origin <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:nixiangyu1/repo1.git</li>
+<li>将本地仓库推送到远程 git push -u origin master</li>
+</ol>
+<p>或者右击，选择git sync，点击Mange进行配置</p>
+<p><img src="/Img/1566298567756.png" alt="1566298567756"></p>
+<h3 id="2-Https建立连接"><a href="#2-Https建立连接" class="headerlink" title="2.Https建立连接"></a>2.Https建立连接</h3><p><img src="Img/1566298769795.png" alt="1566298769795"></p>
+<p><img src="/Img/1566298815756.png" alt="1566298815756"></p>
+<h2 id="克隆远程仓库到本地"><a href="#克隆远程仓库到本地" class="headerlink" title="克隆远程仓库到本地"></a>克隆远程仓库到本地</h2><p>方法一</p>
+<ol>
+<li>打开 git Bash</li>
+<li>输入 git clone <a href="https://github.com/nixiangyu1/repo1.git" target="_blank" rel="noopener">https://github.com/nixiangyu1/repo1.git</a></li>
+</ol>
+<p>方法二</p>
+<ol>
+<li><p>右击打开git clone，输入url</p>
+<p><img src="Img/1566299235038.png" alt="1566299235038"></p>
+</li>
+</ol>
+<h2 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h2><ol>
+<li>先把远程仓库的代码pull拉取下来</li>
+<li>手动合并代码，右击解决冲突</li>
+<li>然后提交代码</li>
+</ol>
+<h2 id="连接私有仓库"><a href="#连接私有仓库" class="headerlink" title="连接私有仓库"></a>连接私有仓库</h2><p><img src="/Img/1566311226476.png" alt="1566311226476"></p>
+<h2 id="克隆私有仓库"><a href="#克隆私有仓库" class="headerlink" title="克隆私有仓库"></a>克隆私有仓库</h2><p><img src="/Img/1566311425324.png" alt="1566311425324"></p>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><p>创建分支</p>
+<p>切换到主分支再合并分支。</p>
+<h1 id="idea中使用git"><a href="#idea中使用git" class="headerlink" title="idea中使用git"></a>idea中使用git</h1><h3 id="1-打开settings添加git目录"><a href="#1-打开settings添加git目录" class="headerlink" title="1.打开settings添加git目录"></a>1.打开settings添加git目录</h3><p><img src="/Img/1566313260404.png" alt="1566313260404"></p>
+<h3 id="2-创建本地仓库"><a href="#2-创建本地仓库" class="headerlink" title="2.创建本地仓库"></a>2.创建本地仓库</h3><p><img src="/Img/1566313407293.png" alt="1566313407293"></p>
+<p>选择上一级目录添加本地仓库</p>
+<h3 id="3-通过按钮进行操作"><a href="#3-通过按钮进行操作" class="headerlink" title="3.通过按钮进行操作"></a>3.通过按钮进行操作</h3><p><img src="/Img/1566313951401.png" alt="1566313951401"></p>
+<h3 id="4-推送到远程仓库，ssh在idea中不好用"><a href="#4-推送到远程仓库，ssh在idea中不好用" class="headerlink" title="4.推送到远程仓库，ssh在idea中不好用"></a>4.推送到远程仓库，ssh在idea中不好用</h3><p><img src="/Img/1566314024375.png" alt="1566314024375"></p>
+<p><img src="/Img/1566314110337.png" alt="1566314110337"></p>
+<h3 id="5-从远程仓库中克隆"><a href="#5-从远程仓库中克隆" class="headerlink" title="5.从远程仓库中克隆"></a>5.从远程仓库中克隆</h3><p><img src="/Img/1566314256280.png" alt="1566314256280"></p>
+<p><img src="/Img/1566314289504.png" alt="1566314289504"></p>
+<h3 id="6-在idea中使用分支"><a href="#6-在idea中使用分支" class="headerlink" title="6.在idea中使用分支"></a>6.在idea中使用分支</h3><p><img src="/Img/1566314503681.png" alt="1566314503681"></p>
+<p><img src="/Img/1566314557930.png" alt="1566314557930"></p>
+<h3 id="7-idea中切换分支"><a href="#7-idea中切换分支" class="headerlink" title="7.idea中切换分支"></a>7.idea中切换分支</h3><p><img src="/Img/1566314742710.png" alt="1566314742710"></p>
 
           
         
