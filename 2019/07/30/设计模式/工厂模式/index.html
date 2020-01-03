@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="倪翔宇的博客">
 <meta property="og:description" content="工厂模式工厂模式的实现方式和原理都不难理解和掌握。但是，在学习完之后，发现网上给的例子，根本体现不了工厂模式的作用。先不说存在有的例子本身就是错误的，主要是例子中的代码太简单，可以说没必要用工厂模式，只不过是为了说明实现方式和原理。所以，会产生一种错觉：还不如直接new 一个对象来的方便，有效。 的确，设计模式本身就有其适用的场景，并不是滥用的，否则还不如不用。 现在，我记录一下在翻阅一些资料后，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-31T16:45:01.193Z">
+<meta property="og:updated_time" content="2019-08-29T14:32:59.183Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工厂模式">
 <meta name="twitter:description" content="工厂模式工厂模式的实现方式和原理都不难理解和掌握。但是，在学习完之后，发现网上给的例子，根本体现不了工厂模式的作用。先不说存在有的例子本身就是错误的，主要是例子中的代码太简单，可以说没必要用工厂模式，只不过是为了说明实现方式和原理。所以，会产生一种错觉：还不如直接new 一个对象来的方便，有效。 的确，设计模式本身就有其适用的场景，并不是滥用的，否则还不如不用。 现在，我记录一下在翻阅一些资料后，">
@@ -371,6 +371,10 @@
 <p>参考博客： <a href="https://blog.csdn.net/fmyzc/article/details/79614944" target="_blank" rel="noopener">https://blog.csdn.net/fmyzc/article/details/79614944</a></p>
 <p>​         抽象工厂看下面的博客</p>
 <p>​       <a href="https://zhuanlan.zhihu.com/p/37095996" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/37095996</a></p>
+<p>简单工厂：所有产品放到一个工厂，工厂出现问题，所有产品都不能用</p>
+<p>​                    添加产品需要修改工厂类，违背了开闭；原则</p>
+<p>工厂模式：只有一个抽象类，一个工厂对于一个产品，每增加一个产品就需要添加一个具体的产品类和工厂类</p>
+<p>抽象工厂：可以有多个抽象类，可以有一个工厂对于多个产品，产品之间有依赖关系。代码扩展比较困难，如果要实现一个新的系列的产品，需要写抽象工厂，抽象类，还要实现工厂，实现抽象类。</p>
 
       
     </div>
@@ -411,7 +415,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/30/Java基础知识再回顾/反射/" rel="prev" title="反射">
+              <a href="/2019/07/30/JVM虚拟机/反射/" rel="prev" title="反射">
                 反射 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -492,7 +496,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">129</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -503,7 +507,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -514,7 +518,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -577,7 +581,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="死锁,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、死锁讲解在Java中使用多线程，就会有可能导致死锁问题。死锁会让程序一直卡住，不再程序往下执行。我们只能通过中止并重启的方式来让程序重新执行。  这是我们非常不愿意看到的一种现象，我们要尽可能避免死锁的情况发生！  造成死锁的原因可以概括成三句话：  当前线程拥有其他线程需要的资源 当前线程等待其他线程已拥有的资源 都不放弃自己拥有的资源  1.1锁顺序死锁首先我们来看一下最简单的死锁(锁顺序">
+<meta name="keywords" content="死锁">
+<meta property="og:type" content="article">
+<meta property="og:title" content="死锁">
+<meta property="og:url" content="http://yoursite.com/2019/08/27/多线程/死锁/index.html">
+<meta property="og:site_name" content="倪翔宇的博客">
+<meta property="og:description" content="一、死锁讲解在Java中使用多线程，就会有可能导致死锁问题。死锁会让程序一直卡住，不再程序往下执行。我们只能通过中止并重启的方式来让程序重新执行。  这是我们非常不愿意看到的一种现象，我们要尽可能避免死锁的情况发生！  造成死锁的原因可以概括成三句话：  当前线程拥有其他线程需要的资源 当前线程等待其他线程已拥有的资源 都不放弃自己拥有的资源  1.1锁顺序死锁首先我们来看一下最简单的死锁(锁顺序">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/Img/v2-6ea5feffa868ba7ddce1cc4926b29828_hd.jpg">
+<meta property="og:updated_time" content="2019-08-27T03:16:43.505Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="死锁">
+<meta name="twitter:description" content="一、死锁讲解在Java中使用多线程，就会有可能导致死锁问题。死锁会让程序一直卡住，不再程序往下执行。我们只能通过中止并重启的方式来让程序重新执行。  这是我们非常不愿意看到的一种现象，我们要尽可能避免死锁的情况发生！  造成死锁的原因可以概括成三句话：  当前线程拥有其他线程需要的资源 当前线程等待其他线程已拥有的资源 都不放弃自己拥有的资源  1.1锁顺序死锁首先我们来看一下最简单的死锁(锁顺序">
+<meta name="twitter:image" content="http://yoursite.com/Img/v2-6ea5feffa868ba7ddce1cc4926b29828_hd.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '倪翔宇'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/27/多线程/死锁/">
+
+
+
+
+
+  <title>死锁 | 倪翔宇的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">倪翔宇的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录和小刘一起学习的过程</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/多线程/死锁/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="倪翔宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪翔宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">死锁</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-27T15:21:06+08:00">
+                2019-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/多线程/" itemprop="url" rel="index">
+                    <span itemprop="name">多线程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、死锁讲解"><a href="#一、死锁讲解" class="headerlink" title="一、死锁讲解"></a>一、死锁讲解</h2><p>在Java中使用多线程，就会<strong>有可能导致死锁</strong>问题。死锁会让程序一直<strong>卡</strong>住，不再程序往下执行。我们只能通过<strong>中止并重启</strong>的方式来让程序重新执行。</p>
+<ul>
+<li>这是我们非常不愿意看到的一种现象，我们要<strong>尽可能</strong>避免死锁的情况发生！</li>
+</ul>
+<p>造成死锁的原因可以<strong>概括</strong>成三句话：</p>
+<ul>
+<li>当前线程<strong>拥有其他线程需要的</strong>资源</li>
+<li>当前线程<strong>等待其他线程已拥有</strong>的资源</li>
+<li><strong>都不放弃</strong>自己拥有的资源</li>
+</ul>
+<h2 id="1-1锁顺序死锁"><a href="#1-1锁顺序死锁" class="headerlink" title="1.1锁顺序死锁"></a>1.1锁顺序死锁</h2><p>首先我们来看一下最简单的死锁(锁顺序死锁)是怎么样发生的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LeftRightDeadlock</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object left = <span class="keyword">new</span> Object();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object right = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">leftRight</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 得到left锁</span></span><br><span class="line">        <span class="keyword">synchronized</span> (left) &#123;</span><br><span class="line">			<span class="comment">// 得到right锁</span></span><br><span class="line">            <span class="keyword">synchronized</span> (right) &#123;</span><br><span class="line">                doSomething();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rightLeft</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 得到right锁</span></span><br><span class="line">        <span class="keyword">synchronized</span> (right) &#123;</span><br><span class="line">			<span class="comment">// 得到left锁</span></span><br><span class="line">            <span class="keyword">synchronized</span> (left) &#123;</span><br><span class="line">                doSomethingElse();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们的线程是<strong>交错执行</strong>的，那么就很有可能出现以下的情况：</p>
+<ul>
+<li>线程A调用<code>leftRight()</code>方法，得到left锁</li>
+<li><strong>同时</strong>线程B调用<code>rightLeft()</code>方法，得到right锁</li>
+<li>线程A和线程B都继续执行，此时线程A需要right锁<strong>才能继续往下</strong>执行。此时线程B需要left锁<strong>才能继续往下</strong>执行。</li>
+<li>但是：<strong>线程A的left锁并没有释放，线程B的right锁也没有释放</strong>。</li>
+<li>所以他们都只能等待，而这种等待是无期限的–&gt;永久等待–&gt;死锁</li>
+</ul>
+<p><img src="/Img/v2-6ea5feffa868ba7ddce1cc4926b29828_hd.jpg" alt="img"></p>
+<h2 id="1-2动态锁顺序死锁"><a href="#1-2动态锁顺序死锁" class="headerlink" title="1.2动态锁顺序死锁"></a>1.2动态锁顺序死锁</h2><p>我们看一下下面的例子，你认为会发生死锁吗？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 转账</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">transferMoney</span><span class="params">(Account fromAccount,</span></span></span><br><span class="line"><span class="function"><span class="params">                                 Account toAccount,</span></span></span><br><span class="line"><span class="function"><span class="params">                                 DollarAmount amount)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> InsufficientFundsException </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 锁定汇账账户</span></span><br><span class="line">    <span class="keyword">synchronized</span> (fromAccount) &#123;</span><br><span class="line">        <span class="comment">// 锁定来账账户</span></span><br><span class="line">        <span class="keyword">synchronized</span> (toAccount) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 判余额是否大于0</span></span><br><span class="line">            <span class="keyword">if</span> (fromAccount.getBalance().compareTo(amount) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> InsufficientFundsException();</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 汇账账户减钱</span></span><br><span class="line">                fromAccount.debit(amount);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 来账账户增钱</span></span><br><span class="line">                toAccount.credit(amount);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码<strong>看起来是没有问题的</strong>：锁定两个账户来判断余额是否充足才进行转账！</p>
+<p>但是，同样<strong>有可能会发生死锁</strong>：</p>
+<ul>
+<li>如果两个线程<strong>同时</strong>调用<code>transferMoney()</code></li>
+<li>线程A从X账户向Y账户转账</li>
+<li>线程B从账户Y向账户X转账</li>
+<li>那么就会发生死锁。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A:transferMoney(myAccount,yourAccount,<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">B:transferMoney(yourAccount,myAccount,<span class="number">20</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-3协作对象之间发生死锁"><a href="#1-3协作对象之间发生死锁" class="headerlink" title="1.3协作对象之间发生死锁"></a>1.3协作对象之间发生死锁</h2><p>我们来看一下下面的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CooperatingDeadlock</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Warning: deadlock-prone!</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Taxi</span> </span>&#123;</span><br><span class="line">        <span class="meta">@GuardedBy</span>(<span class="string">"this"</span>) <span class="keyword">private</span> Point location, destination;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Dispatcher dispatcher;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Taxi</span><span class="params">(Dispatcher dispatcher)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.dispatcher = dispatcher;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> Point <span class="title">getLocation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> location;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// setLocation 需要Taxi内置锁</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setLocation</span><span class="params">(Point location)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.location = location;</span><br><span class="line">            <span class="keyword">if</span> (location.equals(destination))</span><br><span class="line">                <span class="comment">// 调用notifyAvailable()需要Dispatcher内置锁</span></span><br><span class="line">                dispatcher.notifyAvailable(<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> Point <span class="title">getDestination</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> destination;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setDestination</span><span class="params">(Point destination)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.destination = destination;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Dispatcher</span> </span>&#123;</span><br><span class="line">        <span class="meta">@GuardedBy</span>(<span class="string">"this"</span>) <span class="keyword">private</span> <span class="keyword">final</span> Set&lt;Taxi&gt; taxis;</span><br><span class="line">        <span class="meta">@GuardedBy</span>(<span class="string">"this"</span>) <span class="keyword">private</span> <span class="keyword">final</span> Set&lt;Taxi&gt; availableTaxis;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Dispatcher</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            taxis = <span class="keyword">new</span> HashSet&lt;Taxi&gt;();</span><br><span class="line">            availableTaxis = <span class="keyword">new</span> HashSet&lt;Taxi&gt;();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">notifyAvailable</span><span class="params">(Taxi taxi)</span> </span>&#123;</span><br><span class="line">            availableTaxis.add(taxi);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调用getImage()需要Dispatcher内置锁</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> Image <span class="title">getImage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            Image image = <span class="keyword">new</span> Image();</span><br><span class="line">            <span class="keyword">for</span> (Taxi t : taxis)</span><br><span class="line">                <span class="comment">// 调用getLocation()需要Taxi内置锁</span></span><br><span class="line">                image.drawMarker(t.getLocation());</span><br><span class="line">            <span class="keyword">return</span> image;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Image</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawMarker</span><span class="params">(Point p)</span> </span>&#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的<code>getImage()</code>和<code>setLocation(Point location)</code>都需要获取两个锁的</p>
+<ul>
+<li>并且在操作<strong>途中是没有释放锁的</strong></li>
+</ul>
+<p>这就是<strong>隐式获取两个锁</strong>(对象之间协作)..</p>
+<p>这种方式<strong>也很容易就造成死锁</strong>…..</p>
+<h2 id="二、避免死锁的方法"><a href="#二、避免死锁的方法" class="headerlink" title="二、避免死锁的方法"></a>二、避免死锁的方法</h2><p>避免死锁可以概括成三种方法：</p>
+<ul>
+<li><p><strong>固定加锁的顺序</strong>(针对锁顺序死锁)</p>
+</li>
+<li><p><strong>开放调用</strong>(针对对象之间协作造成的死锁)</p>
+</li>
+<li><p><strong>使用定时锁</strong>–&gt;<code>tryLock()</code></p>
+</li>
+<li><ul>
+<li>如果等待获取锁时间超时，则<strong>抛出异常而不是一直等待</strong>！</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-1固定锁顺序避免死锁"><a href="#2-1固定锁顺序避免死锁" class="headerlink" title="2.1固定锁顺序避免死锁"></a>2.1固定锁顺序避免死锁</h2><p>上面<code>transferMoney()</code>发生死锁的原因是因为<strong>加锁顺序</strong>不一致而出现的~</p>
+<ul>
+<li>正如书上所说的：如果所有线程<strong>以固定的顺序来获得锁</strong>，那么程序中就不会出现锁顺序死锁问题！</li>
+</ul>
+<p>那么上面的例子我们就可以<strong>改造</strong>成这样子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InduceLockOrder</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 额外的锁、避免两个对象hash值相等的情况(即使很少)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object tieLock = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transferMoney</span><span class="params">(<span class="keyword">final</span> Account fromAcct,</span></span></span><br><span class="line"><span class="function"><span class="params">                              <span class="keyword">final</span> Account toAcct,</span></span></span><br><span class="line"><span class="function"><span class="params">                              <span class="keyword">final</span> DollarAmount amount)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> InsufficientFundsException </span>&#123;</span><br><span class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Helper</span> </span>&#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transfer</span><span class="params">()</span> <span class="keyword">throws</span> InsufficientFundsException </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (fromAcct.getBalance().compareTo(amount) &lt; <span class="number">0</span>)</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> InsufficientFundsException();</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    fromAcct.debit(amount);</span><br><span class="line">                    toAcct.credit(amount);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 得到锁的hash值</span></span><br><span class="line">        <span class="keyword">int</span> fromHash = System.identityHashCode(fromAcct);</span><br><span class="line">        <span class="keyword">int</span> toHash = System.identityHashCode(toAcct);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 根据hash值来上锁</span></span><br><span class="line">        <span class="keyword">if</span> (fromHash &lt; toHash) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (fromAcct) &#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (toAcct) &#123;</span><br><span class="line">                    <span class="keyword">new</span> Helper().transfer();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (fromHash &gt; toHash) &#123;<span class="comment">// 根据hash值来上锁</span></span><br><span class="line">            <span class="keyword">synchronized</span> (toAcct) &#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (fromAcct) &#123;</span><br><span class="line">                    <span class="keyword">new</span> Helper().transfer();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;<span class="comment">// 额外的锁、避免两个对象hash值相等的情况(即使很少)</span></span><br><span class="line">            <span class="keyword">synchronized</span> (tieLock) &#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (fromAcct) &#123;</span><br><span class="line">                    <span class="keyword">synchronized</span> (toAcct) &#123;</span><br><span class="line">                        <span class="keyword">new</span> Helper().transfer();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到对应的<strong>hash值来固定加锁的顺序</strong>，这样我们就不会发生死锁的问题了！</p>
+<h2 id="2-2开放调用避免死锁"><a href="#2-2开放调用避免死锁" class="headerlink" title="2.2开放调用避免死锁"></a>2.2开放调用避免死锁</h2><p>在协作对象之间发生死锁的例子中，主要是因为在<strong>调用某个方法时就需要持有锁</strong>，并且在方法内部也调用了其他带锁的方法！</p>
+<ul>
+<li><strong>如果在调用某个方法时不需要持有锁，那么这种调用被称为开放调用</strong>！</li>
+</ul>
+<p>我们可以这样来改造：</p>
+<ul>
+<li>同步代码块最好<strong>仅被用于保护那些涉及共享状态的操作</strong>！</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CooperatingNoDeadlock</span> </span>&#123;</span><br><span class="line">    <span class="meta">@ThreadSafe</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Taxi</span> </span>&#123;</span><br><span class="line">        <span class="meta">@GuardedBy</span>(<span class="string">"this"</span>) <span class="keyword">private</span> Point location, destination;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Dispatcher dispatcher;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Taxi</span><span class="params">(Dispatcher dispatcher)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.dispatcher = dispatcher;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> Point <span class="title">getLocation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> location;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setLocation</span><span class="params">(Point location)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">boolean</span> reachedDestination;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 加Taxi内置锁</span></span><br><span class="line">            <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">                <span class="keyword">this</span>.location = location;</span><br><span class="line">                reachedDestination = location.equals(destination);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 执行同步代码块后完毕，释放锁</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (reachedDestination)</span><br><span class="line">                <span class="comment">// 加Dispatcher内置锁</span></span><br><span class="line">                dispatcher.notifyAvailable(<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> Point <span class="title">getDestination</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> destination;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setDestination</span><span class="params">(Point destination)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.destination = destination;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ThreadSafe</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Dispatcher</span> </span>&#123;</span><br><span class="line">        <span class="meta">@GuardedBy</span>(<span class="string">"this"</span>) <span class="keyword">private</span> <span class="keyword">final</span> Set&lt;Taxi&gt; taxis;</span><br><span class="line">        <span class="meta">@GuardedBy</span>(<span class="string">"this"</span>) <span class="keyword">private</span> <span class="keyword">final</span> Set&lt;Taxi&gt; availableTaxis;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Dispatcher</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            taxis = <span class="keyword">new</span> HashSet&lt;Taxi&gt;();</span><br><span class="line">            availableTaxis = <span class="keyword">new</span> HashSet&lt;Taxi&gt;();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">notifyAvailable</span><span class="params">(Taxi taxi)</span> </span>&#123;</span><br><span class="line">            availableTaxis.add(taxi);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Image <span class="title">getImage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            Set&lt;Taxi&gt; copy;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Dispatcher内置锁</span></span><br><span class="line">            <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">                copy = <span class="keyword">new</span> HashSet&lt;Taxi&gt;(taxis);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 执行同步代码块后完毕，释放锁</span></span><br><span class="line"></span><br><span class="line">            Image image = <span class="keyword">new</span> Image();</span><br><span class="line">            <span class="keyword">for</span> (Taxi t : copy)</span><br><span class="line">                <span class="comment">// 加Taix内置锁</span></span><br><span class="line">                image.drawMarker(t.getLocation());</span><br><span class="line">            <span class="keyword">return</span> image;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Image</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawMarker</span><span class="params">(Point p)</span> </span>&#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用开放调用是<strong>非常好的一种方式</strong>，应该尽量使用它~</p>
+<h2 id="2-3使用定时锁"><a href="#2-3使用定时锁" class="headerlink" title="2.3使用定时锁"></a>2.3使用定时锁</h2><p>使用显式Lock锁，在获取锁时使用<code>tryLock()</code>方法。当等待<strong>超过时限</strong>的时候，<code>tryLock()</code>不会一直等待，而是返回错误信息。</p>
+<p>使用<code>tryLock()</code>能够有效避免死锁问题~~</p>
+<h2 id="2-4死锁检测"><a href="#2-4死锁检测" class="headerlink" title="2.4死锁检测"></a>2.4死锁检测</h2><p>虽然造成死锁的原因是因为我们设计得不够好，但是可能写代码的时候不知道哪里发生了死锁。</p>
+<p>JDK提供了两种方式来给我们检测：</p>
+<ul>
+<li>JconsoleJDK自带的图形化界面工具，使用JDK给我们的的工具JConsole</li>
+<li>Jstack是JDK自带的命令行工具，主要用于线程Dump分析。</li>
+</ul>
+<p>具体可参考：</p>
+<ul>
+<li><a href="https://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%3A%2F%2Fwww.cnblogs.com%2Fflyingeagle%2Farticles%2F6853167.html" target="_blank" rel="noopener">www.cnblogs.com/flyingeagle…</a></li>
+</ul>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>发生死锁的原因主要由于：</p>
+<ul>
+<li><p>线程之间交错执行</p>
+</li>
+<li><ul>
+<li>解决：<strong>以固定的顺序加锁</strong></li>
+</ul>
+</li>
+<li><p>执行某方法时就需要持有锁，且不释放</p>
+</li>
+<li><ul>
+<li>解决：<strong>缩减同步代码块范围，最好仅操作共享变量时才加锁</strong></li>
+</ul>
+</li>
+<li><p>永久等待</p>
+</li>
+<li><ul>
+<li>解决：使用<code>tryLock()</code>定时锁，超过时限则返回错误信息</li>
+</ul>
+</li>
+</ul>
+<p>在操作系统层面上看待死锁问题(这是我之前做的笔记、很浅显)：</p>
+<ul>
+<li><a href="https://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%3A%2F%2Fmp.weixin.qq.com%2Fs%3F__biz%3DMzI4Njg5MDA5NA%3D%3D%26mid%3D2247484186%26idx%3D6%26sn%3Dfbe59571e8469fe953404cc632723646%26chksm%3Debd7421bdca0cb0d85c3a6651e765821d8e0b8aba43e2358d6f3be550a10e0b3ef02bc603715%23rd" target="_blank" rel="noopener">操作系统第五篇【死锁】</a></li>
+</ul>
+<p>参考资料：</p>
+<ul>
+<li>《Java核心技术卷一》</li>
+<li>《Java并发编程实战》</li>
+<li>《计算机操作系统 汤小丹》</li>
+</ul>
+<blockquote>
+<p>如果文章有错的地方欢迎指正，大家互相交流。习惯在微信看技术文章，想要获取更多的Java资源的同学，可以<strong>关注微信公众号:Java3y</strong>。</p>
+</blockquote>
+<p><strong>文章的目录导航</strong>：</p>
+<ul>
+<li><a href="https://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttps%3A%2F%2Fzhongfucheng.bitcron.com%2Fpost%2Fshou-ji%2Fwen-zhang-dao-hang" target="_blank" rel="noopener">zhongfucheng.bitcron.com/post/shou-j…</a></li>
+</ul>
+<p>—————————————————-2018年5月15日15:40:22更新</p>
+<p>鉴于评论区有两个人提出了相同的疑问，<strong>于是我去做了一个实验</strong>：</p>
+<p>现在<strong>贴出死锁代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DieLock</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> flag;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 锁对象A和B</span></span><br><span class="line">    <span class="keyword">private</span> Object objA;</span><br><span class="line">    <span class="keyword">private</span> Object objB;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DieLock</span><span class="params">(<span class="keyword">boolean</span> flag, Object objA, Object objB)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.flag = flag;</span><br><span class="line">        <span class="keyword">this</span>.objA = objA;</span><br><span class="line">        <span class="keyword">this</span>.objB = objB;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        testDeadLock(objA, objB);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 测试死锁的代码</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDeadLock</span><span class="params">(Object objA, Object objB)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (objA) &#123;</span><br><span class="line">                System.out.println(<span class="string">"if objA"</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (objB) &#123;</span><br><span class="line">                    System.out.println(<span class="string">"if objB"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (objB) &#123;</span><br><span class="line">                System.out.println(<span class="string">"else objB"</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (objA) &#123;</span><br><span class="line">                    System.out.println(<span class="string">"else objA"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>测试代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DieLockDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建出两个锁</span></span><br><span class="line">        Object objA = <span class="keyword">new</span> Object();</span><br><span class="line">        Object objB = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 传递进去给线程</span></span><br><span class="line">        DieLock dl1 = <span class="keyword">new</span> DieLock(<span class="keyword">true</span>, objA, objB);</span><br><span class="line">        DieLock dl2 = <span class="keyword">new</span> DieLock(<span class="keyword">false</span>, objA, objB);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 启动线程</span></span><br><span class="line">        dl1.start();</span><br><span class="line">        dl2.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>即使是方法传递参数的形式，是会发生死锁的(原因在评论区）</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/死锁/" rel="tag"># 死锁</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/27/多线程/Untitled/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/28/Linux/Linux/" rel="prev" title="Linux">
+                Linux <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/me.jpg" alt="倪翔宇">
+            
+              <p class="site-author-name" itemprop="name">倪翔宇</p>
+              <p class="site-description motion-element" itemprop="description">技术博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">129</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/nixiangyu1" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、死锁讲解"><span class="nav-number">1.</span> <span class="nav-text">一、死锁讲解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1锁顺序死锁"><span class="nav-number">2.</span> <span class="nav-text">1.1锁顺序死锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2动态锁顺序死锁"><span class="nav-number">3.</span> <span class="nav-text">1.2动态锁顺序死锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3协作对象之间发生死锁"><span class="nav-number">4.</span> <span class="nav-text">1.3协作对象之间发生死锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、避免死锁的方法"><span class="nav-number">5.</span> <span class="nav-text">二、避免死锁的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1固定锁顺序避免死锁"><span class="nav-number">6.</span> <span class="nav-text">2.1固定锁顺序避免死锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2开放调用避免死锁"><span class="nav-number">7.</span> <span class="nav-text">2.2开放调用避免死锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3使用定时锁"><span class="nav-number">8.</span> <span class="nav-text">2.3使用定时锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4死锁检测"><span class="nav-number">9.</span> <span class="nav-text">2.4死锁检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、总结"><span class="nav-number">10.</span> <span class="nav-text">三、总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">倪翔宇</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="JVM中的内存划分 1.堆中存放的数据存放对象本身和数组 StringPool 2.栈中存放的数据存放对象的引用 执行一个方法是，该方法就会压栈进行，方法执行结束就出栈 局部变量，如果是基本数据类型，会随着方法进栈，如果是引用数据类型，对象引用会进栈 3.方法区存放类的.class，静态变量，和全局变量。 4.本地方法栈为了执行操作系统本地的一些方法 5.程序计数器记录虚拟机运行到哪行代码 推荐博">
+<meta name="description" content="JVM中的内存划分 1.堆中存放的数据存放对象本身和数组 StringPool 2.栈中存放的数据存放对象的引用 执行一个方法是，该方法就会压栈进行，方法执行结束就出栈 局部变量，如果是基本数据类型，会随着方法进栈，如果是引用数据类型，对象引用会进栈 1.局部变量表2.操作数栈3.动态链接4.返回地址 3.方法区存放类的.class，静态变量，和全局变量。 4.本地方法栈为了执行操作系统本地的一些">
 <meta name="keywords" content="JVM中的内存划分">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM中的内存划分">
 <meta property="og:url" content="http://yoursite.com/2019/08/26/JVM虚拟机/JVM中的内存划分/index.html">
 <meta property="og:site_name" content="倪翔宇的博客">
-<meta property="og:description" content="JVM中的内存划分 1.堆中存放的数据存放对象本身和数组 StringPool 2.栈中存放的数据存放对象的引用 执行一个方法是，该方法就会压栈进行，方法执行结束就出栈 局部变量，如果是基本数据类型，会随着方法进栈，如果是引用数据类型，对象引用会进栈 3.方法区存放类的.class，静态变量，和全局变量。 4.本地方法栈为了执行操作系统本地的一些方法 5.程序计数器记录虚拟机运行到哪行代码 推荐博">
+<meta property="og:description" content="JVM中的内存划分 1.堆中存放的数据存放对象本身和数组 StringPool 2.栈中存放的数据存放对象的引用 执行一个方法是，该方法就会压栈进行，方法执行结束就出栈 局部变量，如果是基本数据类型，会随着方法进栈，如果是引用数据类型，对象引用会进栈 1.局部变量表2.操作数栈3.动态链接4.返回地址 3.方法区存放类的.class，静态变量，和全局变量。 4.本地方法栈为了执行操作系统本地的一些">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/Img/1566375889820.png">
-<meta property="og:updated_time" content="2019-08-26T07:47:28.606Z">
+<meta property="og:updated_time" content="2019-10-30T08:00:25.863Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM中的内存划分">
-<meta name="twitter:description" content="JVM中的内存划分 1.堆中存放的数据存放对象本身和数组 StringPool 2.栈中存放的数据存放对象的引用 执行一个方法是，该方法就会压栈进行，方法执行结束就出栈 局部变量，如果是基本数据类型，会随着方法进栈，如果是引用数据类型，对象引用会进栈 3.方法区存放类的.class，静态变量，和全局变量。 4.本地方法栈为了执行操作系统本地的一些方法 5.程序计数器记录虚拟机运行到哪行代码 推荐博">
+<meta name="twitter:description" content="JVM中的内存划分 1.堆中存放的数据存放对象本身和数组 StringPool 2.栈中存放的数据存放对象的引用 执行一个方法是，该方法就会压栈进行，方法执行结束就出栈 局部变量，如果是基本数据类型，会随着方法进栈，如果是引用数据类型，对象引用会进栈 1.局部变量表2.操作数栈3.动态链接4.返回地址 3.方法区存放类的.class，静态变量，和全局变量。 4.本地方法栈为了执行操作系统本地的一些">
 <meta name="twitter:image" content="http://yoursite.com/Img/1566375889820.png">
 
 
@@ -360,6 +360,7 @@
 <h2 id="2-栈中存放的数据"><a href="#2-栈中存放的数据" class="headerlink" title="2.栈中存放的数据"></a>2.栈中存放的数据</h2><p>存放对象的引用</p>
 <p>执行一个方法是，该方法就会压栈进行，方法执行结束就出栈</p>
 <p>局部变量，如果是基本数据类型，会随着方法进栈，如果是引用数据类型，对象引用会进栈</p>
+<p><strong>1.局部变量表</strong><br><strong>2.操作数栈</strong><br><strong>3.动态链接</strong><br><strong>4.返回地址</strong></p>
 <h2 id="3-方法区"><a href="#3-方法区" class="headerlink" title="3.方法区"></a>3.方法区</h2><p>存放类的.class，静态变量，和全局变量。</p>
 <h2 id="4-本地方法栈"><a href="#4-本地方法栈" class="headerlink" title="4.本地方法栈"></a>4.本地方法栈</h2><p>为了执行操作系统本地的一些方法</p>
 <h2 id="5-程序计数器"><a href="#5-程序计数器" class="headerlink" title="5.程序计数器"></a>5.程序计数器</h2><p>记录虚拟机运行到哪行代码</p>
@@ -486,7 +487,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">129</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -497,7 +498,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -508,7 +509,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -571,7 +572,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="八大排序参考博客：https://zhuanlan.zhihu.com/p/63611843 https://zhuanlan.zhihu.com/p/42541704">
+<meta name="description" content="综合排序：对于基本数据类型：对于稳定性没有要求 小于60左右的时候使用插入排序，60左右到200左右使用双轴快排，大于200多考虑连续性采用归并排序或者双轴快排 对于复杂类型：对于稳定性有要求 小于60左右的时候使用插入排序，大于60多用归并排序 冒泡排序：双层循环，左右交换 选择排序选取一个最大的和末位置交换 插入排序：从排序好的末位置，开始向前比较，插入到合适位置。 归并排序：将数组分成两半，">
 <meta name="keywords" content="八大排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="八大排序">
 <meta property="og:url" content="http://yoursite.com/2019/08/03/算法/八大排序/index.html">
 <meta property="og:site_name" content="倪翔宇的博客">
-<meta property="og:description" content="八大排序参考博客：https://zhuanlan.zhihu.com/p/63611843 https://zhuanlan.zhihu.com/p/42541704">
+<meta property="og:description" content="综合排序：对于基本数据类型：对于稳定性没有要求 小于60左右的时候使用插入排序，60左右到200左右使用双轴快排，大于200多考虑连续性采用归并排序或者双轴快排 对于复杂类型：对于稳定性有要求 小于60左右的时候使用插入排序，大于60多用归并排序 冒泡排序：双层循环，左右交换 选择排序选取一个最大的和末位置交换 插入排序：从排序好的末位置，开始向前比较，插入到合适位置。 归并排序：将数组分成两半，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-03T11:34:03.079Z">
+<meta property="og:updated_time" content="2019-12-23T03:23:54.318Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="八大排序">
-<meta name="twitter:description" content="八大排序参考博客：https://zhuanlan.zhihu.com/p/63611843 https://zhuanlan.zhihu.com/p/42541704">
+<meta name="twitter:description" content="综合排序：对于基本数据类型：对于稳定性没有要求 小于60左右的时候使用插入排序，60左右到200左右使用双轴快排，大于200多考虑连续性采用归并排序或者双轴快排 对于复杂类型：对于稳定性有要求 小于60左右的时候使用插入排序，大于60多用归并排序 冒泡排序：双层循环，左右交换 选择排序选取一个最大的和末位置交换 插入排序：从排序好的末位置，开始向前比较，插入到合适位置。 归并排序：将数组分成两半，">
 
 
 
@@ -352,7 +352,21 @@
       
 
       
-        <h1 id="八大排序"><a href="#八大排序" class="headerlink" title="八大排序"></a>八大排序</h1><p>参考博客：<a href="https://zhuanlan.zhihu.com/p/63611843" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/63611843</a></p>
+        <h4 id="综合排序："><a href="#综合排序：" class="headerlink" title="综合排序："></a>综合排序：</h4><p>对于基本数据类型：对于稳定性没有要求</p>
+<p>小于60左右的时候使用插入排序，60左右到200左右使用双轴快排，大于200多考虑连续性采用归并排序或者双轴快排</p>
+<p>对于复杂类型：对于稳定性有要求</p>
+<p>小于60左右的时候使用插入排序，大于60多用归并排序</p>
+<h4 id="冒泡排序："><a href="#冒泡排序：" class="headerlink" title="冒泡排序："></a>冒泡排序：</h4><p>双层循环，左右交换</p>
+<h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h4><p>选取一个最大的和末位置交换</p>
+<h4 id="插入排序："><a href="#插入排序：" class="headerlink" title="插入排序："></a>插入排序：</h4><p>从排序好的末位置，开始向前比较，插入到合适位置。</p>
+<h4 id="归并排序："><a href="#归并排序：" class="headerlink" title="归并排序："></a>归并排序：</h4><p>将数组分成两半，递归排序，左右两边排序好了，然后对两边数组进行比较，替换原数组</p>
+<h4 id="快速排序："><a href="#快速排序：" class="headerlink" title="快速排序："></a>快速排序：</h4><p>分区递归。</p>
+<p>和最后一个位置的比较，小的放在前面，相等的不变，大的放在后面，</p>
+<p>递归。</p>
+<p>如果是连续性比较好，不建议使用快速排序</p>
+<h4 id="归并排序：-1"><a href="#归并排序：-1" class="headerlink" title="归并排序："></a>归并排序：</h4><p>递归合并</p>
+<p>左边排序，右边排序，合并左右，替换原数组</p>
+<h4 id="桶排序："><a href="#桶排序：" class="headerlink" title="桶排序："></a>桶排序：</h4><h1 id="八大排序"><a href="#八大排序" class="headerlink" title="八大排序"></a>八大排序</h1><p>参考博客：<a href="https://zhuanlan.zhihu.com/p/63611843" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/63611843</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/42541704" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/42541704</a></p>
 
       
@@ -475,7 +489,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">129</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -486,7 +500,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -497,7 +511,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -540,7 +554,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#八大排序"><span class="nav-number">1.</span> <span class="nav-text">八大排序</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#综合排序："><span class="nav-number">1.</span> <span class="nav-text">综合排序：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#冒泡排序："><span class="nav-number">2.</span> <span class="nav-text">冒泡排序：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择排序"><span class="nav-number">3.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入排序："><span class="nav-number">4.</span> <span class="nav-text">插入排序：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#归并排序："><span class="nav-number">5.</span> <span class="nav-text">归并排序：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快速排序："><span class="nav-number">6.</span> <span class="nav-text">快速排序：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#归并排序：-1"><span class="nav-number">7.</span> <span class="nav-text">归并排序：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#桶排序："><span class="nav-number">8.</span> <span class="nav-text">桶排序：</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#八大排序"><span class="nav-number"></span> <span class="nav-text">八大排序</span></a></li></div>
             
 
           </div>
@@ -560,7 +574,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

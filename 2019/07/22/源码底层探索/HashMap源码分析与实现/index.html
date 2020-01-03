@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="HashMap源码分析一、什么是HashMap？简介HashMap是一个散列表，它存储的内容是键值对(key-value)映射 HashMap存储的key键唯一，允许为null（只能有一个key为null），允许value不唯一 HashMap 继承于AbstractMap，实现了Map、Cloneable、java.io.Serializable接口。 HashMap 的实现是异步的，这意味着它">
+<meta name="description" content="#HashMap HashMap源码分析一、什么是HashMap？简介HashMap是一个散列表，它存储的内容是键值对(key-value)映射 HashMap存储的key键唯一，允许为null（只能有一个key为null），允许value不唯一 HashMap 继承于AbstractMap，实现了Map、Cloneable、java.io.Serializable接口。 HashMap 的实现是">
 <meta name="keywords" content="HashMap源码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HashMap源码分析">
 <meta property="og:url" content="http://yoursite.com/2019/07/22/源码底层探索/HashMap源码分析与实现/index.html">
 <meta property="og:site_name" content="倪翔宇的博客">
-<meta property="og:description" content="HashMap源码分析一、什么是HashMap？简介HashMap是一个散列表，它存储的内容是键值对(key-value)映射 HashMap存储的key键唯一，允许为null（只能有一个key为null），允许value不唯一 HashMap 继承于AbstractMap，实现了Map、Cloneable、java.io.Serializable接口。 HashMap 的实现是异步的，这意味着它">
+<meta property="og:description" content="#HashMap HashMap源码分析一、什么是HashMap？简介HashMap是一个散列表，它存储的内容是键值对(key-value)映射 HashMap存储的key键唯一，允许为null（只能有一个key为null），允许value不唯一 HashMap 继承于AbstractMap，实现了Map、Cloneable、java.io.Serializable接口。 HashMap 的实现是">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/Img/1563803935254.png">
 <meta property="og:image" content="http://yoursite.com/Img/1563846124439.png">
 <meta property="og:image" content="http://yoursite.com/Img/1563806691606.png">
-<meta property="og:updated_time" content="2019-08-06T05:59:31.913Z">
+<meta property="og:updated_time" content="2019-12-11T08:24:10.015Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap源码分析">
-<meta name="twitter:description" content="HashMap源码分析一、什么是HashMap？简介HashMap是一个散列表，它存储的内容是键值对(key-value)映射 HashMap存储的key键唯一，允许为null（只能有一个key为null），允许value不唯一 HashMap 继承于AbstractMap，实现了Map、Cloneable、java.io.Serializable接口。 HashMap 的实现是异步的，这意味着它">
+<meta name="twitter:description" content="#HashMap HashMap源码分析一、什么是HashMap？简介HashMap是一个散列表，它存储的内容是键值对(key-value)映射 HashMap存储的key键唯一，允许为null（只能有一个key为null），允许value不唯一 HashMap 继承于AbstractMap，实现了Map、Cloneable、java.io.Serializable接口。 HashMap 的实现是">
 <meta name="twitter:image" content="http://yoursite.com/Img/1563803935254.png">
 
 
@@ -356,7 +356,8 @@
       
 
       
-        <h1 id="HashMap源码分析"><a href="#HashMap源码分析" class="headerlink" title="HashMap源码分析"></a>HashMap源码分析</h1><h2 id="一、什么是HashMap？"><a href="#一、什么是HashMap？" class="headerlink" title="一、什么是HashMap？"></a>一、什么是HashMap？</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>HashMap是一个散列表，它存储的内容是键值对(key-value)映射</p>
+        <p>#HashMap</p>
+<h1 id="HashMap源码分析"><a href="#HashMap源码分析" class="headerlink" title="HashMap源码分析"></a>HashMap源码分析</h1><h2 id="一、什么是HashMap？"><a href="#一、什么是HashMap？" class="headerlink" title="一、什么是HashMap？"></a>一、什么是HashMap？</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>HashMap是一个散列表，它存储的内容是键值对(key-value)映射</p>
 <p>HashMap存储的key键唯一，允许为null（只能有一个key为null），允许value不唯一</p>
 <p>HashMap 继承于AbstractMap，实现了Map、Cloneable、java.io.Serializable接口。</p>
 <p>HashMap 的实现是异步的，这意味着它不是线程安全的。它的key、value都可以为null。此外，HashMap中的映射是无序的。</p>
@@ -477,6 +478,16 @@
 <blockquote>
 <p>因为String是不可变的，也是final的，而且已经重写了equals()和hashCode()方法了。其他的wrapper类也有这个特点。不可变性是必要的，因为为了要计算hashCode()，就要防止键值改变，如果键值在放入时和获取时返回不同的hashcode的话，那么就不能从HashMap中找到你想要的对象。不可变性还有其他的优点如线程安全。如果你可以仅仅通过将某个field声明成final就能保证hashCode是不变的，那么请这么做吧。因为获取对象的时候要用到equals()和hashCode()方法，那么键对象正确的重写这两个方法是非常重要的。如果两个不相等的对象返回不同的hashcode的话，那么碰撞的几率就会小些，这样就能提高HashMap的性能</p>
 </blockquote>
+</li>
+<li><p>为什么hashmap的负载因子是0.75？</p>
+<p>如果扩容因子太大的话，比如说是1，那么需要填满数组才能够扩容，会产生较多的碰撞，浪费的大量的时间</p>
+<p>如果扩容因子太小的话，比如说是0.5，那么填满数组的一半就进行rehash扩容，浪费的大量的空间，并且rehash本身也会消耗大量的时间</p>
+<p>所以在这里折中，综合考虑时间空间选取0.75作为负载因子。</p>
+<p>而且这里面还涉及了统计学的泊松分布，结论就是在负载因子为0.75的时候，链表的长度达到8的概率非常低。</p>
+</li>
+<li><p>为什么hashmap的初始化长度默认是16，不是8或者是其他数字？</p>
+<p>首先HashMap的长度都是2的指数次，原因是在做取模运算的时候需要转换为二进制进行运算，取余的效率比加减的效率低很多，有一个等价公式，hash%length = hash &amp;（length-1），将取余运算转化为与运算，而这个公式有一个前提条件，length必须是2的指数次，所以HashMap扩容都是2倍。</p>
+<p>然后为什么不是8，如果式8的话，数组大小达到8*0.75=6的话就要进行rehash，而rehash会消耗大量的时间，为了提升效率，这里采取16作为初始容量</p>
 </li>
 </ol>
 <p>转载博客：<a href="https://blog.csdn.net/fjse51/article/details/53811465" target="_blank" rel="noopener">https://blog.csdn.net/fjse51/article/details/53811465</a></p>
@@ -603,7 +614,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">129</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -614,7 +625,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -625,7 +636,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -688,7 +699,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
